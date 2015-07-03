@@ -16,6 +16,7 @@ gem 'omniauth-google-oauth2'
 gem 'google-api-client'
 
 group :development do
+  gem 'letter_opener_web'
 end
 
 group :test do

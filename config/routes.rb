@@ -4,6 +4,9 @@ Rails.application.routes.draw do
     mount LetterOpenerWeb::Engine, at: "/letter_opener"
   end
 
+  mount GymcloudAPI::API => '/'
+  mount GrapeSwaggerRails::Engine => '/swagger'
+
   devise_for :users
 
 end

@@ -15,6 +15,13 @@ gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
 gem 'google-api-client'
 
+gem 'rack-cors', require: 'rack/cors'
+
+gem 'grape'
+gem 'grape-entity'
+gem 'grape-swagger'
+gem 'grape-swagger-rails'
+
 group :development do
   gem 'letter_opener_web'
 end

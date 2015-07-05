@@ -21,6 +21,7 @@ gem 'grape'
 gem 'grape-entity'
 gem 'grape-swagger'
 gem 'grape-swagger-rails'
+gem 'doorkeeper'
 
 group :development do
   gem 'letter_opener_web'

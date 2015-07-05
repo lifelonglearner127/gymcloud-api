@@ -1,6 +1,10 @@
+require 'doorkeeper/grape/helpers'
+
 module GymcloudAPI
 
 class API < Grape::API
+
+  helpers Doorkeeper::Grape::Helpers
 
   before do
     header['Access-Control-Allow-Origin'] = '*'

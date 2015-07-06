@@ -14,6 +14,7 @@ gem 'omniauth-oauth2'
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
 gem 'google-api-client'
+gem 'cancancan'
 
 gem 'rack-cors', require: 'rack/cors'
 gem 'rack-oauth2'
@@ -22,6 +23,7 @@ gem 'grape'
 gem 'grape-entity'
 gem 'grape-swagger'
 gem 'grape-swagger-rails'
+gem 'grape-cancan'
 gem 'doorkeeper'
 
 group :development do

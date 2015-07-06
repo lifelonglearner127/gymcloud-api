@@ -1,4 +1,5 @@
-module GymcloudAPI::V2
+module GymcloudAPI
+module V2
 
 module Helpers
 
@@ -9,4 +10,5 @@ module Helpers
 
 end
 
+end
 end

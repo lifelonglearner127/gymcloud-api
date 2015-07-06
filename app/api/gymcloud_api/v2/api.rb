@@ -13,6 +13,8 @@ class API < Grape::API
 
   default_format :json
 
+  mount Namespaces::Root
+
 end
 
 end

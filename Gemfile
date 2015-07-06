@@ -16,6 +16,7 @@ gem 'omniauth-google-oauth2'
 gem 'google-api-client'
 
 gem 'rack-cors', require: 'rack/cors'
+gem 'rack-oauth2'
 
 gem 'grape'
 gem 'grape-entity'

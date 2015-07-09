@@ -28,6 +28,7 @@ gem 'grape-cancan'
 gem 'doorkeeper'
 
 gem 'carrierwave'
+gem 'carrierwave-aws'
 
 group :development do
   gem 'letter_opener_web'

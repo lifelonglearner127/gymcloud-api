@@ -19,12 +19,19 @@ gem 'cancancan'
 gem 'rack-cors', require: 'rack/cors'
 gem 'rack-oauth2'
 
-gem 'grape'
+gem 'grape'#, github: 'bodya-dnepr/grape'
 gem 'grape-entity'
-gem 'grape-swagger'
+gem 'grape-swagger', '~> 0.9.0'
 gem 'grape-swagger-rails'
 gem 'grape-cancan'
 gem 'doorkeeper'
+
+gem 'carrierwave'
+
+# Then choose your preferred paginator from the following:
+gem 'kaminari' # will_paginate
+gem 'api-pagination'
+
 
 group :development do
   gem 'letter_opener_web'

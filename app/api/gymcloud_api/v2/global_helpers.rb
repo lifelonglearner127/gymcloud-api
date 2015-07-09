@@ -1,7 +1,7 @@
 module GymcloudAPI
 module V2
 
-module Helpers
+module GlobalHelpers
 
   def filtered_params
     declared params, \

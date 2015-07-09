@@ -32,6 +32,7 @@ gem 'carrierwave'
 gem 'kaminari' # will_paginate
 gem 'api-pagination'
 
+gem 'sidekiq'
 
 group :development do
   gem 'letter_opener_web'

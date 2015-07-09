@@ -27,6 +27,8 @@ gem 'grape-swagger-rails'
 gem 'grape-cancan'
 gem 'doorkeeper'
 
+gem 'carrierwave'
+
 group :development do
   gem 'letter_opener_web'
 end

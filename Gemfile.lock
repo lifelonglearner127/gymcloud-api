@@ -261,6 +261,8 @@ GEM
       binding_of_caller (>= 0.7.2)
       railties (>= 4.0)
       sprockets-rails (>= 2.0, < 4.0)
+    yt (0.25.0)
+      activesupport
 
 PLATFORMS
   ruby
@@ -294,3 +296,4 @@ DEPENDENCIES
   spring
   thin
   web-console (~> 2.0)
+  yt

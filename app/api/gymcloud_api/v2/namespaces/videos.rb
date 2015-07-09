@@ -17,7 +17,7 @@ class Videos < Base
   post do
     @video = Video.new tmp_file: params[:file]
     @video.save!
-    # VimeoUploadJob.upload(@video.id) if @video.valid?
+    VimeoUploadWorker.perform_async(@video.id)
 
     status :accepted
   end

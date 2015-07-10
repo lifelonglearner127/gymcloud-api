@@ -14,6 +14,7 @@ gem 'omniauth-oauth2'
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
 gem 'google-api-client'
+gem 'yt'
 gem 'cancancan'
 
 gem 'rack-cors', require: 'rack/cors'
@@ -27,6 +28,7 @@ gem 'grape-cancan'
 gem 'doorkeeper'
 
 gem 'carrierwave'
+gem 'carrierwave-aws'
 
 # Then choose your preferred paginator from the following:
 gem 'kaminari' # will_paginate
@@ -38,13 +40,13 @@ gem 'vimeo', github: 'bodya-dnepr/vimeo', branch: 'v2'
 
 group :development do
   gem 'letter_opener_web'
+  gem 'sinatra', require: nil # for Sidekiq monitoring
 end
 
 group :test do
 end
 
 group :development, :test do
-  gem 'sinatra', require: nil # for Sidekiq monitoring
   gem 'byebug'
   gem 'web-console', '~> 2.0'
   gem 'spring'

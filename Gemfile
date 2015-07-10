@@ -19,7 +19,7 @@ gem 'cancancan'
 gem 'rack-cors', require: 'rack/cors'
 gem 'rack-oauth2'
 
-gem 'grape'#, github: 'bodya-dnepr/grape'
+gem 'grape'
 gem 'grape-entity'
 gem 'grape-swagger', '~> 0.9.0'
 gem 'grape-swagger-rails'
@@ -33,6 +33,8 @@ gem 'kaminari' # will_paginate
 gem 'api-pagination'
 
 gem 'sidekiq'
+
+gem 'vimeo', github: 'bodya-dnepr/vimeo', branch: 'v2'
 
 group :development do
   gem 'letter_opener_web'

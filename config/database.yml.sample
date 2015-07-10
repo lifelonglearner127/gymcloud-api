@@ -17,7 +17,7 @@ development:
   host:     localhost
   encoding: unicode
   database: gymcloud_api_development
-  pool:     5
+  pool:     20 # increased for sidekiq
   username: username
   password: 'password'
   template: template0
@@ -45,7 +45,7 @@ test:
   host:     localhost
   encoding: unicode
   database: gymcloud_api_test
-  pool:     5
+  pool:     20 # increased for sidekiq
   username: username
   password: 'password'
   template: template0
@@ -54,7 +54,7 @@ adapter:  postgresql
   host:     localhost
   encoding: unicode
   database: gymcloud_api_production
-  pool:     5
+  pool:     20 # increased for sidekiq
   username: username
   password: 'password'
   template: template0

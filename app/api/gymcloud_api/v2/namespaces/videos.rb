@@ -13,7 +13,7 @@ class Videos < Base
       @video.published = state
       @video.save!
 
-      client = ::Vimeo::Client.new access_token: '4aabe27d55ff434dc6ba7ec97c930e9b'
+      client = ::Vimeo::Client.new access_token: Rails.application.secrets.vimeo_token
       vimeo_video = client.video @video.vimeo_id
       vimeo_video.edit 'privacy.view' => vimeo_privacy
     end

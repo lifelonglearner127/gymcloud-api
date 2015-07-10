@@ -4,7 +4,7 @@ class VimeoUploadWorker
 
   def perform(video_id)
     @video     = Video.last#find(video_id)
-    @client    = Vimeo::Client.new access_token: '4aabe27d55ff434dc6ba7ec97c930e9b'
+    @client    = Vimeo::Client.new access_token: Rails.application.secrets.vimeo_token
     @client_me = @client.me
     check_quota
     get_ticket

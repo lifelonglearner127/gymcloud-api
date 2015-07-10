@@ -44,6 +44,7 @@ group :test do
 end
 
 group :development, :test do
+  gem 'sinatra', require: nil # for Sidekiq monitoring
   gem 'byebug'
   gem 'web-console', '~> 2.0'
   gem 'spring'

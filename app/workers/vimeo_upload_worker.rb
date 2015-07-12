@@ -6,12 +6,16 @@ class VimeoUploadWorker
     @video     = Video.find video_id
     @client    = Vimeo::Client.new access_token: ENV['VIMEO_TOKEN']
     @client_me = @client.me
+
     check_quota
     @ticket = get_ticket
     vimeo_id = send_video_data
-    change_video_privacy vimeo_id
+    vimeo_video = @client.video vimeo_id
+
+    change_video_privacy vimeo_video
 
     @video.vimeo_id = vimeo_id
+    @video.embed    = vimeo_video.embed.html
     @video.delete_tmp_file_folder
     @video.save!
   end
@@ -32,8 +36,7 @@ class VimeoUploadWorker
     @client.upload :post, @video.tmp_file.file, @ticket
   end
 
-  def change_video_privacy vimeo_id
-    vimeo_video = @client.video vimeo_id
+  def change_video_privacy vimeo_video
     vimeo_video.edit 'privacy.view' => @video.privacy
   end
 end

@@ -3,13 +3,13 @@ class VimeoUploadWorker
   sidekiq_options retry: false
 
   def perform(video_id)
-    @video     = Video.last#find(video_id)
+    @video     = Video.find video_id
     @client    = Vimeo::Client.new access_token: ENV['VIMEO_TOKEN']
     @client_me = @client.me
     check_quota
-    get_ticket
+    @ticket = get_ticket
     vimeo_id = send_video_data
-    hide_vimeo_video vimeo_id
+    change_video_privacy vimeo_id
 
     @video.vimeo_id = vimeo_id
     @video.delete_tmp_file_folder
@@ -19,21 +19,21 @@ class VimeoUploadWorker
   private
 
   def check_quota
-    free_space  = @client_me.upload_quota.space.free
-    video_size  = @video.tmp_file.file.size
+    free_space = @client_me.upload_quota.space.free
+    video_size = @video.tmp_file.file.size
     raise Vimeo::UploadeQuotaLimit if free_space < video_size
   end
 
   def get_ticket
-    @ticket = Hashie::Mash.new @client_me.new_video(type: 'POST', redirect_url: 'http://localhost:3000/vimeo')
+    Hashie::Mash.new @client_me.new_video(type: 'POST', redirect_url: 'http://any_domain.com/vimeo')
   end
 
   def send_video_data
     @client.upload :post, @video.tmp_file.file, @ticket
   end
 
-  def hide_vimeo_video vimeo_id
+  def change_video_privacy vimeo_id
     vimeo_video = @client.video vimeo_id
-    vimeo_video.edit 'privacy.view' => 'disable'
+    vimeo_video.edit 'privacy.view' => @video.privacy
   end
 end

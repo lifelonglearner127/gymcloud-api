@@ -8,16 +8,14 @@ class VimeoUploadWorker
     @client_me = @client.me
 
     check_quota
-    @ticket = get_ticket
-    vimeo_id = send_video_data
+    ticket      = get_ticket
+    vimeo_id    = send_video_data ticket
     vimeo_video = @client.video vimeo_id
 
-    change_video_privacy vimeo_video
+    update_vimeo_video vimeo_video
+    update_video vimeo_id, vimeo_video
 
-    @video.vimeo_id = vimeo_id
-    @video.embed    = vimeo_video.embed.html
-    @video.delete_tmp_file_folder
-    @video.save!
+    VimeoVideoUpdateWorker.perform_in(2.minutes, video_id)
   end
 
   private
@@ -32,11 +30,19 @@ class VimeoUploadWorker
     Hashie::Mash.new @client_me.new_video(type: 'POST', redirect_url: 'http://any_domain.com/vimeo')
   end
 
-  def send_video_data
-    @client.upload :post, @video.tmp_file.file, @ticket
+  def send_video_data ticket
+    @client.upload :post, @video.tmp_file.file, ticket
   end
 
-  def change_video_privacy vimeo_video
-    vimeo_video.edit 'privacy.view' => @video.privacy
+  def update_vimeo_video vimeo_video
+    vimeo_video.edit privacy: {view: @video.privacy}, name: @video.name
+  end
+
+  def update_video vimeo_id, vimeo_video
+    @video.vimeo_id  = vimeo_id
+    @video.vimeo_url = vimeo_video.link
+    @video.status    = vimeo_video.status
+    @video.delete_tmp_file_folder
+    @video.save!
   end
 end

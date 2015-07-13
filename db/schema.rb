@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150712185008) do
+ActiveRecord::Schema.define(version: 20150713172956) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -90,10 +90,14 @@ ActiveRecord::Schema.define(version: 20150712185008) do
   create_table "videos", force: :cascade do |t|
     t.integer  "vimeo_id"
     t.string   "tmp_file"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-    t.integer  "privacy",    default: 1
-    t.text     "embed"
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.integer  "privacy",             default: 1
+    t.string   "name"
+    t.integer  "duration"
+    t.string   "preview_picture_url"
+    t.string   "vimeo_url"
+    t.string   "status"
   end
 
 end

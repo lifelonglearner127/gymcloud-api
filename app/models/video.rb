@@ -5,8 +5,8 @@ class Video < ActiveRecord::Base
 
   enum privacy: [:anybody, :nobody, :contacts, :password, :disable]
 
-  def vimeo_url
-    "https://vimeo.com/#{self.vimeo_id}" unless self.vimeo_id.nil?
+  def available_for_play?
+    self.status == "available"
   end
 
   def file_uploaded?
@@ -18,7 +18,4 @@ class Video < ActiveRecord::Base
     FileUtils.remove_dir("#{Rails.root}/public/uploads/#{self.class.to_s.underscore}/tmp_file/#{self.id}", force: true)
   end
 
-  def as_json(options = {})
-    super( {methods: :vimeo_url}.merge(options) )
-  end
 end

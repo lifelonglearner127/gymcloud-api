@@ -34,7 +34,8 @@ class Videos < Base
   post do
     @video = Video.new tmp_file: params[:file], privacy: params[:privacy], name: params[:name]
     @video.save!
-    VimeoUploadWorker.perform_async(@video.id)
+    VimeoUploaderService.new.upload(@video)
+    VimeoVideoUpdateWorker.perform_in(2.minutes, @video.id)
 
     status :accepted
   end
@@ -84,7 +85,7 @@ class Videos < Base
       vimeo_id = video.vimeo_id
       video.destroy!
 
-      VimeoVideoDeleteWorker.perform_async(vimeo_id)
+      VimeoVideoDeleteWorker.perform_async(vimeo_id) if vimeo_id
 
       status :no_content
     end

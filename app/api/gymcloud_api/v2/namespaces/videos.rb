@@ -51,7 +51,7 @@ class Videos < Base
     end
 
 
-    desc 'Change a video published status'
+    desc 'Update a video'
     params do
       optional :privacy, type: String, default: "nobody",
               values: Video.privacies.keys, desc: 'Privacy status'
@@ -84,9 +84,7 @@ class Videos < Base
       vimeo_id = video.vimeo_id
       video.destroy!
 
-      client = ::Vimeo::Client.new access_token: ENV['VIMEO_TOKEN']
-      vimeo_video = client.video vimeo_id
-      vimeo_video.delete
+      VimeoVideoDeleteWorker.perform_async(vimeo_id)
 
       status :no_content
     end

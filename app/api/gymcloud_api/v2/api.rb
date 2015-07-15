@@ -7,13 +7,14 @@ class API < Grape::API
 
   version 'v2', using: :header, vendor: 'gymcloud'
 
-  helpers Helpers
+  helpers GlobalHelpers
 
   guard_all!
 
   default_format :json
 
   mount Namespaces::Root
+  mount Namespaces::Videos => 'videos'
 
 end
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150706074911) do
+ActiveRecord::Schema.define(version: 20150714080042) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -86,5 +86,20 @@ ActiveRecord::Schema.define(version: 20150706074911) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["invitation_token"], name: "index_users_on_invitation_token", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+
+  create_table "videos", force: :cascade do |t|
+    t.integer  "vimeo_id"
+    t.string   "tmp_file"
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.integer  "privacy",             default: 1
+    t.string   "name"
+    t.integer  "duration"
+    t.string   "preview_picture_url"
+    t.string   "vimeo_url"
+    t.string   "status"
+    t.string   "embed_url"
+    t.datetime "uploaded_at"
+  end
 
 end

@@ -12,6 +12,12 @@ class API < Grape::API
   end
 
   rescue_from :all
+  rescue_from ActiveRecord::RecordNotFound do |e|
+    rack_response(nil, 404)
+  end
+  rescue_from ActiveRecord::RecordInvalid do |e|
+    rack_response({ errors: e.record.errors }.to_json, 422)
+  end
 
   mount V2::API
 

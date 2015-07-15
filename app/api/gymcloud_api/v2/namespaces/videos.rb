@@ -2,6 +2,7 @@ module GymcloudAPI::V2
 module Namespaces
 
 class Videos < Base
+  helpers GlobalHelpers
   helpers do
     def update_video video_id, options = {}
       @video = Video.find(video_id)
@@ -37,7 +38,7 @@ class Videos < Base
     VimeoUploaderService.new.upload(@video)
     VimeoVideoUpdateWorker.perform_in(2.minutes, @video.id)
 
-    status :accepted
+    present @video
   end
 
 
@@ -94,12 +95,13 @@ class Videos < Base
   namespace '/search' do
     desc "Search vimeo video"
     params do
-      requires :q,        type: String,  desc: 'Query for search'
-      optional :page,     type: Integer, desc: 'Page  number'
-      optional :per_page, type: Integer, desc: "Items per page"
+      requires :q, type: String, desc: 'Query for search'
+      use :pagination
     end
     get '/vimeo' do
-      videos = VimeoVideoSearchService.new.search params[:q], params.slice!(:q)
+      vimeo_search = VimeoVideoSearchService.new(params)
+      videos = vimeo_search.search
+
       present videos.items, with: Entities::VimeoVideo
     end
   end

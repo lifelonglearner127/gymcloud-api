@@ -91,6 +91,19 @@ class Videos < Base
     end
   end
 
+  namespace '/search' do
+    desc "Search vimeo video"
+    params do
+      requires :q,        type: String,  desc: 'Query for search'
+      optional :page,     type: Integer, desc: 'Page  number'
+      optional :per_page, type: Integer, desc: "Items per page"
+    end
+    get '/vimeo' do
+      videos = VimeoVideoSearchService.new.search params[:q], params.slice!(:q)
+      present videos.items, with: Entities::VimeoVideo
+    end
+  end
+
 
 end
 

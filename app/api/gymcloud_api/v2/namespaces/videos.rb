@@ -5,15 +5,15 @@ class Videos < Base
   helpers GlobalHelpers
   helpers do
     def update_video video_id, options = {}
-      @video = Video.find(video_id)
+      video = Video.find(video_id)
       options.each do |key, value|
-        @video.send("#{key}=", value) if @video.has_attribute?(key)
+        video.send("#{key}=", value) if video.has_attribute?(key)
       end
-      @video.save!
+      video.save!
 
       client = ::Vimeo::Client.new access_token: ENV['VIMEO_TOKEN']
-      vimeo_video = client.video @video.vimeo_id
-      vimeo_video.edit privacy: {view: @video.privacy}, name: @video.name
+      vimeo_video = client.video video.vimeo_id
+      vimeo_video.edit privacy: {view: video.privacy}, name: video.name
     end
   end
 
@@ -21,7 +21,7 @@ class Videos < Base
   desc "Retrieve videos"
   paginate max_per_page: 50
   get do
-    paginate Video.all
+    present paginate(Video.all), with: Entities::Video
   end
 
 
@@ -33,12 +33,12 @@ class Videos < Base
               values: Video.privacies.keys, desc: 'Privacy status'
   end
   post do
-    @video = Video.new tmp_file: params[:file], privacy: params[:privacy], name: params[:name]
-    @video.save!
-    VimeoUploaderService.new.upload(@video)
-    VimeoVideoUpdateWorker.perform_in(2.minutes, @video.id)
+    video = Video.new tmp_file: params[:file], privacy: params[:privacy], name: params[:name]
+    video.save!
+    VimeoUploaderService.new.upload(video)
+    VimeoVideoUpdateWorker.perform_in(2.minutes, video.id)
 
-    present @video
+    present video, with: Entities::Video
   end
 
 

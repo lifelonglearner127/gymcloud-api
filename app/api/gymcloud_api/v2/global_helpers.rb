@@ -11,7 +11,7 @@ module GlobalHelpers
 
   params :pagination do
     optional :page,     type: Integer, desc: 'Page  number'
-    optional :per_page, type: Integer, desc: "Items per page"
+    optional :per_page, type: Integer, desc: 'Items per page'
   end
 end
 

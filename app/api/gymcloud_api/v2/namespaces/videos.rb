@@ -18,18 +18,18 @@ class Videos < Base
   end
 
 
-  desc "Retrieve videos"
+  desc 'Retrieve videos'
   paginate max_per_page: 50
   get do
     present paginate(Video.all), with: Entities::Video
   end
 
 
-  desc "Create new video and uploading it to Vimeo"
+  desc 'Create new video and uploading it to Vimeo'
   params do
-    requires :file, type: Rack::Multipart::UploadedFile, desc: "Video file"
-    requires :name, type: String, desc: "Video name"
-    optional :privacy, type: String, default: "nobody",
+    requires :file, type: Rack::Multipart::UploadedFile, desc: 'Video file'
+    requires :name, type: String, desc: 'Video name'
+    optional :privacy, type: String, default: 'nobody',
               values: Video.privacies.keys, desc: 'Privacy status'
   end
   post do
@@ -44,10 +44,10 @@ class Videos < Base
 
 
   params do
-    requires :id, type: Integer, desc: "Video ID"
+    requires :id, type: Integer, desc: 'Video ID'
   end
   route_param :id do
-    desc "Retrieve a video"
+    desc 'Retrieve a video'
     get do
       Video.find params[:id]
     end
@@ -55,9 +55,9 @@ class Videos < Base
 
     desc 'Update a video'
     params do
-      optional :privacy, type: String, default: "nobody",
+      optional :privacy, type: String, default: 'nobody',
               values: Video.privacies.keys, desc: 'Privacy status'
-      optional :name, type: String, desc: "Video name"
+      optional :name, type: String, desc: 'Video name'
       at_least_one_of :privacy, :name
     end
     patch do
@@ -66,14 +66,14 @@ class Videos < Base
     end
 
 
-    desc "Publish a video"
+    desc 'Publish a video'
     get 'publish' do
       update_video params[:id], privacy: 'anybody'
       status :no_content
     end
 
 
-    desc "Unpublish a video"
+    desc 'Unpublish a video'
     get 'unpublish' do
       update_video params[:id], privacy: 'nobody'
       status :no_content
@@ -93,7 +93,7 @@ class Videos < Base
   end
 
   namespace '/search' do
-    desc "Search vimeo video"
+    desc 'Search vimeo video'
     params do
       requires :q, type: String, desc: 'Query for search'
       use :pagination
@@ -104,6 +104,24 @@ class Videos < Base
 
       present videos.items, with: Entities::VimeoVideo
     end
+
+
+    desc 'Search youtube video'
+    params do
+      requires :q, type: String, desc: 'Query for search'
+      use :pagination
+    end
+    get '/youtube' do
+      per_page = params[:per_page] || 50
+      page = params[:page]
+
+      yt_search = Yt::Collections::Videos.new
+      yt_search = yt_search.where(q: params[:q], format: 5) # only embeddable
+      videos = yt_search.first(per_page * page).last(per_page)
+
+      present videos, with: Entities::YoutubeVideo
+    end
+
   end
 
 

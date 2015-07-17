@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/bodya-dnepr/vimeo.git
-  revision: 263e2bd18cbe4dcf93bb20ebef2401e15b34c558
+  revision: 528ce08fc83514cd446b807fe55c75b034b8de4d
   branch: v2
   specs:
     vimeo (2.0.0)

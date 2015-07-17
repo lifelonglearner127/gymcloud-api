@@ -13,8 +13,12 @@ class VimeoVideo < Grape::Entity
     url.sub("?#{URI(url).query}", '')
   end
   expose :link, as: :full_url
-  expose(:author_name) {|obj, _| obj.user[:name]}
-  expose(:preview_picture_url) {|obj, _| obj.preview_picture_url}
+  expose :author_name do |obj|
+    obj.user[:name]
+  end
+  expose :preview_picture_url do |obj|
+    obj.preview_picture_url
+  end
   expose :created_time, as: :uploaded_at
 end
 

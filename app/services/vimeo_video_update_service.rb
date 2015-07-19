@@ -17,7 +17,7 @@ class VimeoVideoUpdateService
   private
 
   def update_video(video, vimeo_video)
-    video.preview_picture_url = get_preview_picture(vimeo_video.pictures)
+    video.preview_picture_url = vimeo_video.preview_picture_url
     video.duration  = vimeo_video.duration
     video.vimeo_url = vimeo_video.link
     video.status    = vimeo_video.status
@@ -25,7 +25,4 @@ class VimeoVideoUpdateService
     video.save!
   end
 
-  def get_preview_picture pics
-    pics.try(:[], :data).try(:first).try(:[],:sizes).try(:second).try(:[], :link)
-  end
 end

@@ -16,6 +16,9 @@ class VimeoVideo < Grape::Entity
   expose :author_name do |obj|
     obj.user[:name]
   end
+  expose :preview_picture_url do |obj|
+    obj.preview_picture_url
+  end
   expose :created_time, as: :uploaded_at
 end
 

@@ -14,6 +14,8 @@ class Videos < Base
       client = ::Vimeo::Client.new access_token: ENV['VIMEO_TOKEN']
       vimeo_video = client.video video.vimeo_id
       vimeo_video.edit privacy: {view: video.privacy}, name: video.name
+
+      return video
     end
   end
 
@@ -61,22 +63,22 @@ class Videos < Base
       at_least_one_of :privacy, :name
     end
     patch do
-      update_video params[:id], params
-      status :no_content
+      video = update_video params[:id], params
+      present video, with: Entities::Video
     end
 
 
     desc 'Publish a video'
     get 'publish' do
-      update_video params[:id], privacy: 'anybody'
-      status :no_content
+      video = update_video params[:id], privacy: 'anybody'
+      present video, with: Entities::Video
     end
 
 
     desc 'Unpublish a video'
     get 'unpublish' do
-      update_video params[:id], privacy: 'nobody'
-      status :no_content
+      video = update_video params[:id], privacy: 'nobody'
+      present video, with: Entities::Video
     end
 
 
@@ -88,7 +90,7 @@ class Videos < Base
 
       VimeoVideoDeleteWorker.perform_async(vimeo_id) if vimeo_id
 
-      status :no_content
+      present video, with: Entities::Video
     end
   end
 

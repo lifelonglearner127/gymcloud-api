@@ -102,9 +102,10 @@ class Videos < Base
     end
     get '/vimeo' do
       vimeo_search = VimeoVideoSearchService.new(params)
-      videos = vimeo_search.search
+      vimeo_search = vimeo_search.search
+      videos = vimeo_search.items.reject {|v| v.embed.html.nil? }
 
-      present videos.items, with: Entities::VimeoVideo
+      present videos, with: Entities::VimeoVideo
     end
 
 

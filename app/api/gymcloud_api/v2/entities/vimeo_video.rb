@@ -9,8 +9,10 @@ class VimeoVideo < Grape::Entity
   expose :description
   expose :embed_url do |obj|
     str = obj.embed.html
-    url = URI::extract(str).first
-    url.sub("?#{URI(url).query}", '')
+    unless str.nil?
+      url = URI::extract(str).first
+      url.sub("?#{URI(url).query}", '')
+    end
   end
   expose :link, as: :full_url
   expose :author_name do |obj|

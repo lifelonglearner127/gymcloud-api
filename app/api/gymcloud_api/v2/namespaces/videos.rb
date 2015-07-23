@@ -102,8 +102,7 @@ class Videos < Base
     end
     get '/vimeo' do
       vimeo_search = VimeoVideoSearchService.new(params)
-      vimeo_search = vimeo_search.search
-      videos = vimeo_search.items.reject {|v| v.embed.html.nil? }
+      videos = vimeo_search.search
 
       present videos, with: Entities::VimeoVideo
     end
@@ -115,12 +114,8 @@ class Videos < Base
       use :pagination
     end
     get '/youtube' do
-      per_page = params[:per_page] || 50
-      page = params[:page]
-
-      yt_search = Yt::Collections::Videos.new
-      yt_search = yt_search.where(q: params[:q], format: 5) # only embeddable
-      videos = yt_search.first(per_page * page).last(per_page)
+      yt_search = YoutubeVideoSearchService.new(params)
+      videos = yt_search.search
 
       present videos, with: Entities::YoutubeVideo
     end

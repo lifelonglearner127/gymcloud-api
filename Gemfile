@@ -20,6 +20,8 @@ gem 'cancancan'
 gem 'rack-cors', require: 'rack/cors'
 gem 'rack-oauth2'
 
+gem 'activeadmin', github: 'activeadmin'
+
 gem 'grape'
 gem 'grape-entity'
 gem 'grape-swagger', '~> 0.9.0'

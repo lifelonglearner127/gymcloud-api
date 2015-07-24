@@ -5,4 +5,6 @@ class User < ActiveRecord::Base
          :trackable, :validatable,
          :confirmable, :invitable
 
+  has_one :user_profile
+
 end

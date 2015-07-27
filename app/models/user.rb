@@ -6,5 +6,6 @@ class User < ActiveRecord::Base
          :confirmable, :invitable
 
   has_one :user_profile
+  has_many :user_agreements
 
 end

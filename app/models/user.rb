@@ -11,4 +11,7 @@ class User < ActiveRecord::Base
   has_many :client_groups, foreign_key: :pro_id
   has_many :client_group_memberships
 
+  def name
+    email
+  end
 end

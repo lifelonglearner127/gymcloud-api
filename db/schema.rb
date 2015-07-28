@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150724181659) do
+ActiveRecord::Schema.define(version: 20150727181524) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,6 +48,28 @@ ActiveRecord::Schema.define(version: 20150724181659) do
 
   add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true, using: :btree
   add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
+
+  create_table "agreement_categories", force: :cascade do |t|
+    t.string   "title"
+    t.string   "pro_title"
+    t.string   "client_title"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  create_table "client_group_memberships", force: :cascade do |t|
+    t.integer  "client_group_id"
+    t.integer  "client_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  create_table "client_groups", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "pro_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "oauth_access_grants", force: :cascade do |t|
     t.integer  "resource_owner_id", null: false
@@ -88,6 +110,31 @@ ActiveRecord::Schema.define(version: 20150724181659) do
   end
 
   add_index "oauth_applications", ["uid"], name: "index_oauth_applications_on_uid", unique: true, using: :btree
+
+  create_table "user_agreements", force: :cascade do |t|
+    t.integer  "pro_id"
+    t.integer  "client_id"
+    t.integer  "category_id"
+    t.integer  "status"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "user_profiles", force: :cascade do |t|
+    t.integer  "gender"
+    t.decimal  "height"
+    t.decimal  "weight"
+    t.decimal  "bodyfat"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "location"
+    t.string   "zip"
+    t.string   "employer"
+    t.date     "birthday"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false

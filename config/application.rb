@@ -40,6 +40,13 @@ module GymcloudApi
       config.autoload_paths += Dir[Rails.root.join('app', folder, '*')]
     end
 
+    config.generators do |g|
+      g.test_framework  false
+      g.template_engine false
+      g.stylesheets     false
+      g.javascripts     false
+    end
+
     config.middleware.use Rack::Cors do
       allow do
         origins '*'

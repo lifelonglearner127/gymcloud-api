@@ -16,6 +16,7 @@ gem 'omniauth-google-oauth2'
 gem 'google-api-client'
 gem 'yt'
 gem 'cancancan'
+gem 'paper_trail', '~> 4.0.0.rc'
 
 gem 'rack-cors', require: 'rack/cors'
 gem 'rack-oauth2'
@@ -29,7 +30,7 @@ gem 'grape-swagger-rails'
 gem 'grape-cancan'
 gem 'doorkeeper'
 
-gem 'squeel'
+# gem 'squeel'
 gem 'carrierwave'
 gem 'carrierwave-aws'
 

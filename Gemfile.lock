@@ -356,6 +356,10 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (>= 2.8, < 4.0)
+    squeel (1.2.3)
+      activerecord (>= 3.0)
+      activesupport (>= 3.0)
+      polyamorous (~> 1.1.0)
     thin (1.6.3)
       daemons (~> 1.0, >= 1.0.9)
       eventmachine (~> 1.0)
@@ -419,6 +423,7 @@ DEPENDENCIES
   sidekiq
   sinatra
   spring
+  squeel
   thin
   vimeo!
   web-console (~> 2.0)

@@ -29,6 +29,7 @@ gem 'grape-swagger-rails'
 gem 'grape-cancan'
 gem 'doorkeeper'
 
+gem 'squeel'
 gem 'carrierwave'
 gem 'carrierwave-aws'
 

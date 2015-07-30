@@ -1,4 +1,5 @@
 ActiveAdmin.register WorkoutExercise do
+  menu parent: "EWP"
 
   permit_params :workout_template_id, :exercise_id, :note
 

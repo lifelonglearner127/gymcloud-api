@@ -19,6 +19,9 @@ db/*.sqlite3
 /tmp
 .ruby-gemset
 
+# Collaboration artifacts
+.floo*
+
 # various artifacts
 **.war
 *.rbc

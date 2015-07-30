@@ -1,4 +1,10 @@
 ActiveAdmin.setup do |config|
+  config.namespace :admin do |admin|
+    admin.build_menu do |menu|
+      menu.add label: 'Users', priority: 2
+      menu.add label: 'EWP', priority: 3
+    end
+  end
   # == Site Title
   #
   # Set the title that is displayed on the main layout

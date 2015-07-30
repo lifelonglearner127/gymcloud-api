@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150730173016) do
+ActiveRecord::Schema.define(version: 20150730182219) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -82,6 +82,16 @@ ActiveRecord::Schema.define(version: 20150730173016) do
   end
 
   add_index "exercises", ["author_id"], name: "index_exercises_on_author_id", using: :btree
+
+  create_table "global_properties", force: :cascade do |t|
+    t.string   "symbol"
+    t.string   "name"
+    t.string   "unit"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "global_properties", ["symbol"], name: "index_global_properties_on_symbol", unique: true, using: :btree
 
   create_table "oauth_access_grants", force: :cascade do |t|
     t.integer  "resource_owner_id", null: false

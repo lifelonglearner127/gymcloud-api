@@ -3,6 +3,7 @@ ActiveAdmin.setup do |config|
     admin.build_menu do |menu|
       menu.add label: 'Users', priority: 2
       menu.add label: 'EWP', priority: 3
+      menu.add label: 'Global', priority: 4
     end
   end
   # == Site Title

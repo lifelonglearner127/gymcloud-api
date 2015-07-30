@@ -228,6 +228,8 @@ ActiveRecord::Schema.define(version: 20150729170122) do
     t.datetime "updated_at",  null: false
   end
 
+  add_index "workout_templates", ["author_id"], name: "index_workout_templates_on_author_id", using: :btree
+
   add_foreign_key "workout_exercises", "exercises"
   add_foreign_key "workout_exercises", "workout_templates"
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150730182219) do
+ActiveRecord::Schema.define(version: 20150730184708) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -132,6 +132,17 @@ ActiveRecord::Schema.define(version: 20150730182219) do
   end
 
   add_index "oauth_applications", ["uid"], name: "index_oauth_applications_on_uid", unique: true, using: :btree
+
+  create_table "personal_properties", force: :cascade do |t|
+    t.integer  "global_property_id"
+    t.integer  "position"
+    t.boolean  "is_visible"
+    t.integer  "person_id"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
+
+  add_index "personal_properties", ["global_property_id"], name: "index_personal_properties_on_global_property_id", using: :btree
 
   create_table "personal_workouts", force: :cascade do |t|
     t.string   "name"
@@ -255,6 +266,7 @@ ActiveRecord::Schema.define(version: 20150730182219) do
 
   add_index "workout_templates", ["author_id"], name: "index_workout_templates_on_author_id", using: :btree
 
+  add_foreign_key "personal_properties", "global_properties"
   add_foreign_key "personal_workouts", "workout_templates"
   add_foreign_key "workout_exercises", "exercises"
   add_foreign_key "workout_exercises", "workout_templates"

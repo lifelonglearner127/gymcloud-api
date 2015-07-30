@@ -1,6 +1,7 @@
 class Exercise < ActiveRecord::Base
 
   belongs_to :author, class_name: User
+  # TODO: get rid of dependent destroy (after exercise delete workout_exercise should stay)
   has_many :workout_exercises, dependent: :destroy
 
   validates :name, :author_id, presence: true

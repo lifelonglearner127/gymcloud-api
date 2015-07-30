@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150729170122) do
+ActiveRecord::Schema.define(version: 20150730173016) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -123,6 +123,21 @@ ActiveRecord::Schema.define(version: 20150729170122) do
 
   add_index "oauth_applications", ["uid"], name: "index_oauth_applications_on_uid", unique: true, using: :btree
 
+  create_table "personal_workouts", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.text     "note"
+    t.integer  "workout_template_id"
+    t.integer  "person_id"
+    t.integer  "status"
+    t.string   "video_url"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+  end
+
+  add_index "personal_workouts", ["person_id"], name: "index_personal_workouts_on_person_id", using: :btree
+  add_index "personal_workouts", ["workout_template_id"], name: "index_personal_workouts_on_workout_template_id", using: :btree
+
   create_table "user_agreements", force: :cascade do |t|
     t.integer  "pro_id"
     t.integer  "client_id"
@@ -230,6 +245,7 @@ ActiveRecord::Schema.define(version: 20150729170122) do
 
   add_index "workout_templates", ["author_id"], name: "index_workout_templates_on_author_id", using: :btree
 
+  add_foreign_key "personal_workouts", "workout_templates"
   add_foreign_key "workout_exercises", "exercises"
   add_foreign_key "workout_exercises", "workout_templates"
 end

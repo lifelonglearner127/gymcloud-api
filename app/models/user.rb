@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   has_many :client_group_memberships
   has_many :personal_workouts, foreign_key: :person_id
 
-  def name
+  def display_name
     email
   end
 end

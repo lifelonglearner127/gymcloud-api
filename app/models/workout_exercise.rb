@@ -5,6 +5,10 @@ class WorkoutExercise < ActiveRecord::Base
 
   before_create :set_exercise_version!
 
+  def display_name
+    self.source_exercise.name
+  end
+
   def source_exercise
     self.exercise.versions.at(self.exercise_version - 1).andand.reify || self.exercise
   end

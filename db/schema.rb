@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150730184708) do
+ActiveRecord::Schema.define(version: 20150730191119) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,6 +70,18 @@ ActiveRecord::Schema.define(version: 20150730184708) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "exercise_properties", force: :cascade do |t|
+    t.integer  "personal_property_id"
+    t.integer  "workout_exercise_id"
+    t.integer  "value"
+    t.integer  "position"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  add_index "exercise_properties", ["personal_property_id"], name: "index_exercise_properties_on_personal_property_id", using: :btree
+  add_index "exercise_properties", ["workout_exercise_id"], name: "index_exercise_properties_on_workout_exercise_id", using: :btree
 
   create_table "exercises", force: :cascade do |t|
     t.string   "name"
@@ -266,6 +278,8 @@ ActiveRecord::Schema.define(version: 20150730184708) do
 
   add_index "workout_templates", ["author_id"], name: "index_workout_templates_on_author_id", using: :btree
 
+  add_foreign_key "exercise_properties", "personal_properties"
+  add_foreign_key "exercise_properties", "workout_exercises"
   add_foreign_key "personal_properties", "global_properties"
   add_foreign_key "personal_workouts", "workout_templates"
   add_foreign_key "workout_exercises", "exercises"

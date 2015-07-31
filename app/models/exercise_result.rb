@@ -2,9 +2,14 @@ class ExerciseResult < ActiveRecord::Base
 
   belongs_to :workout_event
   belongs_to :workout_exercise
+  has_many :exercise_result_items
 
   validates :workout_exercise_id, :workout_event_id, presence: true
   validate :check_exercise_workout_type
+
+  def display_name
+    "#{self.workout_exercise.display_name} - #{self.workout_event.display_name}"
+  end
 
   private
 

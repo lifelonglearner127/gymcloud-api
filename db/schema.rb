@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150731110810) do
+ActiveRecord::Schema.define(version: 20150731123440) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -82,6 +82,17 @@ ActiveRecord::Schema.define(version: 20150731110810) do
 
   add_index "exercise_properties", ["personal_property_id"], name: "index_exercise_properties_on_personal_property_id", using: :btree
   add_index "exercise_properties", ["workout_exercise_id"], name: "index_exercise_properties_on_workout_exercise_id", using: :btree
+
+  create_table "exercise_result_items", force: :cascade do |t|
+    t.integer  "exercise_result_id"
+    t.integer  "exercise_property_id"
+    t.integer  "value"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  add_index "exercise_result_items", ["exercise_property_id"], name: "index_exercise_result_items_on_exercise_property_id", using: :btree
+  add_index "exercise_result_items", ["exercise_result_id"], name: "index_exercise_result_items_on_exercise_result_id", using: :btree
 
   create_table "exercise_results", force: :cascade do |t|
     t.integer  "workout_event_id"
@@ -303,6 +314,8 @@ ActiveRecord::Schema.define(version: 20150731110810) do
 
   add_foreign_key "exercise_properties", "personal_properties"
   add_foreign_key "exercise_properties", "workout_exercises"
+  add_foreign_key "exercise_result_items", "exercise_properties"
+  add_foreign_key "exercise_result_items", "exercise_results"
   add_foreign_key "exercise_results", "workout_events"
   add_foreign_key "exercise_results", "workout_exercises"
   add_foreign_key "personal_properties", "global_properties"

@@ -17,6 +17,7 @@ gem 'google-api-client'
 gem 'yt'
 gem 'cancancan'
 gem 'paper_trail', '~> 4.0.0.rc'
+gem 'acts_as_commentable'
 
 gem 'rack-cors', require: 'rack/cors'
 gem 'rack-oauth2'

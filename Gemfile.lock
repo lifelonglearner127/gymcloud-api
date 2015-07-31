@@ -381,6 +381,8 @@ GEM
       hitimes
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
+    unread (0.6.1)
+      activerecord (>= 3)
     virtus (1.0.5)
       axiom-types (~> 0.1)
       coercible (~> 1.0)
@@ -442,6 +444,7 @@ DEPENDENCIES
   sinatra
   spring
   thin
+  unread
   vimeo!
   web-console (~> 2.0)
   yt

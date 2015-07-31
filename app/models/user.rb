@@ -5,6 +5,8 @@ class User < ActiveRecord::Base
          :trackable, :validatable,
          :confirmable, :invitable
 
+  acts_as_reader
+
   has_one :user_profile
   has_many :agreements_as_pro, class_name: UserAgreement, foreign_key: :pro_id
   has_many :agreements_as_client, class_name: UserAgreement, foreign_key: :client_id
@@ -16,4 +18,5 @@ class User < ActiveRecord::Base
   def display_name
     email
   end
+
 end

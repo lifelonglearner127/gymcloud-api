@@ -22,6 +22,7 @@ gem 'rack-cors', require: 'rack/cors'
 gem 'rack-oauth2'
 
 gem 'activeadmin', github: 'activeadmin'
+gem 'active_admin_datetimepicker'
 
 gem 'grape'
 gem 'grape-entity'

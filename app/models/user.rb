@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
   has_many :agreements_as_client, class_name: UserAgreement, foreign_key: :client_id
   has_many :client_groups, foreign_key: :pro_id
   has_many :client_group_memberships
+  has_many :workout_templates, foreign_key: :author_id
   has_many :personal_workouts, foreign_key: :person_id
 
   def display_name

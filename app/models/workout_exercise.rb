@@ -1,7 +1,7 @@
 class WorkoutExercise < ActiveRecord::Base
 
   belongs_to :exercise
-  belongs_to :workout_template
+  belongs_to :workout, polymorphic: true
   has_many :exercise_properties
 
   before_create :set_exercise_version!

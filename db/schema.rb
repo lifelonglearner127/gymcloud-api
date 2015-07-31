@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150731085548) do
+ActiveRecord::Schema.define(version: 20150731095520) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -253,6 +253,17 @@ ActiveRecord::Schema.define(version: 20150731085548) do
     t.datetime "uploaded_at"
   end
 
+  create_table "workout_events", force: :cascade do |t|
+    t.integer  "personal_workout_id"
+    t.datetime "begins_at"
+    t.datetime "ends_at"
+    t.boolean  "is_completed"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+  end
+
+  add_index "workout_events", ["personal_workout_id"], name: "index_workout_events_on_personal_workout_id", using: :btree
+
   create_table "workout_exercises", force: :cascade do |t|
     t.integer  "exercise_id"
     t.integer  "workout_id"
@@ -283,6 +294,7 @@ ActiveRecord::Schema.define(version: 20150731085548) do
   add_foreign_key "exercise_properties", "workout_exercises"
   add_foreign_key "personal_properties", "global_properties"
   add_foreign_key "personal_workouts", "workout_templates"
+  add_foreign_key "workout_events", "personal_workouts"
   add_foreign_key "workout_exercises", "exercises"
   add_foreign_key "workout_exercises", "workout_templates", column: "workout_id"
 end

@@ -4,6 +4,7 @@ class PersonalWorkout < ActiveRecord::Base
   belongs_to :person, class_name: User
   has_one :author, through: :workout_template
   has_many :workout_exercises, as: :workout
+  has_many :workout_events
 
   validates :name, :workout_template_id, :person_id, presence: true
 

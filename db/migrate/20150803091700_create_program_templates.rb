@@ -9,5 +9,7 @@ class CreateProgramTemplates < ActiveRecord::Migration
 
       t.timestamps null: false
     end
+
+    add_index :program_templates, :author_id
   end
 end

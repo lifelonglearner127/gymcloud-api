@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150803091700) do
+ActiveRecord::Schema.define(version: 20150803092541) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -199,6 +199,20 @@ ActiveRecord::Schema.define(version: 20150803091700) do
 
   add_index "oauth_applications", ["uid"], name: "index_oauth_applications_on_uid", unique: true, using: :btree
 
+  create_table "personal_programs", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.text     "note"
+    t.integer  "program_template_id"
+    t.integer  "status"
+    t.integer  "person_id"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+  end
+
+  add_index "personal_programs", ["person_id"], name: "index_personal_programs_on_person_id", using: :btree
+  add_index "personal_programs", ["program_template_id"], name: "index_personal_programs_on_program_template_id", using: :btree
+
   create_table "personal_properties", force: :cascade do |t|
     t.integer  "global_property_id"
     t.integer  "position"
@@ -234,6 +248,8 @@ ActiveRecord::Schema.define(version: 20150803091700) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
+
+  add_index "program_templates", ["author_id"], name: "index_program_templates_on_author_id", using: :btree
 
   create_table "read_marks", force: :cascade do |t|
     t.integer  "readable_id"
@@ -369,6 +385,7 @@ ActiveRecord::Schema.define(version: 20150803091700) do
   add_foreign_key "exercise_result_items", "exercise_results"
   add_foreign_key "exercise_results", "workout_events"
   add_foreign_key "exercise_results", "workout_exercises"
+  add_foreign_key "personal_programs", "program_templates"
   add_foreign_key "personal_properties", "global_properties"
   add_foreign_key "personal_workouts", "workout_templates"
   add_foreign_key "workout_events", "personal_workouts"

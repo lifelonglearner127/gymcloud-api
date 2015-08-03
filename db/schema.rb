@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150803113027) do
+ActiveRecord::Schema.define(version: 20150803113617) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -150,6 +150,15 @@ ActiveRecord::Schema.define(version: 20150803113027) do
 
   add_index "exercises", ["author_id"], name: "index_exercises_on_author_id", using: :btree
   add_index "exercises", ["folder_id"], name: "index_exercises_on_folder_id", using: :btree
+
+  create_table "folders", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "folders", ["user_id"], name: "index_folders_on_user_id", using: :btree
 
   create_table "global_properties", force: :cascade do |t|
     t.string   "symbol"
@@ -404,6 +413,7 @@ ActiveRecord::Schema.define(version: 20150803113027) do
   add_foreign_key "exercise_result_items", "exercise_results"
   add_foreign_key "exercise_results", "workout_events"
   add_foreign_key "exercise_results", "workout_exercises"
+  add_foreign_key "folders", "users"
   add_foreign_key "personal_programs", "program_templates"
   add_foreign_key "personal_properties", "global_properties"
   add_foreign_key "personal_workouts", "workout_templates"

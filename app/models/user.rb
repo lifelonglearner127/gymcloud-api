@@ -20,6 +20,7 @@ class User < ActiveRecord::Base
   has_many :workout_events, through: :personal_workouts
   has_many :personal_properties, foreign_key: :person_id
   has_many :exercise_results, through: :workout_events
+  has_many :folders
 
   def display_name
     email

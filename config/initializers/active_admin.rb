@@ -2,7 +2,11 @@ ActiveAdmin.setup do |config|
   config.namespace :admin do |admin|
     admin.build_menu do |menu|
       menu.add label: 'Users', priority: 2
-      menu.add label: 'EWP', priority: 3
+      menu.add label: 'Pro', priority: 3
+      menu.add label: 'Personal', priority: 4
+      menu.add label: 'Trainings', priority: 5
+      menu.add label: 'Communication', priority: 6
+      menu.add label: 'Global', priority: 20
     end
   end
   # == Site Title
@@ -125,6 +129,7 @@ ActiveAdmin.setup do |config|
   # This allows your users to comment on any resource registered with Active Admin.
   #
   # You can completely disable comments:
+  config.comments_registration_name = "OldComment"
   config.comments = false
   #
   # You can disable the menu item for the comments index page:

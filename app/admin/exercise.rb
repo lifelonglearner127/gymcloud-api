@@ -1,5 +1,6 @@
 ActiveAdmin.register Exercise do
-  menu parent: "EWP"
+
+  menu parent: "Pro"
 
   permit_params :name, :description, :video_url, :is_public, :author_id
 

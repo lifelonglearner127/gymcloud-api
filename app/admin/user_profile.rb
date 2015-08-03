@@ -1,4 +1,5 @@
 ActiveAdmin.register UserProfile do
+
   menu parent: "Users"
 
   permit_params :gender, :height, :weight, :bodyfat, :first_name, :last_name,
@@ -20,4 +21,5 @@ ActiveAdmin.register UserProfile do
     end
     f.actions
   end
+
 end

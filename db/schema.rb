@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150729170122) do
+ActiveRecord::Schema.define(version: 20150731133659) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,23 @@ ActiveRecord::Schema.define(version: 20150729170122) do
   add_index "active_admin_comments", ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id", using: :btree
   add_index "active_admin_comments", ["namespace"], name: "index_active_admin_comments_on_namespace", using: :btree
   add_index "active_admin_comments", ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id", using: :btree
+
+  create_table "activities", force: :cascade do |t|
+    t.integer  "trackable_id"
+    t.string   "trackable_type"
+    t.integer  "owner_id"
+    t.string   "owner_type"
+    t.string   "key"
+    t.text     "parameters"
+    t.integer  "recipient_id"
+    t.string   "recipient_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "activities", ["owner_id", "owner_type"], name: "index_activities_on_owner_id_and_owner_type", using: :btree
+  add_index "activities", ["recipient_id", "recipient_type"], name: "index_activities_on_recipient_id_and_recipient_type", using: :btree
+  add_index "activities", ["trackable_id", "trackable_type"], name: "index_activities_on_trackable_id_and_trackable_type", using: :btree
 
   create_table "admin_users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -71,6 +88,55 @@ ActiveRecord::Schema.define(version: 20150729170122) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "comments", force: :cascade do |t|
+    t.string   "title",            limit: 50, default: ""
+    t.text     "comment"
+    t.integer  "commentable_id"
+    t.string   "commentable_type"
+    t.integer  "user_id"
+    t.string   "role",                        default: "comments"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "comments", ["commentable_id"], name: "index_comments_on_commentable_id", using: :btree
+  add_index "comments", ["commentable_type"], name: "index_comments_on_commentable_type", using: :btree
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
+
+  create_table "exercise_properties", force: :cascade do |t|
+    t.integer  "personal_property_id"
+    t.integer  "workout_exercise_id"
+    t.integer  "value"
+    t.integer  "position"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  add_index "exercise_properties", ["personal_property_id"], name: "index_exercise_properties_on_personal_property_id", using: :btree
+  add_index "exercise_properties", ["workout_exercise_id"], name: "index_exercise_properties_on_workout_exercise_id", using: :btree
+
+  create_table "exercise_result_items", force: :cascade do |t|
+    t.integer  "exercise_result_id"
+    t.integer  "exercise_property_id"
+    t.integer  "value"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  add_index "exercise_result_items", ["exercise_property_id"], name: "index_exercise_result_items_on_exercise_property_id", using: :btree
+  add_index "exercise_result_items", ["exercise_result_id"], name: "index_exercise_result_items_on_exercise_result_id", using: :btree
+
+  create_table "exercise_results", force: :cascade do |t|
+    t.integer  "workout_event_id"
+    t.integer  "workout_exercise_id"
+    t.boolean  "is_personal_best"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+  end
+
+  add_index "exercise_results", ["workout_event_id"], name: "index_exercise_results_on_workout_event_id", using: :btree
+  add_index "exercise_results", ["workout_exercise_id"], name: "index_exercise_results_on_workout_exercise_id", using: :btree
+
   create_table "exercises", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
@@ -82,6 +148,16 @@ ActiveRecord::Schema.define(version: 20150729170122) do
   end
 
   add_index "exercises", ["author_id"], name: "index_exercises_on_author_id", using: :btree
+
+  create_table "global_properties", force: :cascade do |t|
+    t.string   "symbol"
+    t.string   "name"
+    t.string   "unit"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "global_properties", ["symbol"], name: "index_global_properties_on_symbol", unique: true, using: :btree
 
   create_table "oauth_access_grants", force: :cascade do |t|
     t.integer  "resource_owner_id", null: false
@@ -122,6 +198,41 @@ ActiveRecord::Schema.define(version: 20150729170122) do
   end
 
   add_index "oauth_applications", ["uid"], name: "index_oauth_applications_on_uid", unique: true, using: :btree
+
+  create_table "personal_properties", force: :cascade do |t|
+    t.integer  "global_property_id"
+    t.integer  "position"
+    t.boolean  "is_visible"
+    t.integer  "person_id"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
+
+  add_index "personal_properties", ["global_property_id"], name: "index_personal_properties_on_global_property_id", using: :btree
+
+  create_table "personal_workouts", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.text     "note"
+    t.integer  "workout_template_id"
+    t.integer  "person_id"
+    t.integer  "status"
+    t.string   "video_url"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+  end
+
+  add_index "personal_workouts", ["person_id"], name: "index_personal_workouts_on_person_id", using: :btree
+  add_index "personal_workouts", ["workout_template_id"], name: "index_personal_workouts_on_workout_template_id", using: :btree
+
+  create_table "read_marks", force: :cascade do |t|
+    t.integer  "readable_id"
+    t.string   "readable_type", null: false
+    t.integer  "user_id",       null: false
+    t.datetime "timestamp"
+  end
+
+  add_index "read_marks", ["user_id", "readable_type", "readable_id"], name: "index_read_marks_on_user_id_and_readable_type_and_readable_id", using: :btree
 
   create_table "user_agreements", force: :cascade do |t|
     t.integer  "pro_id"
@@ -205,17 +316,29 @@ ActiveRecord::Schema.define(version: 20150729170122) do
     t.datetime "uploaded_at"
   end
 
-  create_table "workout_exercises", force: :cascade do |t|
-    t.integer  "exercise_id"
-    t.integer  "workout_template_id"
-    t.text     "note"
+  create_table "workout_events", force: :cascade do |t|
+    t.integer  "personal_workout_id"
+    t.datetime "begins_at"
+    t.datetime "ends_at"
+    t.boolean  "is_completed"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
+  end
+
+  add_index "workout_events", ["personal_workout_id"], name: "index_workout_events_on_personal_workout_id", using: :btree
+
+  create_table "workout_exercises", force: :cascade do |t|
+    t.integer  "exercise_id"
+    t.integer  "workout_id"
+    t.text     "note"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
     t.integer  "exercise_version"
+    t.string   "workout_type"
   end
 
   add_index "workout_exercises", ["exercise_id"], name: "index_workout_exercises_on_exercise_id", using: :btree
-  add_index "workout_exercises", ["workout_template_id"], name: "index_workout_exercises_on_workout_template_id", using: :btree
+  add_index "workout_exercises", ["workout_id"], name: "index_workout_exercises_on_workout_id", using: :btree
 
   create_table "workout_templates", force: :cascade do |t|
     t.string   "name"
@@ -230,6 +353,15 @@ ActiveRecord::Schema.define(version: 20150729170122) do
 
   add_index "workout_templates", ["author_id"], name: "index_workout_templates_on_author_id", using: :btree
 
+  add_foreign_key "exercise_properties", "personal_properties"
+  add_foreign_key "exercise_properties", "workout_exercises"
+  add_foreign_key "exercise_result_items", "exercise_properties"
+  add_foreign_key "exercise_result_items", "exercise_results"
+  add_foreign_key "exercise_results", "workout_events"
+  add_foreign_key "exercise_results", "workout_exercises"
+  add_foreign_key "personal_properties", "global_properties"
+  add_foreign_key "personal_workouts", "workout_templates"
+  add_foreign_key "workout_events", "personal_workouts"
   add_foreign_key "workout_exercises", "exercises"
-  add_foreign_key "workout_exercises", "workout_templates"
+  add_foreign_key "workout_exercises", "workout_templates", column: "workout_id"
 end

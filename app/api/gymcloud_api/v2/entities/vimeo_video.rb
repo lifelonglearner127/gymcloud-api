@@ -2,6 +2,7 @@ module GymcloudAPI::V2
 module Entities
 
 class VimeoVideo < Grape::Entity
+
   expose :id do |obj|
     obj.uri.match(/(\d+)/).captures.first.to_i
   end
@@ -22,6 +23,7 @@ class VimeoVideo < Grape::Entity
     obj.preview_picture_url
   end
   expose :created_time, as: :uploaded_at
+
 end
 
 end

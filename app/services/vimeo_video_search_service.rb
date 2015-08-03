@@ -1,4 +1,5 @@
 class VimeoVideoSearchService
+
   def initialize params
     @query = params[:q]
     @page = params[:page]
@@ -35,4 +36,5 @@ class VimeoVideoSearchService
   def filter_results results
     results.reject {|v| v.embed.html.nil? }
   end
+
 end

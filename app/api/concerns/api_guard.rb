@@ -3,6 +3,7 @@
 require 'rack/oauth2'
 
 module APIGuard
+
   extend ActiveSupport::Concern
 
   included do |base|

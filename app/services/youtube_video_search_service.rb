@@ -1,4 +1,5 @@
 class YoutubeVideoSearchService
+
   def initialize params
     @query = params[:q]
     @page = params[:page]
@@ -10,4 +11,5 @@ class YoutubeVideoSearchService
     @yt_search = @yt_search.where(q: @query, format: 5) # only embeddable
     @yt_search.first(@per_page * @page).last(@per_page)
   end
+
 end

@@ -1,4 +1,5 @@
 class VimeoUploaderService
+
   def initialize
     @client    = Vimeo::Client.new access_token: ENV['VIMEO_TOKEN']
     @client_me = @client.me

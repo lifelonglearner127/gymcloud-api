@@ -1,4 +1,5 @@
 class Video < ActiveRecord::Base
+
   mount_uploader :tmp_file, VideoUploader
 
   before_destroy :delete_tmp_file_folder

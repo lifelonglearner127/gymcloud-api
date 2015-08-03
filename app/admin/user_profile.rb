@@ -6,7 +6,7 @@ ActiveAdmin.register UserProfile do
                 :location, :zip, :employer, :birthday, :user_id
 
   form do |f|
-    f.inputs "User Agreement Details" do
+    f.inputs "#{f.object.class.name.titleize} Details" do
       f.input :user
       f.input :gender, as: :select, collection: UserProfile.genders.keys
       f.input :height

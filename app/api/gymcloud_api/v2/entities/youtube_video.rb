@@ -2,6 +2,7 @@ module GymcloudAPI::V2
 module Entities
 
 class YoutubeVideo < Grape::Entity
+
   expose :id
   expose :title
   expose :description
@@ -18,6 +19,7 @@ class YoutubeVideo < Grape::Entity
     obj.snippet.thumbnails["medium"]["url"]
   end
   expose :published_at, as: :uploaded_at
+
 end
 
 end

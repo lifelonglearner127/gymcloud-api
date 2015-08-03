@@ -1,5 +1,7 @@
 class VimeoVideoUpdateWorker
+
   include Sidekiq::Worker
+
   sidekiq_options retry: 5
 
   def perform(video_id)

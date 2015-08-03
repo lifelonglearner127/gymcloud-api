@@ -2,7 +2,9 @@ module GymcloudAPI::V2
 module Namespaces
 
 class Videos < Base
+
   helpers GlobalHelpers
+
   helpers do
     def update_video video_id, options = {}
       video = Video.find(video_id)
@@ -19,13 +21,11 @@ class Videos < Base
     end
   end
 
-
   desc 'Retrieve videos'
   paginate max_per_page: 50
   get do
     present paginate(Video.all), with: Entities::Video
   end
-
 
   desc 'Create new video and uploading it to Vimeo'
   params do
@@ -43,17 +43,15 @@ class Videos < Base
     present video, with: Entities::Video
   end
 
-
-
   params do
     requires :id, type: Integer, desc: 'Video ID'
   end
   route_param :id do
+
     desc 'Retrieve a video'
     get do
       Video.find params[:id]
     end
-
 
     desc 'Update a video'
     params do
@@ -67,20 +65,17 @@ class Videos < Base
       present video, with: Entities::Video
     end
 
-
     desc 'Publish a video'
     get 'publish' do
       video = update_video params[:id], privacy: 'anybody'
       present video, with: Entities::Video
     end
 
-
     desc 'Unpublish a video'
     get 'unpublish' do
       video = update_video params[:id], privacy: 'nobody'
       present video, with: Entities::Video
     end
-
 
     desc 'Delete a video'
     delete do
@@ -92,9 +87,11 @@ class Videos < Base
 
       present video, with: Entities::Video
     end
+
   end
 
   namespace '/search' do
+
     desc 'Search vimeo video'
     params do
       requires :q, type: String, desc: 'Query for search'
@@ -106,7 +103,6 @@ class Videos < Base
 
       present videos, with: Entities::VimeoVideo
     end
-
 
     desc 'Search youtube video'
     params do

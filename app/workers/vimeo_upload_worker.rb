@@ -1,5 +1,7 @@
 class VimeoUploadWorker
+
   include Sidekiq::Worker
+
   sidekiq_options retry: 5
 
   def perform(video_id)
@@ -7,4 +9,5 @@ class VimeoUploadWorker
     VimeoUploaderService.new.upload(video)
     VimeoVideoUpdateWorker.perform_in(2.minutes, video_id)
   end
+
 end

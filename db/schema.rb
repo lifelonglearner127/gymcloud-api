@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150803094015) do
+ActiveRecord::Schema.define(version: 20150803113027) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -145,9 +145,11 @@ ActiveRecord::Schema.define(version: 20150803094015) do
     t.integer  "author_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.integer  "folder_id"
   end
 
   add_index "exercises", ["author_id"], name: "index_exercises_on_author_id", using: :btree
+  add_index "exercises", ["folder_id"], name: "index_exercises_on_folder_id", using: :btree
 
   create_table "global_properties", force: :cascade do |t|
     t.string   "symbol"
@@ -247,9 +249,11 @@ ActiveRecord::Schema.define(version: 20150803094015) do
     t.integer  "author_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.integer  "folder_id"
   end
 
   add_index "program_templates", ["author_id"], name: "index_program_templates_on_author_id", using: :btree
+  add_index "program_templates", ["folder_id"], name: "index_program_templates_on_folder_id", using: :btree
 
   create_table "program_workouts", force: :cascade do |t|
     t.integer  "workout_id"
@@ -389,7 +393,10 @@ ActiveRecord::Schema.define(version: 20150803094015) do
     t.integer  "author_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.integer  "folder_id"
   end
+
+  add_index "workout_templates", ["folder_id"], name: "index_workout_templates_on_folder_id", using: :btree
 
   add_foreign_key "exercise_properties", "personal_properties"
   add_foreign_key "exercise_properties", "workout_exercises"

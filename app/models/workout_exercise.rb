@@ -5,6 +5,9 @@ class WorkoutExercise < ActiveRecord::Base
   has_many :exercise_properties
   has_many :exercise_results
 
+  validates :exercise_id, :workout_id, presence: true
+  validates :workout_type, inclusion: { in: ['WorkoutTemplate', 'PersonalWorkout'] }
+
   before_create :set_exercise_version!
 
   def display_name

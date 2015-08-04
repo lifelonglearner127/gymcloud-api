@@ -51,6 +51,7 @@ gem 'andand'
 group :development do
   gem 'letter_opener_web'
   gem 'sinatra', require: nil # for Sidekiq monitoring
+  gem 'rails-erd'
 end
 
 group :test do

@@ -14,6 +14,8 @@ class API < Grape::API
   default_format :json
 
   mount Namespaces::Root
+  mount Namespaces::Users => 'users'
+  mount Namespaces::UserProfiles => 'user_profiles'
   mount Namespaces::Videos => 'videos'
 
 end

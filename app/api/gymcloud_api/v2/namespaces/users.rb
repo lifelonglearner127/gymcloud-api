@@ -18,7 +18,7 @@ class Users < Base
 
       %w{
         notifications
-        pros clients
+        pros clients client_groups
         exercises workout_templates program_templates
         personal_workouts personal_programs
         personal_properties workout_events

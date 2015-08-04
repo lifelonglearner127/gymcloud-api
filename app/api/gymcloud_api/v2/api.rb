@@ -22,6 +22,7 @@ class API < Grape::API
   mount Namespaces::ProgramTemplates => 'program_templates'
   mount Namespaces::PersonalPrograms => 'personal_programs'
   mount Namespaces::PersonalProperties => 'personal_properties'
+  mount Namespaces::WorkoutEvents => 'workout_events'
   mount Namespaces::Notifications => 'notifications'
   mount Namespaces::Videos => 'videos'
 

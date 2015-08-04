@@ -23,6 +23,7 @@ class Users < Base
         personal_workouts personal_programs
         personal_properties workout_events
         exercise_results
+        folders
       }.each do |collection|
         namespace collection.to_sym do
           desc "Fetch #{collection.titleize}"

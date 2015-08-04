@@ -6,12 +6,10 @@ class PersonalProperties < Base
   route_param :id do
 
     desc 'Read Personal Property'
-    get do
-    end
+    get
 
     desc 'Update Personal Property'
-    patch do
-    end
+    patch
 
   end
 

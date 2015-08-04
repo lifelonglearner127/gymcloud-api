@@ -4,22 +4,18 @@ module Namespaces
 class WorkoutTemplates < Base
 
   desc 'Create Workout Template'
-  post do
-  end
+  post
 
   route_param :id do
 
     desc 'Read Workout Template'
-    get do
-    end
+    get
 
     desc 'Update Workout Template'
-    patch do
-    end
+    patch
 
     desc 'Delete Workout Template'
-    delete do
-    end
+    delete
 
   end
 

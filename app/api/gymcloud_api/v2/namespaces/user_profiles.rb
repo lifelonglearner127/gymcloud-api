@@ -6,12 +6,10 @@ class UserProfiles < Base
   route_param :id do
 
     desc 'Fetch User Profile'
-    get do
-    end
+    get
 
     desc 'Update User Profile'
-    patch do
-    end
+    patch
 
   end
 

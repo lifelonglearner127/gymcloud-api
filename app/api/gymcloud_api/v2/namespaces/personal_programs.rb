@@ -4,22 +4,18 @@ module Namespaces
 class PersonalPrograms < Base
 
   desc 'Create Personal Program'
-  post do
-  end
+  post
 
   route_param :id do
 
     desc 'Read Personal Program'
-    get do
-    end
+    get
 
     desc 'Update Personal Program'
-    patch do
-    end
+    patch
 
     desc 'Delete Personal Program'
-    delete do
-    end
+    delete
 
   end
 

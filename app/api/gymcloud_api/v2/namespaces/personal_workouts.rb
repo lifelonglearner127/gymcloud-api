@@ -4,22 +4,18 @@ module Namespaces
 class PersonalWorkouts < Base
 
   desc 'Create Personal Workout'
-  post do
-  end
+  post
 
   route_param :id do
 
     desc 'Read Personal Workout'
-    get do
-    end
+    get
 
     desc 'Update Personal Workout'
-    patch do
-    end
+    patch
 
     desc 'Delete Personal Workout'
-    delete do
-    end
+    delete
 
   end
 

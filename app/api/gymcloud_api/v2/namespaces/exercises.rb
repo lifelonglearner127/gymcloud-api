@@ -4,22 +4,18 @@ module Namespaces
 class Exercises < Base
 
   desc 'Create Exercise'
-  post do
-  end
+  post
 
   route_param :id do
 
     desc 'Read Exercise'
-    get do
-    end
+    get
 
     desc 'Update Exercise'
-    patch do
-    end
+    patch
 
     desc 'Delete Exercise'
-    delete do
-    end
+    delete
 
   end
 

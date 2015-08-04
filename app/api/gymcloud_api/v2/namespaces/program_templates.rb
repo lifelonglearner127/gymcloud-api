@@ -4,22 +4,18 @@ module Namespaces
 class ProgramTemplates < Base
 
   desc 'Create Program Template'
-  post do
-  end
+  post
 
   route_param :id do
 
     desc 'Read Program Template'
-    get do
-    end
+    get
 
     desc 'Update Program Template'
-    patch do
-    end
+    patch
 
     desc 'Delete Program Template'
-    delete do
-    end
+    delete
 
   end
 

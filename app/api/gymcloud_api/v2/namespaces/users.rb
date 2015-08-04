@@ -4,14 +4,12 @@ module Namespaces
 class Users < Base
 
   desc 'Fetch Current User'
-  get :me do
-  end
+  get :me
 
   route_param :id do
 
     desc 'Fetch User'
-    get do
-    end
+    get
 
     desc 'Invite User'
     post :invite
@@ -27,8 +25,7 @@ class Users < Base
       }.each do |collection|
         namespace collection.to_sym do
           desc "Fetch #{collection.titleize}"
-          get do
-          end
+          get
         end
       end
 

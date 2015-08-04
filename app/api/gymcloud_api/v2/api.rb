@@ -16,6 +16,11 @@ class API < Grape::API
   mount Namespaces::Root
   mount Namespaces::Users => 'users'
   mount Namespaces::UserProfiles => 'user_profiles'
+  mount Namespaces::Exercises => 'exercises'
+  mount Namespaces::WorkoutTemplates => 'workout_templates'
+  mount Namespaces::PersonalWorkouts => 'personal_workouts'
+  mount Namespaces::ProgramTemplates => 'program_templates'
+  mount Namespaces::PersonalPrograms => 'personal_programs'
   mount Namespaces::Videos => 'videos'
 
 end

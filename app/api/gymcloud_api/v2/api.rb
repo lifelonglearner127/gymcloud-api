@@ -26,6 +26,7 @@ class API < Grape::API
   mount Namespaces::WorkoutEvents => 'workout_events'
   mount Namespaces::ExerciseResults => 'exercise_results'
   mount Namespaces::Notifications => 'notifications'
+  mount Namespaces::Comments => 'comments'
   mount Namespaces::Videos => 'videos'
 
 end

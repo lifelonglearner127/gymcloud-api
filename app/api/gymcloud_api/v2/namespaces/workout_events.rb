@@ -17,6 +17,11 @@ class WorkoutEvents < Base
     desc 'Delete Workout Event'
     delete
 
+    desc 'Fetch full Event content'
+    get :full do
+      # NOTE: should include: comments, results (grouped), previous results
+    end
+
   end
 
 end

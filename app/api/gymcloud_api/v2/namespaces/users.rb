@@ -19,6 +19,7 @@ class Users < Base
     namespace :collections do
 
       %w{
+        notifications
         pros clients
         exercises workout_templates program_templates
         personal_workouts personal_programs
@@ -29,6 +30,13 @@ class Users < Base
           get do
           end
         end
+      end
+
+      resource :notifications do
+
+        desc 'Mark all Notifications as Read'
+        patch :read_all
+
       end
 
     end

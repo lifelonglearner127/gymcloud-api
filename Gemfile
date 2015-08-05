@@ -53,12 +53,14 @@ group :development do
   gem 'sinatra', require: nil # for Sidekiq monitoring
   gem 'rails-erd'
   gem 'rubocop', require: false
+  gem 'annotate', '~> 2.6.6'
 
   gem 'guard'
   gem 'guard-bundler', require: false
   gem 'guard-rspec', require: false
   gem 'guard-rack', require: false
   gem 'guard-rubocop', require: false
+  gem 'guard-annotate', require: false
 end
 
 group :test do

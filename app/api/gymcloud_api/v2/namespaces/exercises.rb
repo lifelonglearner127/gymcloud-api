@@ -40,7 +40,7 @@ class Exercises < Base
 
     desc 'Delete Exercise'
     delete do
-      present ::Exercise.destroy!(params[:id]), with: Entities::Exercise
+      present ::Exercise.destroy(params[:id]), with: Entities::Exercise
     end
 
   end

@@ -52,11 +52,13 @@ group :development do
   gem 'letter_opener_web'
   gem 'sinatra', require: nil # for Sidekiq monitoring
   gem 'rails-erd'
+  gem 'rubocop', require: false
 
   gem 'guard'
   gem 'guard-bundler', require: false
   gem 'guard-rspec', require: false
   gem 'guard-rack', require: false
+  gem 'guard-rubocop', require: false
 end
 
 group :test do

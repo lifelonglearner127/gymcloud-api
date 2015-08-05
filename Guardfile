@@ -85,3 +85,8 @@ guard :rack do
   watch('Gemfile.lock')
   watch(%r{^(config|app|api)/.*})
 end
+
+guard :rubocop, all_on_start: false, cli: %w{--format fuubar --format offenses} do
+  watch(%r{.+\.rb$})
+  watch(%r{(?:.+/)?\.rubocop\.yml$}) { |m| File.dirname(m[0]) }
+end

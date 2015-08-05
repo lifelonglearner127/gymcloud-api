@@ -12,7 +12,7 @@
 
 class AgreementCategory < ActiveRecord::Base
 
-  has_many :user_agreements
+  has_many :user_agreements, foreign_key: :category_id
 
   validates :title, :pro_title, :client_title, presence: true
 

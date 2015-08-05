@@ -12,6 +12,8 @@
 
 class GlobalProperty < ActiveRecord::Base
 
+  has_many :personal_properties
+
   validates :name, :unit, :symbol, presence: true
   validates :symbol, uniqueness: true
 

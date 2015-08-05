@@ -8,6 +8,24 @@
 
 ### Usage
 
+#### Services
+
+Run services in separate terminals:
+
+```
+bundle exec rails console
+bundle exec rails server
+bundle exec guard
+```
+
+#### Guard
+
+Guard will:
+
+* Run testing suite (`rspec`)
+* Run code style QA (`rubocop`)
+* Install rubygems from Gemfile (`bundle install`)
+
 #### API Documentation (Swagger)
 
 ```

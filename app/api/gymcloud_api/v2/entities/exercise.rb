@@ -7,7 +7,7 @@ class Exercise < Grape::Entity
   expose :description
   expose :video_url
   expose :is_public
-  expose :author_id
+  expose :author, using: Entities::User
 end
 
 end

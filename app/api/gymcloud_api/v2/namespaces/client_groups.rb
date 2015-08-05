@@ -4,18 +4,38 @@ module Namespaces
 class ClientGroups < Base
 
   desc 'Create Client Group'
-  post
+  params do
+    requires :name, type: String
+  end
+  post do
+    attributes = filtered_params.merge(pro: current_user).to_h
+    present ::ClientGroup.create!(attributes), with: Entities::ClientGroup
+  end
 
+  params do
+    requires :id, type: Integer, desc: 'ClientGroup ID'
+  end
   route_param :id do
 
     desc 'Read Client Group'
-    get
+    get do
+      present ::ClientGroup.find(filtered_params[:id]), with: Entities::ClientGroup
+    end
 
     desc 'Update Client Group'
-    patch
+    params do
+      optional :name, type: String
+    end
+    patch do
+      client_group = ::ClientGroup.find params[:id]
+      client_group.update_attributes! filtered_params.to_h
+      present client_group, with: Entities::ClientGroup
+    end
 
     desc 'Delete Client Group'
-    delete
+    delete do
+      present ::ClientGroup.destroy(params[:id]), with: Entities::ClientGroup
+    end
 
     namespace :members do
 

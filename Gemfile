@@ -54,6 +54,7 @@ group :development do
   gem 'rails-erd'
 
   gem 'guard'
+  gem 'guard-rspec', require: false
 end
 
 group :test do

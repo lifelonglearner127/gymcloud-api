@@ -1,3 +1,22 @@
+# == Schema Information
+#
+# Table name: videos
+#
+#  id                  :integer          not null, primary key
+#  vimeo_id            :integer
+#  tmp_file            :string
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
+#  privacy             :integer          default(1)
+#  name                :string
+#  duration            :integer
+#  preview_picture_url :string
+#  vimeo_url           :string
+#  status              :string
+#  embed_url           :string
+#  uploaded_at         :datetime
+#
+
 class Video < ActiveRecord::Base
 
   mount_uploader :tmp_file, VideoUploader

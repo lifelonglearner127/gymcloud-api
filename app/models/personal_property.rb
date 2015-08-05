@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: personal_properties
+#
+#  id                 :integer          not null, primary key
+#  global_property_id :integer
+#  position           :integer
+#  is_visible         :boolean
+#  person_id          :integer
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#
+
 class PersonalProperty < ActiveRecord::Base
 
   belongs_to :global_property

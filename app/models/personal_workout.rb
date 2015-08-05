@@ -1,3 +1,19 @@
+# == Schema Information
+#
+# Table name: personal_workouts
+#
+#  id                  :integer          not null, primary key
+#  name                :string
+#  description         :text
+#  note                :text
+#  workout_template_id :integer
+#  person_id           :integer
+#  status              :integer
+#  video_url           :string
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
+#
+
 class PersonalWorkout < ActiveRecord::Base
 
   belongs_to :workout_template

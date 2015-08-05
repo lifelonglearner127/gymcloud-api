@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: exercise_properties
+#
+#  id                   :integer          not null, primary key
+#  personal_property_id :integer
+#  workout_exercise_id  :integer
+#  value                :integer
+#  position             :integer
+#  created_at           :datetime         not null
+#  updated_at           :datetime         not null
+#
+
 class ExerciseProperty < ActiveRecord::Base
 
   belongs_to :personal_property

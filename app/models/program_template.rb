@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: program_templates
+#
+#  id          :integer          not null, primary key
+#  name        :string
+#  description :text
+#  note        :text
+#  is_public   :boolean
+#  author_id   :integer
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  folder_id   :integer
+#
+
 class ProgramTemplate < ActiveRecord::Base
 
   belongs_to :author, class_name: User

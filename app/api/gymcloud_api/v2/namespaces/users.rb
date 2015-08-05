@@ -4,14 +4,24 @@ module Namespaces
 class Users < Base
 
   desc 'Fetch Current User'
-  get :me
+  get :me do
+    present current_user, with: Entities::User
+  end
 
+  params do
+    requires :id, type: Integer, desc: 'User ID'
+  end
   route_param :id do
 
     desc 'Fetch User'
-    get
+    get do
+      present ::User.find(params[:id]), with: Entities::User
+    end
 
     desc 'Invite User'
+    params do
+      requires :email, allow_blank: false, regexp: /.+@.+/
+    end
     post :invite
 
     namespace :collections do
@@ -27,7 +37,10 @@ class Users < Base
       }.each do |collection|
         namespace collection.to_sym do
           desc "Fetch #{collection.titleize}"
-          get
+          get do
+            user = ::User.find params[:id]
+            user.send(collection)
+          end
         end
       end
 

@@ -66,6 +66,7 @@ group :development do
 end
 
 group :test do
+  gem 'shoulda-matchers', require: false
 end
 
 group :development, :test do

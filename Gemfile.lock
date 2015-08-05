@@ -448,6 +448,8 @@ GEM
       sprockets-rails (>= 2.0, < 4.0)
       tilt (~> 1.1)
     shellany (0.0.1)
+    shoulda-matchers (2.8.0)
+      activesupport (>= 3.0.0)
     sidekiq (3.4.2)
       celluloid (~> 0.16.0)
       connection_pool (~> 2.2, >= 2.2.0)
@@ -557,6 +559,7 @@ DEPENDENCIES
   rails_12factor
   rspec-rails (~> 3.0)
   rubocop
+  shoulda-matchers
   sidekiq
   sinatra
   spring

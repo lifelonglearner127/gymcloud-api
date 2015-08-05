@@ -54,6 +54,7 @@ group :development do
   gem 'rails-erd'
   gem 'rubocop', require: false
   gem 'annotate', '~> 2.6.6'
+  gem 'consistency_fail', require: false
 
   gem 'guard'
   gem 'guard-bundler', require: false
@@ -61,6 +62,7 @@ group :development do
   gem 'guard-rack', require: false
   gem 'guard-rubocop', require: false
   gem 'guard-annotate', require: false
+  gem 'guard-consistency_fail', require: false
 end
 
 group :test do

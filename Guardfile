@@ -102,3 +102,8 @@ guard 'annotate' do
   # with the ":routes => true" option
   #watch( 'config/routes.rb' )
 end
+
+guard 'consistency_fail', environment: 'development' do
+  watch(%r{^app/model/(.+)\.rb})
+  watch(%r{^db/schema.rb})
+end

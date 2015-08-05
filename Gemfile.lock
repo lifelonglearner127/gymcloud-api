@@ -131,6 +131,7 @@ GEM
     coffee-script-source (1.9.1.1)
     columnize (0.9.0)
     connection_pool (2.2.0)
+    consistency_fail (0.3.3)
     daemons (1.2.3)
     debug_inspector (0.0.2)
     descendants_tracker (0.0.4)
@@ -225,6 +226,10 @@ GEM
       guard (~> 2.2)
       guard-compat (~> 1.1)
     guard-compat (1.2.1)
+    guard-consistency_fail (0.1.1)
+      consistency_fail
+      guard (>= 2.1)
+      guard-compat (~> 1.0)
     guard-rack (2.1.1)
       ffi
       guard (~> 2.3)
@@ -515,6 +520,7 @@ DEPENDENCIES
   cancancan
   carrierwave
   carrierwave-aws
+  consistency_fail
   devise
   devise_invitable
   doorkeeper
@@ -528,6 +534,7 @@ DEPENDENCIES
   guard
   guard-annotate
   guard-bundler
+  guard-consistency_fail
   guard-rack
   guard-rspec
   guard-rubocop

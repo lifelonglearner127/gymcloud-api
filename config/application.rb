@@ -52,7 +52,7 @@ module GymcloudApi
         origins '*'
         resource '*',
           :headers => :any,
-          :methods => [:get, :post, :put, :delete, :options]
+          :methods => %i{get post put patch delete options}
       end
     end
 

@@ -216,6 +216,10 @@ GEM
       guard (~> 2.2)
       guard-compat (~> 1.1)
     guard-compat (1.2.1)
+    guard-rack (2.1.1)
+      ffi
+      guard (~> 2.3)
+      spoon
     guard-rspec (4.6.4)
       guard (~> 2.1)
       guard-compat (~> 1.1)
@@ -433,6 +437,8 @@ GEM
       rack-protection (~> 1.4)
       tilt (>= 1.3, < 3)
     slop (3.6.0)
+    spoon (0.0.4)
+      ffi
     spring (1.3.6)
     sprockets (3.2.0)
       rack (~> 1.0)
@@ -497,6 +503,7 @@ DEPENDENCIES
   grape-swagger-rails
   guard
   guard-bundler
+  guard-rack
   guard-rspec
   jbuilder (~> 2.0)
   kaminari

@@ -80,3 +80,8 @@ guard :bundler do
   # Assume files are symlinked from somewhere
   files.each { |file| watch(helper.real_path(file)) }
 end
+
+guard :rack do
+  watch('Gemfile.lock')
+  watch(%r{^(config|app|api)/.*})
+end

@@ -54,6 +54,7 @@ group :development do
   gem 'rails-erd'
 
   gem 'guard'
+  gem 'guard-bundler', require: false
   gem 'guard-rspec', require: false
 end
 

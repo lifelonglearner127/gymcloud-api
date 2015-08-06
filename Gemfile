@@ -52,15 +52,29 @@ group :development do
   gem 'letter_opener_web'
   gem 'sinatra', require: nil # for Sidekiq monitoring
   gem 'rails-erd'
+  gem 'rubocop', require: false
+  gem 'annotate', '~> 2.6.6'
+  gem 'consistency_fail', require: false
+
+  gem 'guard'
+  gem 'guard-bundler', require: false
+  gem 'guard-rspec', require: false
+  gem 'guard-rack', require: false
+  gem 'guard-rubocop', require: false
+  gem 'guard-annotate', require: false
+  gem 'guard-consistency_fail', require: false
 end
 
 group :test do
+  gem 'shoulda-matchers', require: false
 end
 
 group :development, :test do
   gem 'byebug'
   gem 'web-console', '~> 2.0'
   gem 'spring'
+
+  gem 'rspec-rails', '~> 3.0'
 end
 
 group :production do

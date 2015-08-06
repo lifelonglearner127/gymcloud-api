@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: user_agreements
+#
+#  id          :integer          not null, primary key
+#  pro_id      :integer
+#  client_id   :integer
+#  category_id :integer
+#  status      :integer
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#
+
 class UserAgreement < ActiveRecord::Base
 
   belongs_to :pro, class_name: User

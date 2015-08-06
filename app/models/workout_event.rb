@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: workout_events
+#
+#  id                  :integer          not null, primary key
+#  personal_workout_id :integer
+#  begins_at           :datetime
+#  ends_at             :datetime
+#  is_completed        :boolean
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
+#
+
 class WorkoutEvent < ActiveRecord::Base
 
   belongs_to :personal_workout

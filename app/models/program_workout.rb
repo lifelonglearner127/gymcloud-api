@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: program_workouts
+#
+#  id              :integer          not null, primary key
+#  workout_id      :integer
+#  workout_type    :string
+#  program_id      :integer
+#  program_type    :string
+#  workout_version :integer
+#  note            :text
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#
+
 class ProgramWorkout < ActiveRecord::Base
 
   belongs_to :workout, polymorphic: true

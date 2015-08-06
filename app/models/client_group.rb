@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: client_groups
+#
+#  id         :integer          not null, primary key
+#  name       :string
+#  pro_id     :integer
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
 class ClientGroup < ActiveRecord::Base
 
   belongs_to :pro, class_name: User

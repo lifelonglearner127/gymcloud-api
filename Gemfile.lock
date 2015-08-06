@@ -74,10 +74,16 @@ GEM
     ancestry (2.1.0)
       activerecord (>= 3.0.0)
     andand (1.3.3)
+    annotate (2.6.10)
+      activerecord (>= 3.2, <= 4.3)
+      rake (~> 10.4)
     api-pagination (4.1.1)
     arbre (1.0.3)
       activesupport (>= 3.0.0)
     arel (6.0.2)
+    ast (2.1.0)
+    astrolabe (1.3.1)
+      parser (~> 2.2)
     attr_required (1.0.0)
     autoparse (0.3.3)
       addressable (>= 2.3.1)
@@ -113,6 +119,7 @@ GEM
     celluloid (0.16.0)
       timers (~> 4.0.0)
     choice (0.2.0)
+    coderay (1.1.0)
     coercible (1.0.0)
       descendants_tracker (~> 0.0.1)
     coffee-rails (4.1.0)
@@ -124,6 +131,7 @@ GEM
     coffee-script-source (1.9.1.1)
     columnize (0.9.0)
     connection_pool (2.2.0)
+    consistency_fail (0.3.3)
     daemons (1.2.3)
     debug_inspector (0.0.2)
     descendants_tracker (0.0.4)
@@ -138,6 +146,7 @@ GEM
     devise_invitable (1.5.2)
       actionmailer (>= 3.2.6, < 5)
       devise (>= 3.2.0)
+    diff-lcs (1.2.5)
     doorkeeper (2.2.1)
       railties (>= 3.2)
     dotenv (2.0.2)
@@ -153,6 +162,8 @@ GEM
       multipart-post (>= 1.2, < 3)
     faraday_middleware (0.9.2)
       faraday (>= 0.7.4, < 0.10)
+    ffi (1.9.10)
+    formatador (0.2.5)
     formtastic (3.1.3)
       actionpack (>= 3.2.13)
     formtastic_i18n (0.4.1)
@@ -198,6 +209,38 @@ GEM
     grape-swagger-rails (0.1.0)
       grape-swagger (>= 0.7.2)
       railties (>= 3.2.12)
+    guard (2.13.0)
+      formatador (>= 0.2.4)
+      listen (>= 2.7, <= 4.0)
+      lumberjack (~> 1.0)
+      nenv (~> 0.1)
+      notiffany (~> 0.0)
+      pry (>= 0.9.12)
+      shellany (~> 0.0)
+      thor (>= 0.18.1)
+    guard-annotate (2.2)
+      annotate (~> 2.4, >= 2.4.0)
+      guard-compat (~> 1.2, >= 1.2.1)
+    guard-bundler (2.1.0)
+      bundler (~> 1.0)
+      guard (~> 2.2)
+      guard-compat (~> 1.1)
+    guard-compat (1.2.1)
+    guard-consistency_fail (0.1.1)
+      consistency_fail
+      guard (>= 2.1)
+      guard-compat (~> 1.0)
+    guard-rack (2.1.1)
+      ffi
+      guard (~> 2.3)
+      spoon
+    guard-rspec (4.6.4)
+      guard (~> 2.1)
+      guard-compat (~> 1.1)
+      rspec (>= 2.99.0, < 4.0)
+    guard-rubocop (1.2.0)
+      guard (~> 2.0)
+      rubocop (~> 0.20)
     has_scope (0.6.0)
       actionpack (>= 3.2, < 5)
       activesupport (>= 3.2, < 5)
@@ -233,24 +276,33 @@ GEM
       actionmailer (>= 3.2)
       letter_opener (~> 1.0)
       railties (>= 3.2)
+    listen (3.0.3)
+      rb-fsevent (>= 0.9.3)
+      rb-inotify (>= 0.9)
     little-plugger (1.1.3)
     logging (2.0.0)
       little-plugger (~> 1.1)
       multi_json (~> 1.10)
     loofah (2.0.2)
       nokogiri (>= 1.5.9)
+    lumberjack (1.0.9)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
     memoist (0.12.0)
+    method_source (0.8.2)
     mime-types (2.6.1)
     mini_portile (0.6.2)
     minitest (5.7.0)
     multi_json (1.11.0)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
+    nenv (0.2.0)
     newrelic_rpm (3.12.1.298)
     nokogiri (1.6.6.2)
       mini_portile (~> 0.6.0)
+    notiffany (0.0.7)
+      nenv (~> 0.1)
+      shellany (~> 0.0)
     oauth (0.4.7)
     oauth2 (1.0.0)
       faraday (>= 0.8, < 0.10)
@@ -274,9 +326,16 @@ GEM
       activerecord (>= 3.0, < 6.0)
       activesupport (>= 3.0, < 6.0)
       request_store (~> 1.1)
+    parser (2.2.2.6)
+      ast (>= 1.1, < 3.0)
     pg (0.18.2)
     polyamorous (1.2.0)
       activerecord (>= 3.0)
+    powerpack (0.1.1)
+    pry (0.10.1)
+      coderay (~> 1.1.0)
+      method_source (~> 0.8.1)
+      slop (~> 3.4)
     public_activity (1.4.2)
       actionpack (>= 3.0.0)
       activerecord (>= 3.0)
@@ -333,6 +392,7 @@ GEM
       activesupport (= 4.2.3)
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
+    rainbow (2.0.0)
     rake (10.4.2)
     ransack (1.6.6)
       actionpack (>= 3.0)
@@ -340,6 +400,9 @@ GEM
       activesupport (>= 3.0)
       i18n
       polyamorous (~> 1.2)
+    rb-fsevent (0.9.5)
+    rb-inotify (0.9.5)
+      ffi (>= 0.5.0)
     rdoc (4.2.0)
     redis (3.2.1)
     redis-namespace (1.5.2)
@@ -348,7 +411,35 @@ GEM
     responders (2.1.0)
       railties (>= 4.2.0, < 5)
     retriable (1.4.1)
+    rspec (3.3.0)
+      rspec-core (~> 3.3.0)
+      rspec-expectations (~> 3.3.0)
+      rspec-mocks (~> 3.3.0)
+    rspec-core (3.3.2)
+      rspec-support (~> 3.3.0)
+    rspec-expectations (3.3.1)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.3.0)
+    rspec-mocks (3.3.2)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.3.0)
+    rspec-rails (3.3.3)
+      actionpack (>= 3.0, < 4.3)
+      activesupport (>= 3.0, < 4.3)
+      railties (>= 3.0, < 4.3)
+      rspec-core (~> 3.3.0)
+      rspec-expectations (~> 3.3.0)
+      rspec-mocks (~> 3.3.0)
+      rspec-support (~> 3.3.0)
+    rspec-support (3.3.0)
+    rubocop (0.33.0)
+      astrolabe (~> 1.3)
+      parser (>= 2.2.2.5, < 3.0)
+      powerpack (~> 0.1)
+      rainbow (>= 1.99.1, < 3.0)
+      ruby-progressbar (~> 1.4)
     ruby-graphviz (1.2.2)
+    ruby-progressbar (1.7.5)
     sass (3.4.16)
     sass-rails (5.0.3)
       railties (>= 4.0.0, < 5.0)
@@ -356,6 +447,9 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (~> 1.1)
+    shellany (0.0.1)
+    shoulda-matchers (2.8.0)
+      activesupport (>= 3.0.0)
     sidekiq (3.4.2)
       celluloid (~> 0.16.0)
       connection_pool (~> 2.2, >= 2.2.0)
@@ -372,6 +466,9 @@ GEM
       rack (~> 1.4)
       rack-protection (~> 1.4)
       tilt (>= 1.3, < 3)
+    slop (3.6.0)
+    spoon (0.0.4)
+      ffi
     spring (1.3.6)
     sprockets (3.2.0)
       rack (~> 1.0)
@@ -419,11 +516,13 @@ DEPENDENCIES
   acts_as_commentable
   ancestry
   andand
+  annotate (~> 2.6.6)
   api-pagination
   byebug
   cancancan
   carrierwave
   carrierwave-aws
+  consistency_fail
   devise
   devise_invitable
   doorkeeper
@@ -434,6 +533,13 @@ DEPENDENCIES
   grape-entity
   grape-swagger (~> 0.9.0)
   grape-swagger-rails
+  guard
+  guard-annotate
+  guard-bundler
+  guard-consistency_fail
+  guard-rack
+  guard-rspec
+  guard-rubocop
   jbuilder (~> 2.0)
   kaminari
   letter_opener_web
@@ -451,6 +557,9 @@ DEPENDENCIES
   rails (~> 4.2.3)
   rails-erd
   rails_12factor
+  rspec-rails (~> 3.0)
+  rubocop
+  shoulda-matchers
   sidekiq
   sinatra
   spring

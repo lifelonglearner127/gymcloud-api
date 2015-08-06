@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: exercise_results
+#
+#  id                  :integer          not null, primary key
+#  workout_event_id    :integer
+#  workout_exercise_id :integer
+#  is_personal_best    :boolean
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
+#
+
 class ExerciseResult < ActiveRecord::Base
 
   belongs_to :workout_event

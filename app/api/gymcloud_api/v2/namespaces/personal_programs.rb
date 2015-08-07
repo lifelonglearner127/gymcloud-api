@@ -27,7 +27,6 @@ class PersonalPrograms < Base
     patch do
       program = ::PersonalProgram.find params[:id]
       program.update_attributes! filtered_params
-
       present program, with: Entities::PersonalProgram
     end
 

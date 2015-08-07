@@ -9,10 +9,7 @@ class Comments < Base
     requires :comment, type: String
     requires :commentable_id, type: Integer
     requires :commentable_type, type: String
-<<<<<<< HEAD
     requires :role, type: String, default: 'comments'
-=======
->>>>>>> [add] Comments api implementation
   end
   post do
     attributes = filtered_params.merge(user: current_user).to_h

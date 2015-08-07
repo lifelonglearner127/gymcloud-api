@@ -27,7 +27,7 @@ class ExerciseResult < ActiveRecord::Base
   private
 
   def check_exercise_workout_type
-    unless self.workout_exercise.workout_type == 'PersonalWorkout'
+    if self.workout_exercise.andand.workout_type != 'PersonalWorkout'
       errors.add(:workout_exercise, 'PersonalWorkout only allowed')
     end
   end

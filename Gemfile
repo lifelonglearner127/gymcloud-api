@@ -47,6 +47,7 @@ gem 'sidekiq'
 
 gem 'vimeo', github: 'bodya-dnepr/vimeo', branch: 'v2'
 gem 'andand'
+gem 'faker'
 
 group :development do
   gem 'letter_opener_web'
@@ -55,6 +56,7 @@ group :development do
   gem 'rubocop', require: false
   gem 'annotate', '~> 2.6.6'
   gem 'consistency_fail', require: false
+  gem 'regressor', '~> 0.3.4'
 
   gem 'guard'
   gem 'guard-bundler', require: false
@@ -63,6 +65,7 @@ group :development do
   gem 'guard-rubocop', require: false
   gem 'guard-annotate', require: false
   gem 'guard-consistency_fail', require: false
+  gem 'guard-regressor', github: 'patrick-nits/guard-regressor', require: false
 end
 
 group :test do
@@ -75,6 +78,7 @@ group :development, :test do
   gem 'spring'
 
   gem 'rspec-rails', '~> 3.0'
+  gem 'database_cleaner'
 end
 
 group :production do

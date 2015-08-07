@@ -40,15 +40,30 @@ class ClientGroups < Base
     namespace :members do
 
       desc 'Fetch Members'
-      get
+      get do
+        present ::ClientGroup.find(params[:id]).clients, with: Entities::User
+      end
 
+      params do
+        requires :user_id, type: Integer, desc: 'User ID'
+      end
       route_param :user_id do
 
         desc 'Add Member'
-        post
+        post do
+          group = ::ClientGroup.find(params[:id])
+          user = ::User.find(params[:user_id])
+          group.clients << user unless group.clients.include?(user)
+          present user, with: Entities::User
+        end
 
         desc 'Remove Member'
-        delete
+        delete do
+          group = ::ClientGroup.find(params[:id])
+          user = ::User.find(params[:user_id])
+          group.clients = group.clients - [user]
+          present user, with: Entities::User
+        end
 
       end
 

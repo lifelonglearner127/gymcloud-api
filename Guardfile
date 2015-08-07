@@ -107,3 +107,8 @@ guard 'consistency_fail', environment: 'development' do
   watch(%r{^app/model/(.+)\.rb})
   watch(%r{^db/schema.rb})
 end
+
+guard 'regressor' do
+  watch('db/schema.rb')
+  watch('app/models/**/*.rb')
+end

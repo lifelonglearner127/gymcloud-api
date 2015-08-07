@@ -1,14 +1,15 @@
 module GymcloudAPI::V2
 module Entities
 
-class Exercise < Grape::Entity
+class PersonalWorkout < Grape::Entity
 
   expose :id
   expose :name
   expose :description
+  expose :note
   expose :video_url
-  expose :is_public
-  expose :author, using: Entities::User
+  expose :status
+  expose :person_id
 
 end
 

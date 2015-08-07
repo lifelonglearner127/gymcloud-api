@@ -2,6 +2,7 @@ module GymcloudAPI::V2
 module Entities
 
 class UserProfile < Grape::Entity
+
   expose :id
   expose :gender
   expose :height
@@ -14,6 +15,7 @@ class UserProfile < Grape::Entity
   expose :employer
   expose :birthday
   expose :user_id
+
 end
 
 end

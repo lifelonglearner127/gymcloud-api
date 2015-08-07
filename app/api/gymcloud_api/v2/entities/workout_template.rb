@@ -2,6 +2,7 @@ module GymcloudAPI::V2
 module Entities
 
 class WorkoutTemplate < Grape::Entity
+
   expose :id
   expose :name
   expose :description
@@ -10,6 +11,7 @@ class WorkoutTemplate < Grape::Entity
   expose :is_public
   expose :author_id
   expose :folder_id
+
 end
 
 end

@@ -26,8 +26,32 @@ class Users < Base
 
     namespace :collections do
 
+      desc 'Fetch user notifications'
+      get 'notifications' do
+        user = ::User.find params[:id]
+        groups = user.client_groups_as_client
+
+        result = PublicActivity::Activity.where("(
+            recipient_type = 'ClientGroup'
+            AND recipient_id IN (?)
+          ) OR (
+            recipient_type = 'User'
+            AND recipient_id = ?
+        )", groups.pluck(:id), user.id)
+        .order(created_at: :desc)
+
+        # notifs = PublicActivity::Activity.where(recipient: groups.to_a)
+        # user_notifs = PublicActivity::Activity.where(recipient: user)
+        # sql = notifs.union(user_notifs).to_sql
+
+        # result = PublicActivity::Activity
+        #           .from("#{sql} activities")
+        #           .order(created_at: :desc)
+
+        present result, with: Entities::Notification
+      end
+
       %w{
-        notifications
         pros clients client_groups
         exercises workout_templates program_templates
         personal_workouts personal_programs
@@ -39,7 +63,10 @@ class Users < Base
           desc "Fetch #{collection.titleize}"
           get do
             user = ::User.find params[:id]
-            user.send(collection)
+            result = user.send collection
+            class_name = user.association(collection).klass.name
+
+            present result, with: "Entities::#{class_name}".constantize
           end
         end
       end

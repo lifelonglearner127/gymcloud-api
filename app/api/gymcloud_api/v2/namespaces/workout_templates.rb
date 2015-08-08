@@ -4,18 +4,46 @@ module Namespaces
 class WorkoutTemplates < Base
 
   desc 'Create Workout Template'
-  post
+  params do
+    requires :name, type: String
+    optional :description, type: String
+    optional :note, type: String
+    optional :video_url, type: String
+    optional :is_public, type: Boolean, default: 'false'
+  end
+  post do
+    attributes = filtered_params_with author: current_user
+    present ::WorkoutTemplate.create!(attributes), with: Entities::WorkoutTemplate
+  end
 
+  params do
+    requires :id, type: Integer, desc: 'WorkoutTemplate ID'
+  end
   route_param :id do
 
     desc 'Read Workout Template'
-    get
+    get do
+      present ::WorkoutTemplate.find(params[:id]), with: Entities::WorkoutTemplate
+    end
 
     desc 'Update Workout Template'
-    patch
+    params do
+      optional :name, type: String
+      optional :description, type: String
+      optional :note, type: String
+      optional :video_url, type: String
+      optional :is_public, type: Boolean
+    end
+    patch do
+      workout_template = ::WorkoutTemplate.find params[:id]
+      workout_template.update_attributes! filtered_params
+      present workout_template, with: Entities::WorkoutTemplate
+    end
 
     desc 'Delete Workout Template'
-    delete
+    delete do
+      present ::WorkoutTemplate.destroy(params[:id]), with: Entities::WorkoutTemplate
+    end
 
   end
 

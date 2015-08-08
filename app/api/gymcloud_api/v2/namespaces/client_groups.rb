@@ -4,31 +4,66 @@ module Namespaces
 class ClientGroups < Base
 
   desc 'Create Client Group'
-  post
+  params do
+    requires :name, type: String
+  end
+  post do
+    attributes = filtered_params_with author: current_user
+    present ::ClientGroup.create!(attributes), with: Entities::ClientGroup
+  end
 
+  params do
+    requires :id, type: Integer, desc: 'ClientGroup ID'
+  end
   route_param :id do
 
     desc 'Read Client Group'
-    get
+    get do
+      present ::ClientGroup.find(params[:id]), with: Entities::ClientGroup
+    end
 
     desc 'Update Client Group'
-    patch
+    params do
+      optional :name, type: String
+    end
+    patch do
+      client_group = ::ClientGroup.find params[:id]
+      client_group.update_attributes! filtered_params
+      present client_group, with: Entities::ClientGroup
+    end
 
     desc 'Delete Client Group'
-    delete
+    delete do
+      present ::ClientGroup.destroy(params[:id]), with: Entities::ClientGroup
+    end
 
     namespace :members do
 
       desc 'Fetch Members'
-      get
+      get do
+        present ::ClientGroup.find(params[:id]).clients, with: Entities::User
+      end
 
+      params do
+        requires :user_id, type: Integer, desc: 'User ID'
+      end
       route_param :user_id do
 
         desc 'Add Member'
-        post
+        post do
+          group = ::ClientGroup.find(params[:id])
+          user = ::User.find(params[:user_id])
+          group.clients << user unless group.clients.include?(user)
+          present user, with: Entities::User
+        end
 
         desc 'Remove Member'
-        delete
+        delete do
+          group = ::ClientGroup.find(params[:id])
+          user = ::User.find(params[:user_id])
+          group.clients = group.clients - [user]
+          present user, with: Entities::User
+        end
 
       end
 

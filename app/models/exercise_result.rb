@@ -14,7 +14,7 @@ class ExerciseResult < ActiveRecord::Base
 
   belongs_to :workout_event
   belongs_to :workout_exercise
-  has_many :exercise_result_items
+  has_many :exercise_result_items, dependent: :destroy
   has_one :person, through: :workout_event
 
   validates :workout_exercise_id, :workout_event_id, presence: true

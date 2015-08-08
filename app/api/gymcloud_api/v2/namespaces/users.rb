@@ -4,20 +4,36 @@ module Namespaces
 class Users < Base
 
   desc 'Fetch Current User'
-  get :me
+  get :me do
+    present current_user, with: Entities::User
+  end
 
+  params do
+    requires :id, type: Integer, desc: 'User ID'
+  end
   route_param :id do
 
     desc 'Fetch User'
-    get
+    get do
+      present ::User.find(params[:id]), with: Entities::User
+    end
 
     desc 'Invite User'
+    params do
+      requires :email, allow_blank: false, regexp: /.+@.+/
+    end
     post :invite
 
     namespace :collections do
 
+      desc 'Fetch user notifications'
+      get 'notifications' do
+        user = ::User.find params[:id]
+        notifications = Activity.of_user(user)
+        present notifications, with: Entities::Notification
+      end
+
       %w{
-        notifications
         pros clients client_groups
         exercises workout_templates program_templates
         personal_workouts personal_programs
@@ -27,7 +43,13 @@ class Users < Base
       }.each do |collection|
         namespace collection.to_sym do
           desc "Fetch #{collection.titleize}"
-          get
+          get do
+            user = ::User.find params[:id]
+            result = user.send collection
+            class_name = user.association(collection).klass.name
+
+            present result, with: "Entities::#{class_name}".constantize
+          end
         end
       end
 

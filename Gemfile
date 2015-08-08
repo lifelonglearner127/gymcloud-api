@@ -35,7 +35,9 @@ gem 'grape-swagger-rails'
 gem 'grape-cancan'
 gem 'doorkeeper'
 
-# gem 'squeel'
+gem 'squeel', '~> 1.2.3'
+# FIXME ransack is frozen b/c of bad deps of polyamorous on squeel and activeadmin
+gem 'ransack', '1.6.5'
 gem 'carrierwave'
 gem 'carrierwave-aws'
 

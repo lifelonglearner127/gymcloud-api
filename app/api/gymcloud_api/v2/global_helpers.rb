@@ -6,8 +6,11 @@ module GlobalHelpers
   extend Grape::API::Helpers
 
   def filtered_params
-    declared params, \
-      include_missing: false
+    declared(params, include_missing: false).to_h
+  end
+
+  def filtered_params_with(attrs = {})
+    filtered_params.merge(attrs)
   end
 
   params :pagination do

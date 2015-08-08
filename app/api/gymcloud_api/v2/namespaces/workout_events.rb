@@ -20,11 +20,11 @@ class WorkoutEvents < Base
     params do
       optional :begins_at, type: DateTime
       optional :ends_at, type: DateTime
-      optional :is_completed, type: Boolean, default: 'false'
+      optional :is_completed, type: Boolean
     end
     patch do
       event = ::WorkoutEvent.find params[:id]
-      event.update_attributes! filtered_params.to_h
+      event.update_attributes! filtered_params
       present event, with: Entities::WorkoutEvent
     end
 

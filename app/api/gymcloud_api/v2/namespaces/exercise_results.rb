@@ -10,7 +10,7 @@ class ExerciseResults < Base
     optional :is_personal_best, type: Boolean, default: 'false'
   end
   post do
-    present ::ExerciseResult.create!(filtered_params.to_h), with: Entities::ExerciseResult
+    present ::ExerciseResult.create!(filtered_params), with: Entities::ExerciseResult
   end
 
 
@@ -21,7 +21,7 @@ class ExerciseResults < Base
 
     desc 'Read Exercise Result'
     get do
-      present ::ExerciseResult.find(filtered_params[:id]), with: Entities::ExerciseResult
+      present ::ExerciseResult.find(params[:id]), with: Entities::ExerciseResult
     end
 
     desc 'Update Exercise Result'
@@ -30,7 +30,7 @@ class ExerciseResults < Base
     end
     patch do
       exercise_result = ::ExerciseResult.find params[:id]
-      exercise_result.update_attributes! filtered_params.to_h
+      exercise_result.update_attributes! filtered_params
       present exercise, with: Entities::ExerciseResult
     end
 
@@ -48,7 +48,7 @@ class ExerciseResults < Base
         requires :value, type: Integer
       end
       post do
-        present ::ExerciseResultItem.create!(filtered_params.to_h), with: Entities::ExerciseResultItem
+        present ::ExerciseResultItem.create!(filtered_params), with: Entities::ExerciseResultItem
       end
 
       params do
@@ -65,7 +65,7 @@ class ExerciseResults < Base
           if params[:value].blank?
             exercise_result_item.destroy
           else
-            exercise_result_item.update_attributes! filtered_params.to_h
+            exercise_result_item.update_attributes! filtered_params
           end
           present exercise_result_item, with: Entities::ExerciseResultItem
         end

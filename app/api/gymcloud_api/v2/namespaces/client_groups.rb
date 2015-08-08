@@ -8,7 +8,7 @@ class ClientGroups < Base
     requires :name, type: String
   end
   post do
-    attributes = filtered_params.merge(pro: current_user).to_h
+    attributes = filtered_params_with author: current_user
     present ::ClientGroup.create!(attributes), with: Entities::ClientGroup
   end
 
@@ -19,7 +19,7 @@ class ClientGroups < Base
 
     desc 'Read Client Group'
     get do
-      present ::ClientGroup.find(filtered_params[:id]), with: Entities::ClientGroup
+      present ::ClientGroup.find(params[:id]), with: Entities::ClientGroup
     end
 
     desc 'Update Client Group'
@@ -28,7 +28,7 @@ class ClientGroups < Base
     end
     patch do
       client_group = ::ClientGroup.find params[:id]
-      client_group.update_attributes! filtered_params.to_h
+      client_group.update_attributes! filtered_params
       present client_group, with: Entities::ClientGroup
     end
 

@@ -12,7 +12,7 @@ class WorkoutTemplates < Base
     optional :is_public, type: Boolean, default: 'false'
   end
   post do
-    attributes = filtered_params.merge(author: current_user).to_h
+    attributes = filtered_params_with author: current_user
     present ::WorkoutTemplate.create!(attributes), with: Entities::WorkoutTemplate
   end
 
@@ -23,7 +23,7 @@ class WorkoutTemplates < Base
 
     desc 'Read Workout Template'
     get do
-      present ::WorkoutTemplate.find(filtered_params[:id]), with: Entities::WorkoutTemplate
+      present ::WorkoutTemplate.find(params[:id]), with: Entities::WorkoutTemplate
     end
 
     desc 'Update Workout Template'
@@ -32,11 +32,11 @@ class WorkoutTemplates < Base
       optional :description, type: String
       optional :note, type: String
       optional :video_url, type: String
-      optional :is_public, type: Boolean, default: 'false'
+      optional :is_public, type: Boolean
     end
     patch do
       workout_template = ::WorkoutTemplate.find params[:id]
-      workout_template.update_attributes! filtered_params.to_h
+      workout_template.update_attributes! filtered_params
       present workout_template, with: Entities::WorkoutTemplate
     end
 

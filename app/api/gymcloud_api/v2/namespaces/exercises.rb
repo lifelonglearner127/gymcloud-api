@@ -11,7 +11,7 @@ class Exercises < Base
     optional :is_public, type: Boolean, default: 'false'
   end
   post do
-    attributes = filtered_params.merge(author: current_user).to_h
+    attributes = filtered_params_with author: current_user
     present ::Exercise.create!(attributes), with: Entities::Exercise
   end
 
@@ -22,7 +22,7 @@ class Exercises < Base
 
     desc 'Read Exercise'
     get do
-      present ::Exercise.find(filtered_params[:id]), with: Entities::Exercise
+      present ::Exercise.find(params[:id]), with: Entities::Exercise
     end
 
     desc 'Update Exercise'
@@ -30,11 +30,11 @@ class Exercises < Base
       optional :name, type: String
       optional :description, type: String
       optional :video_url, type: String
-      optional :is_public, type: Boolean, default: 'false'
+      optional :is_public, type: Boolean
     end
     patch do
       exercise = ::Exercise.find params[:id]
-      exercise.update_attributes! filtered_params.to_h
+      exercise.update_attributes! filtered_params
       present exercise, with: Entities::Exercise
     end
 

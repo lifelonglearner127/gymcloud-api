@@ -12,7 +12,7 @@ class Comments < Base
     requires :role, type: String, default: 'comments'
   end
   post do
-    attributes = filtered_params.merge(user: current_user).to_h
+    attributes = filtered_params_with user: current_user
     present ::Comment.create!(attributes), with: Entities::Comment
   end
 
@@ -23,7 +23,7 @@ class Comments < Base
 
     desc 'Read Comment'
     get do
-      present ::Comment.find(filtered_params[:id]), with: Entities::Comment
+      present ::Comment.find(params[:id]), with: Entities::Comment
     end
 
     desc 'Update Comment'
@@ -33,7 +33,7 @@ class Comments < Base
     end
     patch do
       comment = ::Comment.find params[:id]
-      comment.update_attributes! filtered_params.to_h
+      comment.update_attributes! filtered_params
       present comment, with: Entities::Comment
     end
 

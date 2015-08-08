@@ -11,7 +11,7 @@ class ProgramTemplates < Base
     optional :is_public, type: Boolean, default: 'false'
   end
   post do
-    attributes = filtered_params.merge(author: current_user).to_h
+    attributes = filtered_params_with author: current_user
     present ::ProgramTemplate.create!(attributes), with: Entities::ProgramTemplate
   end
 
@@ -22,7 +22,7 @@ class ProgramTemplates < Base
 
     desc 'Read Program Template'
     get do
-      present ::ProgramTemplate.find(filtered_params[:id]), with: Entities::ProgramTemplate
+      present ::ProgramTemplate.find(params[:id]), with: Entities::ProgramTemplate
     end
 
     desc 'Update Program Template'
@@ -30,11 +30,11 @@ class ProgramTemplates < Base
       optional :name, type: String
       optional :description, type: String
       optional :note, type: String
-      optional :is_public, type: Boolean, default: 'false'
+      optional :is_public, type: Boolean
     end
     patch do
       program_template = ::ProgramTemplate.find params[:id]
-      program_template.update_attributes! filtered_params.to_h
+      program_template.update_attributes! filtered_params
       present program_template, with: Entities::ProgramTemplate
     end
 

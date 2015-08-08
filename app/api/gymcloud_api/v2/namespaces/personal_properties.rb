@@ -16,11 +16,11 @@ class PersonalProperties < Base
     desc 'Update Personal Property'
     params do
       optional :position, type: Integer
-      optional :is_visible, type: Boolean, default: 'true'
+      optional :is_visible, type: Boolean
     end
     patch do
       property = ::PersonalProperty.find params[:id]
-      property.update_attributes! filtered_params.to_h
+      property.update_attributes! filtered_params
       present property, with: Entities::PersonalProperty
     end
 

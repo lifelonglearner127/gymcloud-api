@@ -33,7 +33,7 @@ class PersonalWorkout < ActiveRecord::Base
   before_create :set_workout_template_version!
 
   def source_workout_template
-    ver = self.workout_template_version - 1
+    ver = self.workout_template_version
     self.workout_template.versions.at(ver).andand.reify || self.workout_template
   end
 

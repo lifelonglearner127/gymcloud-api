@@ -8,6 +8,8 @@ RSpec.describe User do
   it { is_expected.to have_many :read_marks}
 	it { is_expected.to have_many :agreements_as_pro}
 	it { is_expected.to have_many :agreements_as_client}
+	it { is_expected.to have_many :pros}
+	it { is_expected.to have_many :clients}
 	it { is_expected.to have_many :client_group_memberships}
 	it { is_expected.to have_many :client_groups}
 	it { is_expected.to have_many :client_groups_as_client}

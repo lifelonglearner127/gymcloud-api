@@ -10,6 +10,20 @@ class WorkoutService
     )
 
     workout = PersonalWorkout.create! attributes
+    deactivate_old_workouts(template, user, workout.id)
+
+    workout
+  end
+
+  protected
+
+  def deactivate_old_workouts(template, user, new_id)
+    PersonalWorkout.where(
+      workout_template: template,
+      person: user
+    )
+    .where.not(id: new_id)
+    .update_all(status: PersonalWorkout.statuses[:inactive])
   end
 
 end

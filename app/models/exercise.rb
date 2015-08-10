@@ -13,7 +13,10 @@
 #  folder_id   :integer
 #
 
+require 'concerns/search_scopes'
 class Exercise < ActiveRecord::Base
+
+  include SearchScopes::Training
 
   belongs_to :author, class_name: User
   belongs_to :folder

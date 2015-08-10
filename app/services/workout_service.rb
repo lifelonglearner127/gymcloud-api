@@ -20,7 +20,11 @@ class WorkoutService
 
     workout = PersonalWorkout.create! attributes
     workout.workout_exercises.each do |item|
-      assign_exercise(workout, item.source_exercise)
+      workout_exercise = assign_exercise(workout, item.source_exercise)
+
+      item.exercise_properties.each do |exercise_property|
+        assign_property_to_exercise(workout_exercise, exercise_property)
+      end
     end
 
     deactivate_old_workouts(template, user, workout.id) unless is_program_part
@@ -29,6 +33,14 @@ class WorkoutService
   end
 
   protected
+
+  def assign_property_to_exercise(workout_exercise, exercise_property)
+    ExerciseProperty.create!(
+      personal_property: exercise_property.personal_property,
+      workout_exercise: workout_exercise,
+      value: exercise_property.value
+    )
+  end
 
   def deactivate_old_workouts(template, user, new_id)
     PersonalWorkout.where(

@@ -18,6 +18,21 @@ Regressor.configure do |config|
   # Exclude Controllers for regression generation.
   # Provide controller names as String (e.g. 'UsersController').
   config.excluded_controllers = %w(
+    InheritedResources::Base
+    DeviseController
+    Devise::ConfirmationsController
+    Devise::PasswordsController
+    Devise::RegistrationsController
+    Devise::SessionsController
+    Devise::UnlocksController
+    ActiveAdmin::BaseController
+    ActiveAdmin::Devise::ConfirmationsController
+    ActiveAdmin::Devise::PasswordsController
+    ActiveAdmin::Devise::RegistrationsController
+    ActiveAdmin::Devise::SessionsController
+    ActiveAdmin::Devise::UnlocksController
+    ActiveAdmin::PageController
+    ActiveAdmin::ResourceController
   )
 
   # If you are using enums in Rails 4 enable this option to generate regression specs for enums.

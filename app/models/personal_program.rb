@@ -27,4 +27,18 @@ class PersonalProgram < ActiveRecord::Base
   scope :is_active, -> { where(status: self.statuses[:active]) }
   scope :is_inactive, -> { where(status: self.statuses[:inactive]) }
 
+  before_create :set_program_template_version!,
+                if: Proc.new { |p| p.program_template_version.nil? }
+
+  def source_program_template
+    ver = self.program_template_version
+    self.program_template.versions.at(ver).andand.reify || self.program_template
+  end
+
+  private
+
+  def set_program_template_version!
+    self.program_template_version = self.program_template.versions.count
+  end
+
 end

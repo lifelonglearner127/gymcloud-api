@@ -30,7 +30,8 @@ class PersonalWorkout < ActiveRecord::Base
   scope :is_active, -> { where(status: self.statuses[:active]) }
   scope :is_inactive, -> { where(status: self.statuses[:inactive]) }
 
-  before_create :set_workout_template_version!
+  before_create :set_workout_template_version!,
+                if: Proc.new { |pw| pw.workout_template_version.nil? }
 
   def source_workout_template
     ver = self.workout_template_version

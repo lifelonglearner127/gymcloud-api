@@ -1,16 +1,29 @@
 class WorkoutService
 
-  def create_personal(template, user)
+  def assign_exercise(workout, exercise)
+    WorkoutExercise.create!(
+      workout: workout,
+      exercise: exercise,
+      exercise_version: exercise.version.andand.index
+    )
+  end
+
+  def create_personal(template, user, is_program_part = false)
     to_exclude = %w(id is_public author_id folder_id created_at updated_at)
     attributes = template.attributes.except(*to_exclude).merge(
       workout_template: template,
-      workout_exercise_ids: template.workout_exercise_ids,
       person: user,
       status: :active,
+      is_program_part: is_program_part,
+      workout_template_version: template.version.andand.index,
     )
 
     workout = PersonalWorkout.create! attributes
-    deactivate_old_workouts(template, user, workout.id)
+    workout.workout_exercises.each do |item|
+      assign_exercise(workout, item.source_exercise)
+    end
+
+    deactivate_old_workouts(template, user, workout.id) unless is_program_part
 
     workout
   end

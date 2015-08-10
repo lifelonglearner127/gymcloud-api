@@ -26,6 +26,6 @@ class Exercise < ActiveRecord::Base
   validates :name, :author_id, presence: true
   validates :is_public, inclusion: { in: [true, false] }
 
-  has_paper_trail on: [:update]
+  has_paper_trail
 
 end

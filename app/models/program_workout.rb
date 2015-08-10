@@ -22,14 +22,14 @@ class ProgramWorkout < ActiveRecord::Base
   validates :workout_type, inclusion: { in: ['WorkoutTemplate', 'PersonalWorkout'] }
   validates :program_type, inclusion: { in: ['ProgramTemplate', 'PersonalProgram'] }
 
-  before_create :set_workout_version!
+  before_create :set_workout_version!, if: Proc.new { |pw| pw.workout_version.nil? }
 
   def display_name
     self.source_workout.name
   end
 
   def source_workout
-    self.workout.versions.at(self.workout_version - 1).andand.reify || self.workout
+    self.workout.versions.at(self.workout_version).andand.reify || self.workout
   end
 
   private

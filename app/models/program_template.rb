@@ -26,4 +26,6 @@ class ProgramTemplate < ActiveRecord::Base
   validates :name, :author_id, presence: true
   validates :is_public, inclusion: { in: [true, false] }
 
+  has_paper_trail
+
 end

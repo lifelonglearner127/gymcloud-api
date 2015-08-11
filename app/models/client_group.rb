@@ -9,8 +9,6 @@
 #  updated_at :datetime         not null
 #
 
-require 'concerns/search_scopes'
-
 class ClientGroup < ActiveRecord::Base
 
   include SearchScopes::ClientGroup

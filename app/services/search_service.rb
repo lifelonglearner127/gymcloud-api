@@ -64,7 +64,7 @@ class SearchService
     case
     when @entity_type == :all
       ENTITIES.keys
-    when ENTITIES.has_key?(@entity_type)
+    when ENTITIES.key?(@entity_type)
       [@entity_type]
     else
       []

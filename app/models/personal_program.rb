@@ -2,15 +2,16 @@
 #
 # Table name: personal_programs
 #
-#  id                  :integer          not null, primary key
-#  name                :string
-#  description         :text
-#  note                :text
-#  program_template_id :integer
-#  status              :integer
-#  person_id           :integer
-#  created_at          :datetime         not null
-#  updated_at          :datetime         not null
+#  id                       :integer          not null, primary key
+#  name                     :string
+#  description              :text
+#  note                     :text
+#  program_template_id      :integer
+#  status                   :integer
+#  person_id                :integer
+#  created_at               :datetime         not null
+#  updated_at               :datetime         not null
+#  program_template_version :integer
 #
 
 class PersonalProgram < ActiveRecord::Base

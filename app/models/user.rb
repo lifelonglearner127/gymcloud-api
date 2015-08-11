@@ -28,8 +28,6 @@
 #  invited_by_type        :string
 #
 
-require 'concerns/search_scopes'
-
 class User < ActiveRecord::Base
 
   include SearchScopes::Pro

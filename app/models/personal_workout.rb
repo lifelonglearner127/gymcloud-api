@@ -2,16 +2,18 @@
 #
 # Table name: personal_workouts
 #
-#  id                  :integer          not null, primary key
-#  name                :string
-#  description         :text
-#  note                :text
-#  workout_template_id :integer
-#  person_id           :integer
-#  status              :integer
-#  video_url           :string
-#  created_at          :datetime         not null
-#  updated_at          :datetime         not null
+#  id                       :integer          not null, primary key
+#  name                     :string
+#  description              :text
+#  note                     :text
+#  workout_template_id      :integer
+#  person_id                :integer
+#  status                   :integer
+#  video_url                :string
+#  created_at               :datetime         not null
+#  updated_at               :datetime         not null
+#  workout_template_version :integer
+#  is_program_part          :boolean          default(FALSE)
 #
 
 class PersonalWorkout < ActiveRecord::Base

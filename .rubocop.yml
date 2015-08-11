@@ -35,3 +35,6 @@ Style/Documentation:
 
 Style/IndentationWidth:
   Enabled: false
+
+Style/TrailingBlankLines:
+  Enabled: false

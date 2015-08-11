@@ -13,15 +13,14 @@
 #  folder_id   :integer
 #
 
-require 'concerns/search_scopes'
-
 class Exercise < ActiveRecord::Base
 
   include SearchScopes::Training
 
   belongs_to :author, class_name: User
   belongs_to :folder
-  # TODO: get rid of dependent destroy (after exercise delete workout_exercise should stay)
+  # TODO: get rid of dependent destroy
+  # After exercise delete workout_exercise should stay
   has_many :workout_exercises, dependent: :destroy
 
   validates :name, :author_id, presence: true

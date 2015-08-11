@@ -4,7 +4,14 @@ module Namespaces
 class WorkoutEvents < Base
 
   desc 'Create Workout Event'
-  post
+  params do
+    requires :begins_at, type: DateTime
+    optional :ends_at, type: DateTime
+  end
+  post do
+    event = ::WorkoutEvent.create!(filtered_params)
+    present event, with: Entities::WorkoutEvent
+  end
 
   params do
     requires :id, type: Integer, desc: 'Workout Event ID'

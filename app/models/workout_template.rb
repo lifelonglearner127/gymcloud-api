@@ -15,6 +15,7 @@
 #
 
 require 'concerns/search_scopes'
+
 class WorkoutTemplate < ActiveRecord::Base
 
   include SearchScopes::Training

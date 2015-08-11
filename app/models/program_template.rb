@@ -14,6 +14,7 @@
 #
 
 require 'concerns/search_scopes'
+
 class ProgramTemplate < ActiveRecord::Base
 
   include SearchScopes::Training

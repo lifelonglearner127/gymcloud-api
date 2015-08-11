@@ -31,11 +31,12 @@ class PersonalWorkout < ActiveRecord::Base
   scope :is_inactive, -> { where(status: self.statuses[:inactive]) }
 
   before_create :set_workout_template_version!,
-                if: Proc.new { |pw| pw.workout_template_version.nil? }
+                unless: :workout_template_version?
 
   def source_workout_template
-    ver = self.workout_template_version
-    self.workout_template.versions.at(ver).andand.reify || self.workout_template
+    version = self.workout_template_version
+    template = self.workout_template
+    template.versions.at(version).andand.reify || template
   end
 
   private

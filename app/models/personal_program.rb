@@ -28,11 +28,12 @@ class PersonalProgram < ActiveRecord::Base
   scope :is_inactive, -> { where(status: self.statuses[:inactive]) }
 
   before_create :set_program_template_version!,
-                if: Proc.new { |p| p.program_template_version.nil? }
+                unless: :program_template_version?
 
   def source_program_template
-    ver = self.program_template_version
-    self.program_template.versions.at(ver).andand.reify || self.program_template
+    version = self.program_template_version
+    template = self.program_template
+    template.versions.at(version).andand.reify || template
   end
 
   private

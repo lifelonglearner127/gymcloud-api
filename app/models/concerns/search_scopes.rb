@@ -1,6 +1,11 @@
 require 'active_support/concern'
+
 module SearchScopes
-  module Training extend ActiveSupport::Concern
+
+  module Training
+
+    extend ActiveSupport::Concern
+
     included do
       scope :owned_by, ->(id) { where(author_id: id) }
       scope :not_owned_by, ->(id) { where.not(author_id: id) }
@@ -10,9 +15,13 @@ module SearchScopes
       }
       scope :search_by_criteria, ->(criteria) { where{ name=~my{criteria} } }
     end
+
   end
 
-  module Pro extend ActiveSupport::Concern
+  module Pro
+
+    extend ActiveSupport::Concern
+
     included do
       scope :owned_by, ->(id) { find(id).clients }
       scope :public_for, ->(id) { nil }
@@ -24,16 +33,20 @@ module SearchScopes
         }
       }
     end
+
   end
 
-  module ClientGroup extend ActiveSupport::Concern
+  module ClientGroup
+
+    extend ActiveSupport::Concern
+
     included do
       scope :owned_by, ->(id) { where(pro_id: id) }
       scope :public_for, ->(id) { nil }
       scope :global_for, ->(id) { owned_by(id) }
       scope :search_by_criteria, ->(criteria) { where{ name=~my{criteria} } }
     end
-  end
 
+  end
 
 end

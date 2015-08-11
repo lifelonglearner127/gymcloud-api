@@ -10,6 +10,7 @@
 #
 
 require 'concerns/search_scopes'
+
 class ClientGroup < ActiveRecord::Base
 
   include SearchScopes::ClientGroup

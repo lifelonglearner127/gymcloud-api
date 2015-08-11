@@ -1,20 +1,10 @@
 module Services
 module PersonalAssignment
 
-class Program
+class Program < BaseService
 
-  attr_reader :result
-
-  def initialize(args = {})
-    @template = args.delete(:template)
-    @user = args.delete(:user)
-    self
-  end
-
-  def process
-    @result = create_personal
-    self
-  end
+  input_params :template, :user
+  run :create_personal
 
   private
 

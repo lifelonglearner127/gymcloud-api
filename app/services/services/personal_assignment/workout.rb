@@ -1,21 +1,11 @@
 module Services
 module PersonalAssignment
 
-class Workout
+class Workout < BaseService
 
-  attr_reader :result
-
-  def initialize(args = {})
-    @template = args.delete(:template)
-    @user = args.delete(:user)
-    @is_program_part = args.delete(:is_program_part) || false
-    self
-  end
-
-  def process
-    @result = create_personal
-    self
-  end
+  input_params :template, :user, :is_program_part
+  defaults is_program_part: false
+  run :create_personal
 
   private
 

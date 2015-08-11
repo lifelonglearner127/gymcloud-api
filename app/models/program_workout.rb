@@ -30,7 +30,7 @@ class ProgramWorkout < ActiveRecord::Base
   end
 
   def source_workout
-    reified = self.workout.versions
+    reified = self.workout.try(:versions)
       .andand.at(self.workout_version)
       .andand.reify
     reified || self.workout

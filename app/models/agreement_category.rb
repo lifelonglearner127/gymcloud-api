@@ -8,12 +8,13 @@
 #  client_title :string
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
+#  symbol       :string
 #
 
 class AgreementCategory < ActiveRecord::Base
 
   has_many :user_agreements, foreign_key: :category_id
 
-  validates :title, :pro_title, :client_title, presence: true
+  validates :symbol, :title, :pro_title, :client_title, presence: true
 
 end

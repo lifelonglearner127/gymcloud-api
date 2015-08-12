@@ -2,15 +2,16 @@
 #
 # Table name: personal_programs
 #
-#  id                  :integer          not null, primary key
-#  name                :string
-#  description         :text
-#  note                :text
-#  program_template_id :integer
-#  status              :integer
-#  person_id           :integer
-#  created_at          :datetime         not null
-#  updated_at          :datetime         not null
+#  id                       :integer          not null, primary key
+#  name                     :string
+#  description              :text
+#  note                     :text
+#  program_template_id      :integer
+#  status                   :integer
+#  person_id                :integer
+#  created_at               :datetime         not null
+#  updated_at               :datetime         not null
+#  program_template_version :integer
 #
 
 class PersonalProgram < ActiveRecord::Base
@@ -26,5 +27,20 @@ class PersonalProgram < ActiveRecord::Base
 
   scope :is_active, -> { where(status: self.statuses[:active]) }
   scope :is_inactive, -> { where(status: self.statuses[:inactive]) }
+
+  before_create :set_program_template_version!,
+                unless: :program_template_version?
+
+  def source_program_template
+    version = self.program_template_version
+    template = self.program_template
+    template.versions.at(version).andand.reify || template
+  end
+
+  private
+
+  def set_program_template_version!
+    self.program_template_version = self.program_template.versions.count
+  end
 
 end

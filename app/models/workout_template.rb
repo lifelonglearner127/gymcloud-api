@@ -16,6 +16,8 @@
 
 class WorkoutTemplate < ActiveRecord::Base
 
+  include SearchScopes::Training
+
   belongs_to :author, class_name: User
   belongs_to :folder
   has_many :personal_workouts
@@ -25,6 +27,6 @@ class WorkoutTemplate < ActiveRecord::Base
   validates :name, :author_id, presence: true
   validates :is_public, inclusion: { in: [true, false] }
 
-  has_paper_trail on: [:update]
+  has_paper_trail
 
 end

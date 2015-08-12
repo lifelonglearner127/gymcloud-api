@@ -2,16 +2,18 @@
 #
 # Table name: personal_workouts
 #
-#  id                  :integer          not null, primary key
-#  name                :string
-#  description         :text
-#  note                :text
-#  workout_template_id :integer
-#  person_id           :integer
-#  status              :integer
-#  video_url           :string
-#  created_at          :datetime         not null
-#  updated_at          :datetime         not null
+#  id                       :integer          not null, primary key
+#  name                     :string
+#  description              :text
+#  note                     :text
+#  workout_template_id      :integer
+#  person_id                :integer
+#  status                   :integer
+#  video_url                :string
+#  created_at               :datetime         not null
+#  updated_at               :datetime         not null
+#  workout_template_version :integer
+#  is_program_part          :boolean          default(FALSE)
 #
 
 class PersonalWorkout < ActiveRecord::Base
@@ -29,5 +31,20 @@ class PersonalWorkout < ActiveRecord::Base
 
   scope :is_active, -> { where(status: self.statuses[:active]) }
   scope :is_inactive, -> { where(status: self.statuses[:inactive]) }
+
+  before_create :set_workout_template_version!,
+                unless: :workout_template_version?
+
+  def source_workout_template
+    version = self.workout_template_version
+    template = self.workout_template
+    template.versions.at(version).andand.reify || template
+  end
+
+  private
+
+  def set_workout_template_version!
+    self.workout_template_version = self.workout_template.versions.count
+  end
 
 end

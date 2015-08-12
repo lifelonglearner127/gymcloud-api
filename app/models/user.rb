@@ -30,6 +30,8 @@
 
 class User < ActiveRecord::Base
 
+  include SearchScopes::Pro
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable,
          :trackable, :validatable,

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150805203924) do
+ActiveRecord::Schema.define(version: 20150810162334) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -217,8 +217,9 @@ ActiveRecord::Schema.define(version: 20150805203924) do
     t.integer  "program_template_id"
     t.integer  "status"
     t.integer  "person_id"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.integer  "program_template_version"
   end
 
   add_index "personal_programs", ["person_id"], name: "index_personal_programs_on_person_id", using: :btree
@@ -243,8 +244,10 @@ ActiveRecord::Schema.define(version: 20150805203924) do
     t.integer  "person_id"
     t.integer  "status"
     t.string   "video_url"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
+    t.integer  "workout_template_version"
+    t.boolean  "is_program_part",          default: false
   end
 
   add_index "personal_workouts", ["person_id"], name: "index_personal_workouts_on_person_id", using: :btree
@@ -407,7 +410,6 @@ ActiveRecord::Schema.define(version: 20150805203924) do
     t.integer  "folder_id"
   end
 
-  add_index "workout_templates", ["author_id"], name: "index_workout_templates_on_author_id", using: :btree
   add_index "workout_templates", ["folder_id"], name: "index_workout_templates_on_folder_id", using: :btree
 
   add_foreign_key "exercise_properties", "personal_properties"

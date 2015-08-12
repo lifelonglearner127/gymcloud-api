@@ -15,6 +15,8 @@
 
 class ProgramTemplate < ActiveRecord::Base
 
+  include SearchScopes::Training
+
   belongs_to :author, class_name: User
   belongs_to :folder
   has_many :personal_programs
@@ -22,5 +24,7 @@ class ProgramTemplate < ActiveRecord::Base
 
   validates :name, :author_id, presence: true
   validates :is_public, inclusion: { in: [true, false] }
+
+  has_paper_trail
 
 end

@@ -585,6 +585,7 @@ DEPENDENCIES
   regressor (~> 0.3.4)
   rspec-rails (~> 3.0)
   rubocop
+  ruby-progressbar
   shoulda-matchers
   sidekiq
   sinatra

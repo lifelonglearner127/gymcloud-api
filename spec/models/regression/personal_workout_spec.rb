@@ -24,6 +24,8 @@ RSpec.describe PersonalWorkout do
 	it { is_expected.to have_db_column :video_url }
 	it { is_expected.to have_db_column :created_at }
 	it { is_expected.to have_db_column :updated_at }
+	it { is_expected.to have_db_column :workout_template_version }
+	it { is_expected.to have_db_column :is_program_part }
 
   # === Database (Indexes) ===
   it { is_expected.to have_db_index ["person_id"]}

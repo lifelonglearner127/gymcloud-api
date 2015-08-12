@@ -410,7 +410,6 @@ ActiveRecord::Schema.define(version: 20150810162334) do
     t.integer  "folder_id"
   end
 
-  add_index "workout_templates", ["author_id"], name: "index_workout_templates_on_author_id", using: :btree
   add_index "workout_templates", ["folder_id"], name: "index_workout_templates_on_folder_id", using: :btree
 
   add_foreign_key "exercise_properties", "personal_properties"

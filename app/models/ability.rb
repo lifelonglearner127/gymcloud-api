@@ -46,6 +46,7 @@ class Ability
     as_owner_can :update, UserProfile
     as_author_can :crud, Exercise
     as_author_can :crud, WorkoutTemplate
+    can :crud, ClientGroupMembership, client_group: {pro_id: @user.id}
   end
 
   def as_client

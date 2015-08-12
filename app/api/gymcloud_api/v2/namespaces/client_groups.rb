@@ -51,18 +51,26 @@ class ClientGroups < Base
 
         desc 'Add Member'
         post do
-          group = ::ClientGroup.find(params[:id])
+          client_group = ::ClientGroup.find(params[:id])
           user = ::User.find(params[:user_id])
-          group.clients << user unless group.clients.include?(user)
-          present user, with: Entities::User
+          membership = ClientGroupMembership.new(
+            client_group: client_group,
+            client: user
+          )
+          authorize!(:create, membership)
+          membership.save!
+          present(client_group, with: Entities::ClientGroup)
         end
 
         desc 'Remove Member'
         delete do
-          group = ::ClientGroup.find(params[:id])
+          client_group = ::ClientGroup.find(params[:id])
           user = ::User.find(params[:user_id])
-          group.clients = group.clients - [user]
-          present user, with: Entities::User
+          membership = client_group.client_group_memberships
+            .find_by!(client_id: user.id)
+          authorize!(:destroy, membership)
+          membership.destroy
+          present(client_group, with: Entities::ClientGroup)
         end
 
       end

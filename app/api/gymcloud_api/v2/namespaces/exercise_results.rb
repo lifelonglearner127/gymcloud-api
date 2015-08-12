@@ -10,9 +10,9 @@ class ExerciseResults < Base
     optional :is_personal_best, type: Boolean, default: 'false'
   end
   post do
-    present ::ExerciseResult.create!(filtered_params), with: Entities::ExerciseResult
+    exercise_result = ::ExerciseResult.create!(filtered_params)
+    present exercise_result, with: Entities::ExerciseResult
   end
-
 
   params do
     requires :id, type: Integer, desc: 'Exercise Result ID'
@@ -21,7 +21,8 @@ class ExerciseResults < Base
 
     desc 'Read Exercise Result'
     get do
-      present ::ExerciseResult.find(params[:id]), with: Entities::ExerciseResult
+      exercise_result = ::ExerciseResult.find(params[:id])
+      present exercise_result, with: Entities::ExerciseResult
     end
 
     desc 'Update Exercise Result'
@@ -36,7 +37,8 @@ class ExerciseResults < Base
 
     desc 'Delete Exercise Result'
     delete do
-      present ::ExerciseResult.destroy(params[:id]), with: Entities::ExerciseResult
+      exercise_result = ::ExerciseResult.destroy(params[:id])
+      present exercise_result, with: Entities::ExerciseResult
     end
 
     namespace :items do
@@ -48,7 +50,8 @@ class ExerciseResults < Base
         requires :value, type: Integer
       end
       post do
-        present ::ExerciseResultItem.create!(filtered_params), with: Entities::ExerciseResultItem
+        exercise_result_item = ::ExerciseResultItem.create!(filtered_params)
+        present exercise_result_item, with: Entities::ExerciseResultItem
       end
 
       params do
@@ -61,11 +64,11 @@ class ExerciseResults < Base
           requires :value, type: Integer
         end
         patch do
-          exercise_result_item = ::ExerciseResultItem.find params[:id]
+          exercise_result_item = ::ExerciseResultItem.find(params[:id])
           if params[:value].blank?
             exercise_result_item.destroy
           else
-            exercise_result_item.update_attributes! filtered_params
+            exercise_result_item.update_attributes!(filtered_params)
           end
           present exercise_result_item, with: Entities::ExerciseResultItem
         end

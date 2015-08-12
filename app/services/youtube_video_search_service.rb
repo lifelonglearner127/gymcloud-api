@@ -1,6 +1,6 @@
 class YoutubeVideoSearchService
 
-  def initialize params
+  def initialize(params)
     @query = params[:q]
     @page = params[:page]
     @per_page = params[:per_page] || 50

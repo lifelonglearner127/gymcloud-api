@@ -5,9 +5,9 @@ module ClientGroup
 
   included do
     scope :owned_by, ->(id) { where(pro_id: id) }
-    scope :public_for, ->(id) { nil }
+    scope :public_for, ->(_id) { nil }
     scope :global_for, ->(id) { owned_by(id) }
-    scope :search_by_criteria, ->(criteria) { where { name=~my{criteria} } }
+    scope :search_by_criteria, ->(criteria) { where { name =~ my{criteria} } }
   end
 
 end

@@ -33,14 +33,14 @@ class Users < Base
         present notifications, with: Entities::Notification
       end
 
-      %w{
+      %w(
         pros clients client_groups
         exercises workout_templates program_templates
         personal_workouts personal_programs
         personal_properties workout_events
         exercise_results
         folders
-      }.each do |collection|
+      ).each do |collection|
         namespace collection.to_sym do
           desc "Fetch #{collection.titleize}"
           get do

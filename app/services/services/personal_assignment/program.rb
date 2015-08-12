@@ -13,14 +13,7 @@ class Program < BaseService
     program = PersonalProgram.create!(attributes)
 
     @template.program_workouts.each do |pw|
-      personal_workout = Services::PersonalAssignment::Workout
-        .new(
-          template: pw.source_workout,
-          user: @user,
-          is_program_part: true
-        )
-        .process
-        .result
+      personal_workout = create_personal_workout(pw.source_workout)
 
       assign_workout(program, personal_workout)
     end
@@ -39,8 +32,19 @@ class Program < BaseService
     @template.attributes.except(*to_exclude).merge(
       program_template: @template,
       person: @user,
-      status: :active,
+      status: :active
     )
+  end
+
+  def create_personal_workout(workout)
+    Services::PersonalAssignment::Workout
+      .new(
+        template: workout,
+        user: @user,
+        is_program_part: true
+      )
+      .process
+      .result
   end
 
   def deactivate_old_programs(new_id)

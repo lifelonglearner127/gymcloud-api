@@ -38,3 +38,9 @@ Style/IndentationWidth:
 
 Style/TrailingBlankLines:
   Enabled: false
+
+Style/AlignHash:
+  Enabled: false
+
+Style/ClassVars:
+  Enabled: false

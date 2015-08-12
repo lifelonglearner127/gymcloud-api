@@ -25,10 +25,10 @@ class Ability
 
   def apply_roles
     as_anyone
-    is_guest? && as_guest || as_user
-    is_client? && as_client
-    is_pro? && as_pro
-    is_admin? && as_admin
+    guest? && as_guest || as_user
+    client? && as_client
+    pro? && as_pro
+    admin? && as_admin
   end
 
   def as_anyone
@@ -52,19 +52,19 @@ class Ability
     can :manage, :all
   end
 
-  def is_guest?
+  def guest?
     false
   end
 
-  def is_client?
+  def client?
     false
   end
 
-  def is_pro?
+  def pro?
     false
   end
 
-  def is_admin?
+  def admin?
     false
   end
 

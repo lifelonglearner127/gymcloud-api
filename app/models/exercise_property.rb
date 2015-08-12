@@ -20,8 +20,8 @@ class ExerciseProperty < ActiveRecord::Base
   validates :personal_property_id, :workout_exercise_id, :value, presence: true
 
   def display_name
-    prop = self.personal_property
-    "#{prop.display_name} (#{self.value} #{prop.global_property.unit})"
+    prop = personal_property
+    "#{prop.display_name} (#{value} #{prop.global_property.unit})"
   end
 
 end

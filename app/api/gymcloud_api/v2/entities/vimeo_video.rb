@@ -11,7 +11,7 @@ class VimeoVideo < Grape::Entity
   expose :embed_url do |obj|
     str = obj.embed.html
     unless str.nil?
-      url = URI::extract(str).first
+      url = URI.extract(str).first
       url.sub("?#{URI(url).query}", '')
     end
   end

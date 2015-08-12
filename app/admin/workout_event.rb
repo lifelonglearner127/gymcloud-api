@@ -1,6 +1,6 @@
 ActiveAdmin.register WorkoutEvent do
 
-  menu parent: "Trainings"
+  menu parent: 'Trainings'
 
   permit_params :personal_workout_id, :begins_at, :ends_at, :is_completed
 

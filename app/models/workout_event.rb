@@ -21,15 +21,14 @@ class WorkoutEvent < ActiveRecord::Base
   validate :period_validation, if: :ends_at?
 
   def display_name
-    "#{self.personal_workout.name} at #{self.begins_at}"
+    "#{personal_workout.name} at #{begins_at}"
   end
 
   private
 
   def period_validation
-    unless ends_at.between?(begins_at, begins_at + 24.hours)
-      errors.add(:ends_at, 'must be within 24 hours')
-    end
+    return if ends_at.between?(begins_at, begins_at + 24.hours)
+    errors.add(:ends_at, 'must be within 24 hours')
   end
 
 end

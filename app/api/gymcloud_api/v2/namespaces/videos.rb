@@ -6,7 +6,7 @@ class Videos < Base
   helpers GlobalHelpers
 
   helpers do
-    def update_video video_id, options = {}
+    def update_video(video_id, options = {})
       video = Video.find(video_id)
       options.each do |key, value|
         video.send("#{key}=", value) if video.has_attribute?(key)
@@ -15,9 +15,9 @@ class Videos < Base
 
       client = ::Vimeo::Client.new access_token: ENV['VIMEO_TOKEN']
       vimeo_video = client.video video.vimeo_id
-      vimeo_video.edit privacy: {view: video.privacy}, name: video.name
+      vimeo_video.edit privacy: { view: video.privacy }, name: video.name
 
-      return video
+      video
     end
   end
 
@@ -35,7 +35,11 @@ class Videos < Base
               values: Video.privacies.keys, desc: 'Privacy status'
   end
   post do
-    video = Video.new tmp_file: params[:file], privacy: params[:privacy], name: params[:name]
+    video = Video.new(
+      tmp_file: params[:file],
+      privacy: params[:privacy],
+      name: params[:name]
+    )
     video.save!
     VimeoUploaderService.new.upload(video)
     VimeoVideoUpdateWorker.perform_in(2.minutes, video.id)
@@ -117,7 +121,6 @@ class Videos < Base
     end
 
   end
-
 
 end
 

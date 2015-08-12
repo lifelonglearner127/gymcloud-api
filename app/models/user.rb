@@ -41,7 +41,9 @@ class User < ActiveRecord::Base
 
   has_one :user_profile
   has_many :agreements_as_pro, class_name: UserAgreement, foreign_key: :pro_id
-  has_many :agreements_as_client, class_name: UserAgreement, foreign_key: :client_id
+  has_many :agreements_as_client,
+    class_name: UserAgreement,
+    foreign_key: :client_id
   has_many :pros, through: :agreements_as_client, class_name: User
   has_many :clients, through: :agreements_as_pro, class_name: User
   has_many :client_group_memberships, foreign_key: :client_id

@@ -1,6 +1,6 @@
 ActiveAdmin.register ClientGroup do
 
-  menu parent: "Users"
+  menu parent: 'Users'
 
   permit_params :name, :pro_id
 

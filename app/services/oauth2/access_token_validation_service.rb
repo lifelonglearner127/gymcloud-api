@@ -23,6 +23,7 @@ module Oauth2::AccessTokenValidationService
     end
 
     protected
+
     # True if the token's scope is a superset of required scopes,
     # or the required scopes is empty.
     def sufficent_scope?(token, scopes)

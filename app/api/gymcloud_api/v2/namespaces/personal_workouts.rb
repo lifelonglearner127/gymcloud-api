@@ -13,7 +13,8 @@ class PersonalWorkouts < Base
 
     desc 'Read Personal Workout'
     get do
-      present ::PersonalWorkout.find(params[:id]), with: Entities::PersonalWorkout
+      workout = ::PersonalWorkout.find(params[:id])
+      present workout, with: Entities::PersonalWorkout
     end
 
     desc 'Update Personal Workout'
@@ -26,15 +27,16 @@ class PersonalWorkouts < Base
       optional :video_url, type: String
     end
     patch do
-      workout = ::PersonalWorkout.find params[:id]
-      workout.update_attributes! filtered_params
+      workout = ::PersonalWorkout.find(params[:id])
+      workout.update_attributes!(filtered_params)
 
       present workout, with: Entities::PersonalWorkout
     end
 
     desc 'Delete Personal Workout'
     delete do
-      present ::PersonalWorkout.destroy(params[:id]), with: Entities::PersonalWorkout
+      workout = ::PersonalWorkout.destroy(params[:id])
+      present workout, with: Entities::PersonalWorkout
     end
 
   end

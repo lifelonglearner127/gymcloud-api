@@ -5,7 +5,7 @@ class SearchService
     workouts: WorkoutTemplate,
     programs: ProgramTemplate,
     clients: User,
-    client_groups: ClientGroup,
+    client_groups: ClientGroup
   }.freeze
 
   attr_accessor :results
@@ -46,13 +46,13 @@ class SearchService
   def search_entity(entity, search_scope)
     klass = ENTITIES[entity]
     scope = case search_scope
-      when :own
-        klass.owned_by(@user_id)
-      when :public
-        klass.public_for(@user_id)
-      when :all
-        klass.global_for(@user_id)
-      end
+            when :own
+              klass.owned_by(@user_id)
+            when :public
+              klass.public_for(@user_id)
+            when :all
+              klass.global_for(@user_id)
+            end
     begin
       scope.search_by_criteria(criteria) || []
     rescue ActiveRecord::StatementInvalid

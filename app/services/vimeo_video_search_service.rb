@@ -1,6 +1,6 @@
 class VimeoVideoSearchService
 
-  def initialize params
+  def initialize(params)
     @query = params[:q]
     @page = params[:page]
     @per_page = params[:per_page] || 50
@@ -10,7 +10,7 @@ class VimeoVideoSearchService
 
   def search
     response = make_request
-    filtered = filter_results response.items
+    filtered = filter_results(response.items)
     @results.concat filtered
 
     if @results.count < @page * @per_page
@@ -24,17 +24,19 @@ class VimeoVideoSearchService
 
   def make_request
     if @collection.nil?
-      client = Vimeo::Client.new access_token: ENV['VIMEO_TOKEN']
-      @collection = client.search_videos @query,
+      client = Vimeo::Client.new(access_token: ENV['VIMEO_TOKEN'])
+      @collection = client.search_videos(
+        @query,
         page: 1,
         per_page: 50 # vimeo maximum
+      )
     else
       @collection.next_page
     end
   end
 
-  def filter_results results
-    results.reject {|v| v.embed.html.nil? }
+  def filter_results(results)
+    results.reject { |v| v.embed.html.nil? }
   end
 
 end

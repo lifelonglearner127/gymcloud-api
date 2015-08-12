@@ -1,6 +1,6 @@
 ActiveAdmin.register AdminUser do
 
-  menu parent: "Users"
+  menu parent: 'Users'
 
   permit_params :email, :password, :password_confirmation
 
@@ -20,7 +20,7 @@ ActiveAdmin.register AdminUser do
   filter :created_at
 
   form do |f|
-    f.inputs "Admin Details" do
+    f.inputs "#{f.object.class.name.titleize} Details" do
       f.input :email
       f.input :password
       f.input :password_confirmation

@@ -16,6 +16,8 @@
 
 class PersonalProgram < ActiveRecord::Base
 
+  include HasTemplateVersion
+
   belongs_to :program_template
   belongs_to :person, class_name: User
   has_one :author, through: :program_template
@@ -25,22 +27,9 @@ class PersonalProgram < ActiveRecord::Base
 
   enum status: [:inactive, :active]
 
-  scope :is_active, -> { where(status: self.statuses[:active]) }
-  scope :is_inactive, -> { where(status: self.statuses[:inactive]) }
+  scope :is_active, -> { where(status: statuses[:active]) }
+  scope :is_inactive, -> { where(status: statuses[:inactive]) }
 
-  before_create :set_program_template_version!,
-                unless: :program_template_version?
-
-  def source_program_template
-    version = self.program_template_version
-    template = self.program_template
-    template.versions.at(version).andand.reify || template
-  end
-
-  private
-
-  def set_program_template_version!
-    self.program_template_version = self.program_template.versions.count
-  end
+  has_template_version :program_template
 
 end

@@ -5,3 +5,18 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+bar = ProgressBar.create(
+  title: 'Seeds',
+  total: 2
+)
+
+bar.log('AgreementCategory')
+Services::Seed::AgreementCategory.!
+bar.increment
+
+bar.log('GlobalProperty')
+Services::Seed::GlobalProperty.!
+bar.increment
+
+bar.finish

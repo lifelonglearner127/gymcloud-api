@@ -4,6 +4,10 @@ class BaseService
 
   attr_reader :result
 
+  @@input_params_value = []
+  @@defaults_value = {}
+  @@run_method = nil
+
   def self.input_params(*value)
     @@input_params_value = value.presence || []
   end
@@ -12,13 +16,17 @@ class BaseService
     @@defaults_value = value
   end
 
-  def self.run(method_name)
-    @@run_method = method_name
+  def self.run(method_name = nil, &block)
+    if method_name.is_a?(Symbol)
+      @@run_method = method_name
+    elsif block_given?
+      @@run_method = block
+    end
   end
 
   def initialize(args = {})
     set_attributes(args)
-    set_defaults if self.class.respond_to?(:defaults_value)
+    set_defaults
     self
   end
 
@@ -44,7 +52,11 @@ class BaseService
   end
 
   def run
-    self.send(@@run_method)
+    if @@run_method.is_a?(Proc)
+      self.instance_eval(&@@run_method)
+    elsif @@run_method.is_a?(Symbol)
+      self.send(@@run_method)
+    end
   end
 
 end

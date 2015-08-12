@@ -6,6 +6,7 @@ gem 'pg'
 gem 'jbuilder', '~> 2.0'
 gem 'thin'
 gem 'dotenv-rails'
+gem 'seedbank'
 
 gem 'devise'
 gem 'devise_invitable'

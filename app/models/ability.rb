@@ -32,6 +32,8 @@ class Ability
   end
 
   def as_anyone
+    as_explorer_can :read, Exercise
+    as_explorer_can :read, WorkoutTemplate
   end
 
   def as_guest
@@ -39,7 +41,11 @@ class Ability
 
   def as_user
     can :read, User
-    can :update, User, id: @user.id
+    as_self_can :update, User
+    can :read, UserProfile
+    as_owner_can :update, UserProfile
+    as_author_can :crud, Exercise
+    as_author_can :crud, WorkoutTemplate
   end
 
   def as_client
@@ -68,9 +74,20 @@ class Ability
     false
   end
 
+  def as_self_can(action, object)
+    can action, object, id: @user.id
+  end
+
   def as_owner_can(action, object)
     can action, object, user_id: @user.id
+  end
+
+  def as_author_can(action, object)
     can action, object, author_id: @user.id
+  end
+
+  def as_explorer_can(action, object)
+    can action, object, is_public: true
   end
 
 end

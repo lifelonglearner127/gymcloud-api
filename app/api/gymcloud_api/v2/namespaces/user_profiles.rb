@@ -10,7 +10,9 @@ class UserProfiles < Base
 
     desc 'Fetch User Profile'
     get do
-      present ::UserProfile.find(params[:id]), with: Entities::UserProfile
+      profile = ::UserProfile.find(params[:id])
+      authorize!(:read, profile)
+      present(profile, with: Entities::UserProfile)
     end
 
     desc 'Update User Profile'
@@ -27,9 +29,10 @@ class UserProfiles < Base
       optional :birthday, type: Date
     end
     patch do
-      profile = ::UserProfile.find params[:id]
-      profile.update_attributes! filtered_params
-      present profile, with: Entities::UserProfile
+      profile = ::UserProfile.find(params[:id])
+      authorize!(:update, profile)
+      profile.update_attributes!(filtered_params)
+      present(profile, with: Entities::UserProfile)
     end
 
   end

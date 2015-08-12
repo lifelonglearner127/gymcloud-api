@@ -11,8 +11,11 @@ class Exercises < Base
     optional :is_public, type: Boolean, default: 'false'
   end
   post do
-    attributes = filtered_params_with author: current_user
-    present ::Exercise.create!(attributes), with: Entities::Exercise
+    attributes = filtered_params_with(author: current_user)
+    exercise = ::Exercise.new(attributes)
+    authorize!(:create, exercise)
+    exercise.save!
+    present(exercise, with: Entities::Exercise)
   end
 
   params do
@@ -22,7 +25,9 @@ class Exercises < Base
 
     desc 'Read Exercise'
     get do
-      present ::Exercise.find(params[:id]), with: Entities::Exercise
+      exercise = ::Exercise.find(params[:id])
+      authorize!(:read, exercise)
+      present(exercise, with: Entities::Exercise)
     end
 
     desc 'Update Exercise'
@@ -33,14 +38,19 @@ class Exercises < Base
       optional :is_public, type: Boolean
     end
     patch do
-      exercise = ::Exercise.find params[:id]
-      exercise.update_attributes! filtered_params
-      present exercise, with: Entities::Exercise
+      exercise = ::Exercise.find(params[:id])
+      exercise.assign_attributes(filtered_params)
+      authorize!(:update, exercise)
+      exercise.save!
+      present(exercise, with: Entities::Exercise)
     end
 
     desc 'Delete Exercise'
     delete do
-      present ::Exercise.destroy(params[:id]), with: Entities::Exercise
+      exercise = ::Exercise.find(params[:id])
+      authorize!(:destroy, exercise)
+      exercise.destroy
+      present(exercise, with: Entities::Exercise)
     end
 
   end

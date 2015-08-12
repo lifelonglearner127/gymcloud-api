@@ -18,6 +18,8 @@
 
 class PersonalWorkout < ActiveRecord::Base
 
+  include HasTemplateVersion
+
   belongs_to :workout_template
   belongs_to :person, class_name: User
   has_one :author, through: :workout_template
@@ -32,19 +34,6 @@ class PersonalWorkout < ActiveRecord::Base
   scope :is_active, -> { where(status: statuses[:active]) }
   scope :is_inactive, -> { where(status: statuses[:inactive]) }
 
-  before_create :set_workout_template_version!,
-                unless: :workout_template_version?
-
-  def source_workout_template
-    version = workout_template_version
-    template = workout_template
-    template.versions.at(version).andand.reify || template
-  end
-
-  private
-
-  def set_workout_template_version!
-    self.workout_template_version = workout_template.versions.count
-  end
+  has_template_version :workout_template
 
 end

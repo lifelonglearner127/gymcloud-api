@@ -31,7 +31,7 @@ class Workout < BaseService
       person: @user,
       status: :active,
       is_program_part: @is_program_part,
-      workout_template_version: @template.version.andand.index
+      workout_template_version: @template.try(:version).try(:index)
     )
   end
 

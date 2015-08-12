@@ -14,6 +14,8 @@
 
 class WorkoutExercise < ActiveRecord::Base
 
+  include HasTemplateVersion
+
   belongs_to :exercise
   belongs_to :workout, polymorphic: true
   has_many :exercise_properties
@@ -23,20 +25,10 @@ class WorkoutExercise < ActiveRecord::Base
   validates :workout_type,
             inclusion: { in: %w(WorkoutTemplate PersonalWorkout) }
 
-  before_create :set_exercise_version!, unless: :exercise_version?
+  has_template_version :exercise
 
   def display_name
     source_exercise.name
-  end
-
-  def source_exercise
-    exercise.versions.at(exercise_version).andand.reify || exercise
-  end
-
-  private
-
-  def set_exercise_version!
-    self.exercise_version = exercise.versions.count
   end
 
 end

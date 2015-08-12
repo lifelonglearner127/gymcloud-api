@@ -15,7 +15,7 @@ class Videos < Base
 
       client = ::Vimeo::Client.new access_token: ENV['VIMEO_TOKEN']
       vimeo_video = client.video video.vimeo_id
-      vimeo_video.edit privacy: { view: video.privacy }, name: video.name
+      vimeo_video.edit privacy: {view: video.privacy}, name: video.name
 
       video
     end

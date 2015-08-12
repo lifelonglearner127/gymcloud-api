@@ -22,9 +22,9 @@ class ProgramWorkout < ActiveRecord::Base
 
   validates :workout_id, :program_id, presence: true
   validates :workout_type,
-            inclusion: { in: %w(WorkoutTemplate PersonalWorkout) }
+            inclusion: {in: %w(WorkoutTemplate PersonalWorkout)}
   validates :program_type,
-            inclusion: { in: %w(ProgramTemplate PersonalProgram) }
+            inclusion: {in: %w(ProgramTemplate PersonalProgram)}
 
   has_template_version :workout
 

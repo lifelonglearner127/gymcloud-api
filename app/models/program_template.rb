@@ -23,7 +23,7 @@ class ProgramTemplate < ActiveRecord::Base
   has_many :program_workouts, as: :program
 
   validates :name, :author_id, presence: true
-  validates :is_public, inclusion: { in: [true, false] }
+  validates :is_public, inclusion: {in: [true, false]}
 
   has_paper_trail
 

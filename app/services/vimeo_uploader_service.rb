@@ -40,7 +40,7 @@ class VimeoUploaderService
   end
 
   def update_vimeo_video(vimeo_video)
-    vimeo_video.edit privacy: { view: @video.privacy }, name: @video.name
+    vimeo_video.edit privacy: {view: @video.privacy}, name: @video.name
   end
 
   def update_video(vimeo_id, vimeo_video)

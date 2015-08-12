@@ -5,7 +5,8 @@ class Users < Base
 
   desc 'Fetch Current User'
   get :me do
-    present current_user, with: Entities::User
+    authorize!(:read, current_user)
+    present(current_user, with: Entities::User)
   end
 
   params do
@@ -15,7 +16,9 @@ class Users < Base
 
     desc 'Fetch User'
     get do
-      present ::User.find(params[:id]), with: Entities::User
+      user = ::User.find(params[:id])
+      authorize!(:read, user)
+      present(user, with: Entities::User)
     end
 
     desc 'Invite User'
@@ -28,9 +31,10 @@ class Users < Base
 
       desc 'Fetch user notifications'
       get 'notifications' do
-        user = ::User.find params[:id]
+        user = ::User.find(params[:id])
+        authorize!(:read, user)
         notifications = Activity.of_user(user)
-        present notifications, with: Entities::Notification
+        present(notifications, with: Entities::Notification)
       end
 
       %w(

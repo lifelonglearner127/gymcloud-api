@@ -44,3 +44,6 @@ Style/AlignHash:
 
 Style/ClassVars:
   Enabled: false
+
+Style/SpaceInsideHashLiteralBraces:
+  EnforcedStyle: no_space

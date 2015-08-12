@@ -8,6 +8,10 @@ class BaseService
   @@defaults_value = {}
   @@run_method = nil
 
+  def self.!(args = {})
+    self.new(args).process.result
+  end
+
   def self.input_params(*value)
     @@input_params_value = value.presence || []
   end

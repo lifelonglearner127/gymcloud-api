@@ -19,7 +19,7 @@ RSpec.describe ClientGroupMembership do
 	it { is_expected.to have_db_column :updated_at }
 
   # === Database (Indexes) ===
-  
+  it { is_expected.to have_db_index ["client_id", "client_group_id"]}
 
   # === Validations (Length) ===
   

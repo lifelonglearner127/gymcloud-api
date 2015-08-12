@@ -17,6 +17,7 @@ RSpec.describe AgreementCategory do
 	it { is_expected.to have_db_column :client_title }
 	it { is_expected.to have_db_column :created_at }
 	it { is_expected.to have_db_column :updated_at }
+	it { is_expected.to have_db_column :symbol }
 
   # === Database (Indexes) ===
   
@@ -25,7 +26,8 @@ RSpec.describe AgreementCategory do
   
 
   # === Validations (Presence) ===
-  it { is_expected.to validate_presence_of :title }
+  it { is_expected.to validate_presence_of :symbol }
+	it { is_expected.to validate_presence_of :title }
 	it { is_expected.to validate_presence_of :pro_title }
 	it { is_expected.to validate_presence_of :client_title }
 

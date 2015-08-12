@@ -15,5 +15,6 @@ class ClientGroupMembership < ActiveRecord::Base
   belongs_to :client, class_name: User
 
   validates :client_group_id, :client_id, presence: true
+  validates :client_id, uniqueness: {scope: :client_group_id}
 
 end

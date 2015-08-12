@@ -8,9 +8,8 @@ class VimeoVideoUpdateWorker
     video   = Video.find video_id
     service = VimeoVideoUpdateService.new
 
-    unless service.update(video)
-      VimeoVideoUpdateWorker.perform_in(2.minutes, video_id)
-    end
+    return if service.update(video)
+    VimeoVideoUpdateWorker.perform_in(2.minutes, video_id)
   end
 
 end

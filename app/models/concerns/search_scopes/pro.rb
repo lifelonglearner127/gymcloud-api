@@ -5,14 +5,14 @@ module Pro
 
   included do
     scope :owned_by, ->(id) { find(id).clients }
-    scope :public_for, ->(id) { nil }
+    scope :public_for, ->(_id) { nil }
     scope :global_for, ->(id) { owned_by(id) }
-    scope :search_by_criteria, ->(criteria) {
-      joins{user_profile}.where{
-        (user_profile.first_name=~my{criteria}) |
-        (user_profile.last_name=~my{criteria})
+    scope :search_by_criteria, (lambda do |criteria|
+      joins { user_profile }.where {
+        (user_profile.first_name =~ my { criteria }) |
+        (user_profile.last_name =~ my { criteria })
       }
-    }
+    end)
   end
 
 end

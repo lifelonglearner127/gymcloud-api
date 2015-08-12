@@ -21,15 +21,14 @@ class ExerciseResult < ActiveRecord::Base
   validate :check_exercise_workout_type
 
   def display_name
-    "#{self.workout_exercise.display_name} - #{self.workout_event.display_name}"
+    "#{workout_exercise.display_name} - #{workout_event.display_name}"
   end
 
   private
 
   def check_exercise_workout_type
-    if self.workout_exercise.andand.workout_type != 'PersonalWorkout'
-      errors.add(:workout_exercise, 'PersonalWorkout only allowed')
-    end
+    return if workout_exercise.andand.workout_type == 'PersonalWorkout'
+    errors.add(:workout_exercise, 'PersonalWorkout only allowed')
   end
 
 end

@@ -25,22 +25,22 @@ class PersonalProgram < ActiveRecord::Base
 
   enum status: [:inactive, :active]
 
-  scope :is_active, -> { where(status: self.statuses[:active]) }
-  scope :is_inactive, -> { where(status: self.statuses[:inactive]) }
+  scope :is_active, -> { where(status: statuses[:active]) }
+  scope :is_inactive, -> { where(status: statuses[:inactive]) }
 
   before_create :set_program_template_version!,
                 unless: :program_template_version?
 
   def source_program_template
-    version = self.program_template_version
-    template = self.program_template
+    version = program_template_version
+    template = program_template
     template.versions.at(version).andand.reify || template
   end
 
   private
 
   def set_program_template_version!
-    self.program_template_version = self.program_template.versions.count
+    self.program_template_version = program_template.versions.count
   end
 
 end

@@ -1,6 +1,6 @@
 ActiveAdmin.register UserProfile do
 
-  menu parent: "Users"
+  menu parent: 'Users'
 
   permit_params :gender, :height, :weight, :bodyfat, :first_name, :last_name,
                 :location, :zip, :employer, :birthday, :user_id

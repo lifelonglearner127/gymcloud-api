@@ -13,7 +13,8 @@ class VideoUploader < CarrierWave::Uploader::Base
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
   def store_dir
-    "#{Rails.root}/tmp/uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+    model_class = model.class.to_s.underscore
+    "#{Rails.root}/tmp/uploads/#{model_class}/#{mounted_as}/#{model.id}"
   end
 
   # Add a white list of extensions which are allowed to be uploaded.
@@ -23,7 +24,7 @@ class VideoUploader < CarrierWave::Uploader::Base
   end
 
   # Override the filename of the uploaded files:
-  # Avoid using model.id or version_name here, see uploader/store.rb for details.
+  # Avoid using model.id or version_name here, see uploader/store.rb for details
   # def filename
   #   "something.jpg" if original_filename
   # end

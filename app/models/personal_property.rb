@@ -19,7 +19,7 @@ class PersonalProperty < ActiveRecord::Base
   validates :global_property_id, :person_id, presence: true
 
   def display_name
-    self.global_property.name
+    global_property.name
   end
 
 end

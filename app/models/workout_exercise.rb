@@ -20,23 +20,23 @@ class WorkoutExercise < ActiveRecord::Base
   has_many :exercise_results
 
   validates :exercise_id, :workout_id, presence: true
-  validates :workout_type, inclusion: {in: %w(WorkoutTemplate PersonalWorkout)}
+  validates :workout_type,
+            inclusion: { in: %w(WorkoutTemplate PersonalWorkout) }
 
   before_create :set_exercise_version!, unless: :exercise_version?
 
   def display_name
-    self.source_exercise.name
+    source_exercise.name
   end
 
   def source_exercise
-    version = self.exercise_version
-    self.exercise.versions.at(version).andand.reify || self.exercise
+    exercise.versions.at(exercise_version).andand.reify || exercise
   end
 
   private
 
   def set_exercise_version!
-    self.exercise_version = self.exercise.versions.count
+    self.exercise_version = exercise.versions.count
   end
 
 end

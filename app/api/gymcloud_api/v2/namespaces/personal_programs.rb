@@ -13,7 +13,8 @@ class PersonalPrograms < Base
 
     desc 'Read Personal Program'
     get do
-      present ::PersonalProgram.find(params[:id]), with: Entities::PersonalProgram
+      program = ::PersonalProgram.find(params[:id])
+      present program, with: Entities::PersonalProgram
     end
 
     desc 'Update Personal Program'
@@ -32,7 +33,8 @@ class PersonalPrograms < Base
 
     desc 'Delete Personal Program'
     delete do
-      present ::PersonalProgram.destroy(params[:id]), with: Entities::PersonalProgram
+      program = ::PersonalProgram.destroy(params[:id])
+      present program, with: Entities::PersonalProgram
     end
 
   end

@@ -1,6 +1,6 @@
 ActiveAdmin.register User do
 
-  menu parent: "Users"
+  menu parent: 'Users'
 
   permit_params :email, :password, :password_confirmation
 
@@ -20,7 +20,7 @@ ActiveAdmin.register User do
   filter :created_at
 
   form do |f|
-    f.inputs "User Details" do
+    f.inputs "#{f.object.class.name.titleize} Details" do
       f.input :email
       f.input :password
       f.input :password_confirmation
@@ -30,7 +30,7 @@ ActiveAdmin.register User do
 
   controller do
     def create
-      parameters = permitted_params[:user].merge confirmed_at: nil
+      parameters = permitted_params[:user].merge(confirmed_at: nil)
       @user = User.new parameters
       @user.skip_confirmation!
       super

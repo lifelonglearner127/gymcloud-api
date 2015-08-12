@@ -4,10 +4,10 @@ class VimeoVideoUpdateService
     @client = Vimeo::Client.new access_token: ENV['VIMEO_TOKEN']
   end
 
-  def update video
+  def update(video)
     vimeo = @client.video video.vimeo_id
 
-    if vimeo.status == "available"
+    if vimeo.status == 'available'
       update_video(video, vimeo)
     else
       video.update_attribute(:status, vimeo.status)

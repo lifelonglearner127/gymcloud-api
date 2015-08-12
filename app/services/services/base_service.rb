@@ -44,7 +44,11 @@ class BaseService
   end
 
   def run
-    self.send(@@run_method)
+    if @@run_method.is_a?(Proc)
+      self.instance_eval(&@@run_method)
+    elsif @@run_method.is_a?(Symbol)
+      self.send(@@run_method)
+    end
   end
 
 end

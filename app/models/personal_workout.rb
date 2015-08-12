@@ -29,22 +29,22 @@ class PersonalWorkout < ActiveRecord::Base
 
   enum status: [:inactive, :active]
 
-  scope :is_active, -> { where(status: self.statuses[:active]) }
-  scope :is_inactive, -> { where(status: self.statuses[:inactive]) }
+  scope :is_active, -> { where(status: statuses[:active]) }
+  scope :is_inactive, -> { where(status: statuses[:inactive]) }
 
   before_create :set_workout_template_version!,
                 unless: :workout_template_version?
 
   def source_workout_template
-    version = self.workout_template_version
-    template = self.workout_template
+    version = workout_template_version
+    template = workout_template
     template.versions.at(version).andand.reify || template
   end
 
   private
 
   def set_workout_template_version!
-    self.workout_template_version = self.workout_template.versions.count
+    self.workout_template_version = workout_template.versions.count
   end
 
 end

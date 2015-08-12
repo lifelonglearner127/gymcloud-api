@@ -1,6 +1,6 @@
 ActiveAdmin.register GlobalProperty do
 
-  menu parent: "Global"
+  menu parent: 'Global'
 
   permit_params :name, :unit, :symbol
 

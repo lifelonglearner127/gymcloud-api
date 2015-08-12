@@ -1,6 +1,6 @@
 ActiveAdmin.register AgreementCategory do
 
-  menu parent: "Users"
+  menu parent: 'Users'
 
   permit_params :title, :pro_title, :client_title
 

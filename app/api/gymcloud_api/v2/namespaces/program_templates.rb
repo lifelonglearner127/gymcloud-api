@@ -11,8 +11,9 @@ class ProgramTemplates < Base
     optional :is_public, type: Boolean, default: 'false'
   end
   post do
-    attributes = filtered_params_with author: current_user
-    present ::ProgramTemplate.create!(attributes), with: Entities::ProgramTemplate
+    attributes = filtered_params_with(author: current_user)
+    template = ::ProgramTemplate.create!(attributes)
+    present template, with: Entities::ProgramTemplate
   end
 
   params do
@@ -22,7 +23,8 @@ class ProgramTemplates < Base
 
     desc 'Read Program Template'
     get do
-      present ::ProgramTemplate.find(params[:id]), with: Entities::ProgramTemplate
+      template = ::ProgramTemplate.find(params[:id])
+      present template, with: Entities::ProgramTemplate
     end
 
     desc 'Update Program Template'
@@ -40,7 +42,8 @@ class ProgramTemplates < Base
 
     desc 'Delete Program Template'
     delete do
-      present ::ProgramTemplate.destroy(params[:id]), with: Entities::ProgramTemplate
+      template = ::ProgramTemplate.destroy(params[:id])
+      present template, with: Entities::ProgramTemplate
     end
 
   end

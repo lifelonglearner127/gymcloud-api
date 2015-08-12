@@ -1,8 +1,9 @@
 ActiveAdmin.register PersonalWorkout do
 
-  menu parent: "Personal"
+  menu parent: 'Personal'
 
-  permit_params :name, :description, :note, :workout_template_id, :person_id, :status, :video_url
+  permit_params :name, :description, :note, :workout_template_id, :person_id,
+                :status, :video_url
 
 end
 

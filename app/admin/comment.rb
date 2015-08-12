@@ -1,7 +1,8 @@
 ActiveAdmin.register ::Comment do
 
-  menu parent: "Communication"
+  menu parent: 'Communication'
 
-  permit_params  :title, :comment, :commentable_id, :commentable_type, :user_id, :role
+  permit_params :title, :comment, :commentable_id, :commentable_type, :user_id,
+                :role
 
 end

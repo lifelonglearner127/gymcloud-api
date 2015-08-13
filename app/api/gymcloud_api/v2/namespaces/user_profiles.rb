@@ -30,8 +30,9 @@ class UserProfiles < Base
     end
     patch do
       profile = ::UserProfile.find(params[:id])
+      profile.assign_attributes(filtered_params)
       authorize!(:update, profile)
-      profile.update_attributes!(filtered_params)
+      profile.save!
       present(profile, with: Entities::UserProfile)
     end
 

@@ -17,9 +17,11 @@ RSpec.describe GlobalProperty do
 	it { is_expected.to have_db_column :unit }
 	it { is_expected.to have_db_column :created_at }
 	it { is_expected.to have_db_column :updated_at }
+	it { is_expected.to have_db_column :position }
 
   # === Database (Indexes) ===
-  it { is_expected.to have_db_index ["symbol"]}
+  it { is_expected.to have_db_index ["position"]}
+	it { is_expected.to have_db_index ["symbol"]}
 
   # === Validations (Length) ===
   
@@ -28,6 +30,7 @@ RSpec.describe GlobalProperty do
   it { is_expected.to validate_presence_of :name }
 	it { is_expected.to validate_presence_of :unit }
 	it { is_expected.to validate_presence_of :symbol }
+	it { is_expected.to validate_presence_of :position }
 
   # === Validations (Numericality) ===
   

@@ -47,6 +47,7 @@ class Ability
     as_author_can :crud, Exercise
     as_author_can :crud, WorkoutTemplate
     can :read, PersonalWorkout, person_id: @user.id
+    can :read, PersonalProgram, person_id: @user.id
   end
 
   def as_client
@@ -59,6 +60,11 @@ class Ability
       workout_template_id: @user.workout_templates.pluck(:id),
       person_id: @user.clients.pluck(:id)
     can [:read, :update, :disable], PersonalWorkout,
+      person_id: @user.clients.pluck(:id)
+    can :create, PersonalProgram,
+      program_template_id: @user.program_templates.pluck(:id),
+      person_id: @user.clients.pluck(:id)
+    can [:read, :update, :disable], PersonalProgram,
       person_id: @user.clients.pluck(:id)
   end
 

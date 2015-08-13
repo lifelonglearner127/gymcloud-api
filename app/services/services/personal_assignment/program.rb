@@ -37,14 +37,11 @@ class Program < BaseService
   end
 
   def create_personal_workout(workout)
-    Services::PersonalAssignment::Workout
-      .new(
-        template: workout,
-        user: @user,
-        is_program_part: true
-      )
-      .process
-      .result
+    Services::PersonalAssignment::Workout.!(
+      template: workout,
+      user: @user,
+      is_program_part: true
+    )
   end
 
   def deactivate_old_programs(new_id)

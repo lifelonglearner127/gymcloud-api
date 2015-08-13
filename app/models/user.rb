@@ -67,7 +67,7 @@ class User < ActiveRecord::Base
   end
 
   def pro?
-    agreements_as_client.is_me(id).any?
+    agreements_as_client.unscoped.is_me(id).any?
   end
 
   def become_a_pro!

@@ -1,20 +1,13 @@
 module Services
 module Seed
 
-class AgreementCategory < BaseService
-
-  run do
-    @result = []
-    fixtures.each do |fixture|
-      attrs = fixture.dup
-      record = ::AgreementCategory \
-        .create_with(symbol: attrs.delete(:symbol))
-        .find_or_create_by(attrs)
-      @result << record
-    end
-  end
+class AgreementCategory < BaseSeedService
 
   private
+
+  def klass
+    ::AgreementCategory
+  end
 
   def fixtures
     [

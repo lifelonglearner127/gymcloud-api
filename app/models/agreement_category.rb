@@ -16,5 +16,6 @@ class AgreementCategory < ActiveRecord::Base
   has_many :user_agreements, foreign_key: :category_id
 
   validates :symbol, :title, :pro_title, :client_title, presence: true
+  validates :symbol, uniqueness: true
 
 end

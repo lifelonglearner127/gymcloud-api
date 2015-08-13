@@ -51,6 +51,8 @@ gem 'sidekiq'
 gem 'vimeo', github: 'bodya-dnepr/vimeo', branch: 'v2'
 gem 'andand'
 gem 'faker'
+gem 'ffaker'
+gem 'factory_girl_rails'
 
 group :development do
   gem 'letter_opener_web'
@@ -60,6 +62,7 @@ group :development do
   gem 'annotate', '~> 2.6.6'
   gem 'consistency_fail', require: false
   gem 'regressor', '~> 0.3.4'
+  gem 'factory_factory_girl'
 
   gem 'guard'
   gem 'guard-bundler', require: false

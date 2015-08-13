@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150812164150) do
+ActiveRecord::Schema.define(version: 20150813072139) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -74,6 +74,8 @@ ActiveRecord::Schema.define(version: 20150812164150) do
     t.datetime "updated_at",   null: false
     t.string   "symbol"
   end
+
+  add_index "agreement_categories", ["symbol"], name: "index_agreement_categories_on_symbol", unique: true, using: :btree
 
   create_table "client_group_memberships", force: :cascade do |t|
     t.integer  "client_group_id"
@@ -169,8 +171,10 @@ ActiveRecord::Schema.define(version: 20150812164150) do
     t.string   "unit"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "position"
   end
 
+  add_index "global_properties", ["position"], name: "index_global_properties_on_position", unique: true, using: :btree
   add_index "global_properties", ["symbol"], name: "index_global_properties_on_symbol", unique: true, using: :btree
 
   create_table "oauth_access_grants", force: :cascade do |t|

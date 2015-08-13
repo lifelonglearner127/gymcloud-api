@@ -1,53 +1,51 @@
 module Services
 module Seed
 
-class GlobalProperty < BaseService
-
-  run do
-    @result = []
-    fixtures.each do |fixture|
-      attrs = fixture.dup
-      record = ::GlobalProperty \
-        .create_with(symbol: attrs.delete(:symbol))
-        .find_or_create_by(attrs)
-      @result << record
-    end
-    @result
-  end
+class GlobalProperty < BaseSeedService
 
   private
+
+  def klass
+    ::GlobalProperty
+  end
 
   def fixtures
     [
       {
         symbol: 'sets',
         name: 'Sets',
-        unit: 'times'
+        unit: 'times',
+        position: 0
       },
       {
         symbol: 'reps',
         name: 'Reps',
-        unit: 'times'
+        unit: 'times',
+        position: 1
       },
       {
         symbol: 'weight',
         name: 'Weight',
-        unit: 'kg'
+        unit: 'kg',
+        position: 2
       },
       {
         symbol: 'height',
         name: 'Height',
-        unit: 'cm'
+        unit: 'cm',
+        position: 3
       },
       {
         symbol: 'distance',
         name: 'Distance',
-        unit: 'm'
+        unit: 'm',
+        position: 4
       },
       {
         symbol: 'time',
         name: 'Time',
-        unit: 's'
+        unit: 's',
+        position: 5
       }
     ]
   end

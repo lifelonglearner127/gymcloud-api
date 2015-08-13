@@ -20,7 +20,7 @@ RSpec.describe AgreementCategory do
 	it { is_expected.to have_db_column :symbol }
 
   # === Database (Indexes) ===
-  
+  it { is_expected.to have_db_index ["symbol"]}
 
   # === Validations (Length) ===
   

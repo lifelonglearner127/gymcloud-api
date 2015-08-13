@@ -20,7 +20,6 @@ class PersonalWorkouts < Base
     present(workout, with: Entities::PersonalWorkout)
   end
 
-
   params do
     requires :id, type: Integer, desc: 'Personal Workout ID'
   end
@@ -29,7 +28,8 @@ class PersonalWorkouts < Base
     desc 'Read Personal Workout'
     get do
       workout = ::PersonalWorkout.find(params[:id])
-      present workout, with: Entities::PersonalWorkout
+      authorize!(:read, workout)
+      present(workout, with: Entities::PersonalWorkout)
     end
 
     desc 'Update Personal Workout'
@@ -37,21 +37,22 @@ class PersonalWorkouts < Base
       optional :name, type: String
       optional :description, type: String
       optional :note, type: String
-      optional :status, type: String, desc: 'Activity status',
-                values: ::PersonalWorkout.statuses.keys
       optional :video_url, type: String
     end
     patch do
-      workout = ::PersonalWorkout.find(params[:id])
-      workout.update_attributes!(filtered_params)
-
-      present workout, with: Entities::PersonalWorkout
+      workout = ::PersonalWorkout.is_active.find(params[:id])
+      workout.assign_attributes(filtered_params)
+      authorize!(:update, workout)
+      workout.save!
+      present(workout, with: Entities::PersonalWorkout)
     end
 
-    desc 'Delete Personal Workout'
+    desc 'Disable Personal Workout'
     delete do
-      workout = ::PersonalWorkout.destroy(params[:id])
-      present workout, with: Entities::PersonalWorkout
+      workout = ::PersonalWorkout.is_active.find(params[:id])
+      authorize!(:disable, workout)
+      workout.update_attributes!(status: :inactive)
+      present(workout, with: Entities::PersonalWorkout)
     end
 
   end

@@ -4,7 +4,22 @@ module Namespaces
 class PersonalWorkouts < Base
 
   desc 'Create Personal Workout'
-  post
+  params do
+    requires :workout_template_id, type: Integer, desc: 'Workout Template ID'
+    requires :person_id, type: Integer, desc: 'Assigned Person ID'
+  end
+  post do
+    template = ::WorkoutTemplate.find(params[:workout_template_id])
+    user = ::User.find(params[:person_id])
+    service = Services::PersonalAssignment::Workout.new(
+      template: template,
+      user: user
+    )
+    authorize!(:create, service.build_personal)
+    workout = service.process.result
+    present(workout, with: Entities::PersonalWorkout)
+  end
+
 
   params do
     requires :id, type: Integer, desc: 'Personal Workout ID'

@@ -46,6 +46,9 @@ class Ability
     as_owner_can :update, UserProfile
     as_author_can :crud, Exercise
     as_author_can :crud, WorkoutTemplate
+    can :create, PersonalWorkout,
+      workout_template_id: @user.workout_templates.pluck(:id),
+      person_id: @user.clients.pluck(:id)
   end
 
   def as_client

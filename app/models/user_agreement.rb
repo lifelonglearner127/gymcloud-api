@@ -17,7 +17,7 @@ class UserAgreement < ActiveRecord::Base
   belongs_to :client, class_name: User
   belongs_to :category, class_name: AgreementCategory
 
-  enum status: [:active, :finished, :paused]
+  enum status: [:active, :paused, :finished]
 
   validates :pro_id, :client_id, :category_id, :status, presence: true
 
@@ -29,5 +29,7 @@ class UserAgreement < ActiveRecord::Base
       status: statuses[:active]
     )
   end)
+
+  default_scope -> { where(status: statuses[:active]) }
 
 end

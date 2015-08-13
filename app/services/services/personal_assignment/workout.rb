@@ -7,6 +7,10 @@ class Workout < BaseService
   defaults is_program_part: false
   run :create_personal
 
+  def build_personal
+    PersonalWorkout.new(prepare_attributes)
+  end
+
   private
 
   def create_personal

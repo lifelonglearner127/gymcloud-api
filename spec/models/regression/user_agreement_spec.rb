@@ -38,6 +38,6 @@ RSpec.describe UserAgreement do
 
   
   # === Enums ===
-  it { is_expected.to define_enum_for(:status).with(["active", "finished", "paused"])}
+  it { is_expected.to define_enum_for(:status).with(["active", "paused", "finished"])}
   
 end

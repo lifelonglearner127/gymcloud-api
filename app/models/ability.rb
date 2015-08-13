@@ -68,7 +68,7 @@ class Ability
   end
 
   def pro?
-    false
+    @user.pro?
   end
 
   def admin?

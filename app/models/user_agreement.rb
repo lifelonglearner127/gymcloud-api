@@ -21,4 +21,13 @@ class UserAgreement < ActiveRecord::Base
 
   validates :pro_id, :client_id, :category_id, :status, presence: true
 
+  scope :is_me, (lambda do |user_id|
+    where(
+      pro_id: user_id,
+      client_id: user_id,
+      category_id: AgreementCategory.find_by(symbol: 'me').id,
+      status: statuses[:active]
+    )
+  end)
+
 end

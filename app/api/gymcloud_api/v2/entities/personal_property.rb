@@ -4,10 +4,10 @@ module Entities
 class PersonalProperty < Grape::Entity
 
   expose :id
-  expose :global_property_id
+  expose :person_id
   expose :position
   expose :is_visible
-  expose :person_id
+  expose :global_property, using: Entities::GlobalProperty
 
 end
 

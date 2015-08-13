@@ -16,6 +16,7 @@ class WorkoutEvent < ActiveRecord::Base
   belongs_to :personal_workout
   has_one :person, through: :personal_workout
   has_many :exercise_results
+  has_many :workout_event_exercises, dependent: :destroy
 
   validates :personal_workout_id, :begins_at, presence: true
   validate :period_validation, if: :ends_at?

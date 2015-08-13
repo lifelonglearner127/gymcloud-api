@@ -8,7 +8,7 @@ module HasTemplateVersion
 
       define_method("source_#{symbol}") do
         record = send(symbol) # workout
-        version = send("#{symbol}_version")
+        version = send("#{symbol}_version") || 0
         record.try(:versions).andand.at(version).andand.reify || record
       end
 

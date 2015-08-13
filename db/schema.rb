@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150813175259) do
+ActiveRecord::Schema.define(version: 20150813192406) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -445,5 +445,4 @@ ActiveRecord::Schema.define(version: 20150813175259) do
   add_foreign_key "workout_event_exercises", "workout_exercises"
   add_foreign_key "workout_events", "personal_workouts"
   add_foreign_key "workout_exercises", "exercises"
-  add_foreign_key "workout_exercises", "workout_templates", column: "workout_id"
 end

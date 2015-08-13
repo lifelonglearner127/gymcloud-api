@@ -12,7 +12,15 @@ class WorkoutEvents < Base
     event = ::WorkoutEvent.new(filtered_params)
     authorize!(:create, event)
     event.save!
-    present event, with: Entities::WorkoutEvent
+
+    event.personal_workout.workout_exercises.each do |exercise|
+      ::WorkoutEventExercise.create!(
+        workout_event: event,
+        workout_exercise: exercise
+      )
+    end
+
+    present(event, with: Entities::WorkoutEvent)
   end
 
   params do

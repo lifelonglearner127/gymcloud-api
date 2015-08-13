@@ -11,7 +11,10 @@
 
 class WorkoutEventExercise < ActiveRecord::Base
 
+  acts_as_commentable
+
   belongs_to :workout_event
   belongs_to :workout_exercise
+  has_many :exercise_results, through: :workout_event
 
 end

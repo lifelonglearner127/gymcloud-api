@@ -15,7 +15,7 @@ class Workout < BaseService
 
   def create_personal
     workout = PersonalWorkout.create!(prepare_attributes)
-    workout.workout_exercises.each do |item|
+    @template.workout_exercises.each do |item|
       workout_exercise = assign_exercise(workout, item.source_exercise)
 
       item.exercise_properties.each do |exercise_property|
@@ -29,8 +29,8 @@ class Workout < BaseService
   end
 
   def prepare_attributes
-    to_exclude = %w(id is_public author_id folder_id created_at updated_at)
-    @template.attributes.except(*to_exclude).merge(
+    to_include = %w(name description note video_url)
+    @template.attributes.slice(*to_include).merge(
       workout_template: @template,
       person: @user,
       status: :active,

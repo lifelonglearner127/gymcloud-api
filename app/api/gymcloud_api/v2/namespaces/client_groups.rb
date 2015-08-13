@@ -8,8 +8,11 @@ class ClientGroups < Base
     requires :name, type: String
   end
   post do
-    attributes = filtered_params_with author: current_user
-    present ::ClientGroup.create!(attributes), with: Entities::ClientGroup
+    attributes = filtered_params_with(pro: current_user)
+    client_group = ::ClientGroup.new(attributes)
+    authorize!(:create, client_group)
+    client_group.save!
+    present(client_group, with: Entities::ClientGroup)
   end
 
   params do
@@ -19,7 +22,9 @@ class ClientGroups < Base
 
     desc 'Read Client Group'
     get do
-      present ::ClientGroup.find(params[:id]), with: Entities::ClientGroup
+      client_group = ::ClientGroup.find(params[:id])
+      authorize!(:read, client_group)
+      present(client_group, with: Entities::ClientGroup)
     end
 
     desc 'Update Client Group'
@@ -27,21 +32,29 @@ class ClientGroups < Base
       optional :name, type: String
     end
     patch do
-      client_group = ::ClientGroup.find params[:id]
-      client_group.update_attributes! filtered_params
-      present client_group, with: Entities::ClientGroup
+      client_group = ::ClientGroup.find(params[:id])
+      client_group.assign_attributes(filtered_params)
+      authorize!(:update, client_group)
+      client_group.save!
+      present(client_group, with: Entities::ClientGroup)
     end
 
     desc 'Delete Client Group'
     delete do
-      present ::ClientGroup.destroy(params[:id]), with: Entities::ClientGroup
+      client_group = ::ClientGroup.find(params[:id])
+      authorize!(:delete, client_group)
+      client_group.destroy
+      present(client_group, with: Entities::ClientGroup)
     end
 
     namespace :members do
 
       desc 'Fetch Members'
       get do
-        present ::ClientGroup.find(params[:id]).clients, with: Entities::User
+        client_group = ::ClientGroup.find(params[:id])
+        authorize!(:read, client_group)
+        members = client_group.clients
+        present(members, with: Entities::User)
       end
 
       params do

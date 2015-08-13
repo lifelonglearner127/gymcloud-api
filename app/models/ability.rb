@@ -46,13 +46,26 @@ class Ability
     as_owner_can :update, UserProfile
     as_author_can :crud, Exercise
     as_author_can :crud, WorkoutTemplate
-    can :crud, ClientGroupMembership, client_group: {pro_id: @user.id}
+    can :read, PersonalWorkout, person_id: @user.id
+    can :read, PersonalProgram, person_id: @user.id
   end
 
   def as_client
   end
 
   def as_pro
+    can :crud, ClientGroup, pro_id: @user.id
+    can :crud, ClientGroupMembership, client_group: {pro_id: @user.id}
+    can :create, PersonalWorkout,
+      workout_template_id: @user.workout_templates.pluck(:id),
+      person_id: @user.clients.pluck(:id)
+    can [:read, :update, :disable], PersonalWorkout,
+      person_id: @user.clients.pluck(:id)
+    can :create, PersonalProgram,
+      program_template_id: @user.program_templates.pluck(:id),
+      person_id: @user.clients.pluck(:id)
+    can [:read, :update, :disable], PersonalProgram,
+      person_id: @user.clients.pluck(:id)
   end
 
   def as_admin
@@ -68,7 +81,7 @@ class Ability
   end
 
   def pro?
-    false
+    @user.pro?
   end
 
   def admin?

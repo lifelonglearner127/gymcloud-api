@@ -4,7 +4,21 @@ module Namespaces
 class PersonalPrograms < Base
 
   desc 'Create Personal Program'
-  post
+  params do
+    requires :program_template_id, type: Integer, desc: 'Program Template ID'
+    requires :person_id, type: Integer, desc: 'Assigned Person ID'
+  end
+  post do
+    template = ::ProgramTemplate.find(params[:program_template_id])
+    user = ::User.find(params[:person_id])
+    service = Services::PersonalAssignment::Program.new(
+      template: template,
+      user: user
+    )
+    authorize!(:create, service.build_personal)
+    program = service.process.result
+    present(program, with: Entities::PersonalProgram)
+  end
 
   params do
     requires :id, type: Integer, desc: 'Personal Program ID'

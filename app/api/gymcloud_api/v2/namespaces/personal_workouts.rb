@@ -4,7 +4,21 @@ module Namespaces
 class PersonalWorkouts < Base
 
   desc 'Create Personal Workout'
-  post
+  params do
+    requires :workout_template_id, type: Integer, desc: 'Workout Template ID'
+    requires :person_id, type: Integer, desc: 'Assigned Person ID'
+  end
+  post do
+    template = ::WorkoutTemplate.find(params[:workout_template_id])
+    user = ::User.find(params[:person_id])
+    service = Services::PersonalAssignment::Workout.new(
+      template: template,
+      user: user
+    )
+    authorize!(:create, service.build_personal)
+    workout = service.process.result
+    present(workout, with: Entities::PersonalWorkout)
+  end
 
   params do
     requires :id, type: Integer, desc: 'Personal Workout ID'
@@ -14,7 +28,8 @@ class PersonalWorkouts < Base
     desc 'Read Personal Workout'
     get do
       workout = ::PersonalWorkout.find(params[:id])
-      present workout, with: Entities::PersonalWorkout
+      authorize!(:read, workout)
+      present(workout, with: Entities::PersonalWorkout)
     end
 
     desc 'Update Personal Workout'
@@ -22,21 +37,22 @@ class PersonalWorkouts < Base
       optional :name, type: String
       optional :description, type: String
       optional :note, type: String
-      optional :status, type: String, desc: 'Activity status',
-                values: ::PersonalWorkout.statuses.keys
       optional :video_url, type: String
     end
     patch do
-      workout = ::PersonalWorkout.find(params[:id])
-      workout.update_attributes!(filtered_params)
-
-      present workout, with: Entities::PersonalWorkout
+      workout = ::PersonalWorkout.is_active.find(params[:id])
+      workout.assign_attributes(filtered_params)
+      authorize!(:update, workout)
+      workout.save!
+      present(workout, with: Entities::PersonalWorkout)
     end
 
-    desc 'Delete Personal Workout'
+    desc 'Disable Personal Workout'
     delete do
-      workout = ::PersonalWorkout.destroy(params[:id])
-      present workout, with: Entities::PersonalWorkout
+      workout = ::PersonalWorkout.is_active.find(params[:id])
+      authorize!(:disable, workout)
+      workout.update_attributes!(status: :inactive)
+      present(workout, with: Entities::PersonalWorkout)
     end
 
   end

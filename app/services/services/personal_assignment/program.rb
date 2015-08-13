@@ -6,11 +6,14 @@ class Program < BaseService
   input_params :template, :user
   run :create_personal
 
+  def build_personal
+    PersonalProgram.new(prepare_attributes)
+  end
+
   private
 
   def create_personal
-    attributes = prepare_attributes
-    program = PersonalProgram.create!(attributes)
+    program = PersonalProgram.create!(prepare_attributes)
 
     @template.program_workouts.each do |pw|
       personal_workout = create_personal_workout(pw.source_workout)

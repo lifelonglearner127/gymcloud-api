@@ -128,6 +128,9 @@ GEM
     celluloid (0.16.0)
       timers (~> 4.0.0)
     choice (0.2.0)
+    closure_tree (5.2.0)
+      activerecord (>= 3.2.0)
+      with_advisory_lock (>= 3.0.0)
     coderay (1.1.0)
     coercible (1.0.0)
       descendants_tracker (~> 0.0.1)
@@ -532,6 +535,9 @@ GEM
       binding_of_caller (>= 0.7.2)
       railties (>= 4.0)
       sprockets-rails (>= 2.0, < 4.0)
+    with_advisory_lock (3.0.0)
+      activerecord (>= 3.2)
+      thread_safe
     xdan-datetimepicker-rails (2.4.3)
       jquery-rails
       rails (>= 3.2.16)
@@ -553,6 +559,7 @@ DEPENDENCIES
   cancancan
   carrierwave
   carrierwave-aws
+  closure_tree
   consistency_fail
   database_cleaner
   devise

@@ -22,6 +22,7 @@ gem 'acts_as_commentable'
 gem 'public_activity'
 gem 'unread'
 gem 'ancestry'
+gem 'closure_tree'
 
 gem 'rack-cors', require: 'rack/cors'
 gem 'rack-oauth2'

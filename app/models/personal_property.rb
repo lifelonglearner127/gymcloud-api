@@ -15,6 +15,7 @@ class PersonalProperty < ActiveRecord::Base
 
   belongs_to :global_property
   belongs_to :person, class_name: User
+  has_many :exercise_properties, dependent: :destroy
 
   validates :global_property_id, :person_id, presence: true
 

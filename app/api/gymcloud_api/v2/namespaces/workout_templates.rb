@@ -10,6 +10,7 @@ class WorkoutTemplates < Base
     optional :note, type: String
     optional :video_url, type: String
     optional :is_public, type: Boolean, default: 'false'
+    optional :is_visible, type: Boolean, default: 'true'
   end
   post do
     attributes = filtered_params_with(author: current_user)
@@ -38,6 +39,7 @@ class WorkoutTemplates < Base
       optional :note, type: String
       optional :video_url, type: String
       optional :is_public, type: Boolean
+      optional :is_visible, type: Boolean
     end
     patch do
       workout_template = ::WorkoutTemplate.find(params[:id])

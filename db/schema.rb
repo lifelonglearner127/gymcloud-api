@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150813072139) do
+ActiveRecord::Schema.define(version: 20150813192406) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -381,6 +381,16 @@ ActiveRecord::Schema.define(version: 20150813072139) do
     t.datetime "uploaded_at"
   end
 
+  create_table "workout_event_exercises", force: :cascade do |t|
+    t.integer  "workout_event_id"
+    t.integer  "workout_exercise_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "workout_event_exercises", ["workout_event_id"], name: "index_workout_event_exercises_on_workout_event_id", using: :btree
+  add_index "workout_event_exercises", ["workout_exercise_id"], name: "index_workout_event_exercises_on_workout_exercise_id", using: :btree
+
   create_table "workout_events", force: :cascade do |t|
     t.integer  "personal_workout_id"
     t.datetime "begins_at"
@@ -412,11 +422,13 @@ ActiveRecord::Schema.define(version: 20150813072139) do
     t.string   "video_url"
     t.boolean  "is_public"
     t.integer  "author_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
     t.integer  "folder_id"
+    t.boolean  "is_visible",  default: true
   end
 
+  add_index "workout_templates", ["author_id"], name: "index_workout_templates_on_author_id", using: :btree
   add_index "workout_templates", ["folder_id"], name: "index_workout_templates_on_folder_id", using: :btree
 
   add_foreign_key "exercise_properties", "personal_properties"
@@ -429,7 +441,8 @@ ActiveRecord::Schema.define(version: 20150813072139) do
   add_foreign_key "personal_programs", "program_templates"
   add_foreign_key "personal_properties", "global_properties"
   add_foreign_key "personal_workouts", "workout_templates"
+  add_foreign_key "workout_event_exercises", "workout_events"
+  add_foreign_key "workout_event_exercises", "workout_exercises"
   add_foreign_key "workout_events", "personal_workouts"
   add_foreign_key "workout_exercises", "exercises"
-  add_foreign_key "workout_exercises", "workout_templates", column: "workout_id"
 end

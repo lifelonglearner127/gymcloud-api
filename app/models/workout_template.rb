@@ -12,6 +12,7 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  folder_id   :integer
+#  is_visible  :boolean          default(TRUE)
 #
 
 class WorkoutTemplate < ActiveRecord::Base

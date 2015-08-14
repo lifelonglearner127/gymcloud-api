@@ -9,8 +9,18 @@ class WorkoutEvents < Base
     optional :ends_at, type: DateTime
   end
   post do
-    event = ::WorkoutEvent.create!(filtered_params)
-    present event, with: Entities::WorkoutEvent
+    event = ::WorkoutEvent.new(filtered_params)
+    authorize!(:create, event)
+    event.save!
+
+    event.personal_workout.workout_exercises.each do |exercise|
+      ::WorkoutEventExercise.create!(
+        workout_event: event,
+        workout_exercise: exercise
+      )
+    end
+
+    present(event, with: Entities::WorkoutEvent)
   end
 
   params do
@@ -20,7 +30,9 @@ class WorkoutEvents < Base
 
     desc 'Read Workout Event'
     get do
-      present ::WorkoutEvent.find(params[:id]), with: Entities::WorkoutEvent
+      event = ::WorkoutEvent.find(params[:id])
+      authorize!(:read, event)
+      present(event, with: Entities::WorkoutEvent)
     end
 
     desc 'Update Workout Event'
@@ -30,19 +42,26 @@ class WorkoutEvents < Base
       optional :is_completed, type: Boolean
     end
     patch do
-      event = ::WorkoutEvent.find params[:id]
-      event.update_attributes! filtered_params
-      present event, with: Entities::WorkoutEvent
+      event = ::WorkoutEvent.find(params[:id])
+      event.assign_attributes(filtered_params)
+      authorize!(:update, event)
+      event.save!
+      present(event, with: Entities::WorkoutEvent)
     end
 
     desc 'Delete Workout Event'
     delete do
-      present ::WorkoutEvent.destroy(params[:id]), with: Entities::WorkoutEvent
+      event = ::WorkoutEvent.find(params[:id])
+      authorize!(:delete, event)
+      event.destroy
+      present(event, with: Entities::WorkoutEvent)
     end
 
     desc 'Fetch full Event content'
     get :full do
-      # NOTE: should include: comments, results (grouped), previous results
+      event = ::WorkoutEvent.find(params[:id])
+      authorize!(:read, event)
+      present(event, with: Entities::WorkoutEventFull)
     end
 
   end

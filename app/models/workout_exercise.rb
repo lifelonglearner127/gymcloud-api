@@ -20,6 +20,7 @@ class WorkoutExercise < ActiveRecord::Base
   belongs_to :workout, polymorphic: true
   has_many :exercise_properties
   has_many :exercise_results
+  has_many :workout_event_exercises, dependent: :destroy
 
   validates :exercise_id, :workout_id, presence: true
   validates :workout_type,

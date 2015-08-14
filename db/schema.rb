@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150814103933) do
+ActiveRecord::Schema.define(version: 20150814110746) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -306,6 +306,11 @@ ActiveRecord::Schema.define(version: 20150814103933) do
   end
 
   add_index "read_marks", ["user_id", "readable_type", "readable_id"], name: "index_read_marks_on_user_id_and_readable_type_and_readable_id", using: :btree
+
+  create_table "root_folder_categories", force: :cascade do |t|
+    t.string "klass"
+    t.string "name"
+  end
 
   create_table "user_agreements", force: :cascade do |t|
     t.integer  "pro_id"

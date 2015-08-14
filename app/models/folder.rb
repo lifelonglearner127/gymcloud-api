@@ -18,4 +18,15 @@ class Folder < ActiveRecord::Base
 
   validates :name, :user_id, presence: true
 
+  validate :only_one_root_per_user
+
+  private
+
+  def only_one_root_per_user
+    if name == 'Root' && parent_id.nil? &&
+        user_id.present? && user.folders.where(name: 'Root').any?
+      errors.add(:name, 'only one root folder is allowed')
+    end
+  end
+
 end

@@ -11,6 +11,7 @@ class All < BaseService
   def bootstrap
     Services::UserBootstrap::UserProfile.!(user: @user)
     Services::UserBootstrap::PersonalProperties.!(user: @user)
+    Services::UserBootstrap::Folders.!(user: @user)
   end
 
 end

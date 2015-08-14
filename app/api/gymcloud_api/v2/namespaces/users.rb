@@ -64,6 +64,12 @@ class Users < Base
 
       end
 
+      resource :folders do
+
+        desc 'Fetch folders'
+        get
+
+      end
     end
 
   end

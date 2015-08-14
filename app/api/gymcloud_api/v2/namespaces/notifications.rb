@@ -6,7 +6,18 @@ class Notifications < Base
   route_param :id do
 
     desc 'Mark Notification as Read'
-    patch :read
+    params do
+      requires :status, type: Boolean, default: 'true', desc: 'Read status'
+    end
+    patch :read do
+      notification = ::Activity.find(params[:id])
+      authorize!(:update, notification)
+
+      method = params[:status] ? :mark_as_read! : :mark_as_unread!
+      notification.send(method, for: current_user)
+
+      present notification, with: Entities::Notification
+    end
 
   end
 

@@ -49,6 +49,9 @@ class Ability
     can :read, PersonalWorkout, person_id: @user.id
     can :read, PersonalProgram, person_id: @user.id
     can :crud, WorkoutEvent, personal_workout: {person_id: @user.id}
+    can :crud, Activity do |notification|
+      Activity.of_user(@user).where(id: notification.id).any?
+    end
   end
 
   def as_client

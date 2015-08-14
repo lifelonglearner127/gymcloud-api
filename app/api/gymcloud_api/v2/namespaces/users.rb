@@ -37,7 +37,7 @@ class Users < Base
         present(notifications, with: Entities::Notification)
       end
 
-      %w(
+      %i(
         pros clients client_groups
         exercises workout_templates program_templates
         personal_workouts personal_programs
@@ -45,14 +45,17 @@ class Users < Base
         exercise_results
         folders
       ).each do |collection|
-        namespace collection.to_sym do
-          desc "Fetch #{collection.titleize}"
+        namespace collection do
+          desc "Fetch #{collection.to_s.titleize}"
+          paginate max_per_page: 50
           get do
-            user = ::User.find params[:id]
-            result = user.send collection
+            user = ::User.find(params[:id])
+            # TODO: authorize!
+            result = user.send(collection)
             class_name = user.association(collection).klass.name
+            entity_name = "Entities::#{class_name}".constantize
 
-            present result, with: "Entities::#{class_name}".constantize
+            present(paginate(result), with: entity_name)
           end
         end
       end
@@ -60,7 +63,18 @@ class Users < Base
       resource :notifications do
 
         desc 'Mark all Notifications as Read'
-        patch :read_all
+        patch :read_all do
+          user = ::User.find(params[:id])
+          authorize!(:update, user)
+
+          notifications = ::Activity.of_user(user).unread_by(user)
+
+          ::Activity.transaction do
+            notifications.each { |item| item.mark_as_read!(for: user) }
+          end
+
+          status :no_content
+        end
 
       end
 

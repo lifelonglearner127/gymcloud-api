@@ -7,7 +7,7 @@ RSpec.describe Activity do
 	it { is_expected.to belong_to :owner}
 	it { is_expected.to belong_to :recipient}
   
-  
+  it { is_expected.to have_many :read_marks}
 
   # === Nested Attributes ===
   

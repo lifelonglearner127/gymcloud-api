@@ -300,8 +300,8 @@ ActiveRecord::Schema.define(version: 20150814110746) do
 
   create_table "read_marks", force: :cascade do |t|
     t.integer  "readable_id"
-    t.string   "readable_type", null: false
-    t.integer  "user_id",       null: false
+    t.string   "readable_type", limit: 255, null: false
+    t.integer  "user_id",                   null: false
     t.datetime "timestamp"
   end
 

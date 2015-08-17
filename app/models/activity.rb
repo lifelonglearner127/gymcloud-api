@@ -17,6 +17,8 @@
 
 class Activity < PublicActivity::Activity
 
+  acts_as_readable on: :created_at
+
   scope :of_user, (lambda do |user|
       client_groups = user.client_groups_as_client
       where {
@@ -25,5 +27,13 @@ class Activity < PublicActivity::Activity
       }
       .order(created_at: :desc)
     end)
+
+  def mark_as_unread!(options = {})
+    ReadMark.where(
+      readable_type: self.class.base_class.name,
+      readable_id: id,
+      user_id: options[:for].id
+    ).destroy_all
+  end
 
 end

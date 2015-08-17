@@ -69,6 +69,7 @@ class Ability
       person_id: @user.clients.pluck(:id)
     can :crud, WorkoutEvent,
       personal_workout: {person_id: @user.clients.pluck(:id)}
+    can :crud, Folder
   end
 
   def as_admin

@@ -28,8 +28,7 @@ RSpec.describe WorkoutTemplate do
 	it { is_expected.to have_db_column :is_visible }
 
   # === Database (Indexes) ===
-  it { is_expected.to have_db_index ["author_id"]}
-	it { is_expected.to have_db_index ["folder_id"]}
+  it { is_expected.to have_db_index ["folder_id"]}
 
   # === Validations (Length) ===
   

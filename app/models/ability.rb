@@ -76,6 +76,10 @@ class Ability
     if_new_can :read, WorkoutEvent
     can :crud, Folder
     can [:read, :update], PersonalProperty
+    can :create, User
+    can :invite, User do |user|
+      user.agreements_as_client.where(pro: @user).any?
+    end
   end
 
   def as_admin

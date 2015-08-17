@@ -23,9 +23,18 @@ class Users < Base
 
     desc 'Invite User'
     params do
-      requires :email, allow_blank: false, regexp: /.+@.+/
+      optional :email, regexp: /.+@.+/
     end
-    post :invite
+    post :invite do
+      user = ::User.find(params[:id])
+      authorize!(:invite, user)
+      Services::Clients::Invite.!(
+        current_user: current_user,
+        user: user,
+        email: params[:email]
+      )
+      present(user, with: Entities::User)
+    end
 
     namespace :collections do
 

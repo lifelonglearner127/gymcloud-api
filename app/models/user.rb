@@ -62,6 +62,8 @@ class User < ActiveRecord::Base
   has_many :exercise_results, through: :workout_events
   has_many :folders
 
+  after_invitation_accepted :confirm!
+
   def display_name
     email
   end

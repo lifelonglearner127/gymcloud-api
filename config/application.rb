@@ -34,11 +34,11 @@ module GymcloudApi
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
 
-    %w{api services}
-    .each do |folder|
-      config.paths.add File.join('app', folder), glob: File.join('**', '*.rb')
-      config.autoload_paths += Dir[Rails.root.join('app', folder, '*')]
-    end
+    %w(api services)
+      .each do |folder|
+        config.paths.add File.join('app', folder), glob: File.join('**', '*.rb')
+        config.autoload_paths += Dir[Rails.root.join('app', folder, '*')]
+      end
 
     config.generators do |g|
       g.test_framework  false
@@ -47,12 +47,12 @@ module GymcloudApi
       g.javascripts     false
     end
 
-    config.middleware.use Rack::Cors do
+    config.middleware.insert_before 0, "Rack::Cors" do
       allow do
         origins '*'
         resource '*',
-          :headers => :any,
-          :methods => %i{get post put patch delete options}
+          headers: :any,
+          methods: %i(get post put patch delete options)
       end
     end
 

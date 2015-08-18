@@ -5,8 +5,9 @@ class WorkoutEvents < Base
 
   desc 'Create Workout Event'
   params do
+    requires :personal_workout_id, type: Integer
     requires :begins_at, type: DateTime
-    optional :ends_at, type: DateTime
+    requires :ends_at, type: DateTime
   end
   post do
     event = ::WorkoutEvent.new(filtered_params)

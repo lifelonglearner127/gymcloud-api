@@ -33,7 +33,7 @@ class ExerciseResults < Base
       requires :is_personal_best, type: Boolean
     end
     patch do
-      exercise_result = ::ExerciseResult.find params[:id]
+      exercise_result = ::ExerciseResult.find(params[:id])
       exercise_result.assign_attributes(filtered_params)
       authorize!(:update, exercise_result)
       exercise_result.save!

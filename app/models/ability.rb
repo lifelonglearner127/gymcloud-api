@@ -53,6 +53,7 @@ class Ability
     can :crud, Activity do |notification|
       Activity.of_user(@user).where(id: notification.id).any?
     end
+    can :crud, ExerciseResult, workout_event: {person_id: @user.id}
   end
 
   def as_client
@@ -80,6 +81,8 @@ class Ability
     can :invite, User do |user|
       user.agreements_as_client.where(pro: @user).any?
     end
+    can :crud, ExerciseResult,
+      workout_event: {person_id: @user.clients.pluck(:id)}
   end
 
   def as_admin

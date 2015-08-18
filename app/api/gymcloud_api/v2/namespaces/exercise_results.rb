@@ -10,8 +10,10 @@ class ExerciseResults < Base
     optional :is_personal_best, type: Boolean, default: 'false'
   end
   post do
-    exercise_result = ::ExerciseResult.create!(filtered_params)
-    present exercise_result, with: Entities::ExerciseResult
+    exercise_result = ::ExerciseResult.new(filtered_params)
+    authorize!(:create, exercise_result)
+    exercise_result.save!
+    present(exercise_result, with: Entities::ExerciseResult)
   end
 
   params do
@@ -22,6 +24,7 @@ class ExerciseResults < Base
     desc 'Read Exercise Result'
     get do
       exercise_result = ::ExerciseResult.find(params[:id])
+      authorize!(:read, exercise_result)
       present exercise_result, with: Entities::ExerciseResult
     end
 
@@ -31,14 +34,18 @@ class ExerciseResults < Base
     end
     patch do
       exercise_result = ::ExerciseResult.find params[:id]
-      exercise_result.update_attributes! filtered_params
+      exercise_result.assign_attributes(filtered_params)
+      authorize!(:update, exercise_result)
+      exercise_result.save!
       present exercise, with: Entities::ExerciseResult
     end
 
     desc 'Delete Exercise Result'
     delete do
-      exercise_result = ::ExerciseResult.destroy(params[:id])
-      present exercise_result, with: Entities::ExerciseResult
+      exercise_result = ::ExerciseResult.find(params[:id])
+      authorize!(:delete, exercise_result)
+      exercise_result.destroy
+      present(exercise_result, with: Entities::ExerciseResult)
     end
 
     namespace :items do

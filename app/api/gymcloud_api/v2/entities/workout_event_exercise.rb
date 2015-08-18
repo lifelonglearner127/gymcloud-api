@@ -8,6 +8,7 @@ class WorkoutEventExercise < Grape::Entity
   expose :workout_exercise_id
   expose :workout_exercise, using: Entities::WorkoutExercise
   expose :comments, using: Entities::Comment
+  expose :previous, using: Entities::WorkoutEventExercise, if: :expose_previous
 
 end
 

@@ -46,6 +46,7 @@ class Ability
     as_owner_can :update, UserProfile
     as_author_can :crud, Exercise
     as_author_can :crud, WorkoutTemplate
+    as_author_can :crud, ProgramTemplate
     can :read, PersonalWorkout, person_id: @user.id
     can :read, PersonalProgram, person_id: @user.id
     can :crud, WorkoutEvent, personal_workout: {person_id: @user.id}
@@ -72,7 +73,13 @@ class Ability
       person_id: @user.clients.pluck(:id)
     can :crud, WorkoutEvent,
       personal_workout: {person_id: @user.clients.pluck(:id)}
+    if_new_can :read, WorkoutEvent
     can :crud, Folder
+    can [:read, :update], PersonalProperty
+    can :create, User
+    can :invite, User do |user|
+      user.agreements_as_client.where(pro: @user).any?
+    end
   end
 
   def as_admin
@@ -109,6 +116,12 @@ class Ability
 
   def as_explorer_can(action, object)
     can action, object, is_public: true
+  end
+
+  def if_new_can(action, object)
+    can action, object do |instance|
+      instance.new_record?
+    end
   end
 
 end

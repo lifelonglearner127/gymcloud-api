@@ -11,7 +11,8 @@ class PersonalProperties < Base
     desc 'Read Personal Property'
     get do
       property = ::PersonalProperty.find(params[:id])
-      present property, with: Entities::PersonalProperty
+      authorize!(:read, property)
+      present(property, with: Entities::PersonalProperty)
     end
 
     desc 'Update Personal Property'
@@ -21,8 +22,10 @@ class PersonalProperties < Base
     end
     patch do
       property = ::PersonalProperty.find(params[:id])
-      property.update_attributes!(filtered_params)
-      present property, with: Entities::PersonalProperty
+      property.assign_attributes(filtered_params)
+      authorize!(:update, property)
+      property.save!
+      present(property, with: Entities::PersonalProperty)
     end
 
   end

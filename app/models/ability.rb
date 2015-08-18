@@ -54,6 +54,13 @@ class Ability
       Activity.of_user(@user).where(id: notification.id).any?
     end
     can :crud, ExerciseResult, workout_event: {person_id: @user.id}
+
+    as_owner_can :crud, Comment
+    can :read, Comment,
+      user_id: @user.clients.pluck(:id)
+      # add condition - access have only current trainer
+    can :read, Comment,
+      user_id: @user.pros.pluck(:id)
   end
 
   def as_client
@@ -83,6 +90,9 @@ class Ability
     end
     can :crud, ExerciseResult,
       workout_event: {person_id: @user.clients.pluck(:id)}
+    can :read, Comment,
+      user_id: @user.clients.pluck(:id)
+      # add condition - access have only current trainer
   end
 
   def as_admin

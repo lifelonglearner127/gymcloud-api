@@ -12,8 +12,10 @@ class Comments < Base
     requires :role, type: String, default: 'comments'
   end
   post do
-    attributes = filtered_params_with user: current_user
-    present ::Comment.create!(attributes), with: Entities::Comment
+    comment = ::Comment.new(filtered_params_with user: current_user)
+    authorize!(:create, comment)
+    comment.save!
+    present(comment, with: Entities::Comment)
   end
 
   params do
@@ -23,7 +25,9 @@ class Comments < Base
 
     desc 'Read Comment'
     get do
-      present ::Comment.find(params[:id]), with: Entities::Comment
+      comment = ::Comment.find(params[:id])
+      authorize!(:read, comment)
+      present comment, with: Entities::Comment
     end
 
     desc 'Update Comment'
@@ -32,14 +36,19 @@ class Comments < Base
       optional :comment, type: String
     end
     patch do
-      comment = ::Comment.find params[:id]
-      comment.update_attributes! filtered_params
+      comment = ::Comment.find(params[:id])
+      comment.assign_attributes(filtered_params)
+      authorize!(:update, comment)
+      comment.save!
       present comment, with: Entities::Comment
     end
 
     desc 'Delete Comment'
     delete do
-      present ::Comment.destroy(params[:id]), with: Entities::Comment
+      comment = ::Comment.find(params[:id])
+      authorize!(:delete, comment)
+      comment.destroy
+      present(comment, with: Entities::Comment)
     end
 
   end

@@ -61,7 +61,7 @@ class WorkoutEvents < Base
     get :full do
       event = ::WorkoutEvent.find(params[:id])
       authorize!(:read, event)
-      present(event, with: Entities::WorkoutEventFull)
+      present(event, with: Entities::WorkoutEventFull, expose_previous: true)
     end
 
   end

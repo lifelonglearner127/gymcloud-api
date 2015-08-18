@@ -3,23 +3,15 @@ module Seed
 
 class RootFolderCategory < BaseSeedService
 
-  KLASS = ::RootFolderCategory
+  private
 
-  FIXTURES =
-    [
-      {
-        klass: 'Exercise',
-        name: 'Exercises'
-      },
-      {
-        klass: 'WorkoutTemplate',
-        name: 'Workouts'
-      },
-      {
-        klass: 'ProgramTemplate',
-        name: 'Programs'
-      }
-    ]
+  def klass
+    ::RootFolderCategory
+  end
+
+  def file_path
+    'spec/fixtures/seed/root_folder_category.yml'
+  end
 
 end
 

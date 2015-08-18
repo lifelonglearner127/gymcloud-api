@@ -16,10 +16,10 @@ class API < Grape::API
     rack_response(nil, 404)
   end
   rescue_from ActiveRecord::RecordInvalid do |e|
-    rack_response({errors: e.record.errors}.to_json, 422)
+    rack_response({error: e.record.errors}.to_json, 422)
   end
   rescue_from CanCan::AccessDenied do |e|
-    rack_response({errors: [e.message]}.to_json, 403)
+    rack_response({error: [e.message]}.to_json, 403)
   end
 
   mount V2::API

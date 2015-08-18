@@ -9,7 +9,7 @@ class BaseService
   @@run_method = nil
 
   def self.!(args = {})
-    self.new(args).process.result
+    new(args).process.result
   end
 
   def self.input_params(*value)
@@ -29,8 +29,8 @@ class BaseService
   end
 
   def initialize(args = {})
-    set_attributes(args)
-    set_defaults
+    define_attributes(args)
+    define_defaults
     self
   end
 
@@ -41,13 +41,13 @@ class BaseService
 
   private
 
-  def set_attributes(args)
+  def define_attributes(args)
     @@input_params_value.each do |attr_name|
       instance_variable_set(:"@#{attr_name}", args[attr_name])
     end
   end
 
-  def set_defaults
+  def define_defaults
     @@defaults_value.each do |attr_name, default_value|
       if instance_variable_get(:"@#{attr_name}").nil?
         instance_variable_set(:"@#{attr_name}", default_value)
@@ -57,9 +57,9 @@ class BaseService
 
   def run
     if @@run_method.is_a?(Proc)
-      self.instance_eval(&@@run_method)
+      instance_eval(&@@run_method)
     elsif @@run_method.is_a?(Symbol)
-      self.send(@@run_method)
+      send(@@run_method)
     end
   end
 

@@ -2,8 +2,8 @@ ActiveAdmin.register UserProfile do
 
   menu parent: 'Users'
 
-  permit_params :gender, :height, :weight, :bodyfat, :first_name, :last_name,
-                :location, :zip, :employer, :birthday, :user_id
+  permit_params :user_id, :first_name, :last_name, :gender, :birthday,
+    :height, :weight, :bodyfat, :location, :zip, :employer
 
   form do |f|
     f.inputs "#{f.object.class.name.titleize} Details" do

@@ -32,10 +32,11 @@ class User < ActiveRecord::Base
 
   include SearchScopes::Pro
 
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable,
-         :trackable, :validatable,
-         :confirmable, :invitable
+  devise \
+    :database_authenticatable, :registerable,
+    :recoverable, :rememberable,
+    :trackable, :validatable,
+    :confirmable, :invitable
 
   acts_as_reader
 
@@ -73,7 +74,7 @@ class User < ActiveRecord::Base
   end
 
   def become_a_pro!
-    pro? || !! agreements_as_client.is_me(id).build.save!
+    pro? || !!agreements_as_client.is_me(id).build.save!
   end
 
 end

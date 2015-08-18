@@ -3,13 +3,9 @@ module Seed
 
 class RootFolderCategory < BaseSeedService
 
-  private
+  KLASS = ::RootFolderCategory
 
-  def klass
-    ::RootFolderCategory
-  end
-
-  def fixtures
+  FIXTURES =
     [
       {
         klass: 'Exercise',
@@ -24,7 +20,6 @@ class RootFolderCategory < BaseSeedService
         name: 'Programs'
       }
     ]
-  end
 
 end
 

@@ -92,7 +92,7 @@ guard :rubocop, all_on_start: false, cli: %w{--format fuubar --format offenses} 
 end
 
 guard 'annotate' do
-  watch( 'db/schema.rb' )
+  watch('db/schema.rb')
 end
 
 guard 'consistency_fail', environment: 'development' do

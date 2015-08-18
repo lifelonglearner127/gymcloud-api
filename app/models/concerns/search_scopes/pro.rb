@@ -8,10 +8,11 @@ module Pro
     scope :public_for, ->(_id) { nil }
     scope :global_for, ->(id) { owned_by(id) }
     scope :search_by_criteria, (lambda do |criteria|
-      joins { user_profile }.where {
-        (user_profile.first_name =~ my { criteria }) |
-        (user_profile.last_name =~ my { criteria })
-      }
+      joins { user_profile }
+        .where do
+          (user_profile.first_name =~ my { criteria }) |
+          (user_profile.last_name =~ my { criteria })
+        end
     end)
   end
 

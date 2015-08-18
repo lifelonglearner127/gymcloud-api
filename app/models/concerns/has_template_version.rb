@@ -24,8 +24,7 @@ module HasTemplateVersion
       self.class_eval(action)
 
     end
+
   end
+
 end
-
-
-

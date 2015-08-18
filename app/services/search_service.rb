@@ -20,7 +20,7 @@ class SearchService
 
   def search!
     @results = []
-    entities = get_entities
+    entities = prepare_entires
     results = search_entities(entities, @search_scope)
     @results = entities_to_results(entities, results)
   end
@@ -45,14 +45,7 @@ class SearchService
 
   def search_entity(entity, search_scope)
     klass = ENTITIES[entity]
-    scope = case search_scope
-            when :own
-              klass.owned_by(@user_id)
-            when :public
-              klass.public_for(@user_id)
-            when :all
-              klass.global_for(@user_id)
-            end
+    scope = find_klass_scope(klass, search_scope)
     begin
       scope.search_by_criteria(criteria) || []
     rescue ActiveRecord::StatementInvalid
@@ -60,7 +53,18 @@ class SearchService
     end
   end
 
-  def get_entities
+  def find_klass_scope(klass, search_scope)
+    case search_scope
+    when :own
+      klass.owned_by(@user_id)
+    when :public
+      klass.public_for(@user_id)
+    when :all
+      klass.global_for(@user_id)
+    end
+  end
+
+  def prepare_entires
     case
     when @entity_type == :all
       ENTITIES.keys

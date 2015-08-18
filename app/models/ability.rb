@@ -53,7 +53,9 @@ class Ability
     can :crud, Activity do |notification|
       Activity.of_user(@user).where(id: notification.id).any?
     end
-    can :crud, ExerciseResult, workout_event: {person_id: @user.id}
+    can :crud, ExerciseResult do |exercise_result|
+      exercise_result.person.id == @user.id
+    end
 
     as_owner_can :crud, Comment
     can :read, Comment,
@@ -88,8 +90,9 @@ class Ability
     can :invite, User do |user|
       user.agreements_as_client.where(pro: @user).any?
     end
-    can :crud, ExerciseResult,
-      workout_event: {person_id: @user.clients.pluck(:id)}
+    can :crud, ExerciseResult do |exercise_result|
+      exercise_result.person.id.in?(@user.clients.pluck(:id))
+    end
     can :read, Comment,
       user_id: @user.clients.pluck(:id)
       # add condition - access have only current trainer

@@ -52,13 +52,16 @@ class ExerciseResults < Base
 
       desc 'Create Result Item'
       params do
-        requires :exercise_result_id, type: Integer
         requires :exercise_property_id, type: Integer
         requires :value, type: Integer
       end
       post do
-        exercise_result_item = ::ExerciseResultItem.create!(filtered_params)
-        present exercise_result_item, with: Entities::ExerciseResultItem
+        exercise_result = ::ExerciseResult.find(params[:id])
+        authorize!(:create, exercise_result)
+        attributes = filtered_params_with(exercise_result_id: params[:id])
+        attributes.delete(:id)
+        exercise_result_item = ::ExerciseResultItem.create!(attributes)
+        present(exercise_result_item, with: Entities::ExerciseResultItem)
       end
 
       params do
@@ -71,6 +74,8 @@ class ExerciseResults < Base
           requires :value, type: Integer
         end
         patch do
+          exercise_result = ::ExerciseResult.find(params[:id])
+          authorize!(:update, exercise_result)
           exercise_result_item = ::ExerciseResultItem.find(params[:id])
           if params[:value].blank?
             exercise_result_item.destroy

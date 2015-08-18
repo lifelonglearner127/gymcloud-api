@@ -3,13 +3,9 @@ module Seed
 
 class GlobalProperty < BaseSeedService
 
-  private
+  KLASS = ::GlobalProperty
 
-  def klass
-    ::GlobalProperty
-  end
-
-  def fixtures
+  FIXTURES =
     [
       {
         symbol: 'sets',
@@ -48,7 +44,6 @@ class GlobalProperty < BaseSeedService
         position: 5
       }
     ]
-  end
 
 end
 

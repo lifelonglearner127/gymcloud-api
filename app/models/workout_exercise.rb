@@ -24,7 +24,7 @@ class WorkoutExercise < ActiveRecord::Base
 
   validates :exercise_id, :workout_id, presence: true
   validates :workout_type,
-            inclusion: {in: %w(WorkoutTemplate PersonalWorkout)}
+    inclusion: {in: %w(WorkoutTemplate PersonalWorkout)}
 
   has_template_version :exercise
 

@@ -9,12 +9,12 @@ class Invite < BaseService
   private
 
   def invite
-    email = @email.presence || ! user_email_is_fake? && @user.email
+    email = @email.presence || !user_email_is_fake? && @user.email
     User.invite!({email: email}, @current_user)
   end
 
   def user_email_is_fake?
-    %r{^u\+\w*@gymcloud\.com$}
+    /^u\+\w*@gymcloud\.com$/
       .match(@user.email)
       .present?
   end

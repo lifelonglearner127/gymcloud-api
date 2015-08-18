@@ -3,13 +3,9 @@ module Seed
 
 class AgreementCategory < BaseSeedService
 
-  private
+  KLASS = ::AgreementCategory
 
-  def klass
-    ::AgreementCategory
-  end
-
-  def fixtures
+  FIXTURES =
     [
       {
         symbol: 'me',
@@ -30,7 +26,7 @@ class AgreementCategory < BaseSeedService
         client_title: 'Athlete'
       }
     ]
-  end
+
 end
 
 end

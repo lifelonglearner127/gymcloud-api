@@ -53,8 +53,8 @@ class Users < Base
             result = user.send(collection)
             authorize!(:read, result.build)
             klass = user.association(collection).klass
-            entity_klass = "GymcloudAPI::V2::Entities::#{klass.name}".constantize
-            present(paginate(result), with: entity_klass)
+            entity = "GymcloudAPI::V2::Entities::#{klass.name}".constantize
+            present(paginate(result), with: entity)
           end
         end
       end

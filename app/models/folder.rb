@@ -23,10 +23,11 @@ class Folder < ActiveRecord::Base
   private
 
   def only_one_root_per_user
-    if name == 'Root' && parent_id.nil? &&
-        user_id.present? && user.folders.where(name: 'Root').any?
-      errors.add(:name, 'only one root folder is allowed')
-    end
+    condition = name == 'Root' &&
+      parent_id.nil? &&
+      user_id.present? &&
+      user.folders.where(name: 'Root').any?
+    errors.add(:name, 'only one root folder is allowed') if condition
   end
 
 end

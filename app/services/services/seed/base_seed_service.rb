@@ -3,22 +3,17 @@ module Seed
 
 class BaseSeedService < BaseService
 
+  KLASS = nil
+  FIXTURES = []
+
   run :create_records_from_fixtures
 
   private
 
-  def klass
-    nil
-  end
-
-  def fixtures
-    []
-  end
-
   def create_records_from_fixtures
-    fixtures.map do |fixture|
+    FIXTURES.map do |fixture|
       attrs = fixture.dup
-      klass \
+      KLASS \
         .create_with(symbol: attrs.delete(:symbol))
         .find_or_create_by(attrs)
     end

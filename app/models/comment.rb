@@ -25,6 +25,6 @@ class Comment < ActiveRecord::Base
   default_scope -> { order('created_at ASC') }
 
   validates :comment, :user_id, :commentable_id, :commentable_type,
-            presence: true
+    presence: true
 
 end

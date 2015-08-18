@@ -1,22 +1,17 @@
 AllCops:
   DisplayCopNames: true
   DisplayStyleGuide: true
-  Include:
-    - 'app/admin/*'
-    - 'app/api/*'
-    - 'app/controllers/*'
-    - 'app/helpers/*'
-    - 'app/models/*'
-    - 'app/services/*'
-    - 'app/uploaders/*'
-    - 'app/workers/*'
   Exclude:
-    - 'db/**/*'
+    - 'db/**/**'
     - 'config/**/*'
+    - 'Guardfile'
     - 'spec/rails_helper.rb'
     - 'spec/spec_helper.rb'
-    - 'spec/models/regression/*'
-    - 'spec/controllers/regression/*'
+    - 'spec/models/regression/**/*'
+    - 'spec/controllers/regression/**/*'
+    - 'app/api/concerns/api_guard.rb'
+    - 'app/models/ability.rb'
+    - 'app/models/concerns/has_template_version.rb'
 
 Style/EmptyLinesAroundModuleBody:
   Enabled: false
@@ -45,5 +40,14 @@ Style/AlignHash:
 Style/ClassVars:
   Enabled: false
 
+Style/DoubleNegation:
+  Enabled: false
+
 Style/SpaceInsideHashLiteralBraces:
   EnforcedStyle: no_space
+
+Style/MultilineOperationIndentation:
+  EnforcedStyle: indented
+
+Style/AlignParameters:
+  EnforcedStyle: with_fixed_indentation

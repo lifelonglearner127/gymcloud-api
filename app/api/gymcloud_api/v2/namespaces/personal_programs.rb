@@ -28,6 +28,7 @@ class PersonalPrograms < Base
     desc 'Read Personal Program'
     get do
       program = ::PersonalProgram.find(params[:id])
+      authorize!(:read, program)
       present program, with: Entities::PersonalProgram
     end
 
@@ -40,15 +41,19 @@ class PersonalPrograms < Base
                 values: ::PersonalProgram.statuses.keys
     end
     patch do
-      program = ::PersonalProgram.find params[:id]
-      program.update_attributes! filtered_params
+      program = ::PersonalProgram.is_active.find(params[:id])
+      program.assign_attributes(filtered_params)
+      authorize!(:update, program)
+      program.save!
       present program, with: Entities::PersonalProgram
     end
 
-    desc 'Delete Personal Program'
+    desc 'Disable Personal Program'
     delete do
-      program = ::PersonalProgram.destroy(params[:id])
-      present program, with: Entities::PersonalProgram
+      program = ::PersonalProgram.is_active.find(params[:id])
+      authorize!(:disable, program)
+      program.update_attributes!(status: :inactive)
+      present(program, with: Entities::PersonalProgram)
     end
 
   end

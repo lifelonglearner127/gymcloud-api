@@ -81,6 +81,11 @@ class Ability
       person_id: @user.clients.pluck(:id)
     can [:read, :update, :disable], PersonalProgram,
       person_id: @user.clients.pluck(:id)
+    can :create, PersonalProgram,
+      program_template_id: @user.program_templates.pluck(:id),
+      person_id: @user.clients.pluck(:id)
+    can [:read, :update, :disable], PersonalProgram,
+      person_id: @user.clients.pluck(:id)
     can :crud, WorkoutEvent,
       personal_workout: {person_id: @user.clients.pluck(:id)}
     if_new_can :read, WorkoutEvent

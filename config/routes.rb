@@ -11,13 +11,14 @@ Rails.application.routes.draw do
     mount LetterOpenerWeb::Engine, at: '/letter_opener'
   end
 
-  mount GymcloudAPI::API => '/'
-  mount GrapeSwaggerRails::Engine => '/swagger'
-
   devise_for :users, controllers: {
     registrations: 'registrations',
-    invitations: 'invitations'
+    invitations: 'invitations',
+    passwords: 'passwords'
   }
+
+  mount GymcloudAPI::API => '/'
+  mount GrapeSwaggerRails::Engine => '/swagger'
 
   root to: 'devise/registrations#new'
 

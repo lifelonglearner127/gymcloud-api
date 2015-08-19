@@ -20,7 +20,8 @@ RSpec.describe ExerciseResultItem do
 	it { is_expected.to have_db_column :updated_at }
 
   # === Database (Indexes) ===
-  it { is_expected.to have_db_index ["exercise_property_id"]}
+  it { is_expected.to have_db_index ["exercise_property_id", "exercise_result_id"]}
+	it { is_expected.to have_db_index ["exercise_property_id"]}
 	it { is_expected.to have_db_index ["exercise_result_id"]}
 
   # === Validations (Length) ===

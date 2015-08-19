@@ -34,6 +34,7 @@ class Ability
   def as_anyone
     as_explorer_can :read, Exercise
     as_explorer_can :read, WorkoutTemplate
+    as_explorer_can :read, ProgramTemplate
   end
 
   def as_guest

@@ -57,13 +57,14 @@ class Ability
     can :crud, ExerciseResult do |exercise_result|
       exercise_result.person.id == @user.id
     end
-
     as_owner_can :crud, Comment
-    can :read, Comment,
-      user_id: @user.clients.pluck(:id)
-      # add condition - access have only current trainer
-    can :read, Comment,
-      user_id: @user.pros.pluck(:id)
+    can :read, Comment do |comment|
+      case comment.commentable_type
+      when 'WorkoutEventExercise'
+        comment.commentable.workout_event.personal_workout.workout_template.author.id.in?(@user.pros.pluck(:id)) &&
+        comment.commentable.workout_event.person.id == @user.id
+      end
+    end
   end
 
   def as_client
@@ -99,9 +100,13 @@ class Ability
     can :crud, ExerciseResult do |exercise_result|
       exercise_result.person.id.in?(@user.clients.pluck(:id))
     end
-    can :read, Comment,
-      user_id: @user.clients.pluck(:id)
-      # add condition - access have only current trainer
+    can :read, Comment do |comment|
+      case comment.commentable_type
+      when 'WorkoutEventExercise'
+        comment.commentable.workout_event.person.id.in?(@user.clients.pluck(:id)) &&
+        comment.commentable.workout_event.personal_workout.workout_template.author.id == @user.id
+      end
+    end
   end
 
   def as_admin

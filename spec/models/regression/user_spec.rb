@@ -22,6 +22,7 @@ RSpec.describe User do
 	it { is_expected.to have_many :personal_properties}
 	it { is_expected.to have_many :exercise_results}
 	it { is_expected.to have_many :folders}
+	it { is_expected.to have_many :videos}
 
   # === Nested Attributes ===
   

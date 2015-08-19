@@ -15,9 +15,12 @@
 #  status              :string
 #  embed_url           :string
 #  uploaded_at         :datetime
+#  author_id           :integer
 #
 
 class Video < ActiveRecord::Base
+
+  belongs_to :author, class_name: User
 
   mount_uploader :tmp_file, VideoUploader
 

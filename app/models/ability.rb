@@ -107,6 +107,7 @@ class Ability
         comment.commentable.workout_event.personal_workout.workout_template.author.id == @user.id
       end
     end
+    can :crud, WorkoutExercise, exercise: {author_id: @user.id}
   end
 
   def as_admin

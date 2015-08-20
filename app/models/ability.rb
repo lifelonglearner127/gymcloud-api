@@ -34,6 +34,7 @@ class Ability
   def as_anyone
     as_explorer_can :read, Exercise
     as_explorer_can :read, WorkoutTemplate
+    as_explorer_can :read, ProgramTemplate
   end
 
   def as_guest
@@ -53,6 +54,17 @@ class Ability
     can :crud, Activity do |notification|
       Activity.of_user(@user).where(id: notification.id).any?
     end
+    can :crud, ExerciseResult do |exercise_result|
+      exercise_result.person.id == @user.id
+    end
+    as_owner_can :crud, Comment
+    can :read, Comment do |comment|
+      case comment.commentable_type
+      when 'WorkoutEventExercise'
+        comment.commentable.workout_event.personal_workout.workout_template.author.id.in?(@user.pros.pluck(:id)) &&
+        comment.commentable.workout_event.person.id == @user.id
+      end
+    end
   end
 
   def as_client
@@ -71,6 +83,11 @@ class Ability
       person_id: @user.clients.pluck(:id)
     can [:read, :update, :disable], PersonalProgram,
       person_id: @user.clients.pluck(:id)
+    can :create, PersonalProgram,
+      program_template_id: @user.program_templates.pluck(:id),
+      person_id: @user.clients.pluck(:id)
+    can [:read, :update, :disable], PersonalProgram,
+      person_id: @user.clients.pluck(:id)
     can :crud, WorkoutEvent,
       personal_workout: {person_id: @user.clients.pluck(:id)}
     if_new_can :read, WorkoutEvent
@@ -79,6 +96,16 @@ class Ability
     can :create, User
     can :invite, User do |user|
       user.agreements_as_client.where(pro: @user).any?
+    end
+    can :crud, ExerciseResult do |exercise_result|
+      exercise_result.person.id.in?(@user.clients.pluck(:id))
+    end
+    can :read, Comment do |comment|
+      case comment.commentable_type
+      when 'WorkoutEventExercise'
+        comment.commentable.workout_event.person.id.in?(@user.clients.pluck(:id)) &&
+        comment.commentable.workout_event.personal_workout.workout_template.author.id == @user.id
+      end
     end
   end
 

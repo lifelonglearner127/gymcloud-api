@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Video do
 
   # === Relations ===
-  
+  it { is_expected.to belong_to :author}
   
   
 
@@ -24,9 +24,10 @@ RSpec.describe Video do
 	it { is_expected.to have_db_column :status }
 	it { is_expected.to have_db_column :embed_url }
 	it { is_expected.to have_db_column :uploaded_at }
+	it { is_expected.to have_db_column :author_id }
 
   # === Database (Indexes) ===
-  
+  it { is_expected.to have_db_index ["author_id"]}
 
   # === Validations (Length) ===
   

@@ -62,6 +62,7 @@ class User < ActiveRecord::Base
   has_many :personal_properties, foreign_key: :person_id
   has_many :exercise_results, through: :workout_events
   has_many :folders
+  has_many :videos, foreign_key: :author_id
 
   after_invitation_accepted :confirm!
 

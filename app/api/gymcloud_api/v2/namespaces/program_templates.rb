@@ -12,8 +12,10 @@ class ProgramTemplates < Base
   end
   post do
     attributes = filtered_params_with(author: current_user)
-    template = ::ProgramTemplate.create!(attributes)
-    present template, with: Entities::ProgramTemplate
+    program_template = ::ProgramTemplate.new(attributes)
+    authorize!(:create, program_template)
+    program_template.save!
+    present(program_template, with: Entities::ProgramTemplate)
   end
 
   params do
@@ -23,8 +25,9 @@ class ProgramTemplates < Base
 
     desc 'Read Program Template'
     get do
-      template = ::ProgramTemplate.find(params[:id])
-      present template, with: Entities::ProgramTemplate
+      program_template = ::ProgramTemplate.find(params[:id])
+      authorize!(:read, program_template)
+      present(program_template, with: Entities::ProgramTemplate)
     end
 
     desc 'Update Program Template'
@@ -36,14 +39,18 @@ class ProgramTemplates < Base
     end
     patch do
       program_template = ::ProgramTemplate.find params[:id]
-      program_template.update_attributes! filtered_params
-      present program_template, with: Entities::ProgramTemplate
+      program_template.assign_attributes(filtered_params)
+      authorize!(:update, program_template)
+      program_template.save!
+      present(program_template, with: Entities::ProgramTemplate)
     end
 
     desc 'Delete Program Template'
     delete do
-      template = ::ProgramTemplate.destroy(params[:id])
-      present template, with: Entities::ProgramTemplate
+      program_template = ::ProgramTemplate.find(params[:id])
+      authorize!(:destroy, program_template)
+      program_template.destroy
+      present(program_template, with: Entities::ProgramTemplate)
     end
 
   end

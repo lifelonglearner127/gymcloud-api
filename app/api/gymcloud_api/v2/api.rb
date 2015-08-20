@@ -20,6 +20,7 @@ class API < Grape::API
   mount Namespaces::ClientGroups => 'client_groups'
   mount Namespaces::Exercises => 'exercises'
   mount Namespaces::WorkoutExercises => 'workout_exercises'
+  mount Namespaces::ExerciseProperties => 'exercise_properties'
   mount Namespaces::WorkoutTemplates => 'workout_templates'
   mount Namespaces::PersonalWorkouts => 'personal_workouts'
   mount Namespaces::ProgramTemplates => 'program_templates'

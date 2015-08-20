@@ -108,6 +108,7 @@ class Ability
       end
     end
     can :crud, WorkoutExercise, exercise: {author_id: @user.id}
+    can :crud, ExerciseProperty, personal_property: {person_id: @user.id}
   end
 
   def as_admin

@@ -29,7 +29,7 @@ class PersonalPrograms < Base
     get do
       program = ::PersonalProgram.find(params[:id])
       authorize!(:read, program)
-      present program, with: Entities::PersonalProgram
+      present(program, with: Entities::PersonalProgram)
     end
 
     desc 'Update Personal Program'

@@ -76,13 +76,13 @@ class ExerciseResults < Base
         patch do
           exercise_result = ::ExerciseResult.find(params[:id])
           authorize!(:update, exercise_result)
-          exercise_result_item = ::ExerciseResultItem.find(params[:id])
+          exercise_result_item = exercise_result.items.find(params[:item_id])
           if params[:value].blank?
             exercise_result_item.destroy
           else
             exercise_result_item.update_attributes!(filtered_params)
           end
-          present exercise_result_item, with: Entities::ExerciseResultItem
+          present(exercise_result_item, with: Entities::ExerciseResultItem)
         end
 
       end

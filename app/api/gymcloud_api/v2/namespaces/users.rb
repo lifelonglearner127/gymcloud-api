@@ -59,6 +59,16 @@ class Users < Base
         end
       end
 
+      resource :library do
+        desc 'Fetch user library'
+        get do
+          user = ::User.find(params[:id])
+          authorize!(:update, user)
+          library = user.library
+          present(library)
+        end
+      end
+
       resource :notifications do
 
         desc 'Fetch user notifications'

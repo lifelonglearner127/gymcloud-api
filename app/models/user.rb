@@ -78,4 +78,16 @@ class User < ActiveRecord::Base
     pro? || !!agreements_as_client.is_me(id).build.save!
   end
 
+  def library
+    tree = folders.root.hash_tree
+    parser = lambda do |folder, branch|
+      result = folder.attributes
+      result[:items] = branch.map(&parser)
+      items = folder.items
+      result[:items] += items.flatten if items.any?
+      result
+    end
+    tree.map(&parser)
+  end
+
 end

@@ -15,10 +15,20 @@ class Folder < ActiveRecord::Base
   has_closure_tree
 
   belongs_to :user
+  has_many :exercises
+  has_many :workout_templates
+  has_many :program_templates
 
   validates :name, :user_id, presence: true
 
   validate :only_one_root_per_user
+
+  def items
+    exercises.presence ||
+      workout_templates.presence ||
+      program_templates.presence ||
+      []
+  end
 
   private
 

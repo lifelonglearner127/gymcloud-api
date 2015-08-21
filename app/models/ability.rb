@@ -107,7 +107,14 @@ class Ability
         comment.commentable.workout_event.personal_workout.workout_template.author.id == @user.id
       end
     end
-    can :crud, WorkoutExercise, exercise: {author_id: @user.id}
+    can :crud, WorkoutExercise do |we|
+      case we.workout_type
+      when 'WorkoutTemplate'
+        we.workout.author_id == @user.id
+      when 'PersonalWorkout'
+        we.workout.person_id.in?(@user.clients.pluck(:id))
+      end
+    end
     can :crud, ExerciseProperty, personal_property: {person_id: @user.id}
   end
 

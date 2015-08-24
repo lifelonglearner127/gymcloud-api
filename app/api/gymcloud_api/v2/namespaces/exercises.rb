@@ -8,11 +8,15 @@ class Exercises < Base
     requires :name, type: String
     optional :description, type: String
     optional :video_url, type: String
+    optional :folder_id, type: Integer
     optional :is_public, type: Boolean, default: 'false'
   end
   post do
     attributes = filtered_params_with(author: current_user)
+    folder_id = current_user.folders.root.children
+      .where(name: 'Exercises').pluck(:id).first
     exercise = ::Exercise.new(attributes)
+    exercise.folder_id = params[:folder_id] || folder_id
     authorize!(:create, exercise)
     exercise.save!
     present(exercise, with: Entities::Exercise)
@@ -35,6 +39,7 @@ class Exercises < Base
       optional :name, type: String
       optional :description, type: String
       optional :video_url, type: String
+      optional :folder_id, type: Integer
       optional :is_public, type: Boolean
     end
     patch do

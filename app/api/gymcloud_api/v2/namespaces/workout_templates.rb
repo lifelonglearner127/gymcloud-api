@@ -9,12 +9,16 @@ class WorkoutTemplates < Base
     optional :description, type: String
     optional :note, type: String
     optional :video_url, type: String
+    optional :folder_id, type: Integer
     optional :is_public, type: Boolean, default: 'false'
     optional :is_visible, type: Boolean, default: 'true'
   end
   post do
     attributes = filtered_params_with(author: current_user)
+    folder_id = current_user.folders.root.children
+      .where(name: 'Workouts').pluck(:id).first
     workout_template = ::WorkoutTemplate.new(attributes)
+    workout_template.folder_id = params[:folder_id] || folder_id
     authorize!(:create, workout_template)
     workout_template.save!
     present(workout_template, with: Entities::WorkoutTemplate)
@@ -38,6 +42,7 @@ class WorkoutTemplates < Base
       optional :description, type: String
       optional :note, type: String
       optional :video_url, type: String
+      optional :folder_id, type: Integer
       optional :is_public, type: Boolean
       optional :is_visible, type: Boolean
     end

@@ -8,11 +8,15 @@ class ProgramTemplates < Base
     requires :name, type: String
     optional :description, type: String
     optional :note, type: String
+    optional :folder_id, type: Integer
     optional :is_public, type: Boolean, default: 'false'
   end
   post do
     attributes = filtered_params_with(author: current_user)
+    folder_id = current_user.folders.root.children
+      .where(name: 'Programs').pluck(:id).first
     program_template = ::ProgramTemplate.new(attributes)
+    program_template.folder_id = params[:folder_id] || folder_id
     authorize!(:create, program_template)
     program_template.save!
     present(program_template, with: Entities::ProgramTemplate)
@@ -35,6 +39,7 @@ class ProgramTemplates < Base
       optional :name, type: String
       optional :description, type: String
       optional :note, type: String
+      optional :folder_id, type: Integer
       optional :is_public, type: Boolean
     end
     patch do

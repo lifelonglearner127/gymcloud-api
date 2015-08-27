@@ -1,21 +1,23 @@
 Rails.application.routes.draw do
-  devise_for :admin_users, ActiveAdmin::Devise.config
-  ActiveAdmin.routes(self)
+
   if Rails.env.development?
     require 'sidekiq/web'
     mount Sidekiq::Web => '/sidekiq'
-  end
 
-  use_doorkeeper
-  if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: '/letter_opener'
   end
+
+  ActiveAdmin.routes(self)
+
+  devise_for :admin_users, ActiveAdmin::Devise.config
 
   devise_for :users, controllers: {
     registrations: 'registrations',
     invitations: 'invitations',
     passwords: 'passwords'
   }
+
+  use_doorkeeper
 
   mount GymcloudAPI::API => '/'
   mount GrapeSwaggerRails::Engine => '/swagger'

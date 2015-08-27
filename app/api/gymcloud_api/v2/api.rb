@@ -32,6 +32,7 @@ class API < Grape::API
   mount Namespaces::Comments => 'comments'
   mount Namespaces::Folders => 'folders'
   mount Namespaces::Videos => 'videos'
+  mount Namespaces::Search => 'search'
 
 end
 

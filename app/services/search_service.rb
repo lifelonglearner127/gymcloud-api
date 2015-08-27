@@ -30,7 +30,7 @@ class SearchService
   def entities_to_results(entities, results)
     entities.each_with_index.map do |entity, index|
       {
-        klass: entity.to_s.classify,
+        klass: ENTITIES[entity].name,
         title: entity.to_s.titleize,
         items: results[index]
       }

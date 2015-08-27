@@ -3,7 +3,7 @@ class RegistrationsController < Devise::RegistrationsController
   respond_to :json
 
   rescue_from ActiveRecord::RecordInvalid do |e|
-    rack_response({error: e.record.errors}.to_json, 422)
+    render json: {error: e.record.errors}, status: 422
   end
 
   def create

@@ -10,6 +10,7 @@ class PersonalWorkout < Grape::Entity
   expose :video_url
   expose :status
   expose :person_id
+  expose :workout_exercises, using: Entities::WorkoutExercise, as: :exercises
 
 end
 

@@ -321,6 +321,9 @@ GEM
     multi_xml (0.5.5)
     multipart-post (2.0.0)
     nenv (0.2.0)
+    newrelic-grape (2.0.0)
+      grape
+      newrelic_rpm
     newrelic_rpm (3.12.1.298)
     nokogiri (1.6.6.2)
       mini_portile (~> 0.6.0)
@@ -587,6 +590,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   kaminari
   letter_opener_web
+  newrelic-grape
   newrelic_rpm
   omniauth
   omniauth-facebook

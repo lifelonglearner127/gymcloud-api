@@ -94,4 +94,5 @@ group :production do
   gem 'rails_12factor'
   gem 'puma'
   gem 'newrelic_rpm'
+  gem 'newrelic-grape'
 end

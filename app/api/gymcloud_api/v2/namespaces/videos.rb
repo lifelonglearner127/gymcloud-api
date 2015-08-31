@@ -70,13 +70,13 @@ class Videos < Base
     end
 
     desc 'Publish a video'
-    get 'publish' do
+    patch 'publish' do
       video = update_video params[:id], privacy: 'anybody'
       present video, with: Entities::Video
     end
 
     desc 'Unpublish a video'
-    get 'unpublish' do
+    patch 'unpublish' do
       video = update_video params[:id], privacy: 'nobody'
       present video, with: Entities::Video
     end

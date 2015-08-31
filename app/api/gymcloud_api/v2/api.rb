@@ -14,24 +14,25 @@ class API < Grape::API
   default_format :json
 
   mount Namespaces::Root
-  mount Namespaces::Users => 'users'
-  mount Namespaces::UserProfiles => 'user_profiles'
-  mount Namespaces::Clients => 'clients'
   mount Namespaces::ClientGroups => 'client_groups'
-  mount Namespaces::Exercises => 'exercises'
-  mount Namespaces::WorkoutExercises => 'workout_exercises'
+  mount Namespaces::Clients => 'clients'
+  mount Namespaces::Comments => 'comments'
   mount Namespaces::ExerciseProperties => 'exercise_properties'
-  mount Namespaces::WorkoutTemplates => 'workout_templates'
-  mount Namespaces::PersonalWorkouts => 'personal_workouts'
-  mount Namespaces::ProgramTemplates => 'program_templates'
+  mount Namespaces::ExerciseResults => 'exercise_results'
+  mount Namespaces::Exercises => 'exercises'
+  mount Namespaces::Folders => 'folders'
+  mount Namespaces::Notifications => 'notifications'
   mount Namespaces::PersonalPrograms => 'personal_programs'
   mount Namespaces::PersonalProperties => 'personal_properties'
-  mount Namespaces::WorkoutEvents => 'workout_events'
-  mount Namespaces::ExerciseResults => 'exercise_results'
-  mount Namespaces::Notifications => 'notifications'
-  mount Namespaces::Comments => 'comments'
-  mount Namespaces::Folders => 'folders'
+  mount Namespaces::PersonalWorkouts => 'personal_workouts'
+  mount Namespaces::ProgramTemplates => 'program_templates'
+  mount Namespaces::Search => 'search'
+  mount Namespaces::UserProfiles => 'user_profiles'
+  mount Namespaces::Users => 'users'
   mount Namespaces::Videos => 'videos'
+  mount Namespaces::WorkoutEvents => 'workout_events'
+  mount Namespaces::WorkoutExercises => 'workout_exercises'
+  mount Namespaces::WorkoutTemplates => 'workout_templates'
 
 end
 

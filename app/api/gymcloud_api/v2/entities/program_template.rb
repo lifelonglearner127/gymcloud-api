@@ -10,6 +10,7 @@ class ProgramTemplate < Grape::Entity
   expose :is_public
   expose :author_id
   expose :folder_id
+  expose :program_workouts, using: Entities::ProgramWorkout, as: :workouts
 
 end
 

@@ -6,6 +6,7 @@ class ClientGroup < Grape::Entity
   expose :id
   expose :name
   expose :pro_id
+  expose :clients, using: Entities::User
 
 end
 

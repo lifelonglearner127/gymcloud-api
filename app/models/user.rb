@@ -66,6 +66,12 @@ class User < ActiveRecord::Base
 
   after_invitation_accepted :confirm!
 
+  delegate :can?, :cannot?, to: :ability
+
+  def ability
+    @ability ||= ::Ability.new(self)
+  end
+
   def display_name
     email
   end

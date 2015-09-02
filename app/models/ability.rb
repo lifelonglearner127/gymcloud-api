@@ -42,6 +42,7 @@ class Ability
 
   def as_user
     can :read, User
+    as_self_can [:read_email, :update_email], User
     as_self_can :update, User
     can :read, UserProfile
     as_owner_can :update, UserProfile

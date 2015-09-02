@@ -6,7 +6,9 @@ class Users < Base
   desc 'Fetch Current User'
   get :me do
     authorize!(:read, current_user)
-    present(current_user, with: Entities::User)
+    present current_user,
+      with: Entities::User,
+      email: true
   end
 
   params do
@@ -18,12 +20,28 @@ class Users < Base
     get do
       user = ::User.find(params[:id])
       authorize!(:read, user)
-      present(user, with: Entities::User)
+      present user,
+        with: Entities::User,
+        email: current_user.can?(:read_email, user)
+    end
+
+    desc 'Update User'
+    params do
+      optional :email, type: String, regexp: /.+@.+/
+    end
+    patch do
+      user = ::User.find(params[:id])
+      user.assign_attributes(filtered_params)
+      authorize!(:update, user)
+      user.save!
+      present user,
+        with: Entities::User,
+        email: current_user.can?(:read_email, user)
     end
 
     desc 'Invite User'
     params do
-      optional :email, regexp: /.+@.+/
+      optional :email, type: String, regexp: /.+@.+/
     end
     post :invite do
       user = ::User.find(params[:id])

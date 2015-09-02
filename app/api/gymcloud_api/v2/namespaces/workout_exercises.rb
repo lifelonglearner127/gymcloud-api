@@ -8,6 +8,7 @@ class WorkoutExercises < Base
     requires :exercise_id, type: Integer
     requires :workout_id, type: Integer
     optional :note, type: String
+    optional :order_name, type: String
   end
   post do
     attributes = filtered_params_with(workout_type: 'WorkoutTemplate')
@@ -32,6 +33,7 @@ class WorkoutExercises < Base
     desc 'Update Workout Exercise'
     params do
       optional :note, type: String
+      optional :order_name, type: String
     end
     patch do
       workout_exercise = ::WorkoutExercise.find(params[:id])

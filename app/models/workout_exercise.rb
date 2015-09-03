@@ -10,6 +10,7 @@
 #  updated_at       :datetime         not null
 #  exercise_version :integer
 #  workout_type     :string
+#  order_name       :string
 #
 
 class WorkoutExercise < ActiveRecord::Base

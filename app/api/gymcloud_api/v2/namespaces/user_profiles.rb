@@ -36,6 +36,18 @@ class UserProfiles < Base
       present(profile, with: Entities::UserProfile)
     end
 
+    desc 'Update User Avatar'
+    params do
+      requires :avatar, type: Rack::Multipart::UploadedFile
+    end
+    patch :avatar do
+      profile = ::UserProfile.find(params[:id])
+      authorize!(:update, profile)
+      profile.avatar = ActionDispatch::Http::UploadedFile.new(params[:avatar])
+      profile.save!
+      present(profile, with: Entities::UserProfile)
+    end
+
   end
 
 end

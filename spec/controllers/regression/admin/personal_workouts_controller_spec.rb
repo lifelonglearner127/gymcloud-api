@@ -2,12 +2,12 @@ require 'rails_helper'
 
 describe Admin::PersonalWorkoutsController do
   # === Routes (REST) ===
-  it { should route(:post, '/admin/personal_workouts/batch_action').to({:controller=>"admin/personal_workouts", :action=>"batch_action"}) } 
+  it { should route(:post, '/admin/personal_workouts').to({:controller=>"admin/personal_workouts", :action=>"create"}) } 
+	it { should route(:post, '/admin/personal_workouts/batch_action').to({:controller=>"admin/personal_workouts", :action=>"batch_action"}) } 
 	it { should route(:get, '/admin/personal_workouts').to({:controller=>"admin/personal_workouts", :action=>"index"}) } 
 	it { should route(:get, '/admin/personal_workouts/1').to({:controller=>"admin/personal_workouts", :action=>"show", :id=>1}) } 
 	it { should route(:get, '/admin/personal_workouts/new').to({:controller=>"admin/personal_workouts", :action=>"new"}) } 
 	it { should route(:get, '/admin/personal_workouts/1/edit').to({:controller=>"admin/personal_workouts", :action=>"edit", :id=>1}) } 
-	it { should route(:post, '/admin/personal_workouts').to({:controller=>"admin/personal_workouts", :action=>"create"}) } 
 	it { should route(:patch, '/admin/personal_workouts/1').to({:controller=>"admin/personal_workouts", :action=>"update", :id=>1}) } 
 	it { should route(:delete, '/admin/personal_workouts/1').to({:controller=>"admin/personal_workouts", :action=>"destroy", :id=>1}) } 
   # === Callbacks (Before) ===

@@ -33,6 +33,7 @@ class ExerciseProperties < Base
     params do
       optional :value, type: Integer
       optional :position, type: Integer
+      optional :personal_property_id, type: Integer
     end
     patch do
       exercise_property = ::ExerciseProperty.find(params[:id])

@@ -43,6 +43,7 @@ gem 'squeel', '~> 1.2.3'
 gem 'ransack', '1.6.5'
 gem 'carrierwave'
 gem 'carrierwave-aws'
+gem 'rmagick'
 
 # Then choose your preferred paginator from the following:
 gem 'kaminari' # will_paginate

@@ -11,6 +11,9 @@ RSpec.describe Folder do
 	it { is_expected.to have_many :self_and_ancestors}
 	it { is_expected.to have_many :descendant_hierarchies}
 	it { is_expected.to have_many :self_and_descendants}
+	it { is_expected.to have_many :exercises}
+	it { is_expected.to have_many :workout_templates}
+	it { is_expected.to have_many :program_templates}
 
   # === Nested Attributes ===
   

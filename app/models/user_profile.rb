@@ -16,9 +16,12 @@
 #  user_id    :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  avatar     :string
 #
 
 class UserProfile < ActiveRecord::Base
+
+  mount_uploader :avatar, AvatarUploader
 
   belongs_to :user
 

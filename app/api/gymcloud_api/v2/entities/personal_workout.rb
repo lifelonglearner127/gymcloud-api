@@ -11,6 +11,7 @@ class PersonalWorkout < Grape::Entity
   expose :status
   expose :person_id
   expose :workout_exercises, using: Entities::WorkoutExercise, as: :exercises
+  expose :workout_template_version
 
 end
 

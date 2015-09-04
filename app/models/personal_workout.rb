@@ -33,6 +33,10 @@ class PersonalWorkout < ActiveRecord::Base
 
   scope :is_active, -> { where(status: statuses[:active]) }
   scope :is_inactive, -> { where(status: statuses[:inactive]) }
+  scope :assigned_by, (lambda do |user|
+    where { person_id >> user.clients.pluck(:id) }
+    .where { status == PersonalWorkout.statuses[:active] }
+  end)
 
   has_template_version :workout_template
 

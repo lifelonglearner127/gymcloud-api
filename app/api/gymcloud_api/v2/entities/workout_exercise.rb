@@ -9,6 +9,10 @@ class WorkoutExercise < Grape::Entity
   expose :workout_id
   expose :workout_type
   expose :note
+  expose :description do |workout_exercise|
+    workout_exercise.source_exercise.description
+  end
+  expose :exercise_results, using: Entities::ExerciseResult
   expose :order_name
   expose :exercise_properties, using: Entities::ExerciseProperty
 

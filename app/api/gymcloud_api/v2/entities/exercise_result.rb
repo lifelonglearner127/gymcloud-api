@@ -4,6 +4,7 @@ module Entities
 class ExerciseResult < Grape::Entity
 
   expose :id
+  expose :created_at
   expose :workout_event_id
   expose :workout_exercise_id
   expose :is_personal_best

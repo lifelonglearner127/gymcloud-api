@@ -9,6 +9,7 @@ class PersonalProgram < Grape::Entity
   expose :note
   expose :status
   expose :person_id
+  expose :program_workouts, using: Entities::ProgramWorkout, as: :workouts
 
 end
 

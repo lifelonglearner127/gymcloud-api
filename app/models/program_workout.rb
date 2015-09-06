@@ -11,6 +11,9 @@
 #  note            :text
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
+#  name            :string
+#  description     :text
+#  video_url       :string
 #
 
 class ProgramWorkout < ActiveRecord::Base

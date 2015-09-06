@@ -4,9 +4,16 @@ module Entities
 class ProgramWorkout < Grape::Entity
 
   expose :id
-  expose :display_name, as: :name
+  expose :name
+  expose :description
   expose :note
+  expose :video_url
   expose :workout_id
+  expose :workout_type
+  expose :workout do |model|
+    entity = "GymcloudAPI::V2::Entities::#{model.workout_type}".constantize
+    entity.represent(model.source_workout)
+  end
 
 end
 

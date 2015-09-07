@@ -42,7 +42,7 @@ class ClientGroups < Base
     desc 'Delete Client Group'
     delete do
       client_group = ::ClientGroup.find(params[:id])
-      authorize!(:delete, client_group)
+      authorize!(:destroy, client_group)
       client_group.destroy
       present(client_group, with: Entities::ClientGroup)
     end

@@ -53,7 +53,7 @@ class WorkoutEvents < Base
     desc 'Delete Workout Event'
     delete do
       event = ::WorkoutEvent.find(params[:id])
-      authorize!(:delete, event)
+      authorize!(:destroy, event)
       event.destroy
       present(event, with: Entities::WorkoutEvent)
     end

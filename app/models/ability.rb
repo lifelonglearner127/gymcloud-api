@@ -50,6 +50,12 @@ class Ability
     as_author_can :crud, WorkoutTemplate
     as_author_can :crud, ProgramTemplate
     can :read, PersonalWorkout, person_id: @user.id
+    can :read, WorkoutExercise do |we|
+      case we.workout_type
+      when 'PersonalWorkout'
+        we.workout.person_id == @user.id
+      end
+    end
     can :read, PersonalProgram, person_id: @user.id
     can :crud, WorkoutEvent, personal_workout: {person_id: @user.id}
     can :crud, Activity do |notification|
@@ -91,7 +97,8 @@ class Ability
       person_id: @user.clients.pluck(:id)
     can :crud, WorkoutEvent,
       personal_workout: {person_id: @user.clients.pluck(:id)}
-    if_new_can :read, WorkoutEvent
+    # NOTE: Figure out with this stuff
+    # if_new_can :read, WorkoutEvent
     can :crud, Folder
     can [:read, :update], PersonalProperty
     can :create, User

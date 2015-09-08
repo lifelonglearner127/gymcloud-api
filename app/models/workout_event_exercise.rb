@@ -15,7 +15,10 @@ class WorkoutEventExercise < ActiveRecord::Base
 
   belongs_to :workout_event
   belongs_to :workout_exercise
-  has_many :exercise_results, through: :workout_event
+  has_many :exercise_results,
+    ->(object) { where(workout_exercise_id: object.workout_exercise_id) },
+    through: :workout_event
+  has_many :exercise_properties, through: :workout_exercise
 
   def previous
     personal_workout_id = workout_event.personal_workout_id

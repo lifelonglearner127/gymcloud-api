@@ -12,6 +12,7 @@ AllCops:
     - 'app/api/concerns/api_guard.rb'
     - 'app/models/ability.rb'
     - 'app/models/concerns/has_template_version.rb'
+    - 'app/api/gymcloud_api/v2/namespaces/users.rb'
 
 Style/EmptyLinesAroundModuleBody:
   Enabled: false

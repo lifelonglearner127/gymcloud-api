@@ -60,7 +60,7 @@ class Users < Base
         pros clients client_groups
         exercises workout_templates program_templates
         personal_workouts personal_programs
-        personal_properties workout_events
+        personal_properties
         folders
       ).each do |collection|
         namespace collection do
@@ -77,6 +77,28 @@ class Users < Base
         end
       end
 
+      resource :workout_events do
+        desc 'Fetch user workout events'
+        params do
+          requires :scope, type: String,
+            values: %w(upcoming past),
+            desc: 'Scope of events'
+        end
+        paginate max_per_page: 50
+        get do
+          user = ::User.find(params[:id])
+          scope = params[:scope]
+          workout_events = user.workout_events.send(scope)
+          workout_event = workout_events.build(
+            personal_workout: ::PersonalWorkout.new(
+              person: user
+            )
+          )
+          authorize!(:read, workout_event)
+          present(paginate(workout_events), with: Entities::WorkoutEvent)
+        end
+      end
+
       resource :library do
         desc 'Fetch user library'
         get do
@@ -90,11 +112,12 @@ class Users < Base
       resource :notifications do
 
         desc 'Fetch user notifications'
+        paginate max_per_page: 50
         get do
           user = ::User.find(params[:id])
           authorize!(:read, user)
           notifications = Activity.of_user(user)
-          present(notifications, with: Entities::Notification)
+          present(paginate(notifications), with: Entities::Notification)
         end
 
         desc 'Mark all Notifications as Read'

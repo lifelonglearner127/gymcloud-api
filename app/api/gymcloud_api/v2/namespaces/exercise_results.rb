@@ -43,7 +43,7 @@ class ExerciseResults < Base
     desc 'Delete Exercise Result'
     delete do
       exercise_result = ::ExerciseResult.find(params[:id])
-      authorize!(:delete, exercise_result)
+      authorize!(:destroy, exercise_result)
       exercise_result.destroy
       present(exercise_result, with: Entities::ExerciseResult)
     end

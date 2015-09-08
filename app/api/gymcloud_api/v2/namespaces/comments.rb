@@ -46,7 +46,7 @@ class Comments < Base
     desc 'Delete Comment'
     delete do
       comment = ::Comment.find(params[:id])
-      authorize!(:delete, comment)
+      authorize!(:destroy, comment)
       comment.destroy
       present(comment, with: Entities::Comment)
     end

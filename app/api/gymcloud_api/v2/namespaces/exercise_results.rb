@@ -59,7 +59,7 @@ class ExerciseResults < Base
         exercise_result = ::ExerciseResult.find(params[:id])
         authorize!(:create, exercise_result)
         attributes = filtered_params_with(exercise_result_id: params[:id])
-        attributes.delete(:id)
+        attributes.delete('id')
         exercise_result_item = ::ExerciseResultItem.create!(attributes)
         present(exercise_result_item, with: Entities::ExerciseResultItem)
       end

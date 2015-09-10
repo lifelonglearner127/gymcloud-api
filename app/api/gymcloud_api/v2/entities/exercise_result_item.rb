@@ -5,7 +5,7 @@ class ExerciseResultItem < Grape::Entity
 
   expose :id
   expose :name do |item|
-    item.exercise_property.personal_property.global_property.unit
+    item.exercise_property.personal_property.global_property.name
   end
   expose :exercise_result_id
   expose :exercise_property_id

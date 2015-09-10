@@ -37,7 +37,7 @@ class ExerciseResults < Base
       exercise_result.assign_attributes(filtered_params)
       authorize!(:update, exercise_result)
       exercise_result.save!
-      present exercise, with: Entities::ExerciseResult
+      present exercise_result, with: Entities::ExerciseResult
     end
 
     desc 'Delete Exercise Result'

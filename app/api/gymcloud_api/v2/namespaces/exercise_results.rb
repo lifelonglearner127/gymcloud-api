@@ -13,6 +13,16 @@ class ExerciseResults < Base
     exercise_result = ::ExerciseResult.new(filtered_params)
     authorize!(:create, exercise_result)
     exercise_result.save!
+    if current_user.pro?
+      recipient = exercise_result.person
+    else
+      recipient = exercise_result.workout_exercise.exercise.author
+    end
+    exercise_result.create_activity(
+      action: :create,
+      owner: current_user,
+      recipient: recipient
+    )
     present(exercise_result, with: Entities::ExerciseResult)
   end
 

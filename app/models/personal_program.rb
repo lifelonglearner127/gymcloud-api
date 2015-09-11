@@ -17,6 +17,7 @@
 class PersonalProgram < ActiveRecord::Base
 
   include HasTemplateVersion
+  include PublicActivity::Common
 
   belongs_to :program_template
   belongs_to :person, class_name: User

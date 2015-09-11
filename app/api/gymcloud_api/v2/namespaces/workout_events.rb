@@ -13,6 +13,16 @@ class WorkoutEvents < Base
     event = ::WorkoutEvent.new(filtered_params)
     authorize!(:create, event)
     event.save!
+    if current_user.pro?
+      recipient = event.person
+    else
+      recipient = event.personal_workout.workout_template.author
+    end
+    event.create_activity(
+      action: :create,
+      owner: current_user,
+      recipient: recipient
+    )
 
     event.personal_workout.workout_exercises.each do |exercise|
       ::WorkoutEventExercise.create!(

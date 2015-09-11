@@ -17,6 +17,11 @@ class PersonalPrograms < Base
     )
     authorize!(:create, service.build_personal)
     program = service.process.result
+    program.create_activity(
+      action: :create,
+      owner: current_user,
+      recipient: program.person
+    )
     present(program, with: Entities::PersonalProgram)
   end
 

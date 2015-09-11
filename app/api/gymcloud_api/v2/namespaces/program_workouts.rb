@@ -5,33 +5,16 @@ class ProgramWorkouts < Base
 
   desc 'Create Program Workout Template'
   params do
-    requires :name, type: String
     requires :program_template_id, type: Integer
-    optional :description, type: String
-    optional :note, type: String
-    optional :video_url, type: String
-    optional :folder_id, type: Integer
-    optional :is_public, type: Boolean, default: 'false'
-    optional :is_visible, type: Boolean, default: 'true'
+    requires :workout_template_id, type: Integer
   end
   post do
-    attributes = filtered_params_with(author: current_user)
-    program_template_id = attributes.delete('program_template_id')
-    program_template = ::ProgramTemplate.find(program_template_id)
-    authorize!(:read, program_template)
-    folder_id = current_user.folders.root.children
-      .where(name: 'Workouts').pluck(:id).first
-    workout_template = ::WorkoutTemplate.new(attributes)
-    workout_template.folder_id = params[:folder_id] || folder_id
-    authorize!(:create, workout_template)
-    workout_template.save!
-    program_workout = ::ProgramWorkout.create!(
-      name: attributes['name'],
-      description: attributes['description'],
-      video_url: attributes['video_url'],
-      workout: workout_template,
-      program: program_template
+    service = Services::ProgramWorkout::Create.new(
+      program_template_id: params[:program_template_id],
+      workout_template_id: params[:workout_template_id]
     )
+    authorize!(:create, service.build_program_workout)
+    program_workout = service.process.result
     present(program_workout, with: Entities::ProgramWorkout)
   end
 
@@ -43,8 +26,7 @@ class ProgramWorkouts < Base
     desc 'Read Program Workout Template'
     get do
       program_workout = ::ProgramWorkout.find(params[:id])
-      authorize!(:read, program_workout.workout)
-      authorize!(:read, program_workout.program)
+      authorize!(:read, program_workout)
       present(program_workout, with: Entities::ProgramWorkout)
     end
 
@@ -58,8 +40,7 @@ class ProgramWorkouts < Base
     patch do
       program_workout = ::ProgramWorkout.find(params[:id])
       program_workout.assign_attributes(filtered_params)
-      authorize!(:update, program_workout.workout)
-      authorize!(:update, program_workout.program)
+      authorize!(:update, program_workout)
       program_workout.save!
       present(program_workout, with: Entities::ProgramWorkout)
     end
@@ -67,9 +48,10 @@ class ProgramWorkouts < Base
     desc 'Delete Program Workout Template'
     delete do
       program_workout = ::ProgramWorkout.find(params[:id])
-      workout_template = program_workout.workout
-      authorize!(:destroy, workout_template)
-      program_workout.destroy
+      authorize!(:destroy, program_workout)
+      program_workout = Services::ProgramWorkout::Destroy.!(
+        program_workout: program_workout
+      )
       present(program_workout, with: Entities::ProgramWorkout)
     end
 

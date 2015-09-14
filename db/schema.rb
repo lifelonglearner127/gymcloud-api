@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150914145711) do
+ActiveRecord::Schema.define(version: 20150914161814) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -285,6 +285,17 @@ ActiveRecord::Schema.define(version: 20150914145711) do
   add_index "program_templates", ["author_id"], name: "index_program_templates_on_author_id", using: :btree
   add_index "program_templates", ["folder_id"], name: "index_program_templates_on_folder_id", using: :btree
 
+  create_table "program_weeks", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "position"
+    t.integer  "program_id"
+    t.string   "program_type"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "program_weeks", ["program_type", "program_id"], name: "index_program_weeks_on_program_type_and_program_id", using: :btree
+
   create_table "program_workouts", force: :cascade do |t|
     t.integer  "workout_id"
     t.string   "workout_type"
@@ -298,6 +309,7 @@ ActiveRecord::Schema.define(version: 20150914145711) do
     t.text     "description"
     t.string   "video_url"
     t.integer  "position"
+    t.integer  "week_id"
   end
 
   add_index "program_workouts", ["program_type", "program_id"], name: "index_program_workouts_on_program_type_and_program_id", using: :btree

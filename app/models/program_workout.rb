@@ -15,6 +15,7 @@
 #  description     :text
 #  video_url       :string
 #  position        :integer
+#  week_id         :integer
 #
 
 class ProgramWorkout < ActiveRecord::Base
@@ -23,6 +24,7 @@ class ProgramWorkout < ActiveRecord::Base
 
   belongs_to :workout, polymorphic: true
   belongs_to :program, polymorphic: true
+  belongs_to :week, class_name: 'ProgramWeek'
 
   validates :workout_id, :program_id, presence: true
   validates :workout_type,

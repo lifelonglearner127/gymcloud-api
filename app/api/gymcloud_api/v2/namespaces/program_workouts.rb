@@ -7,6 +7,7 @@ class ProgramWorkouts < Base
   params do
     requires :program_template_id, type: Integer
     requires :workout_template_id, type: Integer
+    optional :position, type: Integer
   end
   post do
     service = Services::ProgramWorkout::Create.new(
@@ -36,6 +37,7 @@ class ProgramWorkouts < Base
       optional :description, type: String
       optional :note, type: String
       optional :video_url, type: String
+      optional :position, type: Integer
     end
     patch do
       program_workout = ::ProgramWorkout.find(params[:id])

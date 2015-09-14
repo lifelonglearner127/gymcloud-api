@@ -8,6 +8,7 @@ class ProgramWorkout < Grape::Entity
   expose :description
   expose :note
   expose :video_url
+  expose :position
   expose :workout_id
   expose :workout_type
   expose :workout_version

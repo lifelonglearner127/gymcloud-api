@@ -8,6 +8,7 @@ class WorkoutExercises < Base
     requires :exercise_id, type: Integer
     requires :workout_id, type: Integer
     optional :note, type: String
+    optional :position, type: Integer
     optional :order_name, type: String
   end
   post do
@@ -33,6 +34,7 @@ class WorkoutExercises < Base
     desc 'Update Workout Exercise'
     params do
       optional :note, type: String
+      optional :position, type: Integer
       optional :order_name, type: String
     end
     patch do

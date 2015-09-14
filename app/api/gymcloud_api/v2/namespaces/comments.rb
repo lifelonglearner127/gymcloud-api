@@ -15,6 +15,19 @@ class Comments < Base
     comment = ::Comment.new(filtered_params_with user: current_user)
     authorize!(:create, comment)
     comment.save!
+    if comment.commentable_type == 'WorkoutEventExercise'
+      if current_user.pro?
+        recipient = comment.commentable.workout_event.person
+      else
+        recipient = comment.commentable.workout_event
+          .personal_workout.workout_template.author
+      end
+    end
+    comment.create_activity(
+      action: :create,
+      owner: current_user,
+      recipient: recipient
+    )
     present(comment, with: Entities::Comment)
   end
 

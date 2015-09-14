@@ -24,14 +24,14 @@ class Activity < PublicActivity::Activity
     where do
       (
         (recipient_type == 'User') &
-        (recipient_id == user.id)
+        (recipient_id == user.id) &
+        (owner_id != recipient_id)
       ) |
       (
         (recipient_type == 'ClientGroup') &
         (recipient_id >> client_groups.select { id })
       )
     end
-      .order(created_at: :desc)
   end)
 
   def mark_as_unread!(options = {})

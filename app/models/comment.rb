@@ -16,6 +16,7 @@
 class Comment < ActiveRecord::Base
 
   include ActsAsCommentable::Comment
+  include PublicActivity::Common
 
   acts_as_readable on: :created_at
 

@@ -19,6 +19,7 @@
 class PersonalWorkout < ActiveRecord::Base
 
   include HasTemplateVersion
+  include PublicActivity::Common
 
   belongs_to :workout_template
   belongs_to :person, class_name: User

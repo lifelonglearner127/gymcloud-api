@@ -10,7 +10,12 @@ class Invite < BaseService
 
   def invite
     email = @email.presence || !user_email_is_fake? && @user.email
-    User.invite!({email: email}, @current_user)
+    user = User.where(email: email).first
+    if user.present?
+      user.invite!(@current_user)
+    else
+      User.invite!({email: email}, @current_user)
+    end
   end
 
   def user_email_is_fake?

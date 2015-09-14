@@ -31,6 +31,7 @@
 class User < ActiveRecord::Base
 
   include SearchScopes::Pro
+  include PublicActivity::Common
 
   devise \
     :database_authenticatable, :registerable,
@@ -64,7 +65,7 @@ class User < ActiveRecord::Base
   has_many :folders
   has_many :videos, foreign_key: :author_id
 
-  after_invitation_accepted :confirm!
+  after_invitation_accepted :on_invitation_accepted
 
   delegate :can?, :cannot?, to: :ability
 
@@ -94,6 +95,17 @@ class User < ActiveRecord::Base
       result
     end
     tree.map(&parser)
+  end
+
+  private
+
+  def on_invitation_accepted
+    confirm!
+    create_activity(
+      action: :invitation_accepted,
+      owner: self,
+      recipient: invited_by
+    )
   end
 
 end

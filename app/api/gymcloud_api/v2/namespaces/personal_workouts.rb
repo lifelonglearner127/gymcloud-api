@@ -17,6 +17,11 @@ class PersonalWorkouts < Base
     )
     authorize!(:create, service.build_personal)
     workout = service.process.result
+    workout.create_activity(
+      action: :create,
+      owner: current_user,
+      recipient: workout.person
+    )
     present(workout, with: Entities::PersonalWorkout)
   end
 

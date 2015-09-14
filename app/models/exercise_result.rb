@@ -12,6 +12,8 @@
 
 class ExerciseResult < ActiveRecord::Base
 
+  include PublicActivity::Common
+
   belongs_to :workout_event
   belongs_to :workout_exercise
   has_many :exercise_result_items, dependent: :destroy

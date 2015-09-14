@@ -14,6 +14,7 @@
 #  name            :string
 #  description     :text
 #  video_url       :string
+#  position        :integer
 #
 
 class ProgramWorkout < ActiveRecord::Base

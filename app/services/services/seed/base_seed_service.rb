@@ -1,7 +1,9 @@
 module Services
 module Seed
 
-class BaseSeedService < BaseService
+class BaseSeedService
+
+  include BaseService
 
   run :create_records_from_fixtures
 

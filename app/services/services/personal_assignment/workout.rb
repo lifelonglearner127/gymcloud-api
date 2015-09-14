@@ -1,7 +1,9 @@
 module Services
 module PersonalAssignment
 
-class Workout < BaseService
+class Workout
+
+  include BaseService
 
   input_params :template, :user, :is_program_part
   defaults is_program_part: false

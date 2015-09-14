@@ -1,7 +1,9 @@
 module Services
 module ProgramWorkout
 
-class Create < BaseService
+class Create
+
+  include BaseService
 
   input_params :program_template_id, :workout_template_id
   run :create_program_workout

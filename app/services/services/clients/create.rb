@@ -1,7 +1,9 @@
 module Services
 module Clients
 
-class Create < BaseService
+class Create
+
+  include BaseService
 
   input_params :current_user, :attrs
   run :create

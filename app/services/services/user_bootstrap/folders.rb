@@ -1,7 +1,9 @@
 module Services
 module UserBootstrap
 
-class Folders < BaseService
+class Folders
+
+  include BaseService
 
   input_params :user
   run :bootstrap

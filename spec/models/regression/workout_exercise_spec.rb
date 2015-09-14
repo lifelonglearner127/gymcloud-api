@@ -23,6 +23,7 @@ RSpec.describe WorkoutExercise do
 	it { is_expected.to have_db_column :exercise_version }
 	it { is_expected.to have_db_column :workout_type }
 	it { is_expected.to have_db_column :order_name }
+	it { is_expected.to have_db_column :position }
 
   # === Database (Indexes) ===
   it { is_expected.to have_db_index ["exercise_id"]}

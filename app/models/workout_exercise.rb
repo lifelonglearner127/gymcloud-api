@@ -11,6 +11,7 @@
 #  exercise_version :integer
 #  workout_type     :string
 #  order_name       :string
+#  position         :integer
 #
 
 class WorkoutExercise < ActiveRecord::Base

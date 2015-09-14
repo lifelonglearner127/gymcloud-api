@@ -6,7 +6,8 @@ RSpec.describe PersonalWorkout do
   it { is_expected.to belong_to :workout_template}
 	it { is_expected.to belong_to :person}
   it { is_expected.to have_one :author}
-  it { is_expected.to have_many :workout_exercises}
+  it { is_expected.to have_many :activities}
+	it { is_expected.to have_many :workout_exercises}
 	it { is_expected.to have_many :workout_events}
 	it { is_expected.to have_many :program_workouts}
 

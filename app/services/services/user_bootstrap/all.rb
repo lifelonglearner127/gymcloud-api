@@ -1,7 +1,9 @@
 module Services
 module UserBootstrap
 
-class All < BaseService
+class All
+
+  include BaseService
 
   input_params :user
   run :bootstrap

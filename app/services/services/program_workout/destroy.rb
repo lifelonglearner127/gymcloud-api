@@ -1,7 +1,9 @@
 module Services
 module ProgramWorkout
 
-class Destroy < BaseService
+class Destroy
+
+  include BaseService
 
   input_params :program_workout
   run :destroy_program_workout

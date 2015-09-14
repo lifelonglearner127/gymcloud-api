@@ -1,7 +1,9 @@
 module Services
 module Clients
 
-class Invite < BaseService
+class Invite
+
+  include BaseService
 
   input_params :current_user, :user, :email
   run :invite

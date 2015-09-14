@@ -1,6 +1,10 @@
 module Services
 
-class BaseService
+module BaseService
+
+  extend ActiveSupport::Concern
+
+  included do
 
   attr_reader :result
 
@@ -61,6 +65,8 @@ class BaseService
     elsif @@run_method.is_a?(Symbol)
       send(@@run_method)
     end
+  end
+
   end
 
 end

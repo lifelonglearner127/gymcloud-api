@@ -1,7 +1,9 @@
 module Services
 module PersonalAssignment
 
-class Program < BaseService
+class Program
+
+  include BaseService
 
   input_params :template, :user
   run :create_personal

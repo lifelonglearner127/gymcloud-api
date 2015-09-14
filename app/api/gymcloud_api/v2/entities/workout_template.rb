@@ -9,6 +9,7 @@ class WorkoutTemplate < Grape::Entity
   expose :note
   expose :video_url
   expose :is_public
+  expose :is_visible
   expose :author_id
   expose :folder_id
   expose :version do |template|

@@ -80,6 +80,11 @@ class Ability
   def as_pro
     can :crud, ClientGroup, pro_id: @user.id
     can :crud, ClientGroupMembership, client_group: {pro_id: @user.id}
+    can :crud, ProgramWorkout,
+      program_id: @user.program_templates.pluck(:id),
+      program_type: 'ProgramTemplate',
+      workout_id: @user.workout_templates.pluck(:id),
+      workout_type: 'WorkoutTemplate'
     can :create, PersonalWorkout,
       workout_template_id: @user.workout_templates.pluck(:id),
       person_id: @user.clients.pluck(:id)

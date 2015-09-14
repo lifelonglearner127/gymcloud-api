@@ -21,6 +21,9 @@ RSpec.describe ProgramWorkout do
 	it { is_expected.to have_db_column :note }
 	it { is_expected.to have_db_column :created_at }
 	it { is_expected.to have_db_column :updated_at }
+	it { is_expected.to have_db_column :name }
+	it { is_expected.to have_db_column :description }
+	it { is_expected.to have_db_column :video_url }
 
   # === Database (Indexes) ===
   it { is_expected.to have_db_index ["program_type", "program_id"]}

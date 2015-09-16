@@ -1,12 +1,15 @@
 module Services
 module Clients
 
-class Create
+class Create < BaseService
 
-  include BaseService
+  def run
+    create
+  end
 
-  input_params :current_user, :attrs
-  run :create
+  def input_params
+    [:current_user, :attrs]
+  end
 
   def build_client
     email = @attrs.delete(:email)

@@ -1,14 +1,17 @@
 module Services
 module ProgramWorkout
 
-class Destroy
-
-  include BaseService
-
-  input_params :program_workout
-  run :destroy_program_workout
+class Destroy < BaseService
 
   private
+
+  def run
+    destroy_program_workout
+  end
+
+  def input_params
+    [:program_workout]
+  end
 
   def destroy_program_workout
     try_to_destroy_workout_template

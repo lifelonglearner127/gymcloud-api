@@ -1,12 +1,15 @@
 module Services
 module PersonalAssignment
 
-class Program
+class Program < BaseService
 
-  include BaseService
+  def run
+    create_personal
+  end
 
-  input_params :template, :user
-  run :create_personal
+  def input_params
+    [:template, :user]
+  end
 
   def build_personal
     PersonalProgram.new(prepare_attributes)

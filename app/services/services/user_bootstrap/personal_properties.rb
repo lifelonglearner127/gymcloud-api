@@ -1,12 +1,15 @@
 module Services
 module UserBootstrap
 
-class PersonalProperties
+class PersonalProperties < BaseService
 
-  include BaseService
+  def run
+    bootstrap
+  end
 
-  input_params :user
-  run :bootstrap
+  def input_params
+    [:user]
+  end
 
   private
 

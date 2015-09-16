@@ -1,13 +1,19 @@
 module Services
 module PersonalAssignment
 
-class Workout
+class Workout < BaseService
 
-  include BaseService
+  def run
+    create_personal
+  end
 
-  input_params :template, :user, :is_program_part
-  defaults is_program_part: false
-  run :create_personal
+  def input_params
+    [:template, :user, :is_program_part]
+  end
+
+  def defaults
+    {is_program_part: false}
+  end
 
   def build_personal
     PersonalWorkout.new(prepare_attributes)

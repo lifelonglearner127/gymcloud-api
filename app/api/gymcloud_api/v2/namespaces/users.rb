@@ -65,7 +65,6 @@ class Users < Base
       ).each do |collection|
         namespace collection do
           desc "Fetch #{collection.to_s.titleize}"
-          paginate max_per_page: 50
           get do
             user = ::User.find(params[:id])
             result = user.send(collection)

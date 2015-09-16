@@ -23,6 +23,7 @@ class WorkoutEvent < ActiveRecord::Base
   validates :personal_workout_id, :begins_at, presence: true
   validate :period_validation, if: :ends_at?
 
+  default_scope { order(created_at: :desc) }
   scope :upcoming, -> { where { begins_at > Time.current } }
   scope :past, -> { where { begins_at < Time.current } }
 

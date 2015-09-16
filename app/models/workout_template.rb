@@ -30,4 +30,7 @@ class WorkoutTemplate < ActiveRecord::Base
 
   has_paper_trail
 
+  scope :is_visible, -> { where(is_visible: :true) }
+  scope :is_invisible, -> { where(is_visible: :false) }
+
 end

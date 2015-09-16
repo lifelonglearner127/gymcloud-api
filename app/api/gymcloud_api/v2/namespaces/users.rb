@@ -80,15 +80,31 @@ class Users < Base
       resource :workout_events do
         desc 'Fetch user workout events'
         params do
-          requires :scope, type: String,
-            values: %w(upcoming past),
+          optional :scope, type: String,
+            values: %w(all upcoming past all_with_clients),
+            default: 'all',
             desc: 'Scope of events'
+          optional :range_from, type: Date
+          optional :range_to, type: Date
         end
         paginate max_per_page: 50
         get do
           user = ::User.find(params[:id])
           scope = params[:scope]
-          workout_events = user.workout_events.send(scope)
+          from = params[:range_from]
+          to = params[:range_to]
+          workout_events = user.workout_events
+          if from.present? && to.present?
+            if scope == 'all'
+              workout_events = workout_events.in_range(from, to)
+            elsif scope == 'all_with_clients'
+              workout_events = ::WorkoutEvent
+                .with_clients(user)
+                .in_range(from, to)
+            end
+          else
+            workout_events = workout_events.send(scope)
+          end
           workout_event = workout_events.build(
             personal_workout: ::PersonalWorkout.new(
               person: user

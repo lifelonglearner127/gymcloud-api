@@ -1,11 +1,11 @@
 module Services
 module Seed
 
-class BaseSeedService
+class BaseSeedService < BaseService
 
-  include BaseService
-
-  run :create_records_from_fixtures
+  def run
+    create_records_from_fixtures
+  end
 
   private
 

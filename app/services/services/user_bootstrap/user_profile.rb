@@ -1,13 +1,19 @@
 module Services
 module UserBootstrap
 
-class UserProfile
+class UserProfile < BaseService
 
-  include BaseService
+  def run
+    bootstrap
+  end
 
-  input_params :user, :profile_attrs
-  defaults profile_attrs: {}
-  run :bootstrap
+  def input_params
+    [:user, :profile_attrs]
+  end
+
+  def defaults
+    {profile_attrs: {}}
+  end
 
   private
 

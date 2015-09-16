@@ -1,12 +1,15 @@
 module Services
 module Clients
 
-class Invite
+class Invite < BaseService
 
-  include BaseService
+  def run
+    invite
+  end
 
-  input_params :current_user, :user, :email
-  run :invite
+  def input_params
+    [:current_user, :user, :email]
+  end
 
   private
 

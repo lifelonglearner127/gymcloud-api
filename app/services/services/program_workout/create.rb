@@ -1,12 +1,15 @@
 module Services
 module ProgramWorkout
 
-class Create
+class Create < BaseService
 
-  include BaseService
+  def run
+    create_program_workout
+  end
 
-  input_params :program_template_id, :workout_template_id
-  run :create_program_workout
+  def input_params
+    [:program_template_id, :workout_template_id]
+  end
 
   def build_program_workout
     ::ProgramWorkout.new(prepare_attributes)

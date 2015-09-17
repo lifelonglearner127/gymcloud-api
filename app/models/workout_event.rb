@@ -23,9 +23,26 @@ class WorkoutEvent < ActiveRecord::Base
   validates :personal_workout_id, :begins_at, presence: true
   validate :period_validation, if: :ends_at?
 
-  default_scope { order(created_at: :desc) }
-  scope :upcoming, -> { where { begins_at > Time.current } }
-  scope :past, -> { where { begins_at < Time.current } }
+  scope :upcoming, (lambda do
+    where { begins_at > Time.current }
+      .order(begins_at: :asc)
+  end)
+  scope :past, (lambda do
+    where { begins_at < Time.current }
+      .order(begins_at: :desc)
+  end)
+  scope :in_range, (lambda do |from, to|
+    where { (begins_at >= from) & (begins_at <= to) }
+      .order(begins_at: :asc)
+  end)
+  scope :with_clients, (lambda do |user|
+    joins { personal_workout.workout_template }
+      .where do
+        (personal_workout.person_id >> user.clients.pluck(:id)) &
+        (personal_workout.workout_template.author_id == user.id) |
+        (personal_workout.person_id >> user.id)
+      end
+  end)
 
   def display_name
     "#{personal_workout.name} at #{begins_at}"

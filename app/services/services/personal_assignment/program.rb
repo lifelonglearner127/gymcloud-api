@@ -32,7 +32,12 @@ class Program < BaseService
   end
 
   def assign_workout(program, workout)
-    ProgramWorkout.create!(program: program, workout: workout)
+    to_include = %w(name description note video_url)
+    attributes = workout.attributes.slice(*to_include).merge(
+      program: program,
+      workout: workout
+    )
+    ::ProgramWorkout.create!(attributes)
   end
 
   def prepare_attributes

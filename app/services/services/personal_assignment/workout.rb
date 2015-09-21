@@ -24,7 +24,7 @@ class Workout < BaseService
   def create_personal
     workout = PersonalWorkout.create!(prepare_attributes)
     @template.workout_exercises.each do |item|
-      workout_exercise = assign_exercise(workout, item.source_exercise)
+      workout_exercise = assign_exercise(workout, item)
 
       item.exercise_properties.each do |exercise_property|
         assign_property_to_exercise(workout_exercise, exercise_property)
@@ -47,11 +47,15 @@ class Workout < BaseService
     )
   end
 
-  def assign_exercise(workout, exercise)
+  def assign_exercise(workout, workout_exercise)
+    exercise = workout_exercise.source_exercise
     WorkoutExercise.create!(
       workout: workout,
       exercise: exercise,
-      exercise_version: exercise.version.andand.index
+      exercise_version: exercise.version.andand.index,
+      note: workout_exercise.note,
+      position: workout_exercise.position,
+      order_name: workout_exercise.order_name
     )
   end
 

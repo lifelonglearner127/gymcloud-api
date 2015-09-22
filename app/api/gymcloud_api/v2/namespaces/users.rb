@@ -59,7 +59,6 @@ class Users < Base
       %i(
         pros clients client_groups
         exercises workout_templates program_templates
-        personal_workouts personal_programs
         personal_properties
         folders
       ).each do |collection|
@@ -68,6 +67,33 @@ class Users < Base
           get do
             user = ::User.find(params[:id])
             result = user.send(collection)
+            authorize!(:read, result.build)
+            klass = user.association(collection).klass
+            entity = "GymcloudAPI::V2::Entities::#{klass.name}".constantize
+            present(paginate(result), with: entity)
+          end
+        end
+      end
+
+      %i(
+        personal_workouts personal_programs
+      ).each do |collection|
+        namespace collection do
+          desc "Fetch #{collection.to_s.titleize}"
+          params do
+            optional :status, type: String,
+              values: %w(inactive active all),
+              default: 'active',
+              desc: 'Status of #{collection.to_s.titleize}'
+          end
+          get do
+            scope = {
+              active: :is_active,
+              inactive: :is_inactive,
+              all: :unscoped
+            }[params[:status]] || :is_active
+            user = ::User.find(params[:id])
+            result = user.send(collection).send(scope)
             authorize!(:read, result.build)
             klass = user.association(collection).klass
             entity = "GymcloudAPI::V2::Entities::#{klass.name}".constantize

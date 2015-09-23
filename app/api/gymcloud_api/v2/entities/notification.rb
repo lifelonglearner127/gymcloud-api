@@ -14,6 +14,7 @@ class Notification < Grape::Entity
     [profile.first_name, profile.last_name].compact.join(' ')
   end
   expose :parent do |notification|
+    return {} if notification.trackable.nil?
     case notification.trackable_type
     when 'ExerciseResult'
       {

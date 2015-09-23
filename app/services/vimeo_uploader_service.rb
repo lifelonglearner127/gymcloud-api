@@ -15,6 +15,7 @@ class VimeoUploaderService
 
     update_vimeo_video vimeo_video
     update_video vimeo_id, vimeo_video
+    @video.save!
 
     @video
   end
@@ -50,7 +51,6 @@ class VimeoUploaderService
     @video.uploaded_at = DateTime.now
     @video.embed_url   = get_embed_url(vimeo_video.embed.html)
     @video.delete_tmp_file_folder
-    @video.save!
   end
 
   def get_embed_url(str)

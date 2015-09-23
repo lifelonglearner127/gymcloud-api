@@ -40,7 +40,7 @@ class Videos < Base
       privacy: params[:privacy],
       name: params[:name]
     )
-    video.save!
+    # NOTE: this is not async b/c of heroku limits
     VimeoUploaderService.new.upload(video)
     VimeoVideoUpdateWorker.perform_in(2.minutes, video.id)
 

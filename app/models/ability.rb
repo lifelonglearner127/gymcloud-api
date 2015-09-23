@@ -85,6 +85,11 @@ class Ability
       program_type: 'ProgramTemplate',
       workout_id: @user.workout_templates.pluck(:id),
       workout_type: 'WorkoutTemplate'
+    can :crud, ProgramWeek do |pw|
+      case pw.program_type
+      when 'ProgramTemplate'
+        pw.program.author_id == @user.id
+    end
     can :create, PersonalWorkout,
       workout_template_id: @user.workout_templates.pluck(:id),
       person_id: @user.clients.pluck(:id)

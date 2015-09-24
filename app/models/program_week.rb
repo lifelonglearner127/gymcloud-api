@@ -15,6 +15,10 @@ class ProgramWeek < ActiveRecord::Base
 
   belongs_to :program, polymorphic: true
 
-  has_many :program_workouts
+  has_many :program_workouts, dependent: :destroy
+
+  validates :name, :position, :program_id, presence: true
+  validates :program_type,
+    inclusion: {in: %w(ProgramTemplate PersonalProgram)}
 
 end

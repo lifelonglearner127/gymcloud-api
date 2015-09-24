@@ -12,7 +12,9 @@ class ProgramTemplate < Grape::Entity
   expose :folder_id
   expose :program_workouts, using: Entities::ProgramWorkout, as: :workouts
   expose :assignees, using: Entities::ProgramAssignees do |template|
-    template.personal_programs.assigned_by(template.author)
+    ::PersonalProgram
+      .where(program_template_id: template.id)
+      .assigned_by(template.author)
   end
 
 end

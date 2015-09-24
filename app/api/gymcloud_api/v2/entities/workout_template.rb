@@ -17,7 +17,9 @@ class WorkoutTemplate < Grape::Entity
   end
   expose :workout_exercises, using: Entities::WorkoutExercise, as: :exercises
   expose :assignees, using: Entities::WorkoutAssignees do |template|
-    template.personal_workouts.assigned_by(template.author)
+    ::PersonalWorkout
+      .where(workout_template_id: template.id)
+      .assigned_by(template.author)
   end
 
 end

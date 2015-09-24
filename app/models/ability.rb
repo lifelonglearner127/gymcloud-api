@@ -89,6 +89,7 @@ class Ability
       case pw.program_type
       when 'ProgramTemplate'
         pw.program.author_id == @user.id
+      end
     end
     can :create, PersonalWorkout,
       workout_template_id: @user.workout_templates.pluck(:id),

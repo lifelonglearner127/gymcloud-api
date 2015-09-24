@@ -15,7 +15,7 @@ class ProgramWeek < ActiveRecord::Base
 
   belongs_to :program, polymorphic: true
 
-  has_many :program_workouts, dependent: :destroy
+  has_many :program_workouts, dependent: :destroy, foreign_key: :week_id
 
   validates :name, :position, :program_id, presence: true
   validates :program_type,

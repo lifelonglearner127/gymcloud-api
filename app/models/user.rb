@@ -86,6 +86,7 @@ class User < ActiveRecord::Base
   end
 
   def library
+    return [] if folders.none?
     tree = folders.root.hash_tree
     parser = lambda do |folder, branch|
       result = folder.attributes

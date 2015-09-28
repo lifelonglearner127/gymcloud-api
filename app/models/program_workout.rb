@@ -31,6 +31,7 @@ class ProgramWorkout < ActiveRecord::Base
     inclusion: {in: %w(WorkoutTemplate PersonalWorkout)}
   validates :program_type,
     inclusion: {in: %w(ProgramTemplate PersonalProgram)}
+  validates :name, length: {maximum: 255}
 
   has_template_version :workout
 

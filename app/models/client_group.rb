@@ -17,5 +17,6 @@ class ClientGroup < ActiveRecord::Base
   has_many :clients, class_name: User, through: :client_group_memberships
 
   validates :name, :pro_id, presence: true
+  validates :name, length: {maximum: 255}
 
 end

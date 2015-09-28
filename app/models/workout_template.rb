@@ -27,6 +27,7 @@ class WorkoutTemplate < ActiveRecord::Base
 
   validates :name, :author_id, presence: true
   validates :is_public, inclusion: {in: [true, false]}
+  validates :name, :video_url, length: {maximum: 255}
 
   has_paper_trail
 

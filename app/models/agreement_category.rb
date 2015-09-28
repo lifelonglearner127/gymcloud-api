@@ -17,5 +17,6 @@ class AgreementCategory < ActiveRecord::Base
 
   validates :symbol, :title, :pro_title, :client_title, presence: true
   validates :symbol, uniqueness: true
+  validates :title, :pro_title, :symbol, length: {maximum: 255}
 
 end

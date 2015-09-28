@@ -26,6 +26,7 @@ class PersonalProgram < ActiveRecord::Base
   has_many :program_weeks, as: :program
 
   validates :name, :program_template_id, :person_id, presence: true
+  validates :name, length: {maximum: 255}
 
   enum status: [:inactive, :active]
 

@@ -17,6 +17,7 @@ class GlobalProperty < ActiveRecord::Base
 
   validates :name, :unit, :symbol, :position, presence: true
   validates :symbol, :position, uniqueness: true
+  validates :symbol, :name, :unit, length: {maximum: 255}
 
   default_scope -> { order(position: :asc) }
 

@@ -20,5 +20,6 @@ class ProgramWeek < ActiveRecord::Base
   validates :name, :position, :program_id, presence: true
   validates :program_type,
     inclusion: {in: %w(ProgramTemplate PersonalProgram)}
+  validates :name, length: {maximum: 255}
 
 end

@@ -20,6 +20,7 @@ class Folder < ActiveRecord::Base
   has_many :program_templates
 
   validates :name, :user_id, presence: true
+  validates :name, length: {maximum: 255}
 
   validate :only_one_root_per_user
 

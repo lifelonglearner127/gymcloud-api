@@ -29,6 +29,7 @@ class PersonalWorkout < ActiveRecord::Base
   has_many :program_workouts, as: :workout
 
   validates :name, :workout_template_id, :person_id, presence: true
+  validates :name, :video_url, length: {maximum: 255}
 
   enum status: [:inactive, :active]
 

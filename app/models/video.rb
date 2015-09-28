@@ -22,6 +22,8 @@ class Video < ActiveRecord::Base
 
   belongs_to :author, class_name: User
 
+  validates :name, length: {maximum: 255}
+
   mount_uploader :tmp_file, VideoUploader
 
   before_destroy :delete_tmp_file_folder

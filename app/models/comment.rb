@@ -27,5 +27,6 @@ class Comment < ActiveRecord::Base
 
   validates :comment, :user_id, :commentable_id, :commentable_type,
     presence: true
+  validates :title, length: {maximum: 255}
 
 end

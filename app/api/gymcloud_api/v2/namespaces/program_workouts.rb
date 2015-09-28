@@ -12,8 +12,7 @@ class ProgramWorkouts < Base
   end
   post do
     service = Services::ProgramWorkout::Create.new(
-      program_template_id: params[:program_template_id],
-      workout_template_id: params[:workout_template_id]
+      attrs: filtered_params
     )
     authorize!(:create, service.build_program_workout)
     program_workout = service.process.result

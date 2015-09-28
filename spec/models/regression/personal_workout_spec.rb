@@ -33,7 +33,10 @@ RSpec.describe PersonalWorkout do
 	it { is_expected.to have_db_index ["workout_template_id"]}
 
   # === Validations (Length) ===
-  
+  it { is_expected.to allow_value(Faker::Lorem.characters(255)).for :name }
+	it { is_expected.not_to allow_value(Faker::Lorem.characters(256)).for :name }
+	it { is_expected.to allow_value(Faker::Lorem.characters(255)).for :video_url }
+	it { is_expected.not_to allow_value(Faker::Lorem.characters(256)).for :video_url }
 
   # === Validations (Presence) ===
   it { is_expected.to validate_presence_of :name }

@@ -23,7 +23,12 @@ RSpec.describe AgreementCategory do
   it { is_expected.to have_db_index ["symbol"]}
 
   # === Validations (Length) ===
-  
+  it { is_expected.to allow_value(Faker::Lorem.characters(255)).for :title }
+	it { is_expected.not_to allow_value(Faker::Lorem.characters(256)).for :title }
+	it { is_expected.to allow_value(Faker::Lorem.characters(255)).for :pro_title }
+	it { is_expected.not_to allow_value(Faker::Lorem.characters(256)).for :pro_title }
+	it { is_expected.to allow_value(Faker::Lorem.characters(255)).for :symbol }
+	it { is_expected.not_to allow_value(Faker::Lorem.characters(256)).for :symbol }
 
   # === Validations (Presence) ===
   it { is_expected.to validate_presence_of :symbol }

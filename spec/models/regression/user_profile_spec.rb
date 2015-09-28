@@ -31,7 +31,18 @@ RSpec.describe UserProfile do
   it { is_expected.to have_db_index ["user_id"]}
 
   # === Validations (Length) ===
-  
+  it { is_expected.to allow_value(Faker::Lorem.characters(255)).for :first_name }
+	it { is_expected.not_to allow_value(Faker::Lorem.characters(256)).for :first_name }
+	it { is_expected.to allow_value(Faker::Lorem.characters(255)).for :last_name }
+	it { is_expected.not_to allow_value(Faker::Lorem.characters(256)).for :last_name }
+	it { is_expected.to allow_value(Faker::Lorem.characters(255)).for :location }
+	it { is_expected.not_to allow_value(Faker::Lorem.characters(256)).for :location }
+	it { is_expected.to allow_value(Faker::Lorem.characters(255)).for :zip }
+	it { is_expected.not_to allow_value(Faker::Lorem.characters(256)).for :zip }
+	it { is_expected.to allow_value(Faker::Lorem.characters(255)).for :employer }
+	it { is_expected.not_to allow_value(Faker::Lorem.characters(256)).for :employer }
+	it { is_expected.to allow_value(Faker::Lorem.characters(255)).for :avatar }
+	it { is_expected.not_to allow_value(Faker::Lorem.characters(256)).for :avatar }
 
   # === Validations (Presence) ===
   

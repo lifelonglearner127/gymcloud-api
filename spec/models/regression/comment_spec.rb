@@ -29,7 +29,8 @@ RSpec.describe Comment do
 	it { is_expected.to have_db_index ["user_id"]}
 
   # === Validations (Length) ===
-  
+  it { is_expected.to allow_value(Faker::Lorem.characters(255)).for :title }
+	it { is_expected.not_to allow_value(Faker::Lorem.characters(256)).for :title }
 
   # === Validations (Presence) ===
   it { is_expected.to validate_presence_of :comment }

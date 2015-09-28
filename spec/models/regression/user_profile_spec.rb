@@ -41,8 +41,6 @@ RSpec.describe UserProfile do
 	it { is_expected.not_to allow_value(Faker::Lorem.characters(256)).for :zip }
 	it { is_expected.to allow_value(Faker::Lorem.characters(255)).for :employer }
 	it { is_expected.not_to allow_value(Faker::Lorem.characters(256)).for :employer }
-	it { is_expected.to allow_value(Faker::Lorem.characters(255)).for :avatar }
-	it { is_expected.not_to allow_value(Faker::Lorem.characters(256)).for :avatar }
 
   # === Validations (Presence) ===
   

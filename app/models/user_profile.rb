@@ -26,7 +26,7 @@ class UserProfile < ActiveRecord::Base
   belongs_to :user
 
   validates :first_name, :last_name, :location, :zip,
-    :employer, :avatar, length: {maximum: 255}
+    :employer, length: {maximum: 255}
 
   enum gender: [:female, :male]
 

@@ -15,6 +15,10 @@ class Program < BaseService
     {folder_id: nil}
   end
 
+  def build
+    ::ProgramTemplate.new(prepare_attributes)
+  end
+
   private
 
   def duplicate

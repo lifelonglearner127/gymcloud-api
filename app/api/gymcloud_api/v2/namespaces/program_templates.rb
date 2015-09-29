@@ -22,6 +22,29 @@ class ProgramTemplates < Base
     present(program_template, with: Entities::ProgramTemplate)
   end
 
+  desc 'Duplicate Program'
+  params do
+    requires :program_ids, type: Integer
+    optional :folder_ids, type: Integer
+  end
+  post do
+    old_programs = ::ProgramTemplate.find(params[:program_ids])
+    programs = old_programs.map do |old_program|
+      authorize!(:read, old_program)
+      params[:folder_ids].map do |folder_id|
+        service = Services::TemplateDuplicating::Program.new(
+          program: old_program,
+          user: current_user,
+          folder_id: folder_id
+        )
+        authorize!(:create, service.build)
+        service.process.result
+      end
+    end
+    programs.flatten!
+    present(programs, with: Entities::ProgramTemplate)
+  end
+
   params do
     requires :id, type: Integer, desc: 'ProgramTemplate ID'
   end

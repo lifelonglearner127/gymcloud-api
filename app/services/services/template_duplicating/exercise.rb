@@ -15,6 +15,10 @@ class Exercise < BaseService
     {folder_id: nil}
   end
 
+  def build
+    ::Exercise.new(prepare_attributes)
+  end
+
   private
 
   def duplicate

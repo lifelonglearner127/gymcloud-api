@@ -15,6 +15,10 @@ class Workout < BaseService
     {folder_id: nil, is_visible: true}
   end
 
+  def build
+    ::WorkoutTemplate.new(prepare_attributes)
+  end
+
   private
 
   def duplicate

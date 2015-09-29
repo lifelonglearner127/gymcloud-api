@@ -24,6 +24,29 @@ class WorkoutTemplates < Base
     present(workout_template, with: Entities::WorkoutTemplate)
   end
 
+  desc 'Duplicate Workout'
+  params do
+    requires :workout_id, type: Integer
+    optional :folder_id, type: Integer
+  end
+  post do
+    old_workouts = ::WorkoutTemplate.find(params[:workout_ids])
+    workouts = old_workouts.map do |old_workout|
+      authorize!(:read, old_workout)
+      params[:folder_ids].map do |folder_id|
+        service = Services::TemplateDuplicating::Workout.new(
+          workout: old_workout,
+          user: current_user,
+          folder_id: folder_id
+        )
+        authorize!(:create, service.build)
+        service.process.result
+      end
+    end
+    workouts.flatten!(1)
+    present(workouts, with: Entities::WorkoutTemplate)
+  end
+
   params do
     requires :id, type: Integer, desc: 'WorkoutTemplate ID'
   end

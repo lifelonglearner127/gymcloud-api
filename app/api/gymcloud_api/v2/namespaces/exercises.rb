@@ -22,6 +22,29 @@ class Exercises < Base
     present(exercise, with: Entities::Exercise)
   end
 
+  desc 'Duplicate Exercise'
+  params do
+    requires :exercise_ids, type: Integer
+    optional :folder_ids, type: Integer
+  end
+  post do
+    old_exercises = ::Exercise.find(params[:exercise_ids])
+    exercises = old_exercises.map do |old_exercise|
+      authorize!(:read, old_exercise)
+      params[:folder_ids].map do |folder_id|
+        service = Services::TemplateDuplicating::Exercise.new(
+          exercise: old_exercise,
+          user: current_user,
+          folder_id: folder_id
+        )
+        authorize!(:create, service.build)
+        service.process.result
+      end
+    end
+    exercises.flatten!(1)
+    present(exercises, with: Entities::Exercise)
+  end
+
   params do
     requires :id, type: Integer, desc: 'Exercise ID'
   end

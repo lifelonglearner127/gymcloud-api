@@ -3,6 +3,8 @@ module Namespaces
 
 class Users < Base
 
+namespace :users do
+
   desc 'Fetch Current User'
   get :me do
     authorize!(:read, current_user)
@@ -180,6 +182,8 @@ class Users < Base
     end
 
   end
+
+end
 
 end
 

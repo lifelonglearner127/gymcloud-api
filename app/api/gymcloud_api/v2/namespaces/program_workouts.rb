@@ -3,6 +3,8 @@ module Namespaces
 
 class ProgramWorkouts < Base
 
+namespace :program_workouts do
+
   desc 'Create Program Workout Template'
   params do
     requires :program_template_id, type: Integer
@@ -59,6 +61,8 @@ class ProgramWorkouts < Base
     end
 
   end
+
+end
 
 end
 

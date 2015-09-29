@@ -3,6 +3,8 @@ module Namespaces
 
 class WorkoutExercises < Base
 
+namespace :workout_exercises do
+
   desc 'Create Workout Exercise'
   params do
     requires :exercise_id, type: Integer
@@ -54,6 +56,8 @@ class WorkoutExercises < Base
     end
 
   end
+
+end
 
 end
 

@@ -3,6 +3,8 @@ module Namespaces
 
 class Search < Base
 
+namespace :search do
+
   desc 'Search my library'
   params do
     requires :q, type: String, desc: 'search term'
@@ -33,6 +35,8 @@ class Search < Base
 
     present results
   end
+
+end
 
 end
 

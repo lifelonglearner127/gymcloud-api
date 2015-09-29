@@ -3,6 +3,8 @@ module Namespaces
 
 class PersonalWorkouts < Base
 
+namespace :personal_workouts do
+
   desc 'Create Personal Workout'
   params do
     requires :workout_template_id, type: Integer, desc: 'Workout Template ID'
@@ -61,6 +63,8 @@ class PersonalWorkouts < Base
     end
 
   end
+
+end
 
 end
 

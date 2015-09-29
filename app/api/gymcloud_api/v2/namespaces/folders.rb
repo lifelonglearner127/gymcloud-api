@@ -3,6 +3,8 @@ module Namespaces
 
 class Folders < Base
 
+namespace :folders do
+
   desc 'Create Folder'
   params do
     requires :name, type: String
@@ -50,6 +52,8 @@ class Folders < Base
     end
 
   end
+
+end
 
 end
 

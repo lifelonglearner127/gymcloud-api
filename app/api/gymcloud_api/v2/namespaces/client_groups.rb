@@ -3,6 +3,8 @@ module Namespaces
 
 class ClientGroups < Base
 
+namespace :client_groups do
+
   desc 'Create Client Group'
   params do
     requires :name, type: String
@@ -91,6 +93,8 @@ class ClientGroups < Base
     end
 
   end
+
+end
 
 end
 

@@ -3,6 +3,8 @@ module Namespaces
 
 class PersonalProperties < Base
 
+namespace :personal_properties do
+
   params do
     requires :id, type: Integer, desc: 'Personal Property ID'
   end
@@ -29,6 +31,8 @@ class PersonalProperties < Base
     end
 
   end
+
+end
 
 end
 

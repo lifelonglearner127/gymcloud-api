@@ -3,6 +3,8 @@ module Namespaces
 
 class UserProfiles < Base
 
+namespace :user_profiles do
+
   params do
     requires :id, type: Integer, desc: 'User Profile ID'
   end
@@ -49,6 +51,8 @@ class UserProfiles < Base
     end
 
   end
+
+end
 
 end
 

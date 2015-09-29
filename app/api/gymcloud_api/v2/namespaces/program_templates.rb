@@ -3,6 +3,8 @@ module Namespaces
 
 class ProgramTemplates < Base
 
+namespace :program_templates do
+
   desc 'Create Program Template'
   params do
     requires :name, type: String
@@ -59,6 +61,8 @@ class ProgramTemplates < Base
     end
 
   end
+
+end
 
 end
 

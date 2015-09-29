@@ -3,6 +3,8 @@ module Namespaces
 
 class WorkoutEvents < Base
 
+namespace :workout_events do
+
   desc 'Create Workout Event'
   params do
     requires :personal_workout_id, type: Integer
@@ -76,6 +78,8 @@ class WorkoutEvents < Base
     end
 
   end
+
+end
 
 end
 

@@ -3,6 +3,8 @@ module Namespaces
 
 class Clients < Base
 
+namespace :clients do
+
   desc 'Create Client'
   params do
     requires :first_name, type: String
@@ -20,6 +22,8 @@ class Clients < Base
     client = service.result
     present(client, with: Entities::User)
   end
+
+end
 
 end
 

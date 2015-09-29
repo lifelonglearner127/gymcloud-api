@@ -35,6 +35,8 @@ class ProgramWorkout < ActiveRecord::Base
 
   has_template_version :workout
 
+  scope :without_week, -> { where(week_id: nil) }
+
   def display_name
     source_workout.name
   end

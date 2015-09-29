@@ -18,6 +18,9 @@ class API < Grape::API
   rescue_from ActiveRecord::RecordInvalid do |e|
     rack_response({error: e.record.errors}.to_json, 422)
   end
+  rescue_from Grape::Exceptions::ValidationErrors do |e|
+    rack_response({error: e.full_messages}.to_json, 422)
+  end
   rescue_from CanCan::AccessDenied do |e|
     rack_response({error: [e.message]}.to_json, 403)
   end

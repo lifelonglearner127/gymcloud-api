@@ -11,6 +11,7 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  folder_id   :integer
+#  deleted_at  :datetime
 #
 
 class Exercise < ActiveRecord::Base
@@ -28,5 +29,6 @@ class Exercise < ActiveRecord::Base
   validates :name, :video_url, length: {maximum: 255}
 
   has_paper_trail
+  acts_as_paranoid
 
 end

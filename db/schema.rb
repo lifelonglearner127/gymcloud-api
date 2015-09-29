@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150914161814) do
+ActiveRecord::Schema.define(version: 20150929103503) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -152,9 +152,11 @@ ActiveRecord::Schema.define(version: 20150914161814) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.integer  "folder_id"
+    t.datetime "deleted_at"
   end
 
   add_index "exercises", ["author_id"], name: "index_exercises_on_author_id", using: :btree
+  add_index "exercises", ["deleted_at"], name: "index_exercises_on_deleted_at", using: :btree
   add_index "exercises", ["folder_id"], name: "index_exercises_on_folder_id", using: :btree
 
   create_table "folder_hierarchies", id: false, force: :cascade do |t|

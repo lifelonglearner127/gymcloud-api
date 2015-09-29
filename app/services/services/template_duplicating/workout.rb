@@ -8,11 +8,11 @@ class Workout < BaseService
   end
 
   def input_params
-    [:workout, :user, :folder_id]
+    [:workout, :user, :folder_id, :is_visible]
   end
 
   def defaults
-    {folder_id: nil}
+    {folder_id: nil, is_visible: true}
   end
 
   private
@@ -31,6 +31,7 @@ class Workout < BaseService
     to_include = %w(name description note video_url)
     @exercise.attributes.slice(*to_include).merge(
       is_public: false,
+      is_visible: @is_visible,
       folder_id: prepare_folder,
       author: @user
     )

@@ -10,14 +10,18 @@ namespace :user_profiles do
   end
   route_param :id do
 
-    desc 'Fetch User Profile'
+    desc 'Fetch User Profile' do
+      success Entities::UserProfile
+    end
     get do
       profile = ::UserProfile.find(params[:id])
       authorize!(:read, profile)
       present(profile, with: Entities::UserProfile)
     end
 
-    desc 'Update User Profile'
+    desc 'Update User Profile' do
+      success Entities::UserProfile
+    end
     params do
       optional :gender, type: String, values: ::UserProfile.genders.keys
       optional :height, type: Float
@@ -38,7 +42,9 @@ namespace :user_profiles do
       present(profile, with: Entities::UserProfile)
     end
 
-    desc 'Update User Avatar'
+    desc 'Update User Avatar' do
+      success Entities::UserProfile
+    end
     params do
       requires :avatar, type: Rack::Multipart::UploadedFile
     end

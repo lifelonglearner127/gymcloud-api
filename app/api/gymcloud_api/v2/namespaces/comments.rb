@@ -3,6 +3,8 @@ module Namespaces
 
 class Comments < Base
 
+namespace :comments do
+
   desc 'Create Comment'
   params do
     requires :title, type: String, default: ''
@@ -65,6 +67,8 @@ class Comments < Base
     end
 
   end
+
+end
 
 end
 

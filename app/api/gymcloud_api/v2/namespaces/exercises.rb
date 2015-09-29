@@ -3,6 +3,8 @@ module Namespaces
 
 class Exercises < Base
 
+namespace :exercises do
+
   desc 'Create Exercise'
   params do
     requires :name, type: String
@@ -59,6 +61,8 @@ class Exercises < Base
     end
 
   end
+
+end
 
 end
 

@@ -3,7 +3,11 @@ module Namespaces
 
 class Users < Base
 
-  desc 'Fetch Current User'
+namespace :users do
+
+  desc 'Fetch Current User' do
+    success Entities::User
+  end
   get :me do
     authorize!(:read, current_user)
     present current_user,
@@ -16,7 +20,9 @@ class Users < Base
   end
   route_param :id do
 
-    desc 'Fetch User'
+    desc 'Fetch User' do
+      success Entities::User
+    end
     get do
       user = ::User.find(params[:id])
       authorize!(:read, user)
@@ -25,7 +31,9 @@ class Users < Base
         email: current_user.can?(:read_email, user)
     end
 
-    desc 'Update User'
+    desc 'Update User' do
+      success Entities::User
+    end
     params do
       optional :email, type: String, regexp: /.+@.+/
     end
@@ -39,7 +47,9 @@ class Users < Base
         email: current_user.can?(:read_email, user)
     end
 
-    desc 'Invite User'
+    desc 'Invite User' do
+      success Entities::User
+    end
     params do
       optional :email, type: String, regexp: /.+@.+/
     end
@@ -180,6 +190,8 @@ class Users < Base
     end
 
   end
+
+end
 
 end
 

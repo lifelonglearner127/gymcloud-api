@@ -3,6 +3,8 @@ module Namespaces
 
 class WorkoutTemplates < Base
 
+namespace :workout_templates do
+
   desc 'Create Workout Template'
   params do
     requires :name, type: String
@@ -63,6 +65,8 @@ class WorkoutTemplates < Base
     end
 
   end
+
+end
 
 end
 

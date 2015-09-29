@@ -3,6 +3,8 @@ module Namespaces
 
 class ExerciseResults < Base
 
+namespace :exercise_results do
+
   desc 'Create Exercise Result'
   params do
     requires :workout_event_id, type: Integer
@@ -100,6 +102,8 @@ class ExerciseResults < Base
     end
 
   end
+
+end
 
 end
 

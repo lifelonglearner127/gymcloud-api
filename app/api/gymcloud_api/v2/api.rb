@@ -14,27 +14,27 @@ class API < Grape::API
   default_format :json
 
   mount Namespaces::Root
-  mount Namespaces::ClientGroups => 'client_groups'
-  mount Namespaces::Clients => 'clients'
-  mount Namespaces::Comments => 'comments'
-  mount Namespaces::ExerciseProperties => 'exercise_properties'
-  mount Namespaces::ExerciseResults => 'exercise_results'
-  mount Namespaces::Exercises => 'exercises'
-  mount Namespaces::Folders => 'folders'
-  mount Namespaces::Notifications => 'notifications'
-  mount Namespaces::PersonalPrograms => 'personal_programs'
-  mount Namespaces::PersonalProperties => 'personal_properties'
-  mount Namespaces::PersonalWorkouts => 'personal_workouts'
-  mount Namespaces::ProgramTemplates => 'program_templates'
-  mount Namespaces::ProgramWeeks => 'program_weeks'
-  mount Namespaces::ProgramWorkouts => 'program_workouts'
-  mount Namespaces::Search => 'search'
-  mount Namespaces::UserProfiles => 'user_profiles'
-  mount Namespaces::Users => 'users'
-  mount Namespaces::Videos => 'videos'
-  mount Namespaces::WorkoutEvents => 'workout_events'
-  mount Namespaces::WorkoutExercises => 'workout_exercises'
-  mount Namespaces::WorkoutTemplates => 'workout_templates'
+  mount Namespaces::ClientGroups
+  mount Namespaces::Clients
+  mount Namespaces::Comments
+  mount Namespaces::ExerciseProperties
+  mount Namespaces::ExerciseResults
+  mount Namespaces::Exercises
+  mount Namespaces::Folders
+  mount Namespaces::Notifications
+  mount Namespaces::PersonalPrograms
+  mount Namespaces::PersonalProperties
+  mount Namespaces::PersonalWorkouts
+  mount Namespaces::ProgramTemplates
+  mount Namespaces::ProgramWeeks
+  mount Namespaces::ProgramWorkouts
+  mount Namespaces::Search
+  mount Namespaces::UserProfiles
+  mount Namespaces::Users
+  mount Namespaces::Videos
+  mount Namespaces::WorkoutEvents
+  mount Namespaces::WorkoutExercises
+  mount Namespaces::WorkoutTemplates
 
 end
 

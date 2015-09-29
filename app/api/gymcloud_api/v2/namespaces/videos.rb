@@ -3,6 +3,8 @@ module Namespaces
 
 class Videos < Base
 
+namespace :videos do
+
   helpers GlobalHelpers
 
   helpers do
@@ -121,6 +123,8 @@ class Videos < Base
     end
 
   end
+
+end
 
 end
 

@@ -3,6 +3,8 @@ module Namespaces
 
 class PersonalPrograms < Base
 
+namespace :personal_programs do
+
   desc 'Create Personal Program'
   params do
     requires :program_template_id, type: Integer, desc: 'Program Template ID'
@@ -62,6 +64,8 @@ class PersonalPrograms < Base
     end
 
   end
+
+end
 
 end
 

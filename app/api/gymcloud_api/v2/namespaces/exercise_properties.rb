@@ -3,6 +3,8 @@ module Namespaces
 
 class ExerciseProperties < Base
 
+namespace :exercise_properties do
+
   desc 'Create Exercise Property'
   params do
     requires :personal_property_id, type: Integer
@@ -52,6 +54,8 @@ class ExerciseProperties < Base
     end
 
   end
+
+end
 
 end
 

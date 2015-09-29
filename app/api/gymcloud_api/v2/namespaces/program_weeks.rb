@@ -3,6 +3,8 @@ module Namespaces
 
 class ProgramWeeks < Base
 
+namespace :program_weeks do
+
   desc 'Create Program Week'
   params do
     requires :name, type: String
@@ -51,6 +53,8 @@ class ProgramWeeks < Base
     end
 
   end
+
+end
 
 end
 

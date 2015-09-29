@@ -3,6 +3,8 @@ module Namespaces
 
 class Notifications < Base
 
+namespace :notifications do
+
   route_param :id do
 
     desc 'Mark Notification as Read'
@@ -20,6 +22,8 @@ class Notifications < Base
     end
 
   end
+
+end
 
 end
 

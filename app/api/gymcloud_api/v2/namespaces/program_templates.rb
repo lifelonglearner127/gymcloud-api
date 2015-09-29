@@ -22,13 +22,13 @@ class ProgramTemplates < Base
     present(program_template, with: Entities::ProgramTemplate)
   end
 
-  desc 'Duplicate Program'
+  desc 'Duplicate Program(s)'
   params do
-    requires :program_ids, type: Integer
-    optional :folder_ids, type: Integer
+    requires :ids, type: Array[Integer]
+    optional :folder_ids, type: Array[Integer]
   end
-  post do
-    old_programs = ::ProgramTemplate.find(params[:program_ids])
+  post '/duplicate' do
+    old_programs = ::ProgramTemplate.find(params[:ids])
     programs = old_programs.map do |old_program|
       authorize!(:read, old_program)
       params[:folder_ids].map do |folder_id|
@@ -41,7 +41,7 @@ class ProgramTemplates < Base
         service.process.result
       end
     end
-    programs.flatten!
+    programs.flatten!(1)
     present(programs, with: Entities::ProgramTemplate)
   end
 

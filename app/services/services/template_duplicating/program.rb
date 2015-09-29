@@ -36,7 +36,7 @@ class Program < BaseService
 
   def prepare_attributes
     to_include = %w(name description note video_url)
-    @exercise.attributes.slice(*to_include).merge(
+    @program.attributes.slice(*to_include).merge(
       is_public: false,
       folder_id: prepare_folder,
       author: @user
@@ -48,11 +48,8 @@ class Program < BaseService
   end
 
   def duplicate_program_week(program_week)
-    new_program_week = program_week.dup.assign_attributes(
-      program: @new_program,
-      created_at: nil,
-      updated_at: nil
-    )
+    new_program_week = program_week.dup
+    new_program_week.assign_attributes(program: @new_program)
     new_program_week.save!
     program_week.program_workouts.each do |program_workout|
       duplicate_program_workout(program_workout, new_program_week)
@@ -61,12 +58,11 @@ class Program < BaseService
   end
 
   def duplicate_program_workout(program_workout, new_program_week)
-    new_program_workout = program_workout.dup.assign_attributes(
+    new_program_workout = program_workout.dup
+    new_program_workout.assign_attributes(
       week: new_program_week,
       program: @new_program,
-      workout: duplicate_workout(program_workout.workout),
-      created_at: nil,
-      updated_at: nil
+      workout: duplicate_workout(program_workout.workout)
     )
     new_program_workout.save!
   end

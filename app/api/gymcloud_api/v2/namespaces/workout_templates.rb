@@ -26,11 +26,11 @@ class WorkoutTemplates < Base
 
   desc 'Duplicate Workout'
   params do
-    requires :workout_id, type: Integer
-    optional :folder_id, type: Integer
+    requires :ids, type: Array[Integer]
+    optional :folder_ids, type: Array[Integer]
   end
-  post do
-    old_workouts = ::WorkoutTemplate.find(params[:workout_ids])
+  post '/duplicate' do
+    old_workouts = ::WorkoutTemplate.find(params[:ids])
     workouts = old_workouts.map do |old_workout|
       authorize!(:read, old_workout)
       params[:folder_ids].map do |folder_id|

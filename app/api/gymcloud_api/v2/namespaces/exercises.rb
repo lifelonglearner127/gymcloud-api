@@ -22,13 +22,13 @@ class Exercises < Base
     present(exercise, with: Entities::Exercise)
   end
 
-  desc 'Duplicate Exercise'
+  desc 'Duplicate Exercise(s)'
   params do
-    requires :exercise_ids, type: Integer
-    optional :folder_ids, type: Integer
+    requires :ids, type: Array[Integer]
+    optional :folder_ids, type: Array[Integer]
   end
-  post do
-    old_exercises = ::Exercise.find(params[:exercise_ids])
+  post '/duplicate' do
+    old_exercises = ::Exercise.find(params[:ids])
     exercises = old_exercises.map do |old_exercise|
       authorize!(:read, old_exercise)
       params[:folder_ids].map do |folder_id|

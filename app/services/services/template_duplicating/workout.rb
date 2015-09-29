@@ -33,7 +33,7 @@ class Workout < BaseService
 
   def prepare_attributes
     to_include = %w(name description note video_url)
-    @exercise.attributes.slice(*to_include).merge(
+    @workout.attributes.slice(*to_include).merge(
       is_public: false,
       is_visible: @is_visible,
       folder_id: prepare_folder,
@@ -46,11 +46,8 @@ class Workout < BaseService
   end
 
   def duplicate_workout_exercise(workout_exercise, new_workout)
-    new_workout_exercise = workout_exercise.dup.assign_attributes(
-      workout: new_workout,
-      created_at: nil,
-      updated_at: nil
-    )
+    new_workout_exercise = workout_exercise.dup
+    new_workout_exercise.assign_attributes(workout: new_workout)
     new_workout_exercise.save!
     workout_exercise.exercise_properties.each do |exercise_property|
       duplicate_exercise_property(exercise_property, new_workout_exercise)
@@ -59,11 +56,10 @@ class Workout < BaseService
   end
 
   def duplicate_exercise_property(property, new_workout_exercise)
-    new_property = property.dup.assign_attributes(
+    new_property = property.dup
+    new_property.assign_attributes(
       personal_property: prepare_personal_property(property.personal_property),
-      workout_exercise: new_workout_exercise,
-      created_at: nil,
-      updated_at: nil
+      workout_exercise: new_workout_exercise
     )
     new_property.save!
   end

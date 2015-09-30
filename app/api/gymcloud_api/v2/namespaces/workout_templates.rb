@@ -26,6 +26,31 @@ namespace :workout_templates do
     present(workout_template, with: Entities::WorkoutTemplate)
   end
 
+  desc 'Duplicate Workout'
+  params do
+    requires :ids, type: Array[Integer]
+    optional :folder_ids, type: Array[Integer]
+  end
+  post '/duplicate' do
+    old_workouts = ::WorkoutTemplate.find(params[:ids])
+    workouts = []
+    ActiveRecord::Base.transaction do
+      old_workouts.each do |old_workout|
+        authorize!(:read, old_workout)
+        params[:folder_ids].each do |folder_id|
+          service = Services::TemplateDuplicating::Workout.new(
+            workout: old_workout,
+            user: current_user,
+            folder_id: folder_id
+          )
+          authorize!(:create, service.build)
+          workouts << service.process.result
+        end
+      end
+    end
+    present(workouts, with: Entities::WorkoutTemplate)
+  end
+
   params do
     requires :id, type: Integer, desc: 'WorkoutTemplate ID'
   end

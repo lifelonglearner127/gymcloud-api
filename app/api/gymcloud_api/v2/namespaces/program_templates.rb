@@ -24,6 +24,31 @@ namespace :program_templates do
     present(program_template, with: Entities::ProgramTemplate)
   end
 
+  desc 'Duplicate Program(s)'
+  params do
+    requires :ids, type: Array[Integer]
+    optional :folder_ids, type: Array[Integer]
+  end
+  post '/duplicate' do
+    old_programs = ::ProgramTemplate.find(params[:ids])
+    programs = []
+    ActiveRecord::Base.transaction do
+      old_programs.each do |old_program|
+        authorize!(:read, old_program)
+        params[:folder_ids].each do |folder_id|
+          service = Services::TemplateDuplicating::Program.new(
+            program: old_program,
+            user: current_user,
+            folder_id: folder_id
+          )
+          authorize!(:create, service.build)
+          programs << service.process.result
+        end
+      end
+    end
+    present(programs, with: Entities::ProgramTemplate)
+  end
+
   params do
     requires :id, type: Integer, desc: 'ProgramTemplate ID'
   end

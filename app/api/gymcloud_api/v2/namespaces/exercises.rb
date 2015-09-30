@@ -24,6 +24,31 @@ namespace :exercises do
     present(exercise, with: Entities::Exercise)
   end
 
+  desc 'Duplicate Exercise(s)'
+  params do
+    requires :ids, type: Array[Integer]
+    optional :folder_ids, type: Array[Integer]
+  end
+  post '/duplicate' do
+    old_exercises = ::Exercise.find(params[:ids])
+    exercises = []
+    ActiveRecord::Base.transaction do
+      old_exercises.each do |old_exercise|
+        authorize!(:read, old_exercise)
+        params[:folder_ids].each do |folder_id|
+          service = Services::TemplateDuplicating::Exercise.new(
+            exercise: old_exercise,
+            user: current_user,
+            folder_id: folder_id
+          )
+          authorize!(:create, service.build)
+          exercises << service.process.result
+        end
+      end
+    end
+    present(exercises, with: Entities::Exercise)
+  end
+
   params do
     requires :id, type: Integer, desc: 'Exercise ID'
   end

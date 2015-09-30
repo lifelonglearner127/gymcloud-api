@@ -78,6 +78,7 @@ namespace :users do
             user = ::User.find(params[:id])
             result = user.send(collection)
             authorize!(:read, result.build)
+            result.reset
             klass = user.association(collection).klass
             entity = "GymcloudAPI::V2::Entities::#{klass.name}".constantize
             present(result, with: entity)
@@ -105,6 +106,7 @@ namespace :users do
             user = ::User.find(params[:id])
             result = user.send(collection).send(scope)
             authorize!(:read, result.build)
+            result.reset
             klass = user.association(collection).klass
             entity = "GymcloudAPI::V2::Entities::#{klass.name}".constantize
             present(result, with: entity)

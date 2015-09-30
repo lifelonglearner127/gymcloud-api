@@ -29,19 +29,21 @@ class Exercises < Base
   end
   post '/duplicate' do
     old_exercises = ::Exercise.find(params[:ids])
-    exercises = old_exercises.map do |old_exercise|
-      authorize!(:read, old_exercise)
-      params[:folder_ids].map do |folder_id|
-        service = Services::TemplateDuplicating::Exercise.new(
-          exercise: old_exercise,
-          user: current_user,
-          folder_id: folder_id
-        )
-        authorize!(:create, service.build)
-        service.process.result
+    exercises = []
+    ActiveRecord::Base.transaction do
+      old_exercises.each do |old_exercise|
+        authorize!(:read, old_exercise)
+        params[:folder_ids].each do |folder_id|
+          service = Services::TemplateDuplicating::Exercise.new(
+            exercise: old_exercise,
+            user: current_user,
+            folder_id: folder_id
+          )
+          authorize!(:create, service.build)
+          exercises << service.process.result
+        end
       end
     end
-    exercises.flatten!(1)
     present(exercises, with: Entities::Exercise)
   end
 

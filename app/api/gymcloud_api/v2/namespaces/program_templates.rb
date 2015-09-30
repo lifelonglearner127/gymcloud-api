@@ -29,19 +29,21 @@ class ProgramTemplates < Base
   end
   post '/duplicate' do
     old_programs = ::ProgramTemplate.find(params[:ids])
-    programs = old_programs.map do |old_program|
-      authorize!(:read, old_program)
-      params[:folder_ids].map do |folder_id|
-        service = Services::TemplateDuplicating::Program.new(
-          program: old_program,
-          user: current_user,
-          folder_id: folder_id
-        )
-        authorize!(:create, service.build)
-        service.process.result
+    programs = []
+    ActiveRecord::Base.transaction do
+      old_programs.each do |old_program|
+        authorize!(:read, old_program)
+        params[:folder_ids].each do |folder_id|
+          service = Services::TemplateDuplicating::Program.new(
+            program: old_program,
+            user: current_user,
+            folder_id: folder_id
+          )
+          authorize!(:create, service.build)
+          programs << service.process.result
+        end
       end
     end
-    programs.flatten!(1)
     present(programs, with: Entities::ProgramTemplate)
   end
 

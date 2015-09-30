@@ -31,19 +31,21 @@ class WorkoutTemplates < Base
   end
   post '/duplicate' do
     old_workouts = ::WorkoutTemplate.find(params[:ids])
-    workouts = old_workouts.map do |old_workout|
-      authorize!(:read, old_workout)
-      params[:folder_ids].map do |folder_id|
-        service = Services::TemplateDuplicating::Workout.new(
-          workout: old_workout,
-          user: current_user,
-          folder_id: folder_id
-        )
-        authorize!(:create, service.build)
-        service.process.result
+    workouts = []
+    ActiveRecord::Base.transaction do
+      old_workouts.each do |old_workout|
+        authorize!(:read, old_workout)
+        params[:folder_ids].each do |folder_id|
+          service = Services::TemplateDuplicating::Workout.new(
+            workout: old_workout,
+            user: current_user,
+            folder_id: folder_id
+          )
+          authorize!(:create, service.build)
+          workouts << service.process.result
+        end
       end
     end
-    workouts.flatten!(1)
     present(workouts, with: Entities::WorkoutTemplate)
   end
 

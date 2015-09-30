@@ -80,7 +80,7 @@ namespace :users do
             authorize!(:read, result.build)
             klass = user.association(collection).klass
             entity = "GymcloudAPI::V2::Entities::#{klass.name}".constantize
-            present(paginate(result), with: entity)
+            present(result, with: entity)
           end
         end
       end
@@ -107,7 +107,7 @@ namespace :users do
             authorize!(:read, result.build)
             klass = user.association(collection).klass
             entity = "GymcloudAPI::V2::Entities::#{klass.name}".constantize
-            present(paginate(result), with: entity)
+            present(result, with: entity)
           end
         end
       end

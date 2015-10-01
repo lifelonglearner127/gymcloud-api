@@ -41,7 +41,9 @@ class VimeoUploaderService
   end
 
   def update_vimeo_video(vimeo_video)
-    vimeo_video.edit privacy: {view: @video.privacy}, name: @video.name
+    default_settings = Rails.application.config_for(:vimeo_video_params)
+    attributes = default_settings.merge(name: @video.name)
+    vimeo_video.edit(attributes)
   end
 
   def update_video(vimeo_id, vimeo_video)

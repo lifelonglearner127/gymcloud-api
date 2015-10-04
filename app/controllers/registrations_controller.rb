@@ -10,8 +10,8 @@ class RegistrationsController < Devise::RegistrationsController
     build_resource(sign_up_params)
     # resource.skip_confirmation!
     resource.save!
-    Services::UserBootstrap::All.!(user: resource)
     resource.become_a_pro!
+    Services::UserBootstrap::All.!(user: resource)
     entity = {id: resource.id, user_profile: {id: resource.user_profile.id}}
 
     render json: entity, status: :created

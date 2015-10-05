@@ -6,7 +6,8 @@ module GlobalHelpers
   extend Grape::API::Helpers
 
   def filtered_params
-    declared(params, include_missing: false).to_h
+    declared(params, include_missing: false)
+      .with_indifferent_access
   end
 
   def filtered_params_with(attrs = {})

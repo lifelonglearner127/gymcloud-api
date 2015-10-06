@@ -21,6 +21,7 @@ class WorkoutTemplate < ActiveRecord::Base
 
   belongs_to :author, class_name: User
   belongs_to :folder
+  has_and_belongs_to_many :videos
   has_many :personal_workouts
   has_many :workout_exercises, as: :workout
   has_many :program_workouts, as: :workout

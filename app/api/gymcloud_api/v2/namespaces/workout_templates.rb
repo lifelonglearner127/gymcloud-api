@@ -11,6 +11,7 @@ namespace :workout_templates do
     optional :description, type: String
     optional :note, type: String
     optional :video_url, type: String
+    optional :video_id, type: Integer
     optional :folder_id, type: Integer
     optional :is_public, type: Boolean, default: 'false'
     optional :is_visible, type: Boolean, default: 'true'
@@ -69,6 +70,7 @@ namespace :workout_templates do
       optional :description, type: String
       optional :note, type: String
       optional :video_url, type: String
+      optional :video_id, type: Integer
       optional :folder_id, type: Integer
       optional :is_public, type: Boolean
       optional :is_visible, type: Boolean

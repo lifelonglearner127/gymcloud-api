@@ -59,7 +59,7 @@ namespace :exercises do
     get do
       exercise = ::Exercise.find(params[:id])
       authorize!(:read, exercise)
-      present(exercise, with: Entities::Exercise)
+      present(exercise, with: Entities::Exercise, nested: true)
     end
 
     desc 'Update Exercise'

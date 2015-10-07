@@ -19,8 +19,14 @@ class WorkoutTemplate < Grape::Entity
   expose :version do |template|
     template.versions.count
   end
-  expose :workout_exercises, using: Entities::WorkoutExercise, as: :exercises
-  expose :assignees, using: Entities::WorkoutAssignees do |template|
+  expose :workout_exercises,
+    if: {nested: true},
+    using: Entities::WorkoutExercise,
+    as: :exercises
+  expose :assignees,
+    if: {nested: true},
+    using: Entities::WorkoutAssignees \
+  do |template|
     ::PersonalWorkout
       .where(workout_template_id: template.id)
       .assigned_by(template.author)

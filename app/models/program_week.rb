@@ -13,7 +13,7 @@
 
 class ProgramWeek < ActiveRecord::Base
 
-  belongs_to :program, polymorphic: true
+  belongs_to :program, -> { unscope(:where) }, polymorphic: true
 
   has_many :program_workouts, dependent: :destroy, foreign_key: :week_id
 

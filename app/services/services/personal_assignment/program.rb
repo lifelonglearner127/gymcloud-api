@@ -41,8 +41,8 @@ class Program < BaseService
   end
 
   def prepare_attributes
-    to_exclude = %w(id is_public author_id folder_id created_at updated_at)
-    @template.attributes.except(*to_exclude).merge(
+    to_include = %w(name description note)
+    @template.attributes.slice(*to_include).merge(
       program_template: @template,
       person: @user,
       status: :active

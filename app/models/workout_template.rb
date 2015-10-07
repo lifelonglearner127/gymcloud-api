@@ -30,6 +30,7 @@ class WorkoutTemplate < ActiveRecord::Base
   validates :name, :video_url, length: {maximum: 255}
 
   has_paper_trail
+  acts_as_paranoid
 
   scope :is_visible, -> { where(is_visible: :true) }
   scope :is_invisible, -> { where(is_visible: :false) }

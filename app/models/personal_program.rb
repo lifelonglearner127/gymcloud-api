@@ -19,7 +19,7 @@ class PersonalProgram < ActiveRecord::Base
   include HasTemplateVersion
   include PublicActivity::Common
 
-  belongs_to :program_template
+  belongs_to :program_template, -> { with_deleted }
   belongs_to :person, class_name: User
   has_one :author, through: :program_template
   has_many :program_workouts, as: :program

@@ -1,0 +1,47 @@
+module Services
+module VideosSearch
+
+class Vimeo < BaseVideoService
+
+  def run
+    @result = []
+    @collection = nil
+    super
+  end
+
+  private
+
+  def search
+    response = make_request
+    items = response.try(:items) || response
+    filtered = filter_results(items)
+    @result.concat filtered
+
+    if @result.count < @page * @per_page
+      search
+    else
+      @result.last(@per_page)
+    end
+  end
+
+  def make_request
+    if @collection.nil?
+      client = ::Vimeo::Client.new(access_token: ENV['VIMEO_TOKEN'])
+      @collection = client.search_videos(
+        @q,
+        page: 1,
+        per_page: 50 # vimeo maximum
+      )
+    else
+      @collection.next_page
+    end
+  end
+
+  def filter_results(results)
+    results.reject { |v| v.embed.html.nil? }
+  end
+
+end
+
+end
+end

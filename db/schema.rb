@@ -159,6 +159,11 @@ ActiveRecord::Schema.define(version: 20151007123244) do
   add_index "exercises", ["deleted_at"], name: "index_exercises_on_deleted_at", using: :btree
   add_index "exercises", ["folder_id"], name: "index_exercises_on_folder_id", using: :btree
 
+  create_table "exercises_videos", id: false, force: :cascade do |t|
+    t.integer "video_id",    null: false
+    t.integer "exercise_id", null: false
+  end
+
   create_table "folder_hierarchies", id: false, force: :cascade do |t|
     t.integer "ancestor_id",   null: false
     t.integer "descendant_id", null: false
@@ -420,6 +425,11 @@ ActiveRecord::Schema.define(version: 20151007123244) do
   end
 
   add_index "videos", ["author_id"], name: "index_videos_on_author_id", using: :btree
+
+  create_table "videos_workout_templates", id: false, force: :cascade do |t|
+    t.integer "video_id",            null: false
+    t.integer "workout_template_id", null: false
+  end
 
   create_table "workout_event_exercises", force: :cascade do |t|
     t.integer  "workout_event_id"

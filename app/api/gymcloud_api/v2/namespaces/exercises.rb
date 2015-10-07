@@ -10,6 +10,7 @@ namespace :exercises do
     requires :name, type: String
     optional :description, type: String
     optional :video_url, type: String
+    optional :video_id, type: Integer
     optional :folder_id, type: Integer
     optional :is_public, type: Boolean, default: 'false'
   end
@@ -66,6 +67,7 @@ namespace :exercises do
       optional :name, type: String
       optional :description, type: String
       optional :video_url, type: String
+      optional :video_id, type: Integer
       optional :folder_id, type: Integer
       optional :is_public, type: Boolean
     end

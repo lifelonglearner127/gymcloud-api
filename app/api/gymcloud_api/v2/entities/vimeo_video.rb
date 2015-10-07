@@ -6,7 +6,7 @@ class VimeoVideo < Grape::Entity
   expose :id do |obj|
     obj.uri.match(/(\d+)/).captures.first.to_i
   end
-  expose :name, as: :title
+  expose :name
   expose :description
   expose :embed_url do |obj|
     str = obj.embed.html

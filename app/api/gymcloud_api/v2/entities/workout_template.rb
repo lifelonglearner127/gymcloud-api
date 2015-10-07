@@ -11,6 +11,10 @@ class WorkoutTemplate < Grape::Entity
   expose :is_public
   expose :is_visible
   expose :author_id
+  expose :author_full_name do |template|
+    profile = template.author.user_profile
+    [profile.first_name, profile.last_name].compact.join(' ')
+  end
   expose :folder_id
   expose :version do |template|
     template.versions.count

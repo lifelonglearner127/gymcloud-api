@@ -11,6 +11,7 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  folder_id   :integer
+#  deleted_at  :datetime
 #
 
 class ProgramTemplate < ActiveRecord::Base

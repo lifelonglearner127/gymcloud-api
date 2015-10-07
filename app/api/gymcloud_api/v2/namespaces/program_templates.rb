@@ -58,7 +58,7 @@ namespace :program_templates do
     get do
       program_template = ::ProgramTemplate.find(params[:id])
       authorize!(:read, program_template)
-      present(program_template, with: Entities::ProgramTemplate)
+      present(program_template, with: Entities::ProgramTemplate, nested: true)
     end
 
     desc 'Update Program Template'

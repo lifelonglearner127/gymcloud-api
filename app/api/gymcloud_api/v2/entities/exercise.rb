@@ -9,7 +9,9 @@ class Exercise < Grape::Entity
   expose :video_url
   expose :folder_id
   expose :is_public
-  expose :author, using: Entities::User
+  expose :author,
+    if: {nested: true},
+    using: Entities::User
 
 end
 

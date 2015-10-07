@@ -61,7 +61,7 @@ namespace :workout_templates do
     get do
       workout_template = ::WorkoutTemplate.find(params[:id])
       authorize!(:read, workout_template)
-      present(workout_template, with: Entities::WorkoutTemplate)
+      present(workout_template, with: Entities::WorkoutTemplate, nested: true)
     end
 
     desc 'Update Workout Template'

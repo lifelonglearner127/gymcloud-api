@@ -22,8 +22,8 @@ class ProgramWorkout < ActiveRecord::Base
 
   include HasTemplateVersion
 
-  belongs_to :workout, -> { unscope(:where) }, polymorphic: true
-  belongs_to :program, -> { unscope(:where) }, polymorphic: true
+  belongs_to :workout, -> { with_deleted }, polymorphic: true
+  belongs_to :program, -> { with_deleted }, polymorphic: true
   belongs_to :week, class_name: 'ProgramWeek'
 
   validates :workout_id, :program_id, presence: true

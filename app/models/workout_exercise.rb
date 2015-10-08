@@ -19,7 +19,7 @@ class WorkoutExercise < ActiveRecord::Base
   include HasTemplateVersion
 
   belongs_to :exercise, -> { with_deleted }
-  belongs_to :workout, -> { unscope(:where) }, polymorphic: true
+  belongs_to :workout, -> { with_deleted }, polymorphic: true
   has_many :exercise_properties
   has_many :exercise_results
   has_many :workout_event_exercises, dependent: :destroy

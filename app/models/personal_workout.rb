@@ -39,6 +39,7 @@ class PersonalWorkout < ActiveRecord::Base
     where { person_id >> user.clients.pluck(:id) }
     .where { status == PersonalWorkout.statuses[:active] }
   end)
+  scope :with_deleted, -> {}
 
   has_template_version :workout_template
 

@@ -12,6 +12,7 @@
 #  updated_at  :datetime         not null
 #  folder_id   :integer
 #  deleted_at  :datetime
+#  video_id    :integer
 #
 
 class Exercise < ActiveRecord::Base

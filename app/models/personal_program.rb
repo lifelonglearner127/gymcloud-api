@@ -36,6 +36,7 @@ class PersonalProgram < ActiveRecord::Base
     where { person_id >> user.clients.pluck(:id) }
     .where { status == PersonalProgram.statuses[:active] }
   end)
+  scope :with_deleted, -> {}
 
   has_template_version :program_template
 

@@ -14,6 +14,7 @@
 #  folder_id   :integer
 #  is_visible  :boolean          default(TRUE)
 #  deleted_at  :datetime
+#  video_id    :integer
 #
 
 class WorkoutTemplate < ActiveRecord::Base

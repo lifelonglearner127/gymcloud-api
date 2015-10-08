@@ -23,7 +23,16 @@ module Video
       end
     end)
     scope :search_by_criteria, (lambda do |criteria|
-      where { name =~ "%#{my { criteria }}%" }
+      joins { exercises.outer }
+      .joins { workout_templates.outer }
+      .where do
+        query = "%#{my { criteria }}%"
+        (name =~ query) |
+        (exercises.name =~ query) |
+        (exercises.description =~ query) |
+        (workout_templates.name =~ query) |
+        (workout_templates.description =~ query)
+      end
     end)
   end
 

@@ -18,6 +18,9 @@ class YoutubeVideo < Grape::Entity
   expose :preview_picture_url do |obj|
     obj.snippet.thumbnails['medium']['url']
   end
+  expose :type do |_obj|
+    'youtube'
+  end
   expose :published_at, as: :uploaded_at
 
 end

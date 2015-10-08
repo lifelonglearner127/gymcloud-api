@@ -13,6 +13,9 @@ class Video < Grape::Entity
   expose :status
   expose :privacy
   expose :uploaded_at
+  expose :type do |_obj|
+    'gymcloud'
+  end
 
 end
 

@@ -8,6 +8,7 @@ class VimeoVideo < Grape::Entity
   end
   expose :name
   expose :description
+  expose :duration
   expose :embed_url do |obj|
     str = obj.embed.html
     unless str.nil?
@@ -21,6 +22,9 @@ class VimeoVideo < Grape::Entity
   end
   expose :preview_picture_url do |obj|
     obj.preview_picture_url
+  end
+  expose :type do |_obj|
+    'vimeo'
   end
   expose :created_time, as: :uploaded_at
 

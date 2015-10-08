@@ -68,7 +68,7 @@ class Ability
     can :read, Comment do |comment|
       case comment.commentable_type
       when 'WorkoutEventExercise'
-        comment.commentable.workout_event.personal_workout.workout_template.author.id.in?(@user.pro_ids) &&
+        comment.commentable.workout_event.personal_workout.workout_template.author.id.in?(@user.pros.pluck(:id)) &&
         comment.commentable.workout_event.person.id == @user.id
       end
     end
@@ -81,9 +81,9 @@ class Ability
     can :crud, ClientGroup, pro_id: @user.id
     can :crud, ClientGroupMembership, client_group: {pro_id: @user.id}
     can :crud, ProgramWorkout,
-      program_id: @user.program_template_ids,
+      program_id: @user.program_templates.pluck(:id),
       program_type: 'ProgramTemplate',
-      workout_id: @user.workout_template_ids,
+      workout_id: @user.workout_templates.pluck(:id),
       workout_type: 'WorkoutTemplate'
     can :crud, ProgramWeek do |pw|
       case pw.program_type
@@ -91,17 +91,23 @@ class Ability
         pw.program.author_id == @user.id
       end
     end
-    as_managing_pro_can :create, PersonalWorkout, :person_id,
-      workout_template_id: @user.workout_template_ids
-    as_managing_pro_can [:read, :update, :disable], PersonalWorkout, :person_id
-    as_managing_pro_can :create, PersonalProgram, :person_id,
-      program_template_id: @user.program_template_ids
-    as_managing_pro_can [:read, :update, :disable], PersonalProgram, :person_id
-    as_managing_pro_can :create, PersonalProgram, :person_id,
-      program_template_id: @user.program_template_ids
-    as_managing_pro_can [:read, :update, :disable], PersonalProgram, :person_id
+    can :create, PersonalWorkout,
+      workout_template_id: @user.workout_templates.pluck(:id),
+      person_id: @user.clients.pluck(:id)
+    can [:read, :update, :disable], PersonalWorkout,
+      person_id: @user.clients.pluck(:id)
+    can :create, PersonalProgram,
+      program_template_id: @user.program_templates.pluck(:id),
+      person_id: @user.clients.pluck(:id)
+    can [:read, :update, :disable], PersonalProgram,
+      person_id: @user.clients.pluck(:id)
+    can :create, PersonalProgram,
+      program_template_id: @user.program_templates.pluck(:id),
+      person_id: @user.clients.pluck(:id)
+    can [:read, :update, :disable], PersonalProgram,
+      person_id: @user.clients.pluck(:id)
     can :crud, WorkoutEvent,
-      personal_workout: {person_id: @user.client_ids}
+      personal_workout: {person_id: @user.clients.pluck(:id)}
     # NOTE: Figure out with this stuff
     # if_new_can :read, WorkoutEvent
     can :crud, Folder
@@ -111,12 +117,12 @@ class Ability
       user.agreements_as_client.where(pro: @user).any?
     end
     can :crud, ExerciseResult do |exercise_result|
-      exercise_result.person.id.in?(@user.client_ids)
+      exercise_result.person.id.in?(@user.clients.pluck(:id))
     end
     can :read, Comment do |comment|
       case comment.commentable_type
       when 'WorkoutEventExercise'
-        comment.commentable.workout_event.person.id.in?(@user.client_ids) &&
+        comment.commentable.workout_event.person.id.in?(@user.clients.pluck(:id)) &&
         comment.commentable.workout_event.personal_workout.workout_template.author.id == @user.id
       end
     end
@@ -125,7 +131,7 @@ class Ability
       when 'WorkoutTemplate'
         we.workout.author_id == @user.id
       when 'PersonalWorkout'
-        we.workout.person_id.in?(@user.client_ids)
+        we.workout.person_id.in?(@user.clients.pluck(:id))
       end
     end
     can :crud, ExerciseProperty, personal_property: {person_id: @user.id}
@@ -165,13 +171,6 @@ class Ability
 
   def as_explorer_can(action, object)
     can action, object, is_public: true
-  end
-
-  def as_managing_pro_can(action, object, attr, attrs = {})
-    attrs.merge!(
-      attr => @user.client_ids
-    )
-    can action, object, attrs
   end
 
   def if_new_can(action, object)

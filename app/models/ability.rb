@@ -78,7 +78,6 @@ class Ability
   end
 
   def as_pro
-    as_managing_pro_can :update, UserProfile, :user_id
     can :crud, ClientGroup, pro_id: @user.id
     can :crud, ClientGroupMembership, client_group: {pro_id: @user.id}
     can :crud, ProgramWorkout,

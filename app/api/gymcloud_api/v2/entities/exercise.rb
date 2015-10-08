@@ -9,6 +9,11 @@ class Exercise < Grape::Entity
   expose :video_url
   expose :folder_id
   expose :is_public
+  expose :author_id
+  expose :author_full_name do |exercise|
+    profile = exercise.author.user_profile
+    [profile.first_name, profile.last_name].compact.join(' ')
+  end
   expose :author,
     if: {nested: true},
     using: Entities::User

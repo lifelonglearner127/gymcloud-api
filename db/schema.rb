@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151007123244) do
+ActiveRecord::Schema.define(version: 20151007170351) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -153,6 +153,7 @@ ActiveRecord::Schema.define(version: 20151007123244) do
     t.datetime "updated_at",  null: false
     t.integer  "folder_id"
     t.datetime "deleted_at"
+    t.integer  "video_id"
   end
 
   add_index "exercises", ["author_id"], name: "index_exercises_on_author_id", using: :btree
@@ -485,6 +486,7 @@ ActiveRecord::Schema.define(version: 20151007123244) do
     t.integer  "folder_id"
     t.boolean  "is_visible",  default: true
     t.datetime "deleted_at"
+    t.integer  "video_id"
   end
 
   add_index "workout_templates", ["author_id"], name: "index_workout_templates_on_author_id", using: :btree

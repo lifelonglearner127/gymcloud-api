@@ -21,7 +21,7 @@ class Exercise < ActiveRecord::Base
 
   belongs_to :author, class_name: User
   belongs_to :folder
-  has_and_belongs_to_many :videos
+  belongs_to :video
   has_many :workout_exercises
 
   validates :name, :author_id, presence: true

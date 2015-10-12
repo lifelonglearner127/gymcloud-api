@@ -23,8 +23,8 @@ class Video < ActiveRecord::Base
   include SearchScopes::Video
 
   belongs_to :author, class_name: User
-  has_and_belongs_to_many :exercises, dependent: :nullify
-  has_and_belongs_to_many :workout_templates, dependent: :nullify
+  has_many :exercises, dependent: :nullify
+  has_many :workout_templates, dependent: :nullify
 
   validates :name, length: {maximum: 255}
 

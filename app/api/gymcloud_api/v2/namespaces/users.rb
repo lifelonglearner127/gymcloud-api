@@ -124,7 +124,7 @@ namespace :users do
           optional :range_from, type: Date
           optional :range_to, type: Date
         end
-        paginate max_per_page: 50
+        paginate per_page: 50, max_per_page: 50
         get do
           user = ::User.find(params[:id])
           scope = params[:scope]
@@ -165,7 +165,7 @@ namespace :users do
       resource :notifications do
 
         desc 'Fetch user notifications'
-        paginate max_per_page: 50
+        paginate per_page: 50, max_per_page: 50
         get do
           user = ::User.find(params[:id])
           authorize!(:read, user)

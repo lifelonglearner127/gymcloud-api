@@ -5,7 +5,8 @@ RSpec.describe Video do
   # === Relations ===
   it { is_expected.to belong_to :author}
   
-  
+  it { is_expected.to have_many :exercises}
+	it { is_expected.to have_many :workout_templates}
 
   # === Nested Attributes ===
   

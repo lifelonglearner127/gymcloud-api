@@ -24,9 +24,11 @@ RSpec.describe ProgramTemplate do
 	it { is_expected.to have_db_column :created_at }
 	it { is_expected.to have_db_column :updated_at }
 	it { is_expected.to have_db_column :folder_id }
+	it { is_expected.to have_db_column :deleted_at }
 
   # === Database (Indexes) ===
   it { is_expected.to have_db_index ["author_id"]}
+	it { is_expected.to have_db_index ["deleted_at"]}
 	it { is_expected.to have_db_index ["folder_id"]}
 
   # === Validations (Length) ===

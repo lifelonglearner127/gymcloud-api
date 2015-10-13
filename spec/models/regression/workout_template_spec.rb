@@ -5,6 +5,7 @@ RSpec.describe WorkoutTemplate do
   # === Relations ===
   it { is_expected.to belong_to :author}
 	it { is_expected.to belong_to :folder}
+	it { is_expected.to belong_to :video}
   
   it { is_expected.to have_many :personal_workouts}
 	it { is_expected.to have_many :workout_exercises}
@@ -26,9 +27,12 @@ RSpec.describe WorkoutTemplate do
 	it { is_expected.to have_db_column :updated_at }
 	it { is_expected.to have_db_column :folder_id }
 	it { is_expected.to have_db_column :is_visible }
+	it { is_expected.to have_db_column :deleted_at }
+	it { is_expected.to have_db_column :video_id }
 
   # === Database (Indexes) ===
   it { is_expected.to have_db_index ["author_id"]}
+	it { is_expected.to have_db_index ["deleted_at"]}
 	it { is_expected.to have_db_index ["folder_id"]}
 
   # === Validations (Length) ===

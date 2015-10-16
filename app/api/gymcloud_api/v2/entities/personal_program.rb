@@ -10,6 +10,7 @@ class PersonalProgram < Grape::Entity
   expose :status
   expose :person_id
   expose :program_workouts,
+    if: {nested: true},
     using: Entities::ProgramWorkout,
     as: :workouts \
   do |model|
@@ -17,6 +18,7 @@ class PersonalProgram < Grape::Entity
   end
 
   expose :program_weeks,
+    if: {nested: true},
     using: Entities::ProgramWeek,
     as: :weeks
 

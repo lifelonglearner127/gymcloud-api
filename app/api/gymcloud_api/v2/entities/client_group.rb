@@ -6,7 +6,9 @@ class ClientGroup < Grape::Entity
   expose :id
   expose :name
   expose :pro_id
-  expose :clients, using: Entities::User
+  expose :clients,
+    if: {nested: true},
+    using: Entities::User
 
 end
 

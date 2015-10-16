@@ -26,7 +26,7 @@ namespace :client_groups do
     get do
       client_group = ::ClientGroup.find(params[:id])
       authorize!(:read, client_group)
-      present(client_group, with: Entities::ClientGroup)
+      present(client_group, with: Entities::ClientGroup, nested: true)
     end
 
     desc 'Update Client Group'

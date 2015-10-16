@@ -36,7 +36,7 @@ namespace :personal_workouts do
     get do
       workout = ::PersonalWorkout.find(params[:id])
       authorize!(:read, workout)
-      present(workout, with: Entities::PersonalWorkout)
+      present(workout, with: Entities::PersonalWorkout, nested: true)
     end
 
     desc 'Update Personal Workout'

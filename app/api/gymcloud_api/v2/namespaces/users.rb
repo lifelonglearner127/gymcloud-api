@@ -114,6 +114,21 @@ namespace :users do
         end
       end
 
+      resource :workout_exercises do
+        desc 'Fetch user workout exercises'
+        get do
+          user = ::User.find(params[:id])
+          workout_exercises = ::WorkoutExercise.personal_for(user)
+          workout_exercise = workout_exercises.build(
+            workout: ::PersonalWorkout.new(person: user)
+          )
+          authorize!(:read, workout_exercise)
+          present workout_exercises,
+            with: Entities::WorkoutExercise,
+            nested: false
+        end
+      end
+
       resource :workout_events do
         desc 'Fetch user workout events'
         params do

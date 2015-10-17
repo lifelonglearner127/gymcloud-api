@@ -9,13 +9,23 @@ class WorkoutExercise < Grape::Entity
   expose :exercise_id
   expose :workout_id
   expose :workout_type
+  expose :workout_name do |workout_exercise|
+    workout_exercise.workout.name
+  end
   expose :note
+  expose :video_url do |workout_exercise|
+    workout_exercise.source_exercise.video_url
+  end
   expose :description do |workout_exercise|
     workout_exercise.source_exercise.description
   end
-  expose :exercise_results, using: Entities::ExerciseResult
+  expose :exercise_results,
+    unless: {nested: false},
+    using: Entities::ExerciseResult
   expose :order_name
-  expose :exercise_properties, using: Entities::ExerciseProperty
+  expose :exercise_properties,
+    unless: {nested: false},
+    using: Entities::ExerciseProperty
 
 end
 

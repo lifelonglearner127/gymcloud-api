@@ -14,14 +14,6 @@ module Video
           (exercises.is_public == true) | (workout_templates.is_public == true)
         end
     end)
-    scope :global_for, (lambda do |user_id|
-      joins { exercises.outer }
-      .joins { workout_templates.outer }
-      .where do
-        (exercises.is_public == true) | (workout_templates.is_public == true) |
-        (author_id == my { user_id })
-      end
-    end)
     scope :search_by_criteria, (lambda do |criteria|
       joins { exercises.outer }
       .joins { workout_templates.outer }

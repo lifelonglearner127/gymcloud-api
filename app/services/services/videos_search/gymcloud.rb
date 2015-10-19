@@ -16,9 +16,8 @@ class Gymcloud < BaseVideoService
 
   def scope
     {
-      gymcloud: :global_for,
       mine: :owned_by,
-      public: :public_for
+      gymcloud: :public_for
     }[@scope.to_sym]
   end
 

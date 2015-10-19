@@ -25,8 +25,8 @@ namespace :videos do
   desc 'Search video'
   params do
     requires :q, type: String, desc: 'Query for search'
-    optional :scope, type: String, default: 'gymcloud',
-      values: %w(gymcloud mine public vimeo youtube),
+    optional :scope, type: String, default: 'mine',
+      values: %w(mine gymcloud vimeo youtube),
       desc: 'Search scope'
     use :pagination
   end

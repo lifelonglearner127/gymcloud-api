@@ -9,7 +9,7 @@ class ClientGroupAssignment < Grape::Entity
   expose :clients_count
   expose :assigned_count
   expose :is_assigned do |group|
-    group.assigned_count / group.clients_count == 1
+    group.assigned_count == group.clients_count
   end
 
 end

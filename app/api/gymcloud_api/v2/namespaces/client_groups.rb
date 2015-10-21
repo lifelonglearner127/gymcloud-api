@@ -49,6 +49,8 @@ namespace :client_groups do
       present(client_group, with: Entities::ClientGroup)
     end
 
+    mount Namespaces::ClientGroupAssignments
+
     namespace :members do
 
       desc 'Fetch Members'

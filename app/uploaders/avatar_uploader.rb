@@ -29,8 +29,4 @@ class AvatarUploader < CarrierWave::Uploader::Base
     %w(jpg jpeg gif png)
   end
 
-  def filename
-    'avatar.png'
-  end
-
 end

@@ -33,6 +33,12 @@ class ProgramTemplate < Grape::Entity
       .where(program_template_id: template.id)
       .assigned_by(template.author)
   end
+  expose :group_assignments,
+    if: {nested: true},
+    using: Entities::ClientGroupAssignment \
+  do |template|
+    ::ClientGroup.where(pro: template.author).with_assinged_count_for(template)
+  end
 
 end
 

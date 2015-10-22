@@ -12,6 +12,16 @@ class Vimeo < BaseVideoService
   private
 
   def search
+    client = ::Vimeo::Client.new(access_token: ENV['VIMEO_TOKEN'])
+    collection = client.search_videos(
+      @q,
+      page: @page,
+      per_page: @per_page
+    )
+    @result = filter_results(collection.items)
+  end
+
+  def search_with_filtered
     response = make_request
     items = response.try(:items) || response
     filtered = filter_results(items)

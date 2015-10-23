@@ -12,7 +12,7 @@ class Vimeo < BaseVideoService
   private
 
   def search
-     collection = client.search_videos(
+    collection = client.search_videos(
       @q,
       page: @page,
       per_page: @per_page

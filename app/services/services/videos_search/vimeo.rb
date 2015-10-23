@@ -12,13 +12,22 @@ class Vimeo < BaseVideoService
   private
 
   def search
+     collection = client.search_videos(
+      @q,
+      page: @page,
+      per_page: @per_page
+    )
+    @result = filter_results(collection.items)
+  end
+
+  def search_with_filtered
     response = make_request
     items = response.try(:items) || response
     filtered = filter_results(items)
     @result.concat filtered
 
     if @result.count < @page * @per_page
-      search
+      search_with_filtered
     else
       @result.last(@per_page)
     end
@@ -26,7 +35,6 @@ class Vimeo < BaseVideoService
 
   def make_request
     if @collection.nil?
-      client = ::Vimeo::Client.new(access_token: ENV['VIMEO_TOKEN'])
       @collection = client.search_videos(
         @q,
         page: 1,
@@ -39,6 +47,11 @@ class Vimeo < BaseVideoService
 
   def filter_results(results)
     results.reject { |v| v.embed.html.nil? }
+  end
+
+  def client
+    @client ||=
+      ::Vimeo::Client.new(access_token: ENV['VIMEO_TOKEN'])
   end
 
 end

@@ -33,11 +33,14 @@ class Workout < BaseService
 
   def prepare_attributes
     to_include = %w(name description note video_url)
+    original = @workout.author == @user ? nil : @workout
     @workout.attributes.slice(*to_include).merge(
       is_public: false,
       is_visible: @is_visible,
       folder_id: prepare_folder,
-      author: @user
+      author: @workout.author,
+      user: @user,
+      original: original
     )
   end
 

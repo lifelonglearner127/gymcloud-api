@@ -18,7 +18,7 @@ namespace :exercise_results do
     if current_user.pro?
       recipient = exercise_result.person
     else
-      recipient = exercise_result.workout_exercise.exercise.author
+      recipient = exercise_result.workout_exercise.exercise.user
     end
     exercise_result.create_activity(
       action: :create,

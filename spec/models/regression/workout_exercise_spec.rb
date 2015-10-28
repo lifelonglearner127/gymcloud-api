@@ -5,6 +5,7 @@ RSpec.describe WorkoutExercise do
   # === Relations ===
   it { is_expected.to belong_to :exercise}
 	it { is_expected.to belong_to :workout}
+	it { is_expected.to belong_to :personal_workout}
   
   it { is_expected.to have_many :exercise_properties}
 	it { is_expected.to have_many :exercise_results}

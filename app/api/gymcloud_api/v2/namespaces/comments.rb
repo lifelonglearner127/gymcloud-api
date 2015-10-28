@@ -22,7 +22,7 @@ namespace :comments do
         recipient = comment.commentable.workout_event.person
       else
         recipient = comment.commentable.workout_event
-          .personal_workout.workout_template.author
+          .personal_workout.workout_template.user
       end
     end
     comment.create_activity(

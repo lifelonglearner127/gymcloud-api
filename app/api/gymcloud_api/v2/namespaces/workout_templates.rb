@@ -17,7 +17,7 @@ namespace :workout_templates do
     optional :is_visible, type: Boolean, default: 'true'
   end
   post do
-    attributes = filtered_params_with(author: current_user)
+    attributes = filtered_params_with(author: current_user, user: current_user)
     folder_id = current_user.folders.root.children
       .where(name: 'Workouts').pluck(:id).first
     workout_template = ::WorkoutTemplate.new(attributes)

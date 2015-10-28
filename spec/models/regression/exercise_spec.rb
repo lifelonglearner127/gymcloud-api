@@ -4,6 +4,8 @@ RSpec.describe Exercise do
 
   # === Relations ===
   it { is_expected.to belong_to :author}
+	it { is_expected.to belong_to :user}
+	it { is_expected.to belong_to :original}
 	it { is_expected.to belong_to :folder}
 	it { is_expected.to belong_to :video}
   
@@ -25,11 +27,15 @@ RSpec.describe Exercise do
 	it { is_expected.to have_db_column :folder_id }
 	it { is_expected.to have_db_column :deleted_at }
 	it { is_expected.to have_db_column :video_id }
+	it { is_expected.to have_db_column :user_id }
+	it { is_expected.to have_db_column :original_id }
 
   # === Database (Indexes) ===
   it { is_expected.to have_db_index ["author_id"]}
 	it { is_expected.to have_db_index ["deleted_at"]}
 	it { is_expected.to have_db_index ["folder_id"]}
+	it { is_expected.to have_db_index ["original_id"]}
+	it { is_expected.to have_db_index ["user_id"]}
 
   # === Validations (Length) ===
   it { is_expected.to allow_value(Faker::Lorem.characters(255)).for :name }

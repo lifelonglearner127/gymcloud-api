@@ -6,15 +6,15 @@ class AddUserIdToEwp < ActiveRecord::Migration
 
       add_column table, :original_id, :integer
       add_index table, :original_id
-      
+
       execute("update #{table} set user_id = author_id")
     end
   end
 
   def down
     %i(exercises workout_templates program_templates).each do |table|
-      rename_column table, :user_id, :email
-      rename_column table, :original_id, :email
+      remove_column table, :user_id, :email
+      remove_column table, :original_id, :email
     end
   end
 

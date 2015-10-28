@@ -48,6 +48,9 @@ gem 'carrierwave'
 gem 'carrierwave-aws'
 gem 'rmagick'
 
+gem 'stripe'
+gem 'stripe_event'
+
 # Then choose your preferred paginator from the following:
 gem 'kaminari' # will_paginate
 gem 'api-pagination'

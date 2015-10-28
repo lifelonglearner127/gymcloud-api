@@ -26,6 +26,8 @@ Rails.application.routes.draw do
     omniauth_callbacks: 'omniauth_callbacks'
   }
 
+  mount StripeEvent::Engine, at: '/webhooks/stripe'
+
   use_doorkeeper
 
   mount GymcloudAPI::API, at: '/'

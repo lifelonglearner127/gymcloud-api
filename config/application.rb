@@ -48,6 +48,9 @@ module GymcloudApi
       g.javascripts     false
     end
 
+    # NOTE: Stripe server IP
+    config.web_console.whitelisted_ips = '54.241.34.0/16'
+
     config.middleware.insert_before 0, "Rack::Cors" do
       allow do
         origins '*'

@@ -12,6 +12,8 @@
 #  updated_at  :datetime         not null
 #  folder_id   :integer
 #  deleted_at  :datetime
+#  user_id     :integer
+#  original_id :integer
 #
 
 class ProgramTemplate < ActiveRecord::Base
@@ -19,6 +21,8 @@ class ProgramTemplate < ActiveRecord::Base
   include SearchScopes::Training
 
   belongs_to :author, class_name: User
+  belongs_to :user
+  belongs_to :original, class_name: ProgramTemplate
   belongs_to :folder
   has_many :personal_programs
   has_many :program_workouts, as: :program

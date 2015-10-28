@@ -15,6 +15,8 @@
 #  is_visible  :boolean          default(TRUE)
 #  deleted_at  :datetime
 #  video_id    :integer
+#  user_id     :integer
+#  original_id :integer
 #
 
 class WorkoutTemplate < ActiveRecord::Base
@@ -22,6 +24,8 @@ class WorkoutTemplate < ActiveRecord::Base
   include SearchScopes::Training
 
   belongs_to :author, class_name: User
+  belongs_to :user
+  belongs_to :original, class_name: WorkoutTemplate
   belongs_to :folder
   belongs_to :video
   has_many :personal_workouts

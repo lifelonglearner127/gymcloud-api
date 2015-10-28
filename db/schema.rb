@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151008174301) do
+ActiveRecord::Schema.define(version: 20151028133618) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -154,11 +154,15 @@ ActiveRecord::Schema.define(version: 20151008174301) do
     t.integer  "folder_id"
     t.datetime "deleted_at"
     t.integer  "video_id"
+    t.integer  "user_id"
+    t.integer  "original_id"
   end
 
   add_index "exercises", ["author_id"], name: "index_exercises_on_author_id", using: :btree
   add_index "exercises", ["deleted_at"], name: "index_exercises_on_deleted_at", using: :btree
   add_index "exercises", ["folder_id"], name: "index_exercises_on_folder_id", using: :btree
+  add_index "exercises", ["original_id"], name: "index_exercises_on_original_id", using: :btree
+  add_index "exercises", ["user_id"], name: "index_exercises_on_user_id", using: :btree
 
   create_table "folder_hierarchies", id: false, force: :cascade do |t|
     t.integer "ancestor_id",   null: false
@@ -284,11 +288,15 @@ ActiveRecord::Schema.define(version: 20151008174301) do
     t.datetime "updated_at",  null: false
     t.integer  "folder_id"
     t.datetime "deleted_at"
+    t.integer  "user_id"
+    t.integer  "original_id"
   end
 
   add_index "program_templates", ["author_id"], name: "index_program_templates_on_author_id", using: :btree
   add_index "program_templates", ["deleted_at"], name: "index_program_templates_on_deleted_at", using: :btree
   add_index "program_templates", ["folder_id"], name: "index_program_templates_on_folder_id", using: :btree
+  add_index "program_templates", ["original_id"], name: "index_program_templates_on_original_id", using: :btree
+  add_index "program_templates", ["user_id"], name: "index_program_templates_on_user_id", using: :btree
 
   create_table "program_weeks", force: :cascade do |t|
     t.string   "name"
@@ -471,11 +479,15 @@ ActiveRecord::Schema.define(version: 20151008174301) do
     t.boolean  "is_visible",  default: true
     t.datetime "deleted_at"
     t.integer  "video_id"
+    t.integer  "user_id"
+    t.integer  "original_id"
   end
 
   add_index "workout_templates", ["author_id"], name: "index_workout_templates_on_author_id", using: :btree
   add_index "workout_templates", ["deleted_at"], name: "index_workout_templates_on_deleted_at", using: :btree
   add_index "workout_templates", ["folder_id"], name: "index_workout_templates_on_folder_id", using: :btree
+  add_index "workout_templates", ["original_id"], name: "index_workout_templates_on_original_id", using: :btree
+  add_index "workout_templates", ["user_id"], name: "index_workout_templates_on_user_id", using: :btree
 
   add_foreign_key "exercise_properties", "personal_properties"
   add_foreign_key "exercise_properties", "workout_exercises"

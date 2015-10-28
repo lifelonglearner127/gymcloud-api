@@ -13,6 +13,8 @@
 #  folder_id   :integer
 #  deleted_at  :datetime
 #  video_id    :integer
+#  user_id     :integer
+#  original_id :integer
 #
 
 class Exercise < ActiveRecord::Base
@@ -20,6 +22,8 @@ class Exercise < ActiveRecord::Base
   include SearchScopes::Training
 
   belongs_to :author, class_name: User
+  belongs_to :user
+  belongs_to :original, class_name: Exercise
   belongs_to :folder
   belongs_to :video
   has_many :workout_exercises

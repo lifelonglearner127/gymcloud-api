@@ -18,7 +18,7 @@ namespace :workout_events do
     if current_user.pro?
       recipient = event.person
     else
-      recipient = event.personal_workout.workout_template.author
+      recipient = event.personal_workout.workout_template.user
     end
     event.create_activity(
       action: :create,

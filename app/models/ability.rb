@@ -46,6 +46,9 @@ class Ability
     as_self_can :update, User
     can :read, UserProfile
     as_owner_can :update, UserProfile
+    can [:create, :read, :destroy], Exercise, user_id: @user.id
+    can [:create, :read, :destroy], WorkoutTemplate, user_id: @user.id
+    can [:create, :read, :destroy], ProgramTemplate, user_id: @user.id
     as_author_can :crud, Exercise
     as_author_can :crud, WorkoutTemplate
     as_author_can :crud, ProgramTemplate
@@ -68,7 +71,7 @@ class Ability
     can :read, Comment do |comment|
       case comment.commentable_type
       when 'WorkoutEventExercise'
-        comment.commentable.workout_event.personal_workout.workout_template.author.id.in?(@user.pro_ids) &&
+        comment.commentable.workout_event.personal_workout.workout_template.user.id.in?(@user.pro_ids) &&
         comment.commentable.workout_event.person.id == @user.id
       end
     end
@@ -86,6 +89,12 @@ class Ability
       program_type: 'ProgramTemplate',
       workout_id: @user.workout_template_ids,
       workout_type: 'WorkoutTemplate'
+    can :read, ProgramWeek do |pw|
+      case pw.program_type
+      when 'ProgramTemplate'
+        pw.program.user_id == @user.id
+      end
+    end
     can :crud, ProgramWeek do |pw|
       case pw.program_type
       when 'ProgramTemplate'
@@ -118,7 +127,13 @@ class Ability
       case comment.commentable_type
       when 'WorkoutEventExercise'
         comment.commentable.workout_event.person.id.in?(@user.client_ids) &&
-        comment.commentable.workout_event.personal_workout.workout_template.author.id == @user.id
+        comment.commentable.workout_event.personal_workout.workout_template.user.id == @user.id
+      end
+    end
+    can :read, WorkoutExercise do |we|
+      case we.workout_type
+      when 'WorkoutTemplate'
+        we.workout.user_id == @user.id
       end
     end
     can :crud, WorkoutExercise do |we|

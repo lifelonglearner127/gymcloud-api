@@ -39,7 +39,7 @@ class WorkoutEvent < ActiveRecord::Base
     joins { personal_workout.workout_template }
       .where do
         (personal_workout.person_id >> user.clients.pluck(:id)) &
-        (personal_workout.workout_template.author_id == user.id) |
+        (personal_workout.workout_template.user_id == user.id) |
         (personal_workout.person_id >> user.id)
       end
   end)

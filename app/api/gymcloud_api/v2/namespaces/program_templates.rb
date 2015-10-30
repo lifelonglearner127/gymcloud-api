@@ -14,7 +14,7 @@ namespace :program_templates do
     optional :is_public, type: Boolean, default: 'false'
   end
   post do
-    attributes = filtered_params_with(author: current_user)
+    attributes = filtered_params_with(author: current_user, user: current_user)
     folder_id = current_user.folders.root.children
       .where(name: 'Programs').pluck(:id).first
     program_template = ::ProgramTemplate.new(attributes)

@@ -36,10 +36,13 @@ class Program < BaseService
 
   def prepare_attributes
     to_include = %w(name description note video_url)
+    original = @program.author == @user ? nil : @program
     @program.attributes.slice(*to_include).merge(
       is_public: false,
       folder_id: prepare_folder,
-      author: @user
+      author: @program.author,
+      user: @user,
+      original: original
     )
   end
 

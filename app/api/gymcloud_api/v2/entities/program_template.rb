@@ -8,6 +8,7 @@ class ProgramTemplate < Grape::Entity
   expose :description
   expose :note
   expose :is_public
+  expose :user_id
   expose :author_id
   expose :author_full_name do |template|
     profile = template.author.user_profile

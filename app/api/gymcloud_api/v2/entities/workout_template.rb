@@ -10,6 +10,7 @@ class WorkoutTemplate < Grape::Entity
   expose :video_url
   expose :is_public
   expose :is_visible
+  expose :user_id
   expose :author_id
   expose :author_full_name do |template|
     profile = template.author.user_profile

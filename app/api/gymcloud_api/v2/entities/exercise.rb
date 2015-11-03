@@ -9,6 +9,7 @@ class Exercise < Grape::Entity
   expose :video_url
   expose :folder_id
   expose :is_public
+  expose :user_id
   expose :author_id
   expose :author_full_name do |exercise|
     profile = exercise.author.user_profile

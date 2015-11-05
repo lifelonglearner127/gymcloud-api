@@ -35,4 +35,15 @@ class ProgramTemplate < ActiveRecord::Base
   has_paper_trail
   acts_as_paranoid
 
+  scope :assigned_to_group, (lambda do |client_group|
+    ids = client_group.clients.pluck(:id).to_a
+    active_status = ::PersonalProgram.statuses[:active]
+
+    joins { personal_programs }
+    .where { personal_programs.person_id >> my { ids } }
+    .where { personal_programs.status == my { active_status } }
+    .group { program_templates.id }
+    .having { count(personal_programs.person_id) == my { ids.length } }
+  end)
+
 end

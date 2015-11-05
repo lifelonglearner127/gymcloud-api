@@ -42,4 +42,15 @@ class WorkoutTemplate < ActiveRecord::Base
   scope :is_visible, -> { where(is_visible: :true) }
   scope :is_invisible, -> { where(is_visible: :false) }
 
+  scope :assigned_to_group, (lambda do |client_group|
+    ids = client_group.clients.pluck(:id).to_a
+    active_status = ::PersonalWorkout.statuses[:active]
+
+    joins { personal_workouts }
+    .where { personal_workouts.person_id >> my { ids } }
+    .where { personal_workouts.status == my { active_status } }
+    .group { workout_templates.id }
+    .having { count(personal_workouts.person_id) == my { ids.length } }
+  end)
+
 end

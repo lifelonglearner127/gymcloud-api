@@ -41,7 +41,8 @@ namespace :videos do
   desc 'Retrieve videos'
   paginate per_page: 50, max_per_page: 50
   get do
-    present(paginate(Video.all), with: Entities::Video)
+    videos = Video.owned_by(current_user.id).all
+    present(paginate(videos), with: Entities::Video)
   end
 
   desc 'Create new video and uploading it to Vimeo'

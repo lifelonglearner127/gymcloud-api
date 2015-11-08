@@ -30,13 +30,13 @@ class WorkoutTemplate < Grape::Entity
   do |template|
     ::PersonalWorkout
       .where(workout_template_id: template.id)
-      .assigned_by(template.author)
+      .assigned_by(template.user)
   end
   expose :group_assignments,
     if: {nested: true},
     using: Entities::ClientGroupAssignment \
   do |template|
-    ::ClientGroup.where(pro: template.author).with_assinged_count_for(template)
+    ::ClientGroup.where(pro: template.user).with_assinged_count_for(template)
   end
 
 end

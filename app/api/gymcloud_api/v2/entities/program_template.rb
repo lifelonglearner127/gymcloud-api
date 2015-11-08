@@ -32,13 +32,13 @@ class ProgramTemplate < Grape::Entity
   do |template|
     ::PersonalProgram
       .where(program_template_id: template.id)
-      .assigned_by(template.author)
+      .assigned_by(template.user)
   end
   expose :group_assignments,
     if: {nested: true},
     using: Entities::ClientGroupAssignment \
   do |template|
-    ::ClientGroup.where(pro: template.author).with_assinged_count_for(template)
+    ::ClientGroup.where(pro: template.user).with_assinged_count_for(template)
   end
 
 end

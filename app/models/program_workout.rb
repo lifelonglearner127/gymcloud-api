@@ -25,6 +25,7 @@ class ProgramWorkout < ActiveRecord::Base
   belongs_to :workout, -> { with_deleted }, polymorphic: true
   belongs_to :program, -> { with_deleted }, polymorphic: true
   belongs_to :week, class_name: 'ProgramWeek'
+  has_many :workout_exercises, through: :workout
 
   validates :workout_id, :program_id, presence: true
   validates :workout_type,

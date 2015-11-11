@@ -13,7 +13,7 @@ Rails.application.routes.draw do
 
   devise_for :users, controllers: {
     registrations: 'registrations',
-    invitations: 'devise/invitations',
+    invitations: 'invitations',
     passwords: 'passwords'
   }
 

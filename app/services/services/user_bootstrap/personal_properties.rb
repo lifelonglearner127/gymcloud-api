@@ -20,15 +20,15 @@ class PersonalProperties < BaseService
   end
 
   def bootstrap_personal_property(global_property, position)
-    ::PersonalProperty \
-      .create_with(
-        global_property: global_property,
-        person: @user
-      )
-      .find_or_create_by(
-        position: position,
-        is_visible: true
-      )
+    property = ::PersonalProperty.find_or_create_by(
+      global_property: global_property,
+      person: @user
+    )
+    property.update_attributes(
+      position: position,
+      is_visible: true
+    )
+    property.save!
   end
 
 end

@@ -1,0 +1,27 @@
+doctype html
+html
+  head
+    meta content='text/html; charset=UTF-8' http-equiv='Content-Type'
+    link rel="stylesheet" href="/assets/letter_design.css"
+  body.email
+    table.content
+      tr
+        td.upper-small-text
+          .welcome
+            | Welcome to GymCloud - online training tool
+          .view-in-browser
+            | View this email in your browser
+
+      = yield
+
+      tr
+        td align="center"
+          p.bottom-text
+            a> href='#'
+              | Unsubscribe
+            | from this list or
+            a<> href='#'
+              | Update
+            | subscription preferences
+            br
+            | Copyright &copy; 2013 GymCloud, All rights reserved

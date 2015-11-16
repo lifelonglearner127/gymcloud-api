@@ -16,7 +16,6 @@ class Invite < BaseService
   def invite
     email = @email.presence || !user_email_is_fake? && @user.email
     @user.update_column('email', email) if email && @user.email != email
-
     @user.invite!(@current_user) if email
   end
 

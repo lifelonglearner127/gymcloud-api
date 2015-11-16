@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'preview/invitation_instructions'
+
   if Rails.env.development?
     require 'sidekiq/web'
     mount Sidekiq::Web => '/sidekiq'

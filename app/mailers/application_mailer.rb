@@ -1,6 +1,5 @@
 class ApplicationMailer < ActionMailer::Base
-
-  default from: ENV.fetch('MAILER_EMAIL')
-  layout 'mailer'
-
+  default from: ENV['MAILER_EMAIL'] 
+  layout 'html_mailer'
+  include InlineImages
 end

@@ -88,3 +88,4 @@ pickle-email-*.html
 .c9
 
 spec/examples.txt
+*.rdb

@@ -28,6 +28,7 @@ class Create < BaseService
     client = build_client
     client.skip_confirmation!
     client.save!
+    client.update_attribute('confirmed_at', nil)
     Services::UserBootstrap::UserProfile.!(user: client)
     profile_attrs = @attrs.slice('first_name', 'last_name')
     client.user_profile.update_attributes!(profile_attrs)

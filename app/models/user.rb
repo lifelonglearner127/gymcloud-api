@@ -101,7 +101,6 @@ class User < ActiveRecord::Base
   private
 
   def on_invitation_accepted
-    confirm!
     create_activity(
       action: :invitation_accepted,
       owner: self,

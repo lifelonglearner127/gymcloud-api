@@ -3,12 +3,12 @@ require 'rails_helper'
 RSpec.describe GlobalProperty do
 
   # === Relations ===
-  
-  
+
+
   it { is_expected.to have_many :personal_properties}
 
   # === Nested Attributes ===
-  
+
 
   # === Database (Columns) ===
   it { is_expected.to have_db_column :id }
@@ -33,15 +33,14 @@ RSpec.describe GlobalProperty do
 
   # === Validations (Presence) ===
   it { is_expected.to validate_presence_of :name }
-	it { is_expected.to validate_presence_of :unit }
 	it { is_expected.to validate_presence_of :symbol }
 	it { is_expected.to validate_presence_of :position }
 
   # === Validations (Numericality) ===
-  
 
-  
+
+
   # === Enums ===
-  
-  
+
+
 end

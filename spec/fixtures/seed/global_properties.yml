@@ -2,30 +2,55 @@
   -
     symbol: "sets"
     name: "Sets"
-    unit: "times"
+    unit: ""
     position: 0
   -
     symbol: "reps"
     name: "Reps"
-    unit: "times"
+    unit: ""
     position: 1
   -
     symbol: "weight"
     name: "Weight"
-    unit: "kg"
+    unit: "lbs"
     position: 2
   -
     symbol: "height"
     name: "Height"
-    unit: "cm"
+    unit: "in"
     position: 3
   -
     symbol: "distance"
     name: "Distance"
-    unit: "m"
+    unit: "ft"
     position: 4
   -
     symbol: "time"
     name: "Time"
     unit: "s"
     position: 5
+  -
+    symbol: "heart_rate"
+    name: "Heart rate"
+    unit: "bpm"
+    position: 6
+  -
+    symbol: "intervals"
+    name: "Intervals"
+    unit: "s"
+    position: 7
+  -
+    symbol: "rest_period"
+    name: "Rest period"
+    unit: "s"
+    position: 8
+  -
+    symbol: "rounds"
+    name: "Rounds"
+    unit: ""
+    position: 9
+  -
+    symbol: "percentage"
+    name: "Percentage"
+    unit: "%"
+    position: 10

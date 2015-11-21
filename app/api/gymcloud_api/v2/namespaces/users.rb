@@ -68,7 +68,7 @@ namespace :users do
 
       %i(
         pros clients client_groups
-        exercises workout_templates program_templates
+        exercises program_templates
         personal_properties
         folders
       ).each do |collection|
@@ -83,6 +83,17 @@ namespace :users do
             entity = "GymcloudAPI::V2::Entities::#{klass.name}".constantize
             present(result, with: entity)
           end
+        end
+      end
+
+      resource :workout_templates do
+        desc "Fetch Workout Templates"
+        get do
+          user = ::User.find(params[:id])
+          workout_templates = user.workout_templates.is_visible
+          authorize!(:read, workout_templates.build)
+          workout_templates.reset
+          present(workout_templates, with: Entities::WorkoutTemplate)
         end
       end
 

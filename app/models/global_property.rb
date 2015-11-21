@@ -15,7 +15,7 @@ class GlobalProperty < ActiveRecord::Base
 
   has_many :personal_properties, dependent: :destroy
 
-  validates :name, :unit, :symbol, :position, presence: true
+  validates :name, :symbol, :position, presence: true
   validates :symbol, :position, uniqueness: true
   validates :symbol, :name, :unit, length: {maximum: 255}
 

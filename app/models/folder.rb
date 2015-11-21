@@ -16,7 +16,7 @@ class Folder < ActiveRecord::Base
 
   belongs_to :user
   has_many :exercises
-  has_many :workout_templates
+  has_many :workout_templates, -> { is_visible }
   has_many :program_templates
 
   validates :name, :user_id, presence: true

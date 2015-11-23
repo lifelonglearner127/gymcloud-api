@@ -52,3 +52,6 @@ Style/MultilineOperationIndentation:
 
 Style/AlignParameters:
   EnforcedStyle: with_fixed_indentation
+
+Metrics/AbcSize:
+  Enabled: false

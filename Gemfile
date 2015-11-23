@@ -10,6 +10,7 @@ gem 'seedbank'
 
 gem 'devise'
 gem 'devise_invitable'
+gem 'devise-async'
 gem 'omniauth'
 gem 'omniauth-oauth2'
 gem 'omniauth-facebook'
@@ -45,6 +46,7 @@ gem 'ransack', '1.6.5'
 gem 'carrierwave'
 gem 'carrierwave-aws'
 gem 'rmagick'
+gem 'slim'
 
 # Then choose your preferred paginator from the following:
 gem 'kaminari' # will_paginate

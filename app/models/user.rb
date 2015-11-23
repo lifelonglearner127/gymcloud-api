@@ -37,7 +37,8 @@ class User < ActiveRecord::Base
     :database_authenticatable, :registerable,
     :recoverable, :rememberable,
     :trackable, :validatable,
-    :confirmable, :invitable
+    :confirmable, :invitable,
+    :async
 
   acts_as_reader
 

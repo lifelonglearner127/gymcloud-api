@@ -171,6 +171,8 @@ GEM
       responders
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
+    devise-async (0.10.1)
+      devise (~> 3.2)
     devise_invitable (1.5.2)
       actionmailer (>= 3.2.6, < 5)
       devise (>= 3.2.0)
@@ -517,6 +519,9 @@ GEM
       rack (~> 1.4)
       rack-protection (~> 1.4)
       tilt (>= 1.3, < 3)
+    slim (3.0.6)
+      temple (~> 0.7.3)
+      tilt (>= 1.3.3, < 2.1)
     slop (3.6.0)
     spoon (0.0.4)
       ffi
@@ -531,6 +536,7 @@ GEM
       activerecord (>= 3.0)
       activesupport (>= 3.0)
       polyamorous (~> 1.1.0)
+    temple (0.7.6)
     thin (1.6.3)
       daemons (~> 1.0, >= 1.0.9)
       eventmachine (~> 1.0)
@@ -584,6 +590,7 @@ DEPENDENCIES
   consistency_fail
   database_cleaner
   devise
+  devise-async
   devise_invitable
   doorkeeper
   dotenv-rails
@@ -634,6 +641,7 @@ DEPENDENCIES
   shoulda-matchers
   sidekiq
   sinatra
+  slim
   spring
   squeel (~> 1.2.3)
   thin

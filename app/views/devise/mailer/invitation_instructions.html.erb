@@ -1,6 +1,6 @@
 <p><%= t("devise.mailer.invitation_instructions.hello", email: @resource.email) %></p>
 
 <p><%= t("devise.mailer.invitation_instructions.someone_invited_you", url: root_url) %></p>
-<p><%= link_to t("devise.mailer.invitation_instructions.accept"), "http://app2.s.gymcloud.com/#signup?invitation_token=#{@token}&first_name=#{@resource.user_profile.first_name}&last_name=#{@resource.user_profile.last_name}&email=#{@resource.email}&client_id=#{@resource.id}&user_profile_id=#{@resource.user_profile.id}" %></p>
+<p><%= link_to t("devise.mailer.invitation_instructions.accept"), "http://#{ENV['DOMAIN_WEBAPP']}/#signup?invitation_token=#{@token}&first_name=#{@resource.user_profile.first_name}&last_name=#{@resource.user_profile.last_name}&email=#{@resource.email}&client_id=#{@resource.id}&user_profile_id=#{@resource.user_profile.id}" %></p>
 
 <p><%= t("devise.mailer.invitation_instructions.ignore").html_safe %></p>

@@ -46,7 +46,6 @@ gem 'ransack', '1.6.5'
 gem 'carrierwave'
 gem 'carrierwave-aws'
 gem 'rmagick'
-gem 'slim'
 
 # Then choose your preferred paginator from the following:
 gem 'kaminari' # will_paginate
@@ -78,7 +77,7 @@ group :development do
   gem 'guard-annotate', require: false
   gem 'guard-consistency_fail', require: false
   gem 'guard-regressor', github: 'patrick-nits/guard-regressor', require: false
-  gem 'pry-rails'#, require: false
+  gem 'pry-rails'
 end
 
 group :test do

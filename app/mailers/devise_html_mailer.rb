@@ -7,7 +7,7 @@ class DeviseHtmlMailer < Devise::Mailer
   default from: ENV['MAILER_EMAIL']
   default template_path: 'devise_html_mailer'
 
-  def invitation_instructions(record, token, opts={})
+  def invitation_instructions(record, token, opts = {})
     @token = token
     inline_images(
       'logo-white.png',

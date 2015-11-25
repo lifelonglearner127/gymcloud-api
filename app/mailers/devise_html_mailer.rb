@@ -9,8 +9,11 @@ class DeviseHtmlMailer < Devise::Mailer
 
   def invitation_instructions(record, token, opts={})
     @token = token
-    inline_images('logo-white.png', 'get-started-arrow.png',
-     'blue-bg-with-icons.jpg')
+    inline_images(
+      'logo-white.png',
+      'get-started-arrow.png',
+      'blue-bg-with-icons.jpg'
+    )
     devise_mail(record, :invitation_instructions, opts)
   end
 end

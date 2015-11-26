@@ -1,12 +1,11 @@
 Rails.application.routes.draw do
 
-  get 'preview/invitation_instructions'
-
   if Rails.env.development?
     require 'sidekiq/web'
-    mount Sidekiq::Web => '/sidekiq'
+    mount Sidekiq::Web, at: '/sidekiq'
 
     mount LetterOpenerWeb::Engine, at: '/letter_opener'
+    get 'preview/invitation_instructions'
   end
 
   ActiveAdmin.routes(self)

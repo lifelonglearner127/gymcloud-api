@@ -8,7 +8,7 @@ tr
     .ready-to-get-started
       | Ready to get started? Sign up and get started using the system
 
-    a.get-started-button href="http://#{ENV['DOMAIN_WEBAPP']}/#signup?invitation_token=#{@token}&first_name=#{@resource.user_profile.first_name}&last_name=#{@resource.user_profile.last_name}&email=#{@resource.email}&client_id=#{@resource.id}&user_profile_id=#{@resource.user_profile.id}"
+    a.get-started-button href=inivitation_url(@token, @resource)
       span.phrase
         | GET STARTED
       =image_tag attachments['get-started-arrow.png'].url

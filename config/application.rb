@@ -39,6 +39,7 @@ module GymcloudApi
         config.paths.add File.join('app', folder), glob: File.join('**', '*.rb')
         config.autoload_paths += Dir[Rails.root.join('app', folder, '*')]
       end
+      config.autoload_paths += %W( #{config.root}/app/mailers/concerns )
 
     config.generators do |g|
       g.test_framework  false

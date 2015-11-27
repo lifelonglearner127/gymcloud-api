@@ -1,0 +1,14 @@
+tr
+  td.top-block align="center" style="background-image: url(#{attachments['blue-bg-with-icons.jpg'].url}); "
+    = image_tag attachments['logo-white.png'].url
+    .you-invited
+      | You've been invited to GymCloud
+tr
+  td.bottom-block align="center"
+    .ready-to-get-started
+      | Ready to get started? Sign up and get started using the system
+
+    a.get-started-button href=inivitation_url(@token, @resource)
+      span.phrase
+        | GET STARTED
+      =image_tag attachments['get-started-arrow.png'].url

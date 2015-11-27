@@ -11,7 +11,7 @@ class RegistrationsController < Devise::RegistrationsController
     # resource.skip_confirmation!
     resource.save!
     resource.become_a_pro!
-    UserMailer.delay.welcome_new_user(resource.id)
+    HtmlMailer.delay.welcome_new_user(resource.id)
     Services::UserBootstrap::All.!(user: resource)
     entity = {id: resource.id, user_profile: {id: resource.user_profile.id}}
 

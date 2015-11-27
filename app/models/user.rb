@@ -43,6 +43,9 @@ class User < ActiveRecord::Base
   acts_as_reader
 
   has_one :user_profile
+  has_many :authentications,
+    class_name: 'UserAuthentication',
+    dependent: :destroy
   has_many :agreements_as_pro, class_name: UserAgreement, foreign_key: :pro_id
   has_many :agreements_as_client,
     class_name: UserAgreement,
@@ -97,6 +100,15 @@ class User < ActiveRecord::Base
       result
     end
     tree.map(&parser)
+  end
+
+  def self.create_from_omniauth(params)
+    attributes = {
+      email: params.emails.first.value,
+      password: Devise.friendly_token
+    }
+
+    create(attributes)
   end
 
   private

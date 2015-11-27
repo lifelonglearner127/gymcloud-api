@@ -22,6 +22,7 @@ class PersonalProgram < ActiveRecord::Base
   belongs_to :program_template, -> { with_deleted }
   belongs_to :person, class_name: User
   has_one :author, through: :program_template
+  has_one :user, through: :program_template
   has_many :program_workouts, as: :program
   has_many :program_weeks, as: :program
 

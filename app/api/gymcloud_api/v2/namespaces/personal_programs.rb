@@ -19,6 +19,7 @@ namespace :personal_programs do
     )
     authorize!(:create, service.build_personal)
     program = service.process.result
+    HtmlMailer.delay.program_assigned(user.id, program.id)
     program.create_activity(
       action: :create,
       owner: current_user,

@@ -30,4 +30,8 @@ class UserProfile < ActiveRecord::Base
 
   enum gender: [:female, :male]
 
+  def full_name
+    [first_name, last_name].compact.join(' ')
+  end
+
 end

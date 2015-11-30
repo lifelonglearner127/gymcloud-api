@@ -19,4 +19,15 @@ module InlineImages
     inline_images(images)
   end
 
+  def each_template(paths, name, &block) #:nodoc:
+    templates = lookup_context.find_all(name, paths)
+    if templates.empty?
+      fail ActionView::MissingTemplate.new(paths, name, paths, false, 'mailer')
+    else
+      templates = templates.uniq(&:formats)
+      attach_images(templates.first.identifier)
+      templates.each(&block)
+    end
+  end
+
 end

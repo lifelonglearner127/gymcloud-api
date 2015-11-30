@@ -10,8 +10,7 @@ class Notification < Grape::Entity
   expose :trackable_type
   expose :key
   expose :owner_full_name do |notification|
-    profile = notification.owner.user_profile
-    [profile.first_name, profile.last_name].compact.join(' ')
+    notification.owner.user_profile.full_name
   end
   expose :parent do |notification|
     next({}) if notification.trackable.nil?

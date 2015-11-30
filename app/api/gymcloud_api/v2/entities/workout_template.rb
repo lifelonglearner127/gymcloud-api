@@ -13,8 +13,7 @@ class WorkoutTemplate < Grape::Entity
   expose :user_id
   expose :author_id
   expose :author_full_name do |template|
-    profile = template.author.user_profile
-    [profile.first_name, profile.last_name].compact.join(' ')
+    template.author.user_profile.full_name
   end
   expose :folder_id
   expose :version do |template|

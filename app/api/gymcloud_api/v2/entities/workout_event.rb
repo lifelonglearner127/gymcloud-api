@@ -12,8 +12,7 @@ class WorkoutEvent < Grape::Entity
     event.personal_workout.person.id
   end
   expose :person_name do |event|
-    profile = event.personal_workout.person.user_profile
-    [profile.first_name, profile.last_name].compact.join(' ')
+    event.personal_workout.person.user_profile.full_name
   end
   expose :workout_name do |event|
     event.personal_workout.name

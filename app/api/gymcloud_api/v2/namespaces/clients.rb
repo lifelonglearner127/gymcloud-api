@@ -23,6 +23,22 @@ namespace :clients do
     present(client, with: Entities::User)
   end
 
+  desc 'Delete Client' do
+    success Entities::UserAgreement
+  end
+  params do
+    requires :id, type: Integer, desc: 'Client ID'
+  end
+  delete :id do
+    user_agreement = ::UserAgreement.find_by!(
+      client_id: params[:id],
+      pro: current_user
+    )
+    user_agreement.status = :finished
+    user_agreement.save!
+    present(user_agreement, with: Entities::UserAgreement)
+  end
+
 end
 
 end

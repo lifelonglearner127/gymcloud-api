@@ -24,6 +24,7 @@ namespace :personal_workouts do
       owner: current_user,
       recipient: workout.person
     )
+    HtmlMailer.delay.workout_assigned(user.id, workout.id)
     present(workout, with: Entities::PersonalWorkout)
   end
 

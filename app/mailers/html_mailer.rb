@@ -1,6 +1,6 @@
 class HtmlMailer < ApplicationMailer
 
-  layout 'html_mailer'
+  layout 'zurb'
 
   def welcome_new_user(user_id)
     @user = ::User.find(user_id)

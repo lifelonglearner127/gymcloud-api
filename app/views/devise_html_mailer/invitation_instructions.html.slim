@@ -1,8 +1,11 @@
 tr
   td.top-block align="center" style="background-image: url(#{attachments['blue-bg-with-icons.jpg'].url}); "
-    = image_tag attachments['logo-white.png'].url
-    .you-invited
-      | You've been invited to GymCloud
+    table.twelve.columns height='267' width='100%' background=attachments['blue-bg-with-icons.jpg'].url
+      tr
+        td.center.header align='center' valign='middle'
+          = image_tag attachments['logo-white.png'].url
+          .you-invited
+            | You've been invited to GymCloud
 tr
   td.bottom-block align="center"
     .ready-to-get-started

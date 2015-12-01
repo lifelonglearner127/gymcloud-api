@@ -15,7 +15,7 @@ class Invite < BaseService
 
   def invite
     email = @email.presence || !user_email_is_fake? && @user.email
-    @user.update_column('email', email) if email && @user.email != email
+    update_email(email) if email && @user.email != email
     @user.invite!(@current_user) if email
   end
 
@@ -23,6 +23,16 @@ class Invite < BaseService
     /^u\+\w*@gymcloud\.com$/
       .match(@user.email)
       .present?
+  end
+
+  def update_email(email)
+    @user.email = email
+    if @user.valid?
+      @user.restore_attributes
+      @user.update_column('email', email)
+    else
+      @user.save! # will raise proper exception
+    end
   end
 
 end

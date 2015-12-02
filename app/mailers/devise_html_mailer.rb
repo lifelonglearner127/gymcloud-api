@@ -2,7 +2,7 @@ class DeviseHtmlMailer < Devise::Mailer
   include Devise::Controllers::UrlHelpers
   include InlineImages
 
-  layout 'html_mailer'
+  layout 'zurb'
   helper :mailer
   default from: ENV['MAILER_EMAIL']
   default template_path: 'devise_html_mailer'

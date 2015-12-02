@@ -581,6 +581,8 @@ GEM
       rails (>= 3.2.16)
     yt (0.25.2)
       activesupport
+    zurb-ink (1.0.5)
+      sass-rails (~> 5.0)
 
 PLATFORMS
   ruby
@@ -662,6 +664,7 @@ DEPENDENCIES
   vimeo!
   web-console (~> 2.0)
   yt
+  zurb-ink
 
 BUNDLED WITH
    1.10.6

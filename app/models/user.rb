@@ -38,7 +38,7 @@ class User < ActiveRecord::Base
     :recoverable, :rememberable,
     :trackable, :validatable,
     :confirmable, :invitable,
-    :async
+    :async, :omniauthable, omniauth_providers: [:google_oauth2]
 
   acts_as_reader
 

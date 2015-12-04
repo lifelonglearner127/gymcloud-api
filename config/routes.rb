@@ -15,13 +15,14 @@ Rails.application.routes.draw do
   devise_for :users, controllers: {
     registrations: 'registrations',
     invitations: 'invitations',
-    passwords: 'passwords'
+    passwords: 'passwords',
+    omniauth_callbacks: "omniauth_callbacks"
   }
 
   use_doorkeeper
 
-  mount GymcloudAPI::API => '/'
-  mount GrapeSwaggerRails::Engine => '/swagger'
+  mount GymcloudAPI::API, at: '/'
+  mount GrapeSwaggerRails::Engine, at: '/swagger'
 
   root to: 'devise/registrations#new'
 

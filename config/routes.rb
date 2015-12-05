@@ -16,7 +16,7 @@ Rails.application.routes.draw do
     registrations: 'registrations',
     invitations: 'invitations',
     passwords: 'passwords',
-    omniauth_callbacks: "omniauth_callbacks"
+    omniauth_callbacks: 'omniauth_callbacks'
   }
 
   use_doorkeeper

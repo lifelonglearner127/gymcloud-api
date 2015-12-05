@@ -2,10 +2,12 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   skip_before_filter :protect_from_forgery
 
+  def facebook
+    social
+  end
+
   def google_oauth2
-      info = request.env['omniauth.auth'].info
-      @user = ::User.find_by(email: info.email) || new_user(info)
-      render json: {access_token: access_token.token}
+    social
   end
 
   def failure
@@ -13,6 +15,13 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
   private
+
+  def social
+    info = request.env['omniauth.auth'].info
+    info.first_name, info.last_name = info.name.split(/\s+/) if info.try(:name)
+    @user = ::User.find_by(email: info.email) || new_user(info)
+    render json: {access_token: access_token.token}
+  end
 
   def access_token
     Doorkeeper::AccessToken.find_or_create_by!(

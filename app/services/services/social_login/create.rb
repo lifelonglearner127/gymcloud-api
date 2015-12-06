@@ -17,10 +17,10 @@ class Create < BaseService
     provider = ::AuthenticationProvider.where(name: @provider).first
     authentication = provider.user_authentications.where(uid: @attrs.id).first
     existing_user = ::User.where('email = ?', @attrs.emails.first.value).first
-    process_user(authentication, existing_user)
+    process_user(authentication, existing_user, provider)
   end
 
-  def process_user(authentication, existing_user)
+  def process_user(authentication, existing_user, provider)
     if authentication
       sign_in_with_existing_authentication(authentication)
     elsif existing_user

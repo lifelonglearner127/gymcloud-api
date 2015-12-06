@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  match '/users/auth/google_oauth2/callback',
+    to: 'oauth2#mobile_google_oauth2',
+    via: [:get, :post]
+
   if Rails.env.development?
     require 'sidekiq/web'
     mount Sidekiq::Web, at: '/sidekiq'

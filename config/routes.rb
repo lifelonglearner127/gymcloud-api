@@ -24,8 +24,8 @@ Rails.application.routes.draw do
 
   use_doorkeeper
 
-  mount GymcloudAPI::API => '/'
-  mount GrapeSwaggerRails::Engine => '/swagger'
+  mount GymcloudAPI::API, at: '/'
+  mount GrapeSwaggerRails::Engine, at: '/swagger'
 
   root to: 'devise/registrations#new'
 

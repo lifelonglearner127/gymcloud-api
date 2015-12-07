@@ -20,4 +20,11 @@ module MailerHelper
     "http://#{webapp_domain}/#personal_programs/#{id}"
   end
 
+  def personal_workout_url(id)
+    "http://#{webapp_domain}/#personal_workouts/#{id}"
+  end
+
+  def cool_readable_date(date)
+    date.strftime('%B %-d, %Y at %I:%M %p')
+  end
 end

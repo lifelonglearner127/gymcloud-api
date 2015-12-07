@@ -15,6 +15,9 @@ namespace :exercise_results do
     exercise_result = ::ExerciseResult.new(filtered_params)
     authorize!(:create, exercise_result)
     exercise_result.save!
+
+    HtmlMailer.delay.results_added(exercise_result.person.id, exercise_result.id)
+    
     if current_user.pro?
       recipient = exercise_result.person
     else

@@ -1,0 +1,24 @@
+tr
+  td.logo-container
+    = image_tag attachments['gymcloud-flat-logo.png'].url
+tr
+  td.top-block-small align="center" style="background-image: url(#{attachments['blue-bg-with-icons.jpg'].url}); "
+    table.six.columns background=attachments['blue-bg-with-icons.jpg'].url height="100px"
+      tr
+        td.center valign="middle"
+          = image_tag attachments['event-email-icon.png'].url
+        td.title.center
+          | Results Added
+tr
+  td.bottom-block align="center"
+    center
+      - if @result.person.user_profile.avatar.large.url
+        img src=@result.person.user_profile.avatar.large.url
+      .message
+        | #{@result.person.user_profile.full_name} added results to
+        a<> href="#"
+          | #{@result.workout_event.personal_workout.name}
+        | Workout
+
+      a.blue-border-button href="#"
+        | CHECK RESULTS

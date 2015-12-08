@@ -12,8 +12,8 @@ tr
 tr
   td.bottom-block align="center"
     center
-      - if @event.personal_workout.user.user_profile.avatar.large.url
-        img src=@event.personal_workout.user.user_profile.avatar.large.url
+      - if @event.personal_workout.user.user_profile.avatar.thumb.url
+        img src=@event.personal_workout.user.user_profile.avatar.thumb.url
       .message
         | #{@event.personal_workout.user.user_profile.full_name} changed event
         a<> href="#"

@@ -8,9 +8,9 @@ class OmniAuth::Strategies::OAuth2
     # see ActionDispatch::Http::Parameters#parameters
     parsed_params = env['action_dispatch.request.request_parameters']
     if parsed_params
-      request.params['code'] = parsed_params['code'] if parsed_params['code']
-      request.params['access_token'] = parsed_params['access_token'] if parsed_params['access_token']
-      request.params['id_token'] = parsed_params['id_token'] if parsed_params['id_token'] # used by Google
+      %w(code access_token id_token).each do |attr|
+        request.params[attr] = parsed_params[attr] if parsed_params[attr]
+      end
     end
     callback_phase_without_json
   end

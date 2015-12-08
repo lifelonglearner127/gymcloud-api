@@ -12,7 +12,7 @@ class BaseVideoService < BaseService
   end
 
   def defaults
-    {per_page: 50}
+    {per_page: 50, page: 1}
   end
 
 end

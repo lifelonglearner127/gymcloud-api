@@ -10,7 +10,14 @@ class Oauth2Controller < ApplicationController
   end
 
   def mobile_google_oauth2
-    auth_client.access_token = params['accessToken']
+    # We are getting 'accessToken' from iOS and 'oauthToken' from Android
+    if params['accessToken']
+      auth_client.access_token = params['accessToken']
+    elsif params['oauthToken']
+      auth_client.access_token = params['oauthToken']
+    else
+      fail ArgumentError.new(errors: ['Token is absent'])
+    end
     person = get_person(params['userId'])
     token = Services::SocialLogin::Create.!(
       attrs: person,

@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  match '/users/auth/google_oauth2/callback',
+  match '/users/mobile_auth/google_oauth2/callback',
     to: 'oauth2#mobile_google_oauth2',
     via: [:get, :post]
 

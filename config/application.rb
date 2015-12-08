@@ -52,6 +52,7 @@ module GymcloudApi
       allow do
         origins '*'
         resource '*',
+          credentials: true,
           headers: :any,
           methods: %i(get post put patch delete options)
       end

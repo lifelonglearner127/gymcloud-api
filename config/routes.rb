@@ -19,7 +19,8 @@ Rails.application.routes.draw do
   devise_for :users, controllers: {
     registrations: 'registrations',
     invitations: 'invitations',
-    passwords: 'passwords'
+    passwords: 'passwords',
+    omniauth_callbacks: 'omniauth_callbacks'
   }
 
   use_doorkeeper

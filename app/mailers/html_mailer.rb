@@ -38,4 +38,8 @@ class HtmlMailer < ApplicationMailer
     mail(to: email, subject: 'GymCloud')
   end
 
+  def trial_expiration(email)
+    mail(to: email, subject: 'GymCloud')
+  end
+
 end

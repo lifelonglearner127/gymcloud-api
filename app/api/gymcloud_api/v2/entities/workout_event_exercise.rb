@@ -14,6 +14,9 @@ class WorkoutEventExercise < Grape::Entity
   expose :order_name do |workout_event_exercise|
     workout_event_exercise.workout_exercise.order_name
   end
+  expose :position do |workout_event_exercise|
+    workout_event_exercise.workout_exercise.position
+  end
   expose :note do |workout_event_exercise|
     workout_event_exercise.workout_exercise.note
   end

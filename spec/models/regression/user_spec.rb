@@ -5,6 +5,7 @@ RSpec.describe User do
   # === Relations ===
   it { is_expected.to belong_to :invited_by}
   it { is_expected.to have_one :user_profile}
+	it { is_expected.to have_one :user_settings}
   it { is_expected.to have_many :activities}
 	it { is_expected.to have_many :read_marks}
 	it { is_expected.to have_many :authentications}

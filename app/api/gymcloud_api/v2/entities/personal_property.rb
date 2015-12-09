@@ -4,6 +4,8 @@ module Entities
 class PersonalProperty < Grape::Entity
 
   expose :id
+  expose :created_at
+  expose :updated_at
   expose :person_id
   expose :display_name, as: :name
   expose :position

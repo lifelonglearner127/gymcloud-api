@@ -4,6 +4,8 @@ module Entities
 class Video < Grape::Entity
 
   expose :id
+  expose :created_at
+  expose :updated_at
   expose :vimeo_id
   expose :vimeo_url
   expose :embed_url

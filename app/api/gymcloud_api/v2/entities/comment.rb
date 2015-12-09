@@ -6,6 +6,7 @@ class Comment < Grape::Entity
   expose :id
   expose :title
   expose :created_at
+  expose :updated_at
   expose :comment
   expose :commentable_id
   expose :commentable_type

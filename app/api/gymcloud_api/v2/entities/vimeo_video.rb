@@ -6,6 +6,8 @@ class VimeoVideo < Grape::Entity
   expose :id do |obj|
     obj.uri.match(/(\d+)/).captures.first.to_i
   end
+  expose :created_at
+  expose :updated_at
   expose :name
   expose :description
   expose :duration

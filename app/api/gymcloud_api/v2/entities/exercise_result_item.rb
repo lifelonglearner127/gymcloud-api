@@ -4,6 +4,8 @@ module Entities
 class ExerciseResultItem < Grape::Entity
 
   expose :id
+  expose :created_at
+  expose :updated_at
   expose :name do |item|
     item.exercise_property.personal_property.global_property.name
   end

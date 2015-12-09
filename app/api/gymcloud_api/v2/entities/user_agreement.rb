@@ -10,6 +10,9 @@ class UserAgreement < Grape::Entity
       required: true
     }
 
+  expose :created_at
+  expose :updated_at
+
   expose :pro_id,
     documentation: {
       desc: 'pro_id',

@@ -4,6 +4,8 @@ module Entities
 class WorkoutEventExercise < Grape::Entity
 
   expose :id
+  expose :created_at
+  expose :updated_at
   expose :workout_event_id
   expose :workout_exercise_id
   expose :name do |workout_event_exercise|

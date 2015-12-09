@@ -4,6 +4,8 @@ module Entities
 class WorkoutExercise < Grape::Entity
 
   expose :id
+  expose :created_at
+  expose :updated_at
   expose :display_name, as: :name
   expose :position
   expose :exercise_id

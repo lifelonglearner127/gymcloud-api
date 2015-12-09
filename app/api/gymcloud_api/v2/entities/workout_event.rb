@@ -4,6 +4,8 @@ module Entities
 class WorkoutEvent < Grape::Entity
 
   expose :id
+  expose :created_at
+  expose :updated_at
   expose :personal_workout_id
   expose :begins_at
   expose :ends_at

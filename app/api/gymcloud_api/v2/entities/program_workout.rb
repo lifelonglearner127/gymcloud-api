@@ -4,6 +4,8 @@ module Entities
 class ProgramWorkout < Grape::Entity
 
   expose :id
+  expose :created_at
+  expose :updated_at
   expose :name
   expose :description
   expose :note

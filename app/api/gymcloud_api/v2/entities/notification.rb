@@ -4,6 +4,8 @@ module Entities
 class Notification < Grape::Entity
 
   expose :id
+  expose :created_at
+  expose :updated_at
   expose :owner_id
   expose :recipient_id
   expose :trackable_id
@@ -40,7 +42,6 @@ class Notification < Grape::Entity
       }
     end
   end
-  expose :created_at
 
 end
 

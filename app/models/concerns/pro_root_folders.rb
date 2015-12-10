@@ -1,0 +1,29 @@
+module ProRootFolders
+
+  extend ActiveSupport::Concern
+
+  included do
+
+    def root_folder
+      folders.find_by(name: 'Root', parent_id: nil)
+    end
+
+    def exercises_folder
+      folder_for('Exercises')
+    end
+
+    def workouts_folder
+      folder_for('Workouts')
+    end
+
+    def programs_folder
+      folder_for('Programs')
+    end
+
+    def folder_for(name)
+      root_folder.children.find_by(name: name)
+    end
+
+  end
+
+end

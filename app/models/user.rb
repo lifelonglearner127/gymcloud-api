@@ -33,6 +33,7 @@ class User < ActiveRecord::Base
 
   include SearchScopes::Pro
   include PublicActivity::Common
+  include ProRootFolders
 
   devise \
     :database_authenticatable, :registerable,

@@ -22,7 +22,7 @@ class AccountType < ActiveRecord::Base
   private
 
   def ensure_icon_has_value
-    self.icon = name.parameterize.underscore if icon.blank?
+    self.icon = name.to_s.parameterize.underscore if icon.blank?
   end
 
 end

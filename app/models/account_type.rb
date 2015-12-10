@@ -17,4 +17,12 @@ class AccountType < ActiveRecord::Base
   validates :name, :icon, presence: true
   validates :name, :icon, length: {maximum: 255}
 
+  before_validation :ensure_icon_has_value
+
+  private
+
+  def ensure_icon_has_value
+    self.icon = name.parameterize.underscore if icon.blank?
+  end
+
 end

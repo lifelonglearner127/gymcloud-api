@@ -6,6 +6,7 @@ ActiveAdmin.setup do |config|
       menu.add label: 'Personal', priority: 4
       menu.add label: 'Trainings', priority: 5
       menu.add label: 'Communication', priority: 6
+      menu.add label: 'Presets', priority: 7
       menu.add label: 'Global', priority: 20
     end
   end

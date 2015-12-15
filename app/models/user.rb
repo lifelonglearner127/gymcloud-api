@@ -102,12 +102,11 @@ class User < ActiveRecord::Base
     tree.map(&parser)
   end
 
-  def self.create_from_omniauth(params)
+  def self.create_from_omniauth(email)
     attributes = {
-      email: params.emails.first.value,
+      email: email,
       password: Devise.friendly_token
     }
-
     create(attributes)
   end
 

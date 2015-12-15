@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
 
   match '/users/mobile_auth/google_oauth2/callback',
-    to: 'oauth2#mobile_google_oauth2',
+    to: 'google_oauth2#mobile_google_oauth2',
     via: [:get, :post]
+
+  post '/users/mobile_auth/facebook_oauth2/callback',
+    to: 'facebook_oauth2#mobile_facebook_oauth2'
 
   if Rails.env.development?
     require 'sidekiq/web'

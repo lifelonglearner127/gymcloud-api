@@ -20,12 +20,12 @@ class UserAuthentication < ActiveRecord::Base
 
   serialize :params
 
-  def self.create_from_omniauth(params, user, provider, access_token)
+  def self.create_from_omniauth(params, user, provider)
     create(
       user_id: user.id,
       authentication_provider_id: provider.id,
-      uid: params.id,
-      token: access_token,
+      uid: params[:uid],
+      token: params[:access_token],
       token_expired_at: nil,
       params: params.to_json
     )

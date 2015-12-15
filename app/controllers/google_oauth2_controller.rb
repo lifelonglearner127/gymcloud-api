@@ -27,8 +27,8 @@ class GoogleOauth2Controller < ApplicationController
       provider: 'google_oauth2',
       uid: raw_user.id,
       email: raw_user.emails.first.value,
-      first_name: raw_user.given_name,
-      last_name: raw_user.family_name
+      first_name: raw_user.name.given_name,
+      last_name: raw_user.name.family_name
     }
   end
 

@@ -24,6 +24,10 @@ module MailerHelper
     "http://#{webapp_domain}/#personal_workouts/#{id}"
   end
 
+  def confirmation_on_frontend(token)
+    "http://#{webapp_domain}/#confirm/#{token}"
+  end
+
   def cool_readable_date(date)
     date.strftime('%B %-d, %Y at %I:%M %p')
   end

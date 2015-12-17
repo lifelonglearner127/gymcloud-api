@@ -1,18 +1,17 @@
 tr
   td.top-block-small align="center" valign="middle" style="background-image: url(#{attachments['blue-bg-with-icons.jpg'].url}); "
-    table.five.columns
-      tr 
-        td.center valign="middle"
-          = image_tag attachments['gymcloud-email-header.png'].url
+    = image_tag attachments['gymcloud-email-header.png'].url, class: 'centered-image'
+tr
+  td.image-block align="center"
+    = image_tag attachments['gymcloud-trial-expiration.png'].url, class: 'centered-image'
 tr
   td.bottom-block align="center"
     center
-      img src=attachments['gymcloud-trial-expiration.png'].url
       h2.notification
         | Time is Running Out
 
       .message.trial-expire-message
-        | Shady, your free trial is going to expire in 2 days, on 13th of May. Please enter payment details to continue your GymCloud membership.
+        | #{@user.user_profile.first_name}, your free trial is going to expire in 2 days, on 13th of May. Please enter payment details to continue your GymCloud membership.
 
-      button.payment-details-button
-        | enter payment details
+      a.green-button.long href="http://#{webapp_domain}"
+        | ENTER PAYMENT DETAILS

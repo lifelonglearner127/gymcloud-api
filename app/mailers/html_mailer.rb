@@ -38,8 +38,9 @@ class HtmlMailer < ApplicationMailer
     mail(to: email, subject: 'GymCloud')
   end
 
-  def trial_expiration(email)
-    mail(to: email, subject: 'GymCloud')
+  def trial_expiration(user_id)
+    @user = ::User.find(user_id)
+    mail(to: @user.email, subject: 'GymCloud')
   end
 
 end

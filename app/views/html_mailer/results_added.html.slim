@@ -13,7 +13,7 @@ tr
   td.bottom-block align="center"
     center
       - if @result.person.user_profile.avatar.thumb.url
-        img src=@result.person.user_profile.avatar.thumb.url
+        img.avatar src=@result.person.user_profile.avatar.thumb.url
       .message
         | #{@result.person.user_profile.full_name} added results to
         a<> href="#"

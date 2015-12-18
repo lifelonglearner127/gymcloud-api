@@ -29,7 +29,7 @@ class WorkoutTemplate < ActiveRecord::Base
   belongs_to :folder
   belongs_to :video
   has_many :personal_workouts
-  has_many :workout_exercises, as: :workout
+  has_many :workout_exercises, as: :workout, dependent: :destroy
   has_many :program_workouts, as: :workout
 
   validates :name, :author_id, presence: true

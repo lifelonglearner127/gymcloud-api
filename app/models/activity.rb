@@ -19,6 +19,8 @@ class Activity < PublicActivity::Activity
 
   acts_as_readable on: :created_at
 
+  default_scope -> { order('created_at DESC') }
+
   scope :of_user, (lambda do |user|
     client_groups = user.client_groups_as_client
     where do

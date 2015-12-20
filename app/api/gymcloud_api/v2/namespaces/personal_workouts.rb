@@ -63,6 +63,29 @@ namespace :personal_workouts do
       present(workout, with: Entities::PersonalWorkout)
     end
 
+    desc 'Fetch Personal Workout events'
+    params do
+      requires :user_id, type: Integer, desc: 'User ID'
+      optional :scope, type: String,
+        values: %w(all upcoming past all_with_clients),
+        default: 'all',
+        desc: 'Scope of events'
+    end
+    paginate per_page: 50, max_per_page: 50
+    get :workout_events do
+      user = ::User.find(params[:user_id])
+      personal_workout = ::PersonalWorkout.find(params[:id])
+      scope = params[:scope]
+      workout_events = personal_workout.workout_events.send(scope)
+      workout_event = workout_events.build(
+        personal_workout: ::PersonalWorkout.new(
+          person: user
+        )
+      )
+      authorize!(:read, workout_event)
+      present(paginate(workout_events), with: Entities::WorkoutEvent)
+    end
+
   end
 
 end

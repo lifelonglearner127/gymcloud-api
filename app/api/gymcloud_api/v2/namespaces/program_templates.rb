@@ -74,7 +74,7 @@ namespace :program_templates do
       program_template.assign_attributes(filtered_params)
       authorize!(:update, program_template)
       program_template.save!
-      present(program_template, with: Entities::ProgramTemplate)
+      present(program_template, with: Entities::ProgramTemplate, nested: true)
     end
 
     desc 'Delete Program Template'

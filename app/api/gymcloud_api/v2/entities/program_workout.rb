@@ -15,9 +15,9 @@ class ProgramWorkout < Grape::Entity
   expose :workout_type
   expose :workout_version
   expose :week_id
-  expose :workout do |model|
+  expose :workout do |model, options|
     entity = "GymcloudAPI::V2::Entities::#{model.workout_type}".constantize
-    entity.represent(model.source_workout)
+    entity.represent(model.source_workout, options)
   end
 
 end

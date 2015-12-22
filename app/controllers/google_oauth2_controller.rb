@@ -23,9 +23,9 @@ class GoogleOauth2Controller < ApplicationController
   def process_user
     raw_user = fetch_person(params['userId'])
     {
-      access_token: params['accessToken'],
       provider: 'google_oauth2',
       uid: raw_user.id,
+      is_signup: params['is_signup'],
       email: raw_user.emails.first.value,
       first_name: raw_user.name.given_name,
       last_name: raw_user.name.family_name

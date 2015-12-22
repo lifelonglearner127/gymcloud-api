@@ -25,7 +25,6 @@ class UserAuthentication < ActiveRecord::Base
       user_id: user.id,
       authentication_provider_id: provider.id,
       uid: params[:uid],
-      token: params[:access_token],
       token_expired_at: nil,
       params: params.to_json
     )

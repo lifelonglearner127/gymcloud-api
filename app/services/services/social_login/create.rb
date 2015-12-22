@@ -45,16 +45,21 @@ class Create < BaseService
   end
 
   def create_user_and_authentication_and_sign_in(provider)
+    fail ActiveRecord::RecordNotFound unless @attrs[:is_signup]
     user = ::User.create_from_omniauth(@attrs[:email])
     user.save! unless user.valid?
     user.become_a_pro!
     Services::UserBootstrap::All.!(user: user)
+    update_profile(user)
+    HtmlMailer.delay.welcome_new_user(user.id)
+    create_authentication_and_sign_in(user, provider)
+  end
+
+  def update_profile(user)
     user.user_profile.update_attributes(
       first_name: @attrs[:first_name],
       last_name: @attrs[:last_name]
     )
-    UserMailer.delay.welcome_new_user(user.id)
-    create_authentication_and_sign_in(user, provider)
   end
 
   def return_access_token(user)

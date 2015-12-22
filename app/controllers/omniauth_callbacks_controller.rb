@@ -17,40 +17,24 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   private
 
   def social
-    info = request.env['omniauth.auth'].info
-    info.first_name, info.last_name = info.name.split(/\s+/) if info.try(:name)
-    @user = ::User.find_by(email: info.email) || new_user(info)
+    @raw_user = request.env['omniauth.auth']
+    if @raw_user.try(:name)
+      @raw_user.info.tap do |info|
+        info.first_name, info.last_name = info.name.split(/\s+/)
+      end
+    end
+    access_token = Services::SocialLogin::Create.!(attrs: process_user)
     render json: {access_token: access_token.token}
   end
 
-  def access_token
-    Doorkeeper::AccessToken.find_or_create_by!(
-      application_id: nil,
-      resource_owner_id: @user.id
-    )
-  end
-
-  def new_user(info)
-    user = create_user(info.email)
-    user.become_a_pro!
-    Services::UserBootstrap::All.!(user: user)
-    update_profile(user, info)
-    HtmlMailer.delay.welcome_new_user(user.id)
-    user
-  end
-
-  def create_user(email)
-    password = Devise.friendly_token
-    user = ::User.new(email: email, password: password)
-    user.skip_confirmation!
-    user.save!
-    user
-  end
-
-  def update_profile(user, attrs)
-    user.user_profile.update_attributes(
-      last_name: attrs.last_name,
-      first_name: attrs.first_name
-    )
+  def process_user
+    {
+      provider: @raw_user.provider,
+      uid: @raw_user.uid,
+      is_signup: params['is_signup'],
+      email: @raw_user.info.email,
+      first_name: @raw_user.info.first_name,
+      last_name: @raw_user.info.last_name
+    }
   end
 end

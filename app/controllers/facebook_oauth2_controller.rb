@@ -14,9 +14,9 @@ class FacebookOauth2Controller < ApplicationController
   def process_user
     raw_user = @graph.get_object('me')
     {
-      access_token: @access_token,
       provider: 'facebook',
       uid: raw_user['id'],
+      is_signup: params['is_signup'],
       email: raw_user['email'],
       first_name: raw_user['first_name'],
       last_name: raw_user['last_name']

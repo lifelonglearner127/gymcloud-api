@@ -67,7 +67,7 @@ namespace :users do
     namespace :collections do
 
       %i(
-        pros clients client_groups
+        pros client_groups
         exercises program_templates
         personal_properties
         folders
@@ -83,6 +83,18 @@ namespace :users do
             entity = "GymcloudAPI::V2::Entities::#{klass.name}".constantize
             present(result, with: entity)
           end
+        end
+      end
+
+      namespace :clients do
+        desc "Fetch Clients"
+        get do
+          user = ::User.find(params[:id])
+          result = user.clients
+          authorize!(:read, result.build)
+          result.reset
+          entity = GymcloudAPI::V2::Entities::User
+          present(result, with: entity, email: true)
         end
       end
 

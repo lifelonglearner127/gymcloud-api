@@ -111,7 +111,7 @@ class User < ActiveRecord::Base
   end
 
   def email_is_fake?
-    /^u\+\w*@gymcloud\.com$/
+    /^u\+[\w\-\_]*@gymcloud\.com$/
       .match(email)
       .present?
   end

@@ -12,7 +12,7 @@ class User < Grape::Entity
 
   expose :email,
     if: (lambda do |user, options|
-      options[:email] && !user.email_is_fake?
+      options[:email] && user.live
     end),
     documentation: {
       desc: 'email',

@@ -110,6 +110,16 @@ class User < ActiveRecord::Base
     create(attributes)
   end
 
+  def email_is_fake?
+    /^u\+\w*@gymcloud\.com$/
+      .match(email)
+      .present?
+  end
+
+  def live
+    !email_is_fake?
+  end
+
   private
 
   def on_invitation_accepted

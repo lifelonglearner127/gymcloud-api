@@ -14,15 +14,9 @@ class Invite < BaseService
   private
 
   def invite
-    email = @email.presence || !user_email_is_fake? && @user.email
+    email = @email.presence || !@user.email_is_fake? && @user.email
     update_email(email) if email && @user.email != email
     @user.invite!(@current_user) if email
-  end
-
-  def user_email_is_fake?
-    /^u\+\w*@gymcloud\.com$/
-      .match(@user.email)
-      .present?
   end
 
   def update_email(email)

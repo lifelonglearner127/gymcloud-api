@@ -11,12 +11,23 @@ class User < Grape::Entity
     }
 
   expose :email,
-    if: {email: true},
+    if: (lambda do |user, options|
+      options[:email] && !user.email_is_fake?
+    end),
     documentation: {
       desc: 'email',
       type: 'string',
       required: true
     }
+
+  expose :live,
+    documentation: {
+      desc: 'real live user',
+      type: 'boolean'
+    } \
+  do |user|
+    user.live
+  end
 
   expose :unconfirmed_email,
     if: (lambda do |user, options|

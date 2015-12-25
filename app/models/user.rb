@@ -89,6 +89,11 @@ class User < ActiveRecord::Base
     pro? || !!agreements_as_client.is_me(id).build.save!
   end
 
+  def self.find_by_access_token(token)
+    record = Doorkeeper::AccessToken.where(token: token).first
+    record.present? && find(record.resource_owner_id) || nil
+  end
+
   def library
     return [] if folders.none?
     tree = folders.root.hash_tree

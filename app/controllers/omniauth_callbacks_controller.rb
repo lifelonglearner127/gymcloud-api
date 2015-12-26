@@ -17,17 +17,33 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   private
 
   def social
-    @raw_user = request.env['omniauth.auth']
-    if @raw_user.info.try(:name)
-      @raw_user.info.tap do |info|
-        info.first_name, info.last_name = info.name.split(/\s+/)
-      end
+    if params['is_linking']
+      auth = Services::SocialLogin::Link.!(
+        linking_user: linking_user,
+        social_user: process_user
+      )
+      render json: {auth: auth}
+    else
+      access_token = Services::SocialLogin::Create.!(attrs: process_user)
+      render json: {access_token: access_token.token}
     end
-    access_token = Services::SocialLogin::Create.!(attrs: process_user)
-    render json: {access_token: access_token.token}
+  end
+
+  def linking_user
+    token = request.headers[:authorization]
+      .match(/^Bearer (?<token>.*)$/)[:token]
+    User.find_by_access_token(token)
+  end
+
+  def split_full_name
+    @raw_user.info.tap do |info|
+      info.first_name, info.last_name = info.name.split(/\s+/)
+    end
   end
 
   def process_user
+    @raw_user = request.env['omniauth.auth']
+    split_full_name if @raw_user.info.try(:name)
     {
       provider: @raw_user.provider,
       uid: @raw_user.uid,

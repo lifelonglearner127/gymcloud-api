@@ -6,11 +6,10 @@
 #  user_id                    :integer
 #  authentication_provider_id :integer
 #  uid                        :string
-#  token                      :string
-#  token_expired_at           :datetime
 #  params                     :text
 #  created_at                 :datetime         not null
 #  updated_at                 :datetime         not null
+#  email                      :string
 #
 
 class UserAuthentication < ActiveRecord::Base
@@ -25,7 +24,7 @@ class UserAuthentication < ActiveRecord::Base
       user_id: user.id,
       authentication_provider_id: provider.id,
       uid: params[:uid],
-      token_expired_at: nil,
+      email: params[:email],
       params: params.to_json
     )
   end

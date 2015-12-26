@@ -18,7 +18,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   def social
     @raw_user = request.env['omniauth.auth']
-    if @raw_user.try(:name)
+    if @raw_user.info.try(:name)
       @raw_user.info.tap do |info|
         info.first_name, info.last_name = info.name.split(/\s+/)
       end

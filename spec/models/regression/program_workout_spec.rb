@@ -6,11 +6,11 @@ RSpec.describe ProgramWorkout do
   it { is_expected.to belong_to :workout}
 	it { is_expected.to belong_to :program}
 	it { is_expected.to belong_to :week}
-
-
+  
+  it { is_expected.to have_many :workout_exercises}
 
   # === Nested Attributes ===
-
+  
 
   # === Database (Columns) ===
   it { is_expected.to have_db_column :id }
@@ -41,10 +41,10 @@ RSpec.describe ProgramWorkout do
 	it { is_expected.to validate_presence_of :program_id }
 
   # === Validations (Numericality) ===
+  
 
-
-
+  
   # === Enums ===
-
-
+  
+  
 end

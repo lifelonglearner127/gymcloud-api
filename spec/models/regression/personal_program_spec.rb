@@ -6,6 +6,7 @@ RSpec.describe PersonalProgram do
   it { is_expected.to belong_to :program_template}
 	it { is_expected.to belong_to :person}
   it { is_expected.to have_one :author}
+	it { is_expected.to have_one :user}
   it { is_expected.to have_many :activities}
 	it { is_expected.to have_many :program_workouts}
 	it { is_expected.to have_many :program_weeks}

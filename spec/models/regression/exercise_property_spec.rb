@@ -30,7 +30,6 @@ RSpec.describe ExerciseProperty do
   # === Validations (Presence) ===
   it { is_expected.to validate_presence_of :personal_property_id }
 	it { is_expected.to validate_presence_of :workout_exercise_id }
-	it { is_expected.to validate_presence_of :value }
 
   # === Validations (Numericality) ===
   

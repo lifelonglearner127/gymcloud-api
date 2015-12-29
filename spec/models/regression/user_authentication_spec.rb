@@ -16,11 +16,10 @@ RSpec.describe UserAuthentication do
 	it { is_expected.to have_db_column :user_id }
 	it { is_expected.to have_db_column :authentication_provider_id }
 	it { is_expected.to have_db_column :uid }
-	it { is_expected.to have_db_column :token }
-	it { is_expected.to have_db_column :token_expired_at }
 	it { is_expected.to have_db_column :params }
 	it { is_expected.to have_db_column :created_at }
 	it { is_expected.to have_db_column :updated_at }
+	it { is_expected.to have_db_column :email }
 
   # === Database (Indexes) ===
   it { is_expected.to have_db_index ["authentication_provider_id"]}

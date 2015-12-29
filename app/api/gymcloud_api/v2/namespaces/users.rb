@@ -66,6 +66,17 @@ namespace :users do
 
     namespace :collections do
 
+      namespace :user_authentications do
+        desc 'Fetch Authentications'
+        get do
+          user = ::User.find(params[:id])
+          authentications = user.authentications
+          authorize!(:read, authentications.build)
+          authentications.reset
+          present(authentications, with: Entities::UserAuthentication)
+        end
+      end
+
       %i(
         pros client_groups
         exercises program_templates
@@ -87,7 +98,7 @@ namespace :users do
       end
 
       namespace :clients do
-        desc "Fetch Clients"
+        desc 'Fetch Clients'
         get do
           user = ::User.find(params[:id])
           result = user.clients
@@ -99,7 +110,7 @@ namespace :users do
       end
 
       resource :workout_templates do
-        desc "Fetch Workout Templates"
+        desc 'Fetch Workout Templates'
         get do
           user = ::User.find(params[:id])
           workout_templates = user.workout_templates.is_visible
@@ -118,7 +129,7 @@ namespace :users do
             optional :status, type: String,
               values: %w(inactive active all),
               default: 'active',
-              desc: 'Status of #{collection.to_s.titleize}'
+              desc: "Status of #{collection.to_s.titleize}"
           end
           get do
             scope = {

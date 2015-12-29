@@ -17,7 +17,7 @@ class ExerciseProperty < ActiveRecord::Base
   belongs_to :workout_exercise
   has_many :exercise_result_items, dependent: :destroy
 
-  validates :personal_property_id, :workout_exercise_id, :value, presence: true
+  validates :personal_property_id, :workout_exercise_id, presence: true
 
   def display_name
     prop = personal_property

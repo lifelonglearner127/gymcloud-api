@@ -9,7 +9,7 @@ namespace :exercise_properties do
   params do
     requires :personal_property_id, type: Integer
     requires :workout_exercise_id, type: Integer
-    requires :value, type: Integer
+    optional :value, type: Integer
     optional :position, type: Integer
   end
   post do

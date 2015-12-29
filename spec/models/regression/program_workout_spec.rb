@@ -7,7 +7,7 @@ RSpec.describe ProgramWorkout do
 	it { is_expected.to belong_to :program}
 	it { is_expected.to belong_to :week}
   
-  it { is_expected.to have_many :workout_exercises}
+  
 
   # === Nested Attributes ===
   

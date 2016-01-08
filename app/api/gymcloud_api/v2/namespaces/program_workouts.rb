@@ -18,7 +18,7 @@ namespace :program_workouts do
     )
     authorize!(:create, service.build_program_workout)
     program_workout = service.process.result
-    present(program_workout, with: Entities::ProgramWorkout)
+    present(program_workout, with: Entities::ProgramWorkout, nested: true)
   end
 
   params do
@@ -30,15 +30,12 @@ namespace :program_workouts do
     get do
       program_workout = ::ProgramWorkout.find(params[:id])
       authorize!(:read, program_workout)
-      present(program_workout, with: Entities::ProgramWorkout)
+      present(program_workout, with: Entities::ProgramWorkout, nested: true)
     end
 
     desc 'Update Program Workout Template'
     params do
-      optional :name, type: String
-      optional :description, type: String
       optional :note, type: String
-      optional :video_url, type: String
       optional :position, type: Integer
       optional :week_id, type: Integer
     end
@@ -47,7 +44,7 @@ namespace :program_workouts do
       program_workout.assign_attributes(filtered_params)
       authorize!(:update, program_workout)
       program_workout.save!
-      present(program_workout, with: Entities::ProgramWorkout)
+      present(program_workout, with: Entities::ProgramWorkout, nested: true)
     end
 
     desc 'Delete Program Workout Template'

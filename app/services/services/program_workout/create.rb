@@ -24,7 +24,7 @@ class Create < BaseService
   def prepare_attributes
     program_template = ::ProgramTemplate.find(@attrs['program_template_id'])
     workout_template = create_workout_template
-    to_include = %w(name description note video_url)
+    to_include = %w(note)
     workout_template.attributes.slice(*to_include)
       .merge(
         program: program_template,

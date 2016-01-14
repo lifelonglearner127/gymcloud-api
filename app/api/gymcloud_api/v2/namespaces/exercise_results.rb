@@ -90,15 +90,16 @@ namespace :exercise_results do
           requires :value, type: Integer
         end
         patch do
-          exercise_result = ::ExerciseResult.find(params[:id])
-          authorize!(:update, exercise_result)
-          exercise_result_item = exercise_result.items.find(params[:item_id])
+          result = ::ExerciseResult.find(params[:id])
+          authorize!(:update, result)
+          byebug
+          result_item = result.exercise_result_items.find(params[:item_id])
           if params[:value].blank?
-            exercise_result_item.destroy
+            result_item.destroy
           else
-            exercise_result_item.update_attributes!(filtered_params)
+            result_item.update_attributes!(filtered_params)
           end
-          present(exercise_result_item, with: Entities::ExerciseResultItem)
+          present(result_item, with: Entities::ExerciseResultItem)
         end
 
       end

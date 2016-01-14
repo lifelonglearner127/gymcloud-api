@@ -92,7 +92,6 @@ namespace :exercise_results do
         patch do
           result = ::ExerciseResult.find(params[:id])
           authorize!(:update, result)
-          byebug
           result_item = result.exercise_result_items.find(params[:item_id])
           if params[:value].blank?
             result_item.destroy

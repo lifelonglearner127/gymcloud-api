@@ -10,7 +10,6 @@ class ProgramWeek < Grape::Entity
   expose :position
   expose :program_id
   expose :program_type
-  expose :program_workouts, using: Entities::ProgramWorkout
 
 end
 

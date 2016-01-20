@@ -8,14 +8,17 @@ namespace :program_workouts do
   desc 'Create Program Workout Template'
   params do
     requires :program_template_id, type: Integer
-    requires :workout_template_id, type: Integer
+    optional :workout_template_id, type: Integer
     optional :position, type: Integer
     optional :week_id, type: Integer
   end
   post do
-    service = Services::ProgramWorkout::Create.new(
-      attrs: filtered_params
-    )
+    if params[:workout_template_id]
+      service_class = Services::ProgramWorkout::Create
+    else
+      service_class = Services::ProgramWorkout::CreateNew
+    end
+    service = service_class.new(attrs: filtered_params, user: current_user)
     authorize!(:create, service.build_program_workout)
     program_workout = service.process.result
     present(program_workout, with: Entities::ProgramWorkout, nested: true)

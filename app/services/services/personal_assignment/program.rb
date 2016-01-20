@@ -21,7 +21,7 @@ class Program < BaseService
     program = PersonalProgram.create!(prepare_attributes)
 
     @template.program_workouts.each do |pw|
-      personal_workout = create_personal_workout(pw.source_workout)
+      personal_workout = create_personal_workout(pw.workout)
 
       assign_workout(program, personal_workout)
     end
@@ -32,7 +32,7 @@ class Program < BaseService
   end
 
   def assign_workout(program, workout)
-    to_include = %w(name description note video_url)
+    to_include = %w(note)
     attributes = workout.attributes.slice(*to_include).merge(
       program: program,
       workout: workout

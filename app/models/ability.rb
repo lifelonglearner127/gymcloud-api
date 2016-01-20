@@ -108,9 +108,6 @@ class Ability
     as_managing_pro_can :create, PersonalProgram, :person_id,
       program_template_id: @user.program_template_ids
     as_managing_pro_can [:read, :update, :disable], PersonalProgram, :person_id
-    as_managing_pro_can :create, PersonalProgram, :person_id,
-      program_template_id: @user.program_template_ids
-    as_managing_pro_can [:read, :update, :disable], PersonalProgram, :person_id
     can :crud, WorkoutEvent,
       personal_workout: {person_id: @user.client_ids}
     # NOTE: Figure out with this stuff

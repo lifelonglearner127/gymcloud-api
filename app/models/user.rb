@@ -69,6 +69,9 @@ class User < ActiveRecord::Base
   has_many :folders
   has_many :videos, foreign_key: :author_id
 
+  scope :pros, -> { distinct.joins(:agreements_as_pro) }
+  scope :clients, -> { distinct.joins(:agreements_as_client) }
+
   after_invitation_accepted :on_invitation_accepted
 
   delegate :can?, :cannot?, to: :ability

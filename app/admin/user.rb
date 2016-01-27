@@ -14,6 +14,10 @@ ActiveAdmin.register User do
     actions
   end
 
+  scope :all, default: true
+  scope :pros
+  scope :clients
+
   filter :email
   filter :current_sign_in_at
   filter :sign_in_count

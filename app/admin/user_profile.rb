@@ -5,6 +5,43 @@ ActiveAdmin.register UserProfile do
   permit_params :user_id, :first_name, :last_name, :gender, :birthday,
     :height, :weight, :bodyfat, :location, :zip, :employer
 
+  scope :all, default: true
+  scope('pros') { |scope| scope.joins { user.agreements_as_pro } }
+  scope('clients') { |scope| scope.joins { user.agreements_as_client } }
+
+  index do
+    selectable_column
+    id_column
+    column :avatar do |model|
+      image_tag(model.avatar.url(:thumb), width: 20) unless model.avatar.blank?
+    end
+    column :first_name
+    column :last_name
+    column :email do |model|
+      model.user.email
+    end
+    column :age do |model|
+      (Date.today - model.birthday).to_i / 365 unless model.birthday.blank?
+    end
+    column :gender
+    column :zip
+    actions
+  end
+
+  filter :first_name
+  filter :last_name
+  filter :user_email, as: :string
+  filter :gender
+  filter :height
+  filter :weight
+  filter :bodyfat
+  filter :location
+  filter :zip
+  filter :employer
+  filter :birthday
+  filter :created_at
+  filter :updated_at
+
   form do |f|
     f.inputs "#{f.object.class.name.titleize} Details" do
       f.input :user
@@ -20,6 +57,12 @@ ActiveAdmin.register UserProfile do
       f.input :birthday, as: :datepicker
     end
     f.actions
+  end
+
+  controller do
+    def scoped_collection
+      super.distinct.joins { user }
+    end
   end
 
 end

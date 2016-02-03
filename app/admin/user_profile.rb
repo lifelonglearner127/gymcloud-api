@@ -9,6 +9,8 @@ ActiveAdmin.register UserProfile do
   scope('pros') { |scope| scope.joins { user.agreements_as_pro } }
   scope('clients') { |scope| scope.joins { user.agreements_as_client } }
 
+  actions :all, except: [:destroy]
+
   index do
     selectable_column
     id_column

@@ -63,7 +63,8 @@ class Workout < BaseService
     ExerciseProperty.create!(
       personal_property: exercise_property.personal_property,
       workout_exercise: workout_exercise,
-      value: exercise_property.value
+      value: exercise_property.value,
+      position: exercise_property.position
     )
   end
 

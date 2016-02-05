@@ -11,6 +11,9 @@ class ClientGroup < Grape::Entity
   expose :clients,
     if: {nested: true},
     using: Entities::User
+  expose :clients_count do |group|
+    group.clients.count
+  end
 
 end
 

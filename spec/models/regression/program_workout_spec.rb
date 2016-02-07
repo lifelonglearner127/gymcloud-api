@@ -6,11 +6,11 @@ RSpec.describe ProgramWorkout do
   it { is_expected.to belong_to :workout}
 	it { is_expected.to belong_to :program}
 	it { is_expected.to belong_to :week}
-
-
+  
+  
 
   # === Nested Attributes ===
-
+  
 
   # === Database (Columns) ===
   it { is_expected.to have_db_column :id }
@@ -28,15 +28,18 @@ RSpec.describe ProgramWorkout do
   it { is_expected.to have_db_index ["program_type", "program_id"]}
 	it { is_expected.to have_db_index ["workout_type", "workout_id"]}
 
+  # === Validations (Length) ===
+  
+
   # === Validations (Presence) ===
   it { is_expected.to validate_presence_of :workout_id }
 	it { is_expected.to validate_presence_of :program_id }
 
   # === Validations (Numericality) ===
+  
 
-
-
+  
   # === Enums ===
-
-
+  
+  
 end

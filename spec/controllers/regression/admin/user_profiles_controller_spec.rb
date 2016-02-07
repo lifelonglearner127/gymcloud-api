@@ -9,7 +9,6 @@ describe Admin::UserProfilesController do
 	it { should route(:get, '/admin/user_profiles/1/edit').to({:controller=>"admin/user_profiles", :action=>"edit", :id=>1}) } 
 	it { should route(:post, '/admin/user_profiles').to({:controller=>"admin/user_profiles", :action=>"create"}) } 
 	it { should route(:patch, '/admin/user_profiles/1').to({:controller=>"admin/user_profiles", :action=>"update", :id=>1}) } 
-	it { should route(:delete, '/admin/user_profiles/1').to({:controller=>"admin/user_profiles", :action=>"destroy", :id=>1}) } 
   # === Callbacks (Before) ===
   it { should use_before_filter(:verify_authenticity_token) }
 	it { should use_before_filter(:set_paper_trail_enabled_for_controller) }

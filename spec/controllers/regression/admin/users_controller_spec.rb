@@ -9,7 +9,6 @@ describe Admin::UsersController do
 	it { should route(:get, '/admin/users/new').to({:controller=>"admin/users", :action=>"new"}) } 
 	it { should route(:get, '/admin/users/1/edit').to({:controller=>"admin/users", :action=>"edit", :id=>1}) } 
 	it { should route(:patch, '/admin/users/1').to({:controller=>"admin/users", :action=>"update", :id=>1}) } 
-	it { should route(:delete, '/admin/users/1').to({:controller=>"admin/users", :action=>"destroy", :id=>1}) } 
   # === Callbacks (Before) ===
   it { should use_before_filter(:verify_authenticity_token) }
 	it { should use_before_filter(:set_paper_trail_enabled_for_controller) }

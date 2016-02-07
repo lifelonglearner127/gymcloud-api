@@ -19,10 +19,7 @@ class ProgramTemplate < Grape::Entity
   expose :program_workouts,
     if: {nested: true},
     using: Entities::ProgramWorkout,
-    as: :workouts \
-  do |model|
-    model.program_workouts
-  end
+    as: :workouts
   expose :program_weeks,
     if: {nested: true},
     using: Entities::ProgramWeek,

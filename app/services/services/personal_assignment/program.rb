@@ -18,24 +18,27 @@ class Program < BaseService
   private
 
   def create_personal
-    program = PersonalProgram.create!(prepare_attributes)
+    program = nil
+    ActiveRecord::Base.transaction do
+      program = PersonalProgram.create!(prepare_attributes)
+      program_workouts = @template.program_workouts.without_week
+      weeks = @template.program_weeks
 
-    @template.program_workouts.each do |pw|
-      personal_workout = create_personal_workout(pw.workout)
+      program_workouts.each { |pw| create_program_workout(pw, program) }
+      weeks.each { |week| create_week_with_workouts(week, program) }
 
-      assign_workout(program, personal_workout)
+      deactivate_old_programs(program.id)
     end
-
-    deactivate_old_programs(program.id)
 
     program
   end
 
-  def assign_workout(program, workout)
-    to_include = %w(note)
-    attributes = workout.attributes.slice(*to_include).merge(
+  def assign_workout(program, workout, old_program_workout, week_id)
+    to_include = %w(note position)
+    attributes = old_program_workout.attributes.slice(*to_include).merge(
       program: program,
-      workout: workout
+      workout: workout,
+      week_id: week_id
     )
     ::ProgramWorkout.create!(attributes)
   end
@@ -47,6 +50,27 @@ class Program < BaseService
       person: @user,
       status: :active
     )
+  end
+
+  def create_week_with_workouts(week, program)
+    new_week = create_week(week, program)
+    week.program_workouts.each do |pw|
+      create_program_workout(pw, program, new_week.id)
+    end
+  end
+
+  def create_week(old_week, new_program)
+    ::ProgramWeek.create!(
+      name: old_week.name,
+      position: old_week.position,
+      program: new_program
+    )
+  end
+
+  def create_program_workout(pw, program, week_id = nil)
+    personal_workout = create_personal_workout(pw.workout)
+
+    assign_workout(program, personal_workout, pw, week_id)
   end
 
   def create_personal_workout(workout)

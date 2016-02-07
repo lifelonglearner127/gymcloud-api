@@ -14,16 +14,11 @@ class PersonalProgram < Grape::Entity
   expose :program_workouts,
     if: {nested: true},
     using: Entities::ProgramWorkout,
-    as: :workouts \
-  do |model|
-    model.program_workouts.without_week
-  end
-
+    as: :workouts
   expose :program_weeks,
     if: {nested: true},
     using: Entities::ProgramWeek,
     as: :weeks
-
 end
 
 end

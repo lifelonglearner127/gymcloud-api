@@ -12,7 +12,9 @@ Regressor.configure do |config|
   # Exclude Models for regression spec generation.
   # Provide model names as String (e.g. 'User')
   config.excluded_models = %w(
-    Doorkeeper::AccessGrant Doorkeeper::AccessToken Doorkeeper::Application
+    Doorkeeper::AccessGrant
+    Doorkeeper::AccessToken
+    Doorkeeper::Application
   )
 
   # Exclude Controllers for regression generation.
@@ -25,6 +27,8 @@ Regressor.configure do |config|
     Devise::RegistrationsController
     Devise::SessionsController
     Devise::UnlocksController
+    Devise::InvitationsController
+    Devise::OmniauthCallbacksController
     ActiveAdmin::BaseController
     ActiveAdmin::Devise::ConfirmationsController
     ActiveAdmin::Devise::PasswordsController
@@ -33,6 +37,8 @@ Regressor.configure do |config|
     ActiveAdmin::Devise::UnlocksController
     ActiveAdmin::PageController
     ActiveAdmin::ResourceController
+    OmniauthCallbacksController
+    PreviewController
   )
 
   # If you are using enums in Rails 4 enable this option to generate regression specs for enums.

@@ -90,6 +90,11 @@ class Ability
       program_type: 'ProgramTemplate',
       workout_id: @user.workout_template_ids,
       workout_type: 'WorkoutTemplate'
+    can :crud, ProgramWorkout,
+      program_id: @user.personal_program_ids,
+      program_type: 'PersonalProgram',
+      workout_id: @user.personal_workout_ids,
+      workout_type: 'PersonalWorkout'
     can :read, ProgramWeek do |pw|
       case pw.program_type
       when 'ProgramTemplate'
@@ -100,6 +105,8 @@ class Ability
       case pw.program_type
       when 'ProgramTemplate'
         pw.program.author_id == @user.id
+      when 'PersonalProgram'
+        pw.program.person_id.in?(@user.client_ids)
       end
     end
     as_managing_pro_can :create, PersonalWorkout, :person_id,

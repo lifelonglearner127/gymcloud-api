@@ -8,11 +8,14 @@ namespace :program_weeks do
   desc 'Create Program Week'
   params do
     requires :name, type: String
-    requires :program_id, type: Integer
     requires :position, type: Integer
+    requires :program_id, type: Integer
+    optional :program_type, type: String, default: 'ProgramTemplate',
+      values: %w(ProgramTemplate PersonalProgram),
+      desc: 'Program Type'
   end
   post do
-    attributes = filtered_params_with(program_type: 'ProgramTemplate')
+    attributes = filtered_params
     program_week = ::ProgramWeek.new(attributes)
     authorize!(:create, program_week)
     program_week.save!

@@ -3,7 +3,7 @@ tr
     table.twelve.columns height='267' width='100%' background=attachments['blue-bg-with-icons.jpg'].url
       tr
         td.center.header align='center' valign='middle'
-          = image_tag attachments['logo-white.png'].url
+          = image_tag attachments['logo-white.png'].url, class: 'centered-image', style: 'margin-top:30px;'
           .you-invited
             | You've been invited to GymCloud
 tr
@@ -14,4 +14,4 @@ tr
     a.get-started-button href=inivitation_url(@token, @resource)
       span.phrase
         | GET STARTED
-      =image_tag attachments['get-started-arrow.png'].url
+      =image_tag attachments['get-started-arrow.png'].url, style: 'clear:none;'

@@ -22,16 +22,24 @@ class Create < BaseService
   end
 
   def prepare_attributes
-    program_template = ::ProgramTemplate.find(@attrs['program_template_id'])
-    workout_template = create_workout_template
-    to_include = %w(note)
-    workout_template.attributes.slice(*to_include)
+    program_class = "::#{@attrs['program_type']}".constantize
+    program = program_class.find(@attrs['program_id'])
+    workout = prepare_workout(program)
+    workout.attributes.slice(*%w(note))
       .merge(
-        program: program_template,
-        workout: workout_template,
+        program: program,
+        workout: workout,
         position: @attrs['position'],
         week_id: @attrs['week_id']
       )
+  end
+
+  def prepare_workout(program)
+    if @attrs['program_type'] == 'ProgramTemplate'
+      create_workout_template
+    else
+      create_personal_workout(program)
+    end
   end
 
   def create_workout_template
@@ -40,6 +48,15 @@ class Create < BaseService
       workout: workout_template,
       user: workout_template.user,
       is_visible: false
+    )
+  end
+
+  def create_personal_workout(program)
+    workout_template = ::WorkoutTemplate.find(@attrs['workout_template_id'])
+    Services::PersonalAssignment::Workout.!(
+      template: workout_template,
+      user: program.person,
+      is_program_part: true
     )
   end
 

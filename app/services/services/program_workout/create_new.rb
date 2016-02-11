@@ -22,14 +22,23 @@ class CreateNew < BaseService
   end
 
   def prepare_attributes
-    program_template = ::ProgramTemplate.find(@attrs['program_template_id'])
+    program_class = "::#{@attrs['program_type']}".constantize
+    program = program_class.find(@attrs['program_id'])
 
     {
-      program: program_template,
-      workout: workout_template,
+      program: program,
+      workout: prepare_workout(program),
       position: @attrs['position'],
       week_id: @attrs['week_id']
     }
+  end
+
+  def prepare_workout(program)
+    if @attrs['program_type'] == 'ProgramTemplate'
+      workout_template
+    else
+      personal_workout(program)
+    end
   end
 
   def workout_template
@@ -43,6 +52,14 @@ class CreateNew < BaseService
       is_public: false,
       author: @user,
       user: @user
+    )
+  end
+
+  def personal_workout(program)
+    Services::PersonalAssignment::Workout.!(
+      template: workout_template,
+      user: program.person,
+      is_program_part: true
     )
   end
 

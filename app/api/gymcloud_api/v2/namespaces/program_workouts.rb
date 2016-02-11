@@ -7,7 +7,10 @@ namespace :program_workouts do
 
   desc 'Create Program Workout Template'
   params do
-    requires :program_template_id, type: Integer
+    requires :program_id, type: Integer
+    optional :program_type, type: String, default: 'ProgramTemplate',
+      values: %w(ProgramTemplate PersonalProgram),
+      desc: 'Program Type'
     optional :workout_template_id, type: Integer
     optional :position, type: Integer
     optional :week_id, type: Integer
@@ -19,8 +22,10 @@ namespace :program_workouts do
       service_class = Services::ProgramWorkout::CreateNew
     end
     service = service_class.new(attrs: filtered_params, user: current_user)
-    authorize!(:create, service.build_program_workout)
-    program_workout = service.process.result
+    program_workout = ActiveRecord::Base.transaction do
+      authorize!(:create, service.build_program_workout)
+      service.process.result
+    end
     present(program_workout, with: Entities::ProgramWorkout, nested: true)
   end
 

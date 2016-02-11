@@ -9,12 +9,15 @@ namespace :workout_exercises do
   params do
     requires :exercise_id, type: Integer
     requires :workout_id, type: Integer
+    optional :workout_type, type: String, default: 'WorkoutTemplate',
+      values: %w(WorkoutTemplate PersonalWorkout),
+      desc: 'Workout Type'
     optional :note, type: String
     optional :position, type: Integer
     optional :order_name, type: String
   end
   post do
-    attributes = filtered_params_with(workout_type: 'WorkoutTemplate')
+    attributes = filtered_params
     workout_exercise = ::WorkoutExercise.new(attributes)
     authorize!(:create, workout_exercise)
     workout_exercise.save!

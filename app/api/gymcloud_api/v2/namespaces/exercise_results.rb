@@ -16,8 +16,10 @@ namespace :exercise_results do
     authorize!(:create, exercise_result)
     exercise_result.save!
 
-    person_id = exercise_result.person.id
-    HtmlMailer.delay.results_added(person_id, exercise_result.id)
+    # FIXME: Only one message should be sent
+    # after all results are added and workout is finished
+    # person_id = exercise_result.person.id
+    # HtmlMailer.delay.results_added(person_id, exercise_result.id)
 
     if current_user.pro?
       recipient = exercise_result.person

@@ -27,6 +27,11 @@ ActiveAdmin.register UserProfile do
     end
     column :gender
     column :zip
+    column :pro do |model|
+      pro = model.user.pros.last.user_profile
+      link_to(pro.full_name, [:admin, pro])
+    end
+
     actions
   end
 

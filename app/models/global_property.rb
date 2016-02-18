@@ -16,7 +16,7 @@ class GlobalProperty < ActiveRecord::Base
   has_many :personal_properties, dependent: :destroy
 
   validates :name, :symbol, :position, presence: true
-  validates :symbol, :position, uniqueness: true
+  validates :symbol, uniqueness: true
   validates :symbol, :name, :unit, length: {maximum: 255}
 
   default_scope -> { order(position: :asc) }

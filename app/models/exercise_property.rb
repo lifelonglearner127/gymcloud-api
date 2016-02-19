@@ -13,6 +13,8 @@
 
 class ExerciseProperty < ActiveRecord::Base
 
+  default_scope -> { order('id ASC') }
+
   belongs_to :personal_property
   belongs_to :workout_exercise
   has_many :exercise_result_items, dependent: :destroy

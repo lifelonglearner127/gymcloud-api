@@ -9,6 +9,9 @@ class ExerciseResultItem < Grape::Entity
   expose :name do |item|
     item.exercise_property.personal_property.global_property.name
   end
+  expose :position do |item|
+    item.exercise_property.position
+  end
   expose :exercise_result_id
   expose :exercise_property_id
   expose :value

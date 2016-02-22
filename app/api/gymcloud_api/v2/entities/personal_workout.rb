@@ -17,6 +17,7 @@ class PersonalWorkout < Grape::Entity
     using: Entities::WorkoutExercise,
     as: :exercises
   expose :workout_template_version
+  expose :is_program_part
 
 end
 

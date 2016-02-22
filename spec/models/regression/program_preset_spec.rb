@@ -1,15 +1,15 @@
 require 'rails_helper'
 
-RSpec.describe Preset do
+RSpec.describe ProgramPreset do
 
   # === Relations ===
   it { is_expected.to belong_to :user}
 	it { is_expected.to belong_to :folder}
-  
-  
+
+
 
   # === Nested Attributes ===
-  
+
 
   # === Database (Columns) ===
   it { is_expected.to have_db_column :id }
@@ -33,10 +33,10 @@ RSpec.describe Preset do
 	it { is_expected.to validate_presence_of :folder_id }
 
   # === Validations (Numericality) ===
-  
 
-  
+
+
   # === Enums ===
-  
-  
+
+
 end

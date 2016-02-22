@@ -1,6 +1,6 @@
 # initialize your global object will all your model names
 window.GymcloudAdmin = GymcloudAdmin =
-  presets: {}
+  program_presets: {}
 
 jQuery(document).ready ($) ->
   # get the page action

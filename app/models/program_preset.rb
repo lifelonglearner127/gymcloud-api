@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: presets
+# Table name: program_presets
 #
 #  id         :integer          not null, primary key
 #  name       :string
@@ -10,7 +10,7 @@
 #  updated_at :datetime         not null
 #
 
-class Preset < ActiveRecord::Base
+class ProgramPreset < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :folder

@@ -1,7 +1,7 @@
 module GymcloudAPI::V2
 module Entities
 
-class Preset < Grape::Entity
+class ProgramPreset < Grape::Entity
 
   expose :id
   expose :name

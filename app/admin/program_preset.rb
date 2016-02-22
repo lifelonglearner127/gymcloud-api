@@ -1,4 +1,4 @@
-ActiveAdmin.register Preset do
+ActiveAdmin.register ProgramPreset do
 
   menu parent: 'Presets'
 
@@ -35,8 +35,8 @@ ActiveAdmin.register Preset do
     before_filter :check_user, only: :new
 
     def check_user
-      preset = ::Preset.last
-      @preset = ::Preset.new(user: preset.user) unless preset.nil?
+      preset = ::ProgramPreset.last
+      @preset = ::ProgramPreset.new(user: preset.user) unless preset.nil?
     end
 
   end

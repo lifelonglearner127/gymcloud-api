@@ -286,7 +286,7 @@ ActiveRecord::Schema.define(version: 20160224173933) do
   add_index "personal_workouts", ["person_id"], name: "index_personal_workouts_on_person_id", using: :btree
   add_index "personal_workouts", ["workout_template_id"], name: "index_personal_workouts_on_workout_template_id", using: :btree
 
-  create_table "presets", force: :cascade do |t|
+  create_table "program_presets", force: :cascade do |t|
     t.string   "name"
     t.integer  "user_id"
     t.integer  "folder_id"
@@ -294,8 +294,8 @@ ActiveRecord::Schema.define(version: 20160224173933) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "presets", ["folder_id"], name: "index_presets_on_folder_id", using: :btree
-  add_index "presets", ["user_id"], name: "index_presets_on_user_id", using: :btree
+  add_index "program_presets", ["folder_id"], name: "index_program_presets_on_folder_id", using: :btree
+  add_index "program_presets", ["user_id"], name: "index_program_presets_on_user_id", using: :btree
 
   create_table "program_templates", force: :cascade do |t|
     t.string   "name"
@@ -547,8 +547,8 @@ ActiveRecord::Schema.define(version: 20160224173933) do
   add_foreign_key "personal_programs", "program_templates"
   add_foreign_key "personal_properties", "global_properties"
   add_foreign_key "personal_workouts", "workout_templates"
-  add_foreign_key "presets", "folders"
-  add_foreign_key "presets", "users"
+  add_foreign_key "program_presets", "folders"
+  add_foreign_key "program_presets", "users"
   add_foreign_key "user_authentications", "authentication_providers"
   add_foreign_key "user_authentications", "users"
   add_foreign_key "user_settings", "user_account_types"

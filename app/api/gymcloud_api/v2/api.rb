@@ -30,12 +30,15 @@ class API < Grape::API
   mount Namespaces::ProgramWorkouts
   mount Namespaces::Search
   mount Namespaces::UserAuthentications
+  mount Namespaces::UserAccountTypes
   mount Namespaces::UserProfiles
+  mount Namespaces::UserSettings
   mount Namespaces::Users
   mount Namespaces::Videos
   mount Namespaces::WorkoutEvents
   mount Namespaces::WorkoutExercises
   mount Namespaces::WorkoutTemplates
+  mount Namespaces::ProgramPresets
 
 end
 

@@ -27,7 +27,7 @@ class UserSettings < Grape::Entity
     documentation: {
       desc: 'account type name',
       type: 'integer'
-    }, if: -> (settings) { !settings.user_account_type_id.nil? } \
+    }, if: -> (settings, _) { !settings.user_account_type_id.nil? } \
   do |settings|
     settings.user_account_type.name
   end

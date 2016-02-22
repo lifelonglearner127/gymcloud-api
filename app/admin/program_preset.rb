@@ -35,8 +35,8 @@ ActiveAdmin.register ProgramPreset do
     before_filter :check_user, only: :new
 
     def check_user
-      preset = ::ProgramPreset.last
-      @preset = ::ProgramPreset.new(user: preset.user) unless preset.nil?
+      last = ::ProgramPreset.last
+      @program_preset = ::ProgramPreset.new(user: last.user) unless last.nil?
     end
 
   end

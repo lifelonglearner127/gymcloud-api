@@ -5,6 +5,24 @@ class UserSettings < Base
 
 namespace :user_settings do
 
+  desc 'Create User Settings' do
+    success Entities::UserSettings
+  end
+  params do
+    optional :user_account_type_id, type: Integer
+    optional :units_system, type: String,
+      values: ::UserSettings.units_systems.keys,
+      default: 'imperial'
+    optional :is_tutorial_finished, type: Boolean, default: 'false'
+  end
+  get do
+    attributes = filtered_params_with(user: current_user)
+    settings = ::UserSettings.new(attributes)
+    authorize!(:create, settings)
+    settings.save!
+    present(settings, with: Entities::UserSettings)
+  end
+
   params do
     requires :id, type: Integer, desc: 'User Profile ID'
   end

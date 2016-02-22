@@ -1,4 +1,4 @@
-ActiveAdmin.register AccountType do
+ActiveAdmin.register UserAccountType do
 
   menu parent: 'Presets'
 

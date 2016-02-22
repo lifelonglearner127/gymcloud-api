@@ -2,7 +2,7 @@ class CreateUserSettings < ActiveRecord::Migration
   def change
     create_table :user_settings do |t|
       t.integer :user_id
-      t.references :account_type, index: true, foreign_key: true
+      t.references :user_account_type, index: true, foreign_key: true
       t.integer :units_system
       t.boolean :is_tutorial_finished
 

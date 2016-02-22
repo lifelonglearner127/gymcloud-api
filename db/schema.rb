@@ -16,13 +16,6 @@ ActiveRecord::Schema.define(version: 20160224173933) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "account_types", force: :cascade do |t|
-    t.string   "name"
-    t.string   "icon"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
     t.text     "body"
@@ -364,6 +357,13 @@ ActiveRecord::Schema.define(version: 20160224173933) do
     t.string "name"
   end
 
+  create_table "user_account_types", force: :cascade do |t|
+    t.string   "name"
+    t.string   "icon"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "user_agreements", force: :cascade do |t|
     t.integer  "pro_id"
     t.integer  "client_id"
@@ -407,14 +407,14 @@ ActiveRecord::Schema.define(version: 20160224173933) do
 
   create_table "user_settings", force: :cascade do |t|
     t.integer  "user_id"
-    t.integer  "account_type_id"
+    t.integer  "user_account_type_id"
     t.integer  "units_system"
     t.boolean  "is_tutorial_finished"
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
   end
 
-  add_index "user_settings", ["account_type_id"], name: "index_user_settings_on_account_type_id", using: :btree
+  add_index "user_settings", ["user_account_type_id"], name: "index_user_settings_on_user_account_type_id", using: :btree
   add_index "user_settings", ["user_id"], name: "index_user_settings_on_user_id", unique: true, using: :btree
 
   create_table "users", force: :cascade do |t|
@@ -551,7 +551,7 @@ ActiveRecord::Schema.define(version: 20160224173933) do
   add_foreign_key "presets", "users"
   add_foreign_key "user_authentications", "authentication_providers"
   add_foreign_key "user_authentications", "users"
-  add_foreign_key "user_settings", "account_types"
+  add_foreign_key "user_settings", "user_account_types"
   add_foreign_key "workout_event_exercises", "workout_events"
   add_foreign_key "workout_event_exercises", "workout_exercises"
   add_foreign_key "workout_events", "personal_workouts"

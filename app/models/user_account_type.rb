@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: account_types
+# Table name: user_account_types
 #
 #  id         :integer          not null, primary key
 #  name       :string
@@ -9,9 +9,9 @@
 #  updated_at :datetime         not null
 #
 
-class AccountType < ActiveRecord::Base
+class UserAccountType < ActiveRecord::Base
 
-  has_many :user_settings, inverse_of: :account_type
+  has_many :user_settings, inverse_of: :user_account_type
   has_many :users, through: :user_settings
 
   validates :name, :icon, presence: true

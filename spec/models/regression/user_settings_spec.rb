@@ -4,7 +4,7 @@ RSpec.describe UserSettings do
 
   # === Relations ===
   it { is_expected.to belong_to :user}
-	it { is_expected.to belong_to :account_type}
+	it { is_expected.to belong_to :user_account_type}
 
 
 
@@ -14,14 +14,14 @@ RSpec.describe UserSettings do
   # === Database (Columns) ===
   it { is_expected.to have_db_column :id }
 	it { is_expected.to have_db_column :user_id }
-	it { is_expected.to have_db_column :account_type_id }
+	it { is_expected.to have_db_column :user_account_type_id }
 	it { is_expected.to have_db_column :units_system }
 	it { is_expected.to have_db_column :is_tutorial_finished }
 	it { is_expected.to have_db_column :created_at }
 	it { is_expected.to have_db_column :updated_at }
 
   # === Database (Indexes) ===
-  it { is_expected.to have_db_index ["account_type_id"]}
+  it { is_expected.to have_db_index ["user_account_type_id"]}
 	it { is_expected.to have_db_index ["user_id"]}
 
   # === Validations (Length) ===

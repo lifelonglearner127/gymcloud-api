@@ -4,7 +4,7 @@
 #
 #  id                   :integer          not null, primary key
 #  user_id              :integer
-#  account_type_id      :integer
+#  user_account_type_id :integer
 #  units_system         :integer
 #  is_tutorial_finished :boolean
 #  created_at           :datetime         not null
@@ -14,7 +14,7 @@
 class UserSettings < ActiveRecord::Base
 
   belongs_to :user
-  belongs_to :account_type, inverse_of: :user_settings
+  belongs_to :user_account_type, inverse_of: :user_settings
 
   enum units_system: [:imperial, :metric]
 

@@ -1,6 +1,6 @@
-class CreateAccountTypes < ActiveRecord::Migration
+class CreateUserAccountTypes < ActiveRecord::Migration
   def change
-    create_table :account_types do |t|
+    create_table :user_account_types do |t|
       t.string :name
       t.string :icon
 

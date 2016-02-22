@@ -17,19 +17,19 @@ class UserSettings < Grape::Entity
       required: true
     }
 
-  expose :account_type_id,
+  expose :user_account_type_id,
     documentation: {
       desc: 'account type id',
       type: 'integer'
     }
 
-  expose :account_type_name,
+  expose :user_account_type_name,
     documentation: {
       desc: 'account type name',
       type: 'integer'
-    }, if: -> (settings) { !settings.account_type_id.nil? } \
+    }, if: -> (settings) { !settings.user_account_type_id.nil? } \
   do |settings|
-    settings.account_type.name
+    settings.user_account_type.name
   end
 
   expose :units_system,

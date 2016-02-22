@@ -23,7 +23,7 @@ namespace :user_settings do
       success Entities::UserSettings
     end
     params do
-      optional :account_type_id, type: Integer
+      optional :user_account_type_id, type: Integer
       optional :units_system, type: String,
         values: ::UserSettings.units_systems.keys
       optional :is_tutorial_finished, type: Boolean

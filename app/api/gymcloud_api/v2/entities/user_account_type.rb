@@ -1,7 +1,7 @@
 module GymcloudAPI::V2
 module Entities
 
-class AccountType < Grape::Entity
+class UserAccountType < Grape::Entity
 
   expose :id
   expose :name

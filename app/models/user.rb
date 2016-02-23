@@ -26,6 +26,7 @@
 #  invitation_limit       :integer
 #  invited_by_id          :integer
 #  invited_by_type        :string
+#  is_active              :boolean
 #
 
 class User < ActiveRecord::Base
@@ -126,6 +127,10 @@ class User < ActiveRecord::Base
 
   def live
     !email_is_fake?
+  end
+
+  def active_for_authentication?
+    super && is_active?
   end
 
   private

@@ -66,6 +66,9 @@ module APIGuard
             @current_user = User.find(access_token.resource_owner_id)
 
         end
+
+        raise UserIsNotActiveError  if not current_user.is_active?
+
       end
     end
 
@@ -107,7 +110,8 @@ module APIGuard
     def install_error_responders(base)
       error_classes = [
         MissingTokenError, TokenNotFoundError,
-        ExpiredError, RevokedError, InsufficientScopeError
+        ExpiredError, RevokedError, InsufficientScopeError,
+        UserIsNotActiveError
       ]
 
       base.send :rescue_from, *error_classes, oauth2_bearer_token_error_handler
@@ -147,6 +151,12 @@ module APIGuard
               {scope: e.scopes}
             )
 
+          when UserIsNotActiveError
+            Rack::OAuth2::Server::Resource::Bearer::Unauthorized.new(
+              :user_is_not_active,
+              "User Account is suspended"
+            )
+
           end
 
         response.finish
@@ -165,6 +175,8 @@ module APIGuard
   class ExpiredError < StandardError; end
 
   class RevokedError < StandardError; end
+
+  class UserIsNotActiveError < StandardError; end
 
   class InsufficientScopeError < StandardError
 

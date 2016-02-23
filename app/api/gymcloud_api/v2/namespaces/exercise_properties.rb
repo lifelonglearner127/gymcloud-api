@@ -10,6 +10,7 @@ namespace :exercise_properties do
     requires :personal_property_id, type: Integer
     requires :workout_exercise_id, type: Integer
     optional :value, type: Integer
+    optional :value2, type: Integer
     optional :position, type: Integer
   end
   post do
@@ -34,6 +35,7 @@ namespace :exercise_properties do
     desc 'Update Exercise Property'
     params do
       optional :value, type: Integer
+      optional :value2, type: Integer
       optional :position, type: Integer
       optional :personal_property_id, type: Integer
     end

@@ -9,6 +9,7 @@ class ExerciseProperty < Grape::Entity
   expose :personal_property, with: Entities::PersonalProperty
   expose :workout_exercise_id
   expose :value
+  expose :value2
   expose :position
 
 end

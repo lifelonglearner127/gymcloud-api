@@ -2,12 +2,12 @@ require 'rails_helper'
 
 describe Admin::GlobalPropertiesController do
   # === Routes (REST) ===
-  it { should route(:post, '/admin/global_properties/batch_action').to({:controller=>"admin/global_properties", :action=>"batch_action"}) } 
+  it { should route(:post, '/admin/global_properties').to({:controller=>"admin/global_properties", :action=>"create"}) } 
+	it { should route(:post, '/admin/global_properties/batch_action').to({:controller=>"admin/global_properties", :action=>"batch_action"}) } 
 	it { should route(:get, '/admin/global_properties').to({:controller=>"admin/global_properties", :action=>"index"}) } 
 	it { should route(:get, '/admin/global_properties/1').to({:controller=>"admin/global_properties", :action=>"show", :id=>1}) } 
 	it { should route(:get, '/admin/global_properties/new').to({:controller=>"admin/global_properties", :action=>"new"}) } 
 	it { should route(:get, '/admin/global_properties/1/edit').to({:controller=>"admin/global_properties", :action=>"edit", :id=>1}) } 
-	it { should route(:post, '/admin/global_properties').to({:controller=>"admin/global_properties", :action=>"create"}) } 
 	it { should route(:patch, '/admin/global_properties/1').to({:controller=>"admin/global_properties", :action=>"update", :id=>1}) } 
 	it { should route(:delete, '/admin/global_properties/1').to({:controller=>"admin/global_properties", :action=>"destroy", :id=>1}) } 
   # === Callbacks (Before) ===

@@ -54,6 +54,7 @@ RSpec.describe User do
 	it { is_expected.to have_db_column :invitation_limit }
 	it { is_expected.to have_db_column :invited_by_id }
 	it { is_expected.to have_db_column :invited_by_type }
+	it { is_expected.to have_db_column :is_active }
 
   # === Database (Indexes) ===
   it { is_expected.to have_db_index ["confirmation_token"]}

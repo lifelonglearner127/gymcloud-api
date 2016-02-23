@@ -9,6 +9,7 @@
 #  position             :integer
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
+#  value2               :integer
 #
 
 class ExerciseProperty < ActiveRecord::Base

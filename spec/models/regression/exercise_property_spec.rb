@@ -19,6 +19,7 @@ RSpec.describe ExerciseProperty do
 	it { is_expected.to have_db_column :position }
 	it { is_expected.to have_db_column :created_at }
 	it { is_expected.to have_db_column :updated_at }
+	it { is_expected.to have_db_column :value2 }
 
   # === Database (Indexes) ===
   it { is_expected.to have_db_index ["personal_property_id"]}

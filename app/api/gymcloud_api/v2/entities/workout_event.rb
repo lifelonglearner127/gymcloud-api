@@ -22,6 +22,7 @@ class WorkoutEvent < Grape::Entity
   expose :workout_note do |event|
     event.personal_workout.note
   end
+  expose :comments, using: Entities::Comment
 
 end
 

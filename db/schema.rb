@@ -410,6 +410,7 @@ ActiveRecord::Schema.define(version: 20160224173933) do
     t.integer  "user_account_type_id"
     t.integer  "units_system"
     t.boolean  "is_tutorial_finished"
+    t.boolean  "is_presets_loaded"
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
   end

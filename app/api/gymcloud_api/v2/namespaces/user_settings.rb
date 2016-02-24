@@ -14,6 +14,7 @@ namespace :user_settings do
       values: ::UserSettings.units_systems.keys,
       default: 'imperial'
     optional :is_tutorial_finished, type: Boolean, default: 'false'
+    optional :is_presets_loaded, type: Boolean, default: 'false'
   end
   get do
     attributes = filtered_params_with(user: current_user)
@@ -45,6 +46,7 @@ namespace :user_settings do
       optional :units_system, type: String,
         values: ::UserSettings.units_systems.keys
       optional :is_tutorial_finished, type: Boolean
+      optional :is_presets_loaded, type: Boolean
     end
     patch do
       settings = ::UserSettings.find(params[:id])

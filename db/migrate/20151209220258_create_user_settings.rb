@@ -5,6 +5,7 @@ class CreateUserSettings < ActiveRecord::Migration
       t.references :user_account_type, index: true, foreign_key: true
       t.integer :units_system
       t.boolean :is_tutorial_finished
+      t.boolean :is_presets_loaded
 
       t.timestamps null: false
     end

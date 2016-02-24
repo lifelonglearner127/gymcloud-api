@@ -44,6 +44,12 @@ class UserSettings < Grape::Entity
       type: 'boolean'
     }
 
+  expose :is_presets_loaded,
+    documentation: {
+      desc: 'is presets loaded',
+      type: 'boolean'
+    }
+
 end
 
 end

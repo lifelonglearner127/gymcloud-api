@@ -22,7 +22,7 @@ class Import < BaseService
   end
 
   def programs_to_import
-    folder_id = program_preset.folder_id
+    folder_id = @program_preset.folder_id
     ::ProgramTemplate.where(folder_id: folder_id, is_public: true)
   end
 

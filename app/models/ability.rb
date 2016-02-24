@@ -47,6 +47,7 @@ class Ability
     as_owner_can [:read, :destroy], UserAuthentication
     can :read, UserProfile
     as_owner_can :update, UserProfile
+    as_owner_can [:create, :read, :update], UserSettings
     can [:create, :read, :destroy], Exercise, user_id: @user.id
     can [:create, :read, :destroy], WorkoutTemplate, user_id: @user.id
     can [:create, :read, :destroy], ProgramTemplate, user_id: @user.id
@@ -150,6 +151,7 @@ class Ability
       end
     end
     can :crud, ExerciseProperty, personal_property: {person_id: @user.id}
+    can :import, ProgramPreset
   end
 
   def as_admin

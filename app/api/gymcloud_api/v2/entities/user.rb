@@ -53,6 +53,14 @@ class User < Grape::Entity
       param_type: 'body'
     }
 
+  expose :user_settings,
+    using: Entities::UserSettings,
+    documentation: {
+      desc: 'user settings',
+      type: Entities::UserSettings,
+      param_type: 'body'
+    }
+
 end
 
 end

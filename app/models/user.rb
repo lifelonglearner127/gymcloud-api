@@ -33,6 +33,7 @@ class User < ActiveRecord::Base
 
   include SearchScopes::Pro
   include PublicActivity::Common
+  include ProRootFolders
 
   devise \
     :database_authenticatable, :registerable,
@@ -44,6 +45,7 @@ class User < ActiveRecord::Base
   acts_as_reader
 
   has_one :user_profile
+  has_one :user_settings
   has_many :authentications,
     class_name: 'UserAuthentication',
     dependent: :destroy

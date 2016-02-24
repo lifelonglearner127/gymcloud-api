@@ -14,3 +14,10 @@
 # ActiveSupport::Inflector.inflections(:en) do |inflect|
 #   inflect.acronym 'RESTful'
 # end
+
+ActiveSupport::Inflector.inflections do |inflect|
+
+   inflect.irregular 'UserSettings', 'UserSettings'
+   inflect.irregular 'user_settings', 'user_settings'
+
+end

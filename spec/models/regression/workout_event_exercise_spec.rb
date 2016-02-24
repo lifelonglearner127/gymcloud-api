@@ -6,8 +6,7 @@ RSpec.describe WorkoutEventExercise do
   it { is_expected.to belong_to :workout_event}
 	it { is_expected.to belong_to :workout_exercise}
   
-  it { is_expected.to have_many :comments}
-	it { is_expected.to have_many :exercise_results}
+  it { is_expected.to have_many :exercise_results}
 	it { is_expected.to have_many :exercise_properties}
 
   # === Nested Attributes ===

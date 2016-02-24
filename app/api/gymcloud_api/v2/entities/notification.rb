@@ -25,11 +25,10 @@ class Notification < Grape::Entity
       }
     when 'Comment'
       {
-        user_id: notification.trackable.commentable.workout_event.person.id,
+        user_id: notification.trackable.commentable.person.id,
         personal_workout_id: notification.trackable.commentable
-          .workout_event.personal_workout_id,
-        workout_event_id: notification.trackable.commentable.workout_event.id,
-        workout_exercise_id: notification.trackable.commentable.id
+          .personal_workout_id,
+        workout_event_id: notification.trackable.commentable.id
       }
     when 'WorkoutEvent'
       {

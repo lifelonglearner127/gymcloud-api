@@ -17,12 +17,11 @@ namespace :comments do
     comment = ::Comment.new(filtered_params_with user: current_user)
     authorize!(:create, comment)
     comment.save!
-    if comment.commentable_type == 'WorkoutEventExercise'
+    if comment.commentable_type == 'WorkoutEvent'
       if current_user.pro?
-        recipient = comment.commentable.workout_event.person
+        recipient = comment.commentable.person
       else
-        recipient = comment.commentable.workout_event
-          .personal_workout.workout_template.user
+        recipient = comment.commentable.personal_workout.workout_template.user
       end
     end
     comment.create_activity(

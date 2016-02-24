@@ -15,6 +15,8 @@ class WorkoutEvent < ActiveRecord::Base
 
   include PublicActivity::Common
 
+  acts_as_commentable
+
   belongs_to :personal_workout
   has_one :person, through: :personal_workout
   has_many :exercise_results

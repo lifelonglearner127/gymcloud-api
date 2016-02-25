@@ -121,8 +121,8 @@ ActiveRecord::Schema.define(version: 20160224173933) do
     t.integer  "workout_exercise_id"
     t.integer  "value"
     t.integer  "position"
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+    t.datetime "created_at",           precision: 6, null: false
+    t.datetime "updated_at",           precision: 6, null: false
     t.integer  "value2"
   end
 
@@ -364,6 +364,8 @@ ActiveRecord::Schema.define(version: 20160224173933) do
     t.datetime "updated_at", null: false
   end
 
+  add_index "user_account_types", ["id"], name: "user_account_types_id_key", unique: true, using: :btree
+
   create_table "user_agreements", force: :cascade do |t|
     t.integer  "pro_id"
     t.integer  "client_id"
@@ -410,9 +412,9 @@ ActiveRecord::Schema.define(version: 20160224173933) do
     t.integer  "user_account_type_id"
     t.integer  "units_system"
     t.boolean  "is_tutorial_finished"
-    t.boolean  "is_presets_loaded"
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
+    t.boolean  "is_presets_loaded"
   end
 
   add_index "user_settings", ["user_account_type_id"], name: "index_user_settings_on_user_account_type_id", using: :btree

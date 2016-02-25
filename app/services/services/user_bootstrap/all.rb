@@ -18,6 +18,7 @@ class All < BaseService
     Services::UserBootstrap::UserSettings.!(user: @user)
     Services::UserBootstrap::PersonalProperties.!(user: @user)
     Services::UserBootstrap::Folders.!(user: @user)
+    Services::UserBootstrap::TestClients.!(user: @user)
     @user.update_attributes!(is_active: true)
   end
 

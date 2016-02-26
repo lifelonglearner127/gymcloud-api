@@ -10,6 +10,7 @@ namespace :workout_events do
     requires :personal_workout_id, type: Integer
     requires :begins_at, type: DateTime
     optional :ends_at, type: DateTime
+    optional :is_completed, type: Boolean, default: 'false'
   end
   post do
     event = ::WorkoutEvent.new(filtered_params)

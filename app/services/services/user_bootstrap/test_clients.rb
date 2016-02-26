@@ -16,7 +16,7 @@ class TestClients < BaseService
   def bootstrap
     group = bootstrap_group
     clients = bootstrap_clients
-    add_clients(group, clients.first(2))
+    add_clients(group, clients)
   end
 
   def bootstrap_group
@@ -24,7 +24,7 @@ class TestClients < BaseService
   end
 
   def bootstrap_clients
-    (1..3).each_with_object([]) { |i, memo| memo << bootstrap_client(i) }
+    (1..2).each_with_object([]) { |i, memo| memo << bootstrap_client(i) }
   end
 
   def bootstrap_client(index)

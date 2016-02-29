@@ -16,7 +16,7 @@ namespace :user_settings do
     optional :is_tutorial_finished, type: Boolean, default: 'false'
     optional :is_presets_loaded, type: Boolean, default: 'false'
   end
-  get do
+  post do
     attributes = filtered_params_with(user: current_user)
     settings = ::UserSettings.new(attributes)
     authorize!(:create, settings)

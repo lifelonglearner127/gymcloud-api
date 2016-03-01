@@ -95,6 +95,12 @@ class User < ActiveRecord::Base
     pro? || !!agreements_as_client.is_me(id).build.save!
   end
 
+  def confirm
+    result = super
+    update_attribute(:is_active, true)
+    result
+  end
+
   def self.find_by_access_token(token)
     record = Doorkeeper::AccessToken.where(token: token).first
     record.present? && find(record.resource_owner_id) || nil

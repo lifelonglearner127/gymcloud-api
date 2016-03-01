@@ -37,9 +37,8 @@ class User < ActiveRecord::Base
 
   devise \
     :database_authenticatable, :registerable,
-    :recoverable, :rememberable,
-    :trackable, :validatable,
-    :confirmable, :invitable,
+    :recoverable, :rememberable, :trackable,
+    :validatable, :confirmable, :invitable,
     :async, :omniauthable, omniauth_providers: [:google_oauth2, :facebook]
 
   acts_as_reader
@@ -104,19 +103,6 @@ class User < ActiveRecord::Base
   def self.find_by_access_token(token)
     record = Doorkeeper::AccessToken.where(token: token).first
     record.present? && find(record.resource_owner_id) || nil
-  end
-
-  def library
-    return [] if folders.none?
-    tree = folders.root.hash_tree
-    parser = lambda do |folder, branch|
-      result = folder.attributes
-      result[:items] = branch.map(&parser)
-      items = folder.items
-      result[:items] += items.flatten if items.any?
-      result
-    end
-    tree.map(&parser)
   end
 
   def self.create_from_omniauth(email)

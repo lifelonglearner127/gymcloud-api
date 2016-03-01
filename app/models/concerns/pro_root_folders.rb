@@ -4,6 +4,19 @@ module ProRootFolders
 
   included do
 
+    def library
+      return [] if folders.none?
+      tree = folders.root.hash_tree
+      parser = lambda do |folder, branch|
+        result = folder.attributes
+        result[:items] = branch.map(&parser)
+        items = folder.items
+        result[:items] += items.flatten if items.any?
+        result
+      end
+      tree.map(&parser)
+    end
+
     def root_folder
       folders.find_by(name: 'Root', parent_id: nil)
     end

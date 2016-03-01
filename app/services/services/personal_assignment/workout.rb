@@ -64,6 +64,7 @@ class Workout < BaseService
       personal_property: exercise_property.personal_property,
       workout_exercise: workout_exercise,
       value: exercise_property.value,
+      value2: exercise_property.value2,
       position: exercise_property.position
     )
   end

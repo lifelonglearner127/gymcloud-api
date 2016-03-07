@@ -12,6 +12,10 @@ class All
 
   def log(event)
     logger.info("STRIPE: #{event.type}: #{event.id}")
+    LoggedStripeEvent.create!(
+      stripe_event_id: event.id,
+      data: event.to_hash
+    )
   end
 
   def logger

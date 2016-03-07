@@ -25,7 +25,7 @@ class VimeoUploaderService
   def check_quota
     free_space = @client_me.upload_quota.space.free
     video_size = @video.tmp_file.file.size
-    fail Vimeo::UploadeQuotaLimit if free_space < video_size
+    raise Vimeo::UploadeQuotaLimit if free_space < video_size
   end
 
   def fetch_ticket

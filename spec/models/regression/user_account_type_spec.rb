@@ -3,13 +3,13 @@ require 'rails_helper'
 RSpec.describe UserAccountType do
 
   # === Relations ===
-
-
-  it { is_expected.to have_many :user_settings }
-	it { is_expected.to have_many :users }
+  
+  
+  it { is_expected.to have_many :user_settings}
+	it { is_expected.to have_many :users}
 
   # === Nested Attributes ===
-
+  
 
   # === Database (Columns) ===
   it { is_expected.to have_db_column :id }
@@ -19,7 +19,7 @@ RSpec.describe UserAccountType do
 	it { is_expected.to have_db_column :updated_at }
 
   # === Database (Indexes) ===
-
+  
 
   # === Validations (Length) ===
   it { is_expected.to allow_value(Faker::Lorem.characters(255)).for :name }
@@ -32,10 +32,10 @@ RSpec.describe UserAccountType do
 	it { is_expected.to validate_presence_of :icon }
 
   # === Validations (Numericality) ===
+  
 
-
-
+  
   # === Enums ===
-
-
+  
+  
 end

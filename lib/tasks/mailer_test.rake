@@ -26,7 +26,7 @@ namespace :mailer_test do
     ActiveRecord::Base.transaction do
       deliver_email HtmlMailer.welcome_new_user(user.id)
       puts "\e[32m welcome_new_user sent \e[0m"
-      fail ActiveRecord::Rollback
+      raise ActiveRecord::Rollback
     end
   end
 
@@ -35,7 +35,7 @@ namespace :mailer_test do
     ActiveRecord::Base.transaction do
       deliver_email HtmlMailer.program_assigned(user.id, personal_program.id)
       puts "\e[32m program_assigned sent \e[0m"
-      fail ActiveRecord::Rollback
+      raise ActiveRecord::Rollback
     end
   end
 
@@ -44,7 +44,7 @@ namespace :mailer_test do
     ActiveRecord::Base.transaction do
       deliver_email HtmlMailer.workout_assigned(user.id, personal_workout.id)
       puts "\e[32m workout_assigned sent \e[0m"
-      fail ActiveRecord::Rollback
+      raise ActiveRecord::Rollback
     end
   end
 
@@ -53,7 +53,7 @@ namespace :mailer_test do
     ActiveRecord::Base.transaction do
       deliver_email HtmlMailer.event_scheduled(user.id, event.id)
       puts "\e[32m event_scheduled sent \e[0m"
-      fail ActiveRecord::Rollback
+      raise ActiveRecord::Rollback
     end
   end
 
@@ -62,7 +62,7 @@ namespace :mailer_test do
     ActiveRecord::Base.transaction do
       deliver_email HtmlMailer.event_changed(user.id, event.id)
       puts "\e[32m event_changed sent \e[0m"
-      fail ActiveRecord::Rollback
+      raise ActiveRecord::Rollback
     end
   end
 
@@ -71,7 +71,7 @@ namespace :mailer_test do
     ActiveRecord::Base.transaction do
       deliver_email HtmlMailer.results_added(user.id, result.id)
       puts "\e[32m results_added sent \e[0m"
-      fail ActiveRecord::Rollback
+      raise ActiveRecord::Rollback
     end
   end
 
@@ -80,7 +80,7 @@ namespace :mailer_test do
     ActiveRecord::Base.transaction do
       deliver_email HtmlMailer.trial_expiration(user.id)
       puts "\e[32m trial_expiration sent \e[0m"
-      fail ActiveRecord::Rollback
+      raise ActiveRecord::Rollback
     end
   end
 
@@ -89,7 +89,7 @@ namespace :mailer_test do
     ActiveRecord::Base.transaction do
       deliver_email DeviseHtmlMailer.invitation_instructions(user, 'token')
       puts "\e[32m invitation_instructions sent \e[0m"
-      fail ActiveRecord::Rollback
+      raise ActiveRecord::Rollback
     end
   end
 

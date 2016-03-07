@@ -16,11 +16,12 @@ namespace :program_workouts do
     optional :week_id, type: Integer
   end
   post do
-    if params[:workout_template_id]
-      service_class = Services::ProgramWorkout::Create
-    else
-      service_class = Services::ProgramWorkout::CreateNew
-    end
+    service_class =
+      if params[:workout_template_id]
+        Services::ProgramWorkout::Create
+      else
+        Services::ProgramWorkout::CreateNew
+      end
     service = service_class.new(attrs: filtered_params, user: current_user)
     program_workout = ActiveRecord::Base.transaction do
       authorize!(:create, service.build_program_workout)

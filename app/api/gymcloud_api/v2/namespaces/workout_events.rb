@@ -19,11 +19,12 @@ namespace :workout_events do
 
     HtmlMailer.delay.event_scheduled(event.personal_workout.person.id, event.id)
 
-    if current_user.pro?
-      recipient = event.person
-    else
-      recipient = event.personal_workout.workout_template.user
-    end
+    recipient =
+      if current_user.pro?
+        event.person
+      else
+        event.personal_workout.workout_template.user
+      end
     event.create_activity(
       action: :create,
       owner: current_user,

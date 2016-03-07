@@ -45,7 +45,7 @@ class Create < BaseService
   end
 
   def create_user_and_authentication_and_sign_in(provider)
-    fail ActiveRecord::RecordNotFound unless @attrs[:is_signup]
+    raise ActiveRecord::RecordNotFound unless @attrs[:is_signup]
     user = ::User.create_from_omniauth(@attrs[:email])
     user.save! unless user.valid?
     user.become_a_pro!

@@ -42,15 +42,12 @@ class Link < BaseService
   end
 
   def return_auth
-    if existing_auth
-      if existing_auth.user_id != @linking_user.id
-        existing_auth.destroy!
-        return create_auth
-      else
-        return existing_auth
-      end
+    return create_auth unless existing_auth
+    if existing_auth.user_id != @linking_user.id
+      existing_auth.destroy!
+      create_auth
     else
-      return create_auth
+      existing_auth
     end
   end
 

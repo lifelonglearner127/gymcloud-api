@@ -21,11 +21,12 @@ namespace :exercise_results do
     # person_id = exercise_result.person.id
     # HtmlMailer.delay.results_added(person_id, exercise_result.id)
 
-    if current_user.pro?
-      recipient = exercise_result.person
-    else
-      recipient = exercise_result.workout_exercise.exercise.user
-    end
+    recipient =
+      if current_user.pro?
+        exercise_result.person
+      else
+        exercise_result.workout_exercise.exercise.user
+      end
     exercise_result.create_activity(
       action: :create,
       owner: current_user,

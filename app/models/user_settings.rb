@@ -7,6 +7,7 @@
 #  user_account_type_id :integer
 #  units_system         :integer
 #  is_tutorial_finished :boolean
+#  is_presets_loaded    :boolean
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
 #

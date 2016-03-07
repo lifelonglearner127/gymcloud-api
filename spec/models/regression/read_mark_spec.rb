@@ -4,7 +4,7 @@ RSpec.describe ReadMark do
 
   # === Relations ===
   it { is_expected.to belong_to :readable}
-	it { is_expected.to belong_to :user}
+	it { is_expected.to belong_to :reader}
   
   
 
@@ -25,7 +25,8 @@ RSpec.describe ReadMark do
   
 
   # === Validations (Presence) ===
-  it { is_expected.to validate_presence_of :user_id }
+  it { is_expected.to validate_presence_of :reader_id }
+	it { is_expected.to validate_presence_of :reader_type }
 	it { is_expected.to validate_presence_of :readable_type }
 
   # === Validations (Numericality) ===

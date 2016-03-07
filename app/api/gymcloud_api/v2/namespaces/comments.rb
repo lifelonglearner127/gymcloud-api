@@ -14,15 +14,18 @@ namespace :comments do
     requires :role, type: String, default: 'comments'
   end
   post do
-    comment = ::Comment.new(filtered_params_with user: current_user)
+    comment = ::Comment.new(
+      filtered_params_with(user: current_user)
+    )
     authorize!(:create, comment)
     comment.save!
     if comment.commentable_type == 'WorkoutEvent'
-      if current_user.pro?
-        recipient = comment.commentable.person
-      else
-        recipient = comment.commentable.personal_workout.workout_template.user
-      end
+      recipient =
+        if current_user.pro?
+          comment.commentable.person
+        else
+          comment.commentable.personal_workout.workout_template.user
+        end
     end
     comment.create_activity(
       action: :create,

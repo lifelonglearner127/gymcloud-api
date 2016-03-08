@@ -23,7 +23,7 @@ gem 'paper_trail', '~> 4.0.0.rc'
 gem 'paranoia', '~> 2.0'
 gem 'acts_as_commentable'
 gem 'public_activity'
-gem 'unread'
+gem 'unread', '~> 0.6.1'
 gem 'ancestry'
 gem 'closure_tree'
 

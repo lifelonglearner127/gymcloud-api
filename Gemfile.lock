@@ -564,7 +564,7 @@ GEM
       unf_ext
     unf_ext (0.0.7.2)
     unicode-display_width (0.3.1)
-    unread (0.7.1)
+    unread (0.6.3)
       activerecord (>= 3)
     virtus (1.0.5)
       axiom-types (~> 0.1)
@@ -668,7 +668,7 @@ DEPENDENCIES
   stripe
   stripe_event
   thin
-  unread
+  unread (~> 0.6.1)
   vimeo!
   web-console (~> 2.0)
   yt

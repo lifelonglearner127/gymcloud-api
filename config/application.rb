@@ -34,8 +34,6 @@ module GymcloudApi
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
 
-    config.web_console.development_only = true
-
     %w(api services)
       .each do |folder|
         config.paths.add File.join('app', folder), glob: File.join('**', '*.rb')
@@ -49,9 +47,6 @@ module GymcloudApi
       g.stylesheets     false
       g.javascripts     false
     end
-
-    # NOTE: Stripe server IP
-    config.web_console.whitelisted_ips = '54.241.34.0/16'
 
     config.middleware.insert_before 0, "Rack::Cors" do
       allow do

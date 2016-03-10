@@ -33,4 +33,7 @@ Rails.application.configure do
   }
   config.action_mailer.delivery_method = :letter_opener_web
 
+  # NOTE: Stripe server IP
+  config.web_console.whitelisted_ips = '54.241.34.0/16'
+
 end

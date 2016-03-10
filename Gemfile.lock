@@ -18,7 +18,16 @@ GIT
       sprockets (< 4)
 
 GIT
-  remote: git://github.com/bodya-dnepr/vimeo.git
+  remote: git://github.com/patrick-nits/guard-regressor.git
+  revision: 18215642577d0049a7a86f833109c2c67ecac96f
+  specs:
+    guard-regressor (0.0.1)
+      guard-compat (~> 1.2.1)
+      rails (~> 4.0)
+      regressor (~> 0.3.4)
+
+GIT
+  remote: https://gymcloud@bitbucket.org/gymcloud/vimeo.git
   revision: 95ecbf6e19de557224d1f4e21aa50ff3662dbdc8
   branch: v2
   specs:
@@ -29,15 +38,6 @@ GIT
       oauth (~> 0.4)
       oauth2 (~> 1.0)
       rdoc (~> 4.2.0)
-
-GIT
-  remote: git://github.com/patrick-nits/guard-regressor.git
-  revision: 18215642577d0049a7a86f833109c2c67ecac96f
-  specs:
-    guard-regressor (0.0.1)
-      guard-compat (~> 1.2.1)
-      rails (~> 4.0)
-      regressor (~> 0.3.4)
 
 GEM
   remote: https://rubygems.org/

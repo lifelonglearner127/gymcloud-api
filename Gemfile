@@ -57,7 +57,7 @@ gem 'api-pagination'
 
 gem 'sidekiq'
 
-gem 'vimeo', github: 'bodya-dnepr/vimeo', branch: 'v2'
+gem 'vimeo', bitbucket: 'gymcloud/vimeo', branch: 'v2'
 gem 'andand'
 gem 'faker'
 gem 'ffaker'

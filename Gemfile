@@ -45,7 +45,7 @@ gem 'squeel', '~> 1.2.3'
 # of polyamorous on squeel and activeadmin
 gem 'ransack', '1.6.5'
 gem 'carrierwave'
-gem 'carrierwave-aws'
+gem 'carrierwave-aws', '~> 0.7.1'
 gem 'rmagick'
 
 gem 'stripe'

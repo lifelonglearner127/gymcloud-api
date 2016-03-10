@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.2.1'
+ruby '2.3.0'
 
 gem 'rails', '~> 4.2.3'
 gem 'pg'
@@ -64,6 +64,7 @@ gem 'ffaker'
 gem 'factory_girl_rails'
 
 group :development do
+  gem 'web-console', '~> 3.0'
   gem 'letter_opener_web'
   gem 'sinatra', require: nil # for Sidekiq monitoring
   gem 'rails-erd'
@@ -90,7 +91,6 @@ end
 
 group :development, :test do
   gem 'byebug'
-  gem 'web-console', '~> 2.0'
   gem 'spring'
   gem 'ruby-progressbar'
 

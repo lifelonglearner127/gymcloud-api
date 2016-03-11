@@ -7,10 +7,10 @@ RSpec.describe PersonalWorkout do
 	it { is_expected.to belong_to :person}
   it { is_expected.to have_one :author}
 	it { is_expected.to have_one :user}
+	it { is_expected.to have_one :program_workout}
   it { is_expected.to have_many :activities}
 	it { is_expected.to have_many :workout_exercises}
 	it { is_expected.to have_many :workout_events}
-	it { is_expected.to have_many :program_workouts}
 
   # === Nested Attributes ===
   

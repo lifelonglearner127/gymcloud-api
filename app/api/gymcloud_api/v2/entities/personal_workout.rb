@@ -19,9 +19,13 @@ class PersonalWorkout < Grape::Entity
   expose :workout_template_version
   expose :is_program_part
   expose :program_name,
-    if: ->(workout, _options) { workout.is_program_part } do |workout|
-    workout.program_workouts.first.program.name
-  end
+    if: (lambda do |workout, _options|
+      workout.is_program_part &&
+        workout.andand.program_workout.andand.program
+    end) \
+    do |workout|
+      workout.program_workout.program.name
+    end
 end
 
 end

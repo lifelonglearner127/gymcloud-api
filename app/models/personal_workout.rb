@@ -27,7 +27,7 @@ class PersonalWorkout < ActiveRecord::Base
   has_one :user, through: :workout_template
   has_many :workout_exercises, as: :workout
   has_many :workout_events
-  has_many :program_workouts, as: :workout
+  has_one :program_workout, as: :workout
 
   validates :name, :workout_template_id, :person_id, presence: true
   validates :name, :video_url, length: {maximum: 255}

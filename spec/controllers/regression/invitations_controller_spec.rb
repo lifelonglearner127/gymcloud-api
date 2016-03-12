@@ -3,10 +3,10 @@ require 'rails_helper'
 describe InvitationsController do
   # === Routes (REST) ===
   it { should route(:get, '/users/invitation/new').to({:controller=>"invitations", :action=>"new"}) } 
-	it { should route(:post, '/users/invitation').to({:controller=>"invitations", :action=>"create"}) } 
-	it { should route(:get, '/users/invitation/accept').to({:controller=>"invitations", :action=>"edit"}) } 
 	it { should route(:patch, '/users/invitation').to({:controller=>"invitations", :action=>"update"}) } 
+	it { should route(:post, '/users/invitation').to({:controller=>"invitations", :action=>"create"}) } 
 	it { should route(:get, '/users/invitation/remove').to({:controller=>"invitations", :action=>"destroy"}) } 
+	it { should route(:get, '/users/invitation/accept').to({:controller=>"invitations", :action=>"edit"}) } 
   # === Callbacks (Before) ===
   it { should use_before_filter(:verify_authenticity_token) }
 	it { should use_before_filter(:resource_from_invitation_token) }

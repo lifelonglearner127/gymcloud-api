@@ -5,10 +5,10 @@ describe Admin::UsersController do
   it { should route(:post, '/admin/users').to({:controller=>"admin/users", :action=>"create"}) } 
 	it { should route(:post, '/admin/users/batch_action').to({:controller=>"admin/users", :action=>"batch_action"}) } 
 	it { should route(:get, '/admin/users').to({:controller=>"admin/users", :action=>"index"}) } 
-	it { should route(:get, '/admin/users/1').to({:controller=>"admin/users", :action=>"show", :id=>1}) } 
 	it { should route(:get, '/admin/users/new').to({:controller=>"admin/users", :action=>"new"}) } 
-	it { should route(:get, '/admin/users/1/edit').to({:controller=>"admin/users", :action=>"edit", :id=>1}) } 
 	it { should route(:patch, '/admin/users/1').to({:controller=>"admin/users", :action=>"update", :id=>1}) } 
+	it { should route(:get, '/admin/users/1/edit').to({:controller=>"admin/users", :action=>"edit", :id=>1}) } 
+	it { should route(:get, '/admin/users/1').to({:controller=>"admin/users", :action=>"show", :id=>1}) } 
   # === Callbacks (Before) ===
   it { should use_before_filter(:verify_authenticity_token) }
 	it { should use_before_filter(:set_paper_trail_enabled_for_controller) }

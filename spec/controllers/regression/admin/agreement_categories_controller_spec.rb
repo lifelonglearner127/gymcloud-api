@@ -4,12 +4,12 @@ describe Admin::AgreementCategoriesController do
   # === Routes (REST) ===
   it { should route(:post, '/admin/agreement_categories/batch_action').to({:controller=>"admin/agreement_categories", :action=>"batch_action"}) } 
 	it { should route(:get, '/admin/agreement_categories').to({:controller=>"admin/agreement_categories", :action=>"index"}) } 
-	it { should route(:get, '/admin/agreement_categories/1').to({:controller=>"admin/agreement_categories", :action=>"show", :id=>1}) } 
 	it { should route(:get, '/admin/agreement_categories/new').to({:controller=>"admin/agreement_categories", :action=>"new"}) } 
-	it { should route(:get, '/admin/agreement_categories/1/edit').to({:controller=>"admin/agreement_categories", :action=>"edit", :id=>1}) } 
-	it { should route(:post, '/admin/agreement_categories').to({:controller=>"admin/agreement_categories", :action=>"create"}) } 
 	it { should route(:patch, '/admin/agreement_categories/1').to({:controller=>"admin/agreement_categories", :action=>"update", :id=>1}) } 
+	it { should route(:post, '/admin/agreement_categories').to({:controller=>"admin/agreement_categories", :action=>"create"}) } 
 	it { should route(:delete, '/admin/agreement_categories/1').to({:controller=>"admin/agreement_categories", :action=>"destroy", :id=>1}) } 
+	it { should route(:get, '/admin/agreement_categories/1/edit').to({:controller=>"admin/agreement_categories", :action=>"edit", :id=>1}) } 
+	it { should route(:get, '/admin/agreement_categories/1').to({:controller=>"admin/agreement_categories", :action=>"show", :id=>1}) } 
   # === Callbacks (Before) ===
   it { should use_before_filter(:verify_authenticity_token) }
 	it { should use_before_filter(:set_paper_trail_enabled_for_controller) }

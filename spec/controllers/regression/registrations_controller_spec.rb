@@ -4,10 +4,10 @@ describe RegistrationsController do
   # === Routes (REST) ===
   it { should route(:post, '/users').to({:controller=>"registrations", :action=>"create"}) } 
 	it { should route(:get, '/users/sign_up').to({:controller=>"registrations", :action=>"new"}) } 
-	it { should route(:get, '/users/edit').to({:controller=>"registrations", :action=>"edit"}) } 
 	it { should route(:patch, '/users').to({:controller=>"registrations", :action=>"update"}) } 
 	it { should route(:delete, '/users').to({:controller=>"registrations", :action=>"destroy"}) } 
 	it { should route(:get, '/users/cancel').to({:controller=>"registrations", :action=>"cancel"}) } 
+	it { should route(:get, '/users/edit').to({:controller=>"registrations", :action=>"edit"}) } 
   # === Callbacks (Before) ===
   it { should use_before_filter(:authenticate_scope!) }
 	it { should use_before_filter(:require_no_authentication) }

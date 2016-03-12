@@ -4,12 +4,12 @@ describe Admin::FoldersController do
   # === Routes (REST) ===
   it { should route(:post, '/admin/folders/batch_action').to({:controller=>"admin/folders", :action=>"batch_action"}) } 
 	it { should route(:get, '/admin/folders').to({:controller=>"admin/folders", :action=>"index"}) } 
-	it { should route(:get, '/admin/folders/1').to({:controller=>"admin/folders", :action=>"show", :id=>1}) } 
 	it { should route(:get, '/admin/folders/new').to({:controller=>"admin/folders", :action=>"new"}) } 
-	it { should route(:get, '/admin/folders/1/edit').to({:controller=>"admin/folders", :action=>"edit", :id=>1}) } 
-	it { should route(:post, '/admin/folders').to({:controller=>"admin/folders", :action=>"create"}) } 
 	it { should route(:patch, '/admin/folders/1').to({:controller=>"admin/folders", :action=>"update", :id=>1}) } 
+	it { should route(:post, '/admin/folders').to({:controller=>"admin/folders", :action=>"create"}) } 
 	it { should route(:delete, '/admin/folders/1').to({:controller=>"admin/folders", :action=>"destroy", :id=>1}) } 
+	it { should route(:get, '/admin/folders/1/edit').to({:controller=>"admin/folders", :action=>"edit", :id=>1}) } 
+	it { should route(:get, '/admin/folders/1').to({:controller=>"admin/folders", :action=>"show", :id=>1}) } 
   # === Callbacks (Before) ===
   it { should use_before_filter(:verify_authenticity_token) }
 	it { should use_before_filter(:set_paper_trail_enabled_for_controller) }

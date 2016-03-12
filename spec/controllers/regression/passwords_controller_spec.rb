@@ -2,8 +2,8 @@ require 'rails_helper'
 
 describe PasswordsController do
   # === Routes (REST) ===
-  it { should route(:post, '/users/password').to({:controller=>"passwords", :action=>"create"}) } 
-	it { should route(:patch, '/users/password').to({:controller=>"passwords", :action=>"update"}) } 
+  it { should route(:patch, '/users/password').to({:controller=>"passwords", :action=>"update"}) } 
+	it { should route(:post, '/users/password').to({:controller=>"passwords", :action=>"create"}) } 
 	it { should route(:get, '/users/password/new').to({:controller=>"passwords", :action=>"new"}) } 
 	it { should route(:get, '/users/password/edit').to({:controller=>"passwords", :action=>"edit"}) } 
   # === Callbacks (Before) ===

@@ -96,6 +96,11 @@ class Ability
       program_type: 'PersonalProgram',
       workout_id: @user.personal_workout_ids,
       workout_type: 'PersonalWorkout'
+    can :crud, ProgramWorkout,
+      program_id: PersonalProgram.where(person_id: @user.client_ids).pluck(:id),
+      program_type: 'PersonalProgram',
+      workout_id: PersonalWorkout.where(person_id: @user.client_ids).pluck(:id),
+      workout_type: 'PersonalWorkout'
     can :read, ProgramWeek do |pw|
       case pw.program_type
       when 'ProgramTemplate'

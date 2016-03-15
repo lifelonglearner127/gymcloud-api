@@ -26,11 +26,11 @@ module ProRootFolders
     end
 
     def workouts_folder
-      folder_for('Workouts')
+      folder_for('Workout Templates')
     end
 
     def programs_folder
-      folder_for('Programs')
+      folder_for('Program Templates')
     end
 
     def folder_for(name)

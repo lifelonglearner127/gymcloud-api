@@ -4,7 +4,7 @@
     name: "Exercises"
   -
     klass: "WorkoutTemplate"
-    name: "Workouts"
+    name: "Workout Templates"
   -
     klass: "ProgramTemplate"
-    name: "Programs"
+    name: "Program Templates"

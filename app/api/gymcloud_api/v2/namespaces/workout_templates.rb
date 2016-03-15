@@ -19,7 +19,7 @@ namespace :workout_templates do
   post do
     attributes = filtered_params_with(author: current_user, user: current_user)
     folder_id = current_user.folders.root.children
-      .where(name: 'Workouts').pluck(:id).first
+      .where(name: 'Workout Templates').pluck(:id).first
     workout_template = ::WorkoutTemplate.new(attributes)
     workout_template.folder_id = params[:folder_id] || folder_id
     authorize!(:create, workout_template)

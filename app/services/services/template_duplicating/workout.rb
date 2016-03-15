@@ -45,7 +45,8 @@ class Workout < BaseService
   end
 
   def prepare_folder
-    @folder_id ||= ::Folder.find_by(name: 'Workouts', user: @user).id
+    @folder_id ||=
+      ::Folder.find_by(name: 'Workout Templates', user: @user).id
   end
 
   def duplicate_workout_exercise(workout_exercise, new_workout)

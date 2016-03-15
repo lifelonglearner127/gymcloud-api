@@ -16,7 +16,7 @@ namespace :program_templates do
   post do
     attributes = filtered_params_with(author: current_user, user: current_user)
     folder_id = current_user.folders.root.children
-      .where(name: 'Programs').pluck(:id).first
+      .where(name: 'Program Templates').pluck(:id).first
     program_template = ::ProgramTemplate.new(attributes)
     program_template.folder_id = params[:folder_id] || folder_id
     authorize!(:create, program_template)

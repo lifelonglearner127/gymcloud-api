@@ -47,7 +47,8 @@ class Program < BaseService
   end
 
   def prepare_folder
-    @folder_id ||= ::Folder.find_by(name: 'Programs', user: @user).id
+    @folder_id ||=
+      ::Folder.find_by(name: 'Program Templates', user: @user).id
   end
 
   def duplicate_program_week(program_week)

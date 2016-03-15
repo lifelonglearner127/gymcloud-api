@@ -43,7 +43,7 @@ class CreateNew < BaseService
 
   def workout_template
     folder_id = @user.folders.root.children
-      .where(name: 'Workouts').pluck(:id).first
+      .where(name: 'Workout Templates').pluck(:id).first
 
     ::WorkoutTemplate.create!(
       name: "Workout #{@attrs['position']}".squish,

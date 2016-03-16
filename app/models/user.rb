@@ -75,6 +75,7 @@ class User < ActiveRecord::Base
   scope :clients, -> { distinct.joins(:agreements_as_client) }
 
   after_invitation_accepted :on_invitation_accepted
+  after_create :activate!
 
   delegate :can?, :cannot?, to: :ability
 
@@ -96,8 +97,16 @@ class User < ActiveRecord::Base
 
   def confirm
     result = super
-    update_attribute(:is_active, true)
+    activate!
     result
+  end
+
+  def activate!
+    update_attribute(:is_active, true)
+  end
+
+  def deactivate!
+    update_attribute(:is_active, false)
   end
 
   def self.find_by_access_token(token)

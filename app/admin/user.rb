@@ -4,8 +4,6 @@ ActiveAdmin.register User do
 
   permit_params :is_active, :email, :password, :password_confirmation
 
-  actions :all, except: [:destroy]
-
   index do
     selectable_column
     id_column
@@ -39,6 +37,12 @@ ActiveAdmin.register User do
       @user = User.new parameters
       @user.skip_confirmation!
       super
+    end
+
+    def destroy
+      user = ::User.find(params[:id])
+      Services::UserDestroy::All.!(user: user)
+      redirect_to admin_users_path
     end
   end
 

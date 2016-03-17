@@ -40,9 +40,9 @@ ActiveAdmin.register User do
     end
 
     def destroy
-      user = ::User.find(params[:id])
-      Services::UserDestroy::All.!(user: user)
-      redirect_to admin_users_path
+      UserDestroyWorker.perform_async(params[:id])
+      flash[:notice] = 'User will be deleted soon'
+      redirect_to :back
     end
   end
 

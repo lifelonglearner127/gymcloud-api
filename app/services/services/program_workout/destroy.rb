@@ -17,10 +17,10 @@ class Destroy < BaseService
     if @program_workout.workout_type == 'WorkoutTemplate'
       workout_template = @program_workout.workout
     else
-      workout_template = @program_workout.workout.workout_template
-      @program_workout.workout.destroy
+      workout_template = @program_workout.workout.andand.workout_template
+      @program_workout.workout.andand.destroy
     end
-    try_to_destroy_workout_template(workout_template)
+    try_to_destroy_workout_template(workout_template) if workout_template
     @program_workout.destroy
   end
 
@@ -29,7 +29,7 @@ class Destroy < BaseService
 
     id = workout_template.id
     is_single_record = no_program_workouts?(id) && no_personal_workouts?(id)
-    is_single_record && workout_template.destroy
+    is_single_record && workout_template.really_destroy!
   end
 
   def no_program_workouts?(workout_template_id)

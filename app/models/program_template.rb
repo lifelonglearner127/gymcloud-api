@@ -19,6 +19,7 @@
 class ProgramTemplate < ActiveRecord::Base
 
   include SearchScopes::Training
+  include DestroyedAuthor
 
   belongs_to :author, class_name: User
   belongs_to :user
@@ -27,6 +28,10 @@ class ProgramTemplate < ActiveRecord::Base
   has_many :personal_programs
   has_many :program_workouts, as: :program
   has_many :program_weeks, as: :program
+  has_many :duplicates,
+    class_name: ProgramTemplate,
+    foreign_key: :original_id,
+    dependent: :nullify
 
   validates :name, :author_id, presence: true
   validates :is_public, inclusion: {in: [true, false]}

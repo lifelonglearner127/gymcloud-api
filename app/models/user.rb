@@ -34,6 +34,7 @@ class User < ActiveRecord::Base
   include SearchScopes::Pro
   include PublicActivity::Common
   include ProRootFolders
+  include UserRelations
 
   devise \
     :database_authenticatable, :registerable,
@@ -42,34 +43,6 @@ class User < ActiveRecord::Base
     :async, :omniauthable, omniauth_providers: [:google_oauth2, :facebook]
 
   acts_as_reader
-
-  has_one :user_profile
-  has_one :user_settings
-  has_many :authentications,
-    class_name: 'UserAuthentication',
-    dependent: :destroy
-  has_many :agreements_as_pro, class_name: UserAgreement, foreign_key: :pro_id
-  has_many :agreements_as_client,
-    class_name: UserAgreement,
-    foreign_key: :client_id
-  has_many :pros, through: :agreements_as_client, class_name: User
-  has_many :clients, through: :agreements_as_pro, class_name: User
-  has_many :client_group_memberships, foreign_key: :client_id
-  has_many :client_groups, foreign_key: :pro_id
-  has_many :client_groups_as_client,
-    through: :client_group_memberships,
-    class_name: ClientGroup,
-    source: :client_group
-  has_many :exercises, foreign_key: :user_id
-  has_many :workout_templates, foreign_key: :user_id
-  has_many :personal_workouts, foreign_key: :person_id
-  has_many :program_templates, foreign_key: :user_id
-  has_many :personal_programs, foreign_key: :person_id
-  has_many :workout_events, through: :personal_workouts
-  has_many :personal_properties, foreign_key: :person_id
-  has_many :exercise_results, through: :workout_events
-  has_many :folders
-  has_many :videos, foreign_key: :author_id
 
   scope :pros, -> { distinct.joins(:agreements_as_pro) }
   scope :clients, -> { distinct.joins(:agreements_as_client) }

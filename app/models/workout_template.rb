@@ -22,6 +22,7 @@
 class WorkoutTemplate < ActiveRecord::Base
 
   include SearchScopes::Training
+  include DestroyedAuthor
 
   belongs_to :author, class_name: User
   belongs_to :user
@@ -31,6 +32,10 @@ class WorkoutTemplate < ActiveRecord::Base
   has_many :personal_workouts
   has_many :workout_exercises, as: :workout, dependent: :destroy
   has_one :program_workout, as: :workout
+  has_many :duplicates,
+    class_name: WorkoutTemplate,
+    foreign_key: :original_id,
+    dependent: :nullify
 
   validates :name, :author_id, presence: true
   validates :is_public, inclusion: {in: [true, false]}

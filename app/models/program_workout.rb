@@ -18,7 +18,10 @@ class ProgramWorkout < ActiveRecord::Base
 
   include HasTemplateVersion
 
-  belongs_to :workout, -> { with_deleted }, polymorphic: true
+  belongs_to :workout,
+    -> { with_deleted },
+    polymorphic: true,
+    dependent: :destroy
   belongs_to :program, -> { with_deleted }, polymorphic: true
   belongs_to :week, class_name: 'ProgramWeek'
 

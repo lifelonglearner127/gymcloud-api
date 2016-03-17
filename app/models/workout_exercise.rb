@@ -25,7 +25,8 @@ class WorkoutExercise < ActiveRecord::Base
     foreign_key: 'workout_id'
   has_many :exercise_properties,
     dependent: :destroy
-  has_many :exercise_results
+  has_many :exercise_results,
+    dependent: :destroy
   has_many :workout_event_exercises,
     dependent: :destroy
 

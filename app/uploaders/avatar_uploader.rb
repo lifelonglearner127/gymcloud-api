@@ -14,16 +14,15 @@ class AvatarUploader < CarrierWave::Uploader::Base
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   end
 
+  process :ensure_auto_orient
   process resize_to_fit: [800, 800]
   process convert: 'png'
 
   version :large do
-    process :ensure_auto_orient
     process resize_to_fill: [400, 400]
   end
 
   version :thumb, from_version: :large do
-    process :ensure_auto_orient
     process resize_to_fill: [100, 100]
   end
 
@@ -34,6 +33,7 @@ class AvatarUploader < CarrierWave::Uploader::Base
   def ensure_auto_orient
     manipulate! do |image|
       image.auto_orient
+      image = yield(image) if block_given?
       image
     end
   end

@@ -14,6 +14,7 @@ class AvatarUploader < CarrierWave::Uploader::Base
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   end
 
+  process :ensure_auto_orient
   process resize_to_fit: [800, 800]
   process convert: 'png'
 
@@ -27,6 +28,10 @@ class AvatarUploader < CarrierWave::Uploader::Base
 
   def extension_white_list
     %w(jpg jpeg gif png)
+  end
+
+  def ensure_auto_orient
+    manipulate!(&:auto_orient)
   end
 
 end

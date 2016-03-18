@@ -31,7 +31,10 @@ class AvatarUploader < CarrierWave::Uploader::Base
   end
 
   def ensure_auto_orient
-    manipulate!(&:auto_orient)
+    manipulate! do |image|
+      image.auto_orient
+      image
+    end
   end
 
 end

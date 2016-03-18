@@ -2,7 +2,7 @@
 
 class AvatarUploader < CarrierWave::Uploader::Base
 
-  include CarrierWave::RMagick
+  include CarrierWave::MiniMagick
 
   def self.which_storage
     Rails.env.production? ? :aws : :file

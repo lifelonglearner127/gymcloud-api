@@ -320,6 +320,7 @@ GEM
     memoist (0.14.0)
     method_source (0.8.2)
     mime-types (2.99.1)
+    mini_magick (4.4.0)
     mini_portile2 (2.0.0)
     minitest (5.8.4)
     multi_json (1.11.2)
@@ -468,7 +469,6 @@ GEM
       mime-types (>= 1.16, < 3.0)
       netrc (~> 0.7)
     retriable (2.1.0)
-    rmagick (2.15.4)
     rspec (3.4.0)
       rspec-core (~> 3.4.0)
       rspec-expectations (~> 3.4.0)
@@ -629,6 +629,7 @@ DEPENDENCIES
   kaminari
   koala (~> 2.2)
   letter_opener_web
+  mini_magick
   newrelic-grape
   newrelic_rpm
   omniauth
@@ -649,7 +650,6 @@ DEPENDENCIES
   rails_12factor
   ransack (= 1.6.5)
   regressor (~> 0.3.4)
-  rmagick
   rspec-rails (~> 3.0)
   rubocop
   ruby-progressbar

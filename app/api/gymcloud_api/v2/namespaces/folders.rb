@@ -47,7 +47,7 @@ namespace :folders do
     delete do
       folder = ::Folder.find(params[:id])
       authorize!(:destroy, folder)
-      folder.destroy
+      folder.destroy_with_items
       present(folder, with: Entities::Folder)
     end
 

@@ -20,6 +20,7 @@
 class Exercise < ActiveRecord::Base
 
   include SearchScopes::Training
+  include DestroyedAuthor
 
   belongs_to :author, class_name: User
   belongs_to :user
@@ -27,6 +28,10 @@ class Exercise < ActiveRecord::Base
   belongs_to :folder
   belongs_to :video
   has_many :workout_exercises
+  has_many :duplicates,
+    class_name: Exercise,
+    foreign_key: :original_id,
+    dependent: :nullify
 
   validates :name, :author_id, presence: true
   validates :is_public, inclusion: {in: [true, false]}

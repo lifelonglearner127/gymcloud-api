@@ -21,12 +21,12 @@ class PersonalWorkout < ActiveRecord::Base
   include HasTemplateVersion
   include PublicActivity::Common
 
-  belongs_to :workout_template
+  belongs_to :workout_template, -> { with_deleted }
   belongs_to :person, class_name: User
   has_one :author, through: :workout_template
   has_one :user, through: :workout_template
-  has_many :workout_exercises, as: :workout
-  has_many :workout_events
+  has_many :workout_exercises, as: :workout, dependent: :destroy
+  has_many :workout_events, dependent: :destroy
   has_one :program_workout, as: :workout
 
   validates :name, :workout_template_id, :person_id, presence: true

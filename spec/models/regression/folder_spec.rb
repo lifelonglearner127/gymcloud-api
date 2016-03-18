@@ -14,6 +14,7 @@ RSpec.describe Folder do
 	it { is_expected.to have_many :exercises}
 	it { is_expected.to have_many :workout_templates}
 	it { is_expected.to have_many :program_templates}
+	it { is_expected.to have_many :program_presets}
 
   # === Nested Attributes ===
   

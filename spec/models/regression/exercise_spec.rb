@@ -10,6 +10,7 @@ RSpec.describe Exercise do
 	it { is_expected.to belong_to :video}
   
   it { is_expected.to have_many :workout_exercises}
+	it { is_expected.to have_many :duplicates}
 	it { is_expected.to have_many :versions}
 
   # === Nested Attributes ===

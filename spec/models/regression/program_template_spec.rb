@@ -11,6 +11,7 @@ RSpec.describe ProgramTemplate do
   it { is_expected.to have_many :personal_programs}
 	it { is_expected.to have_many :program_workouts}
 	it { is_expected.to have_many :program_weeks}
+	it { is_expected.to have_many :duplicates}
 	it { is_expected.to have_many :versions}
 
   # === Nested Attributes ===

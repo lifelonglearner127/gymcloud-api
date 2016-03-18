@@ -3,6 +3,7 @@ require 'rails_helper'
 describe Admin::UsersController do
   # === Routes (REST) ===
   it { should route(:post, '/admin/users').to({:controller=>"admin/users", :action=>"create"}) } 
+	it { should route(:delete, '/admin/users/1').to({:controller=>"admin/users", :action=>"destroy", :id=>1}) } 
 	it { should route(:post, '/admin/users/batch_action').to({:controller=>"admin/users", :action=>"batch_action"}) } 
 	it { should route(:get, '/admin/users').to({:controller=>"admin/users", :action=>"index"}) } 
 	it { should route(:get, '/admin/users/new').to({:controller=>"admin/users", :action=>"new"}) } 

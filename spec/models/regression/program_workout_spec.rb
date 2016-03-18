@@ -26,6 +26,7 @@ RSpec.describe ProgramWorkout do
 
   # === Database (Indexes) ===
   it { is_expected.to have_db_index ["program_type", "program_id"]}
+	it { is_expected.to have_db_index ["workout_id", "workout_type"]}
 	it { is_expected.to have_db_index ["workout_type", "workout_id"]}
 
   # === Validations (Length) ===

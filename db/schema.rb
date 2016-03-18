@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160315090819) do
+ActiveRecord::Schema.define(version: 20160318110755) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -206,8 +206,8 @@ ActiveRecord::Schema.define(version: 20160315090819) do
   create_table "logged_stripe_events", force: :cascade do |t|
     t.text     "data"
     t.string   "stripe_event_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",      precision: 6, null: false
+    t.datetime "updated_at",      precision: 6, null: false
   end
 
   add_index "logged_stripe_events", ["stripe_event_id"], name: "index_logged_stripe_events_on_stripe_event_id", using: :btree
@@ -299,8 +299,8 @@ ActiveRecord::Schema.define(version: 20160315090819) do
     t.string   "name"
     t.integer  "user_id"
     t.integer  "folder_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   add_index "program_presets", ["folder_id"], name: "index_program_presets_on_folder_id", using: :btree
@@ -350,7 +350,8 @@ ActiveRecord::Schema.define(version: 20160315090819) do
   end
 
   add_index "program_workouts", ["program_type", "program_id"], name: "index_program_workouts_on_program_type_and_program_id", using: :btree
-  add_index "program_workouts", ["workout_type", "workout_id"], name: "index_program_workouts_on_workout_type_and_workout_id", using: :btree
+  add_index "program_workouts", ["workout_id", "workout_type"], name: "index_program_workouts_on_workout_id_and_workout_type", unique: true, using: :btree
+  add_index "program_workouts", ["workout_type", "workout_id"], name: "index_program_workouts_on_workout_type_and_workout_id", unique: true, using: :btree
 
   create_table "read_marks", force: :cascade do |t|
     t.integer  "readable_id"
@@ -369,8 +370,8 @@ ActiveRecord::Schema.define(version: 20160315090819) do
   create_table "user_account_types", force: :cascade do |t|
     t.string   "name"
     t.string   "icon"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   add_index "user_account_types", ["id"], name: "user_account_types_id_key", unique: true, using: :btree
@@ -421,8 +422,8 @@ ActiveRecord::Schema.define(version: 20160315090819) do
     t.integer  "user_account_type_id"
     t.integer  "units_system"
     t.boolean  "is_tutorial_finished"
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+    t.datetime "created_at",           precision: 6, null: false
+    t.datetime "updated_at",           precision: 6, null: false
     t.boolean  "is_presets_loaded"
   end
 

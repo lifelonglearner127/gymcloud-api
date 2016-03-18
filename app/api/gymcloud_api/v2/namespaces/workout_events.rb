@@ -64,6 +64,8 @@ namespace :workout_events do
       event.assign_attributes(filtered_params)
       authorize!(:update, event)
       event.save!
+      pro_id = event.person.pros.first.id
+      HtmlMailer.delay.results_added(pro_id, event.id)
       present(event, with: Entities::WorkoutEvent)
     end
 

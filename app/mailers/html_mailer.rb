@@ -32,9 +32,9 @@ class HtmlMailer < ApplicationMailer
     mail(to: email, subject: 'GymCloud')
   end
 
-  def results_added(user_id, result_id)
+  def results_added(user_id, event_id)
     email = ::User.find(user_id).email
-    @result = ::ExerciseResult.find(result_id)
+    @event = ::WorkoutEvent.find(event_id)
     mail(to: email, subject: 'GymCloud')
   end
 

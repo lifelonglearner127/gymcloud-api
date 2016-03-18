@@ -20,5 +20,5 @@ tr
           | "#{@event.personal_workout.name}"
         | on #{cool_readable_date(@event.begins_at)}
 
-      a.blue-border-button href=personal_workout_url(@event.id)
+      a.blue-border-button href=workout_event_url(@event.begins_at)
         | VIEW CALENDAR

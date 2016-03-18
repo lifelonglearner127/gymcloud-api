@@ -24,6 +24,15 @@ module MailerHelper
     "http://#{webapp_domain}/#personal_workouts/#{id}"
   end
 
+  def workout_event_url(date)
+    date = date.strftime('%F')
+    "http://#{webapp_domain}/#calendar/#{date}"
+  end
+
+  def workout_event_results_url(id)
+    "http://#{webapp_domain}/#workout_events/#{id}/results"
+  end
+
   def confirmation_on_frontend(token)
     "http://#{webapp_domain}/#confirm/#{token}"
   end

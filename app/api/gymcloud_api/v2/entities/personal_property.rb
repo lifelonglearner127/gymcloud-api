@@ -11,6 +11,7 @@ class PersonalProperty < Grape::Entity
   expose :position
   expose :is_visible
   expose :global_property, using: Entities::GlobalProperty
+  expose :property_units, using: Entities::PropertyUnit
 
 end
 

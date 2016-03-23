@@ -6,8 +6,8 @@ ActiveAdmin.register UserProfile do
     :height, :weight, :bodyfat, :location, :zip, :employer
 
   scope :all, default: true
-  scope('pros') { |scope| scope.joins { user.agreements_as_pro } }
-  scope('clients') { |scope| scope.joins { user.agreements_as_client } }
+  scope :pros
+  scope :clients
 
   actions :all, except: [:destroy]
 

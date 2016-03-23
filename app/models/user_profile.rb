@@ -28,6 +28,14 @@ class UserProfile < ActiveRecord::Base
   validates :first_name, :last_name, :location, :zip,
     :employer, length: {maximum: 255}
 
+  scope :pros,
+    -> { distinct.joins { user.agreements_as_pro } }
+  scope :clients, (lambda do
+    distinct
+      .joins { user.agreements_as_client }
+      .merge(UserAgreement.without_selftrained)
+  end)
+
   enum gender: [:female, :male]
 
   def full_name

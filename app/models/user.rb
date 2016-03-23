@@ -44,8 +44,13 @@ class User < ActiveRecord::Base
 
   acts_as_reader
 
-  scope :pros, -> { distinct.joins(:agreements_as_pro) }
-  scope :clients, -> { distinct.joins(:agreements_as_client) }
+  scope :pros,
+    -> { distinct.joins(:agreements_as_pro) }
+  scope :clients, (lambda do
+    distinct
+      .joins(:agreements_as_client)
+      .merge(UserAgreement.without_selftrained)
+  end)
 
   after_invitation_accepted :on_invitation_accepted
   after_create :activate!

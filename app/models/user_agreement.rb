@@ -30,6 +30,8 @@ class UserAgreement < ActiveRecord::Base
     )
   end)
 
+  scope :without_selftrained, -> { where('pro_id != client_id') }
+
   default_scope -> { where(status: statuses[:active]) }
 
 end

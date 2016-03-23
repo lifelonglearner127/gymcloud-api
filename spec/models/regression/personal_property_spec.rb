@@ -7,6 +7,7 @@ RSpec.describe PersonalProperty do
 	it { is_expected.to belong_to :person}
   
   it { is_expected.to have_many :exercise_properties}
+	it { is_expected.to have_many :property_units}
 
   # === Nested Attributes ===
   

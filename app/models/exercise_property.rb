@@ -5,11 +5,12 @@
 #  id                   :integer          not null, primary key
 #  personal_property_id :integer
 #  workout_exercise_id  :integer
-#  value                :integer
+#  value                :decimal(12, 3)
 #  position             :integer
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
-#  value2               :integer
+#  value2               :decimal(12, 3)
+#  property_unit_id     :integer
 #
 
 class ExerciseProperty < ActiveRecord::Base

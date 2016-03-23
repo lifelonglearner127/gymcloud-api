@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160315090819) do
+ActiveRecord::Schema.define(version: 20160323150246) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -202,6 +202,14 @@ ActiveRecord::Schema.define(version: 20160315090819) do
   add_index "global_properties", ["position"], name: "index_global_properties_on_position", unique: true, using: :btree
   add_index "global_properties", ["symbol"], name: "index_global_properties_on_symbol", unique: true, using: :btree
 
+  create_table "global_properties_property_units", id: false, force: :cascade do |t|
+    t.integer "global_property_id", null: false
+    t.integer "property_unit_id",   null: false
+  end
+
+  add_index "global_properties_property_units", ["global_property_id", "property_unit_id"], name: "global_property_unit_uniq_index", unique: true, using: :btree
+  add_index "global_properties_property_units", ["property_unit_id", "global_property_id"], name: "global_property_unit_index", using: :btree
+
   create_table "logged_stripe_events", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.text "data"
@@ -350,6 +358,13 @@ ActiveRecord::Schema.define(version: 20160315090819) do
 
   add_index "program_workouts", ["program_type", "program_id"], name: "index_program_workouts_on_program_type_and_program_id", using: :btree
   add_index "program_workouts", ["workout_type", "workout_id"], name: "index_program_workouts_on_workout_type_and_workout_id", using: :btree
+
+  create_table "property_units", force: :cascade do |t|
+    t.string   "short_name"
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "read_marks", force: :cascade do |t|
     t.integer "readable_id"

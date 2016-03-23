@@ -1,0 +1,34 @@
+---
+  -
+    symbol: "sets"
+    units: ["times"]
+  -
+    symbol: "reps"
+    units: ["times"]
+  -
+    symbol: "weight"
+    units: ["g", "kg", "oz", "lbs"]
+  -
+    symbol: "height"
+    units: ["in", "ft", "mm", "cm", "m"]
+  -
+    symbol: "distance"
+    units: ["in", "ft", "mi", "mm", "cm", "m", "km"]
+  -
+    symbol: "time"
+    units: ["sec", "min", "hr"]
+  -
+    symbol: "heart_rate"
+    units: ["bpm"]
+  -
+    symbol: "intervals"
+    units: ["sec", "min", "hr"]
+  -
+    symbol: "rest_period"
+    units: ["sec", "min", "hr"]
+  -
+    symbol: "rounds"
+    units: ["times"]
+  -
+    symbol: "percentage"
+    units: ["%"]

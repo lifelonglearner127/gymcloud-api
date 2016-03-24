@@ -2,15 +2,16 @@ ActiveAdmin.register GlobalProperty do
 
   menu parent: 'Global'
 
-  permit_params :name, :unit, :symbol, :position, property_unit_ids: []
+  permit_params :name, :unit, :symbol, :position, :property_unit_id,
+    property_unit_ids: []
 
   index do
     selectable_column
     id_column
     column :symbol
     column :name
-    column :unit
-    column :available_units do |model|
+    column :default_unit
+    column :units do |model|
       model.property_units.pluck(:short_name).join('/')
     end
     column :position
@@ -21,7 +22,7 @@ ActiveAdmin.register GlobalProperty do
   filter :property_units
   filter :symbol
   filter :name
-  filter :unit
+  filter :default_unit
   filter :position
   filter :created_at
   filter :updated_at
@@ -30,7 +31,9 @@ ActiveAdmin.register GlobalProperty do
     f.inputs "#{f.object.class.name.titleize} Details" do
       f.input :symbol
       f.input :name
-      f.input :unit
+      f.input :default_unit,
+        as: :select,
+        collection: f.object.property_units
       f.input :property_units,
         as: :select,
         collection: ::PropertyUnit.all,

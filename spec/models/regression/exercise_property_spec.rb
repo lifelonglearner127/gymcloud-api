@@ -5,6 +5,7 @@ RSpec.describe ExerciseProperty do
   # === Relations ===
   it { is_expected.to belong_to :personal_property}
 	it { is_expected.to belong_to :workout_exercise}
+	it { is_expected.to belong_to :property_unit}
   
   it { is_expected.to have_many :exercise_result_items}
 
@@ -20,6 +21,7 @@ RSpec.describe ExerciseProperty do
 	it { is_expected.to have_db_column :created_at }
 	it { is_expected.to have_db_column :updated_at }
 	it { is_expected.to have_db_column :value2 }
+	it { is_expected.to have_db_column :property_unit_id }
 
   # === Database (Indexes) ===
   it { is_expected.to have_db_index ["personal_property_id"]}

@@ -17,6 +17,7 @@ class PersonalProperty < ActiveRecord::Base
   belongs_to :person, class_name: User
   has_many :exercise_properties
   has_many :property_units, through: :global_property
+  has_one :default_unit, through: :global_property
 
   validates :global_property_id, :person_id, presence: true
 

@@ -15,11 +15,23 @@ class GlobalProperty < ActiveRecord::Base
 
   has_many :personal_properties, dependent: :destroy
   has_and_belongs_to_many :property_units
+  belongs_to :default_unit,
+    class_name: PropertyUnit,
+    foreign_key: :property_unit_id
 
   validates :name, :symbol, :position, presence: true
   validates :symbol, uniqueness: true
-  validates :symbol, :name, :unit, length: {maximum: 255}
+  validates :symbol, :name, length: {maximum: 255}
 
   default_scope -> { order(position: :asc) }
+
+  before_save :set_default_unit
+
+  private
+
+  def set_default_unit
+    return if default_unit
+    self.default_unit = property_units.presence.andand.first
+  end
 
 end

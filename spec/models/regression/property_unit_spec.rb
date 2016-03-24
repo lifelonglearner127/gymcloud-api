@@ -18,7 +18,7 @@ RSpec.describe PropertyUnit do
 	it { is_expected.to have_db_column :updated_at }
 
   # === Database (Indexes) ===
-  
+  it { is_expected.to have_db_index ["short_name"]}
 
   # === Validations (Length) ===
   it { is_expected.to allow_value(Faker::Lorem.characters(255)).for :name }
@@ -29,7 +29,6 @@ RSpec.describe PropertyUnit do
   # === Validations (Presence) ===
   it { is_expected.to validate_presence_of :name }
 	it { is_expected.to validate_presence_of :short_name }
-	it { is_expected.to validate_presence_of :global_property_id }
 
   # === Validations (Numericality) ===
   

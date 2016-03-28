@@ -73,6 +73,7 @@ group :development do
   gem 'consistency_fail', require: false
   gem 'regressor', '~> 0.3.4'
   gem 'factory_factory_girl'
+  gem 'fix-db-schema-conflicts'
 
   gem 'guard'
   gem 'guard-bundler', require: false

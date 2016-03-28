@@ -184,6 +184,8 @@ GEM
       faraday (>= 0.7.4, < 0.10)
     ffaker (2.2.0)
     ffi (1.9.10)
+    fix-db-schema-conflicts (1.2.1)
+      rubocop (>= 0.38.0)
     formatador (0.2.5)
     formtastic (3.1.3)
       actionpack (>= 3.2.13)
@@ -611,6 +613,7 @@ DEPENDENCIES
   factory_girl_rails
   faker
   ffaker
+  fix-db-schema-conflicts
   google-api-client (= 0.9.pre3)
   grape
   grape-cancan

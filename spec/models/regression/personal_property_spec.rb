@@ -5,8 +5,9 @@ RSpec.describe PersonalProperty do
   # === Relations ===
   it { is_expected.to belong_to :global_property}
 	it { is_expected.to belong_to :person}
-  
+  it { is_expected.to have_one :default_unit}
   it { is_expected.to have_many :exercise_properties}
+	it { is_expected.to have_many :property_units}
 
   # === Nested Attributes ===
   

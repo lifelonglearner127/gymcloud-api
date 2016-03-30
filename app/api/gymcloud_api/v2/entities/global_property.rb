@@ -8,7 +8,6 @@ class GlobalProperty < Grape::Entity
   expose :updated_at
   expose :symbol
   expose :name
-  expose :unit
   expose :position
 
 end

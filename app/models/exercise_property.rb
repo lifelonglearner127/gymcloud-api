@@ -5,11 +5,12 @@
 #  id                   :integer          not null, primary key
 #  personal_property_id :integer
 #  workout_exercise_id  :integer
-#  value                :integer
+#  value                :decimal(12, 3)
 #  position             :integer
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
-#  value2               :integer
+#  value2               :decimal(12, 3)
+#  property_unit_id     :integer
 #
 
 class ExerciseProperty < ActiveRecord::Base
@@ -18,6 +19,7 @@ class ExerciseProperty < ActiveRecord::Base
 
   belongs_to :personal_property
   belongs_to :workout_exercise
+  belongs_to :property_unit
   has_many :exercise_result_items, dependent: :destroy
 
   validates :personal_property_id, :workout_exercise_id, presence: true

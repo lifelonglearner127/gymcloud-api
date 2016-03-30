@@ -17,7 +17,10 @@ namespace :workout_events do
     authorize!(:create, event)
     event.save!
 
-    HtmlMailer.delay.event_scheduled(event.personal_workout.person.id, event.id)
+    HtmlMailer.delay.event_scheduled(
+      event.personal_workout.workout_template.user.id,
+      event.id
+    ) unless event.personal_workout.person.pro?
 
     recipient =
       if current_user.pro?

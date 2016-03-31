@@ -14,8 +14,12 @@ default_settings: &default_settings
     title:
       owner: "hide"
       portrait: "hide"
+      name: "hide"
     logos:
       vimeo: false
+      custom:
+        active: false
+        sticky: false
   review_link: false
 
 development:

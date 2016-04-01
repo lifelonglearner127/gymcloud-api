@@ -33,7 +33,7 @@
     short_name: "lbs"
     name: "Pounds"
   -
-    short_name: "sec"
+    short_name: "s"
     name: "Seconds"
   -
     short_name: "min"
@@ -50,3 +50,15 @@
   -
     short_name: "bpm"
     name: "Beats Per Minute"
+  -
+    short_name: "sets"
+    name: "Sets"
+  -
+    short_name: "reps"
+    name: "Reps"
+  -
+    short_name: "rd"
+    name: "Rounds"
+  -
+    short_name: "rpe"
+    name: "RPE"

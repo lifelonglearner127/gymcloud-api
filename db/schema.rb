@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160331104743) do
+ActiveRecord::Schema.define(version: 20160401113325) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -196,6 +196,7 @@ ActiveRecord::Schema.define(version: 20160331104743) do
     t.string "name"
     t.integer "position"
     t.integer "property_unit_id"
+    t.integer "save_property_unit_id"
     t.string "symbol"
     t.datetime "updated_at", precision: 6, null: false
   end

@@ -14,7 +14,9 @@ class GlobalPropertyUnit < BaseService
       property = ::GlobalProperty.find_by!(symbol: attrs['symbol'])
       units = ::PropertyUnit.where(short_name: attrs['units'])
       default_unit = ::PropertyUnit.find_by(short_name: attrs['default'])
+      save_unit = ::PropertyUnit.find_by(short_name: attrs['save'])
       property.default_unit = default_unit
+      property.save_unit = save_unit
       property.property_units = units
       property.save
     end

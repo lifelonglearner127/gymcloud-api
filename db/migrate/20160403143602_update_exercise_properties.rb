@@ -25,7 +25,11 @@ class UpdateExerciseProperties < ActiveRecord::Migration
 
         ex_prop.value = coefficient * ex_prop.value if ex_prop.value
         ex_prop.value2 = coefficient * ex_prop.value2 if ex_prop.value2
-        ex_prop.save
+        begin
+          ex_prop.save
+        rescue ActiveRecord::StatementInvalid
+          # Too big number from Ross
+        end
       end
     end
   end

@@ -18,6 +18,9 @@ class GlobalProperty < ActiveRecord::Base
   belongs_to :default_unit,
     class_name: PropertyUnit,
     foreign_key: :property_unit_id
+  belongs_to :save_unit,
+    class_name: PropertyUnit,
+    foreign_key: :save_property_unit_id
 
   validates :name, :symbol, :position, presence: true
   validates :symbol, uniqueness: true

@@ -1,45 +1,56 @@
 ---
   -
     symbol: "sets"
-    units: ["times"]
-    default: "times"
+    units: ["sets"]
+    default: "sets"
+    save: "sets"
   -
     symbol: "reps"
-    units: ["times"]
-    default: "times"
+    units: ["reps"]
+    default: "reps"
+    save: "reps"
   -
     symbol: "weight"
     units: ["g", "kg", "oz", "lbs"]
-    default: "g"
+    default: "lbs"
+    save: "g"
   -
     symbol: "height"
-    units: ["in", "ft", "mm", "cm", "m"]
-    default: "mm"
+    units: ["in", "cm"]
+    default: "in"
+    save: "mm"
   -
     symbol: "distance"
     units: ["in", "ft", "mi", "mm", "cm", "m", "km"]
-    default: "mm"
+    default: "ft"
+    save: "mm"
   -
     symbol: "time"
-    units: ["sec", "min", "hr"]
-    default: "sec"
+    units: ["s", "min", "hr"]
+    default: "s"
+    save: "s"
   -
     symbol: "heart_rate"
     units: ["bpm"]
     default: "bpm"
-  -
-    symbol: "intervals"
-    units: ["sec", "min", "hr"]
-    default: "sec"
+    save: "bpm"
   -
     symbol: "rest_period"
-    units: ["sec", "min", "hr"]
-    default: "sec"
+    units: ["s", "min", "hr"]
+    default: "s"
+    save: "s"
   -
     symbol: "rounds"
-    units: ["times"]
-    default: "times"
+    units: ["rd"]
+    default: "rd"
+    save: "rd"
   -
     symbol: "percentage"
     units: ["%"]
     default: "%"
+    save: "%"
+  -
+    symbol: "rpe"
+    units: ["rpe"]
+    default: "rpe"
+    save: "rpe"

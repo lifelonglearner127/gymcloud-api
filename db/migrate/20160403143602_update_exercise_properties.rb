@@ -6,32 +6,33 @@ class UpdateExerciseProperties < ActiveRecord::Migration
     Services::Seed::PropertyUnit.!
     Services::Seed::GlobalPropertyUnit.!
 
-    begin
-      ExerciseProperty.find_in_batches(batch_size: 1000) do |properties|
-        properties.each do |ex_prop|
-          default_unit = ex_prop.personal_property.default_unit
-          save_unit = ex_prop.personal_property.save_unit
+    ExerciseProperty.find_in_batches(batch_size: 1000) do |properties|
+      properties.each do |ex_prop|
+        default_unit = ex_prop.personal_property.default_unit
+        save_unit = ex_prop.personal_property.save_unit
 
-          ex_prop.property_unit = default_unit
-          ex_prop.save
+        ex_prop.property_unit = default_unit
+        ex_prop.save
 
-          if save_unit.short_name == 'g' && default_unit.short_name == 'lbs'
-            coefficient = 453.592
-          elsif save_unit.short_name ==  'mm' && default_unit.short_name == 'in'
-            coefficient = 25.4
-          elsif save_unit.short_name ==  'mm' && default_unit.short_name == 'ft'
-            coefficient = 304.8
-          else
-            coefficient = 1
-          end
-
-          ex_prop.value = coefficient * ex_prop.value if ex_prop.value
-          ex_prop.value2 = coefficient * ex_prop.value2 if ex_prop.value2
-          ex_prop.save
+        if save_unit.short_name == 'g' && default_unit.short_name == 'lbs'
+          coefficient = 453.592
+        elsif save_unit.short_name ==  'mm' && default_unit.short_name == 'in'
+          coefficient = 25.4
+        elsif save_unit.short_name ==  'mm' && default_unit.short_name == 'ft'
+          coefficient = 304.8
+        else
+          coefficient = 1
         end
+
+        if ex_prop.value
+          ex_prop.value = helper.number_with_precision(coefficient * ex_prop.value, precision: 12, significant: true).to_f
+        end
+        if ex_prop.value2
+          ex_prop.value2 = helper.number_with_precision(coefficient * ex_prop.value2, precision: 12, significant: true).to_f
+        end
+
+        ex_prop.save
       end
-    rescue ActiveRecord::StatementInvalid
-      # Too big number from Ross
     end
   end
 end

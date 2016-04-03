@@ -25,10 +25,12 @@ class UpdateExerciseProperties < ActiveRecord::Migration
         end
 
         if ex_prop.value
-          ex_prop.value = ApplicationController.helpers.number_with_precision(coefficient * ex_prop.value, precision: 12, significant: true).to_f
+          value = ApplicationController.helpers.number_with_precision(coefficient * ex_prop.value, precision: 12, significant: true).to_f
+          ex_prop.value = value if value < 10**9
         end
         if ex_prop.value2
-          ex_prop.value2 = ApplicationController.helpers.number_with_precision(coefficient * ex_prop.value2, precision: 12, significant: true).to_f
+          value2 = ApplicationController.helpers.number_with_precision(coefficient * ex_prop.value2, precision: 12, significant: true).to_f
+          ex_prop.value2 = value2 if value2 < 10**9
         end
 
         ex_prop.save

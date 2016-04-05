@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160403143602) do
+ActiveRecord::Schema.define(version: 20160405141724) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -470,6 +470,7 @@ ActiveRecord::Schema.define(version: 20160403143602) do
     t.datetime "reset_password_sent_at", precision: 6
     t.string "reset_password_token"
     t.integer "sign_in_count", default: 0, null: false
+    t.string "stripe_customer_id"
     t.string "unconfirmed_email"
     t.datetime "updated_at", precision: 6, null: false
   end

@@ -66,7 +66,7 @@ namespace :exercise_results do
       desc 'Create Result Item'
       params do
         requires :exercise_property_id, type: Integer
-        requires :value, type: Integer
+        requires :value, type: Float
       end
       post do
         exercise_result = ::ExerciseResult.find(params[:id])

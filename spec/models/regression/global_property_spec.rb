@@ -4,6 +4,7 @@ RSpec.describe GlobalProperty do
 
   # === Relations ===
   it { is_expected.to belong_to :default_unit}
+	it { is_expected.to belong_to :save_unit}
   
   it { is_expected.to have_many :personal_properties}
 
@@ -18,6 +19,7 @@ RSpec.describe GlobalProperty do
 	it { is_expected.to have_db_column :updated_at }
 	it { is_expected.to have_db_column :position }
 	it { is_expected.to have_db_column :property_unit_id }
+	it { is_expected.to have_db_column :save_property_unit_id }
 
   # === Database (Indexes) ===
   it { is_expected.to have_db_index ["position"]}

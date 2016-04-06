@@ -5,11 +5,11 @@
 #  id                   :integer          not null, primary key
 #  personal_property_id :integer
 #  workout_exercise_id  :integer
-#  value                :decimal(12, 3)
+#  value                :decimal(14, 5)
 #  position             :integer
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
-#  value2               :decimal(12, 3)
+#  value2               :decimal(14, 5)
 #  property_unit_id     :integer
 #
 

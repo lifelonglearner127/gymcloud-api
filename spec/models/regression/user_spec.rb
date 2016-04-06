@@ -59,6 +59,7 @@ RSpec.describe User do
 	it { is_expected.to have_db_column :invited_by_id }
 	it { is_expected.to have_db_column :invited_by_type }
 	it { is_expected.to have_db_column :is_active }
+	it { is_expected.to have_db_column :stripe_customer_id }
 
   # === Database (Indexes) ===
   it { is_expected.to have_db_index ["confirmation_token"]}

@@ -32,7 +32,7 @@ RSpec.describe ExerciseResultItem do
 	it { is_expected.to validate_presence_of :value }
 
   # === Validations (Numericality) ===
-  it { is_expected.to validate_numericality_of(:value).only_integer}
+  
 
   
   # === Enums ===

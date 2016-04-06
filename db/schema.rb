@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160406140932) do
+ActiveRecord::Schema.define(version: 20160406145149) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -134,7 +134,7 @@ ActiveRecord::Schema.define(version: 20160406140932) do
     t.integer "exercise_property_id"
     t.integer "exercise_result_id"
     t.datetime "updated_at", null: false
-    t.integer "value"
+    t.decimal "value", precision: 14, scale: 5
   end
 
   add_index "exercise_result_items", ["exercise_property_id"], name: "index_exercise_result_items_on_exercise_property_id", using: :btree

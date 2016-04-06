@@ -84,7 +84,7 @@ namespace :exercise_results do
 
         desc 'Update Result Item'
         params do
-          requires :value, type: Integer
+          requires :value, type: Float
         end
         patch do
           result = ::ExerciseResult.find(params[:id])

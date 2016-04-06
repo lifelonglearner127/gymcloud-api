@@ -42,8 +42,7 @@ class Folder < ActiveRecord::Base
   def destroy_with_items
     ActiveRecord::Base.transaction do
       items.each(&:destroy)
-      destroy_descendant_folders
-      super
+      destroy_descendant_folders_with_items
     end
   end
 

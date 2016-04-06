@@ -21,6 +21,7 @@ Rails.application.routes.draw do
 
   devise_for :users, controllers: {
     registrations: 'registrations',
+    confirmations: 'confirmations',
     invitations: 'invitations',
     passwords: 'passwords',
     omniauth_callbacks: 'omniauth_callbacks'

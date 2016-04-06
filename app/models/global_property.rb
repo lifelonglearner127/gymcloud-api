@@ -2,13 +2,14 @@
 #
 # Table name: global_properties
 #
-#  id               :integer          not null, primary key
-#  symbol           :string
-#  name             :string
-#  created_at       :datetime         not null
-#  updated_at       :datetime         not null
-#  position         :integer
-#  property_unit_id :integer
+#  id                    :integer          not null, primary key
+#  symbol                :string
+#  name                  :string
+#  created_at            :datetime         not null
+#  updated_at            :datetime         not null
+#  position              :integer
+#  property_unit_id      :integer
+#  save_property_unit_id :integer
 #
 
 class GlobalProperty < ActiveRecord::Base

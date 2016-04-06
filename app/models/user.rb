@@ -27,6 +27,7 @@
 #  invited_by_id          :integer
 #  invited_by_type        :string
 #  is_active              :boolean
+#  stripe_customer_id     :string
 #
 
 class User < ActiveRecord::Base

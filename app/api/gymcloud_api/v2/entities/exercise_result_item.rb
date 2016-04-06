@@ -12,6 +12,7 @@ class ExerciseResultItem < Grape::Entity
   expose :position do |item|
     item.exercise_property.position
   end
+  expose :exercise_property, using: Entities::ExerciseProperty
   expose :exercise_result_id
   expose :exercise_property_id
   expose :value

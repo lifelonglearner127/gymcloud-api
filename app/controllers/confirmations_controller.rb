@@ -11,7 +11,7 @@ class ConfirmationsController < Devise::ConfirmationsController
     yield resource if block_given?
 
     if resource.errors.empty?
-      Services::Stripe::CreateCustomer.!(user: resource) if resource.pro?
+      Services::Stripe::UserBootstrap.!(user: resource) if resource.pro?
       render json: resource, status: :ok
     else
       render json: {error: resource.errors}, status: :unprocessable_entity

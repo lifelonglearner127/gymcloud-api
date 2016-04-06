@@ -462,13 +462,15 @@ ActiveRecord::Schema.define(version: 20160406145149) do
     t.integer "invited_by_id"
     t.string "invited_by_type"
     t.boolean "is_active"
-    t.datetime "last_sign_in_at"
+    t.boolean "is_trialing"
+    t.datetime "last_sign_in_at", precision: 6
     t.inet "last_sign_in_ip"
     t.datetime "remember_created_at"
     t.datetime "reset_password_sent_at"
     t.string "reset_password_token"
     t.integer "sign_in_count", default: 0, null: false
     t.string "stripe_customer_id"
+    t.datetime "subscription_end_at"
     t.string "unconfirmed_email"
     t.datetime "updated_at", null: false
   end

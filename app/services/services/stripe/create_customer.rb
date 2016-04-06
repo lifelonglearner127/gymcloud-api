@@ -19,12 +19,11 @@ class CreateCustomer < BaseService
 
     customer = ::Stripe::Customer.create(
       email: @user.email,
-      metadata: {
-        user_id: @user.id
-      }
+      metadata: {user_id: @user.id}
     )
     @user.stripe_customer_id = customer.id
     @user.save!
+    customer
   end
 
 end

@@ -52,6 +52,8 @@ class User < ActiveRecord::Base
       .joins(:agreements_as_client)
       .merge(UserAgreement.without_selftrained)
   end)
+  scope :gymcloud_pros,
+    -> { pros.where { (email =~ '%@gymcloud.com') } }
 
   after_invitation_accepted :on_invitation_accepted
   after_create :activate!

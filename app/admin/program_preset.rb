@@ -22,7 +22,7 @@ ActiveAdmin.register ProgramPreset do
       f.input :name
       f.input :user_id,
         as: :select,
-        collection: ::User.joins(:agreements_as_pro).distinct
+        collection: ::User.gymcloud_pros
       f.input :folder_id,
         as: :select,
         collection: f.object.user ? f.object.user.programs_folder.children : []

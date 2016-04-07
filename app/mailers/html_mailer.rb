@@ -40,6 +40,7 @@ class HtmlMailer < ApplicationMailer
 
   def trial_expiration(user_id)
     @user = ::User.find(user_id)
+    @days_left = (@user.trial_expiration.to_date - Date.today).to_i
     mail(to: @user.email, subject: 'GymCloud')
   end
 

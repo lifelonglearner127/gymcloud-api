@@ -56,6 +56,7 @@ gem 'kaminari' # will_paginate
 gem 'api-pagination'
 
 gem 'sidekiq'
+gem 'sidetiq' # Recurring jobs for Sidekiq
 
 gem 'vimeo', bitbucket: 'gymcloud/vimeo', branch: 'v2'
 gem 'andand'

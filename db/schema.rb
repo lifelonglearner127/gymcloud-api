@@ -463,7 +463,7 @@ ActiveRecord::Schema.define(version: 20160406145149) do
     t.string "invited_by_type"
     t.boolean "is_active"
     t.boolean "is_trialing"
-    t.datetime "last_sign_in_at", precision: 6
+    t.datetime "last_sign_in_at"
     t.inet "last_sign_in_ip"
     t.datetime "remember_created_at"
     t.datetime "reset_password_sent_at"

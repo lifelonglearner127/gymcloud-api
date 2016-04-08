@@ -1,0 +1,7 @@
+name: 'Standart Plan'
+amount: 24.99
+currency: 'usd'
+interval: 'month'
+trial_period_days: 14
+metadata:
+  default: 'true'

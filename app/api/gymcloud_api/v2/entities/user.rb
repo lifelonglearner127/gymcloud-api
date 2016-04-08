@@ -38,6 +38,13 @@ class User < Grape::Entity
       type: 'string'
     }
 
+  expose :confirmed?,
+    as: :is_confirmed,
+    documentation: {
+      desc: 'is email confirmed?',
+      type: 'boolean'
+    }
+
   expose :pro?,
     as: :is_pro,
     documentation: {
@@ -59,6 +66,18 @@ class User < Grape::Entity
       desc: 'user settings',
       type: Entities::UserSettings,
       param_type: 'body'
+    }
+
+  expose :subscription_end_at,
+    documentation: {
+      desc: 'subscription end time',
+      type: 'datetime'
+    }
+
+  expose :is_trialing,
+    documentation: {
+      desc: 'is trial active?',
+      type: 'boolean'
     }
 
 end

@@ -28,6 +28,8 @@
 #  invited_by_type        :string
 #  is_active              :boolean
 #  stripe_customer_id     :string
+#  is_trialing            :boolean
+#  subscription_end_at    :datetime
 #
 
 class User < ActiveRecord::Base
@@ -115,6 +117,11 @@ class User < ActiveRecord::Base
 
   def active_for_authentication?
     super && is_active?
+  end
+
+  def payment_required?
+    ended = subscription_end_at && subscription_end_at < DateTime.now
+    pro? && (!confirmed? || ended)
   end
 
   private

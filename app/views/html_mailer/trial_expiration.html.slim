@@ -11,7 +11,7 @@ tr
         | Time is Running Out
 
       .message.trial-expire-message
-        | #{@user.user_profile.first_name}, your free trial is going to expire in 2 days, on 13th of May. Please enter payment details to continue your GymCloud membership.
+        | #{@user.user_profile.first_name}, your free trial is going to expire in #{@days_left} days, on #{cool_readable_date(@user.subscription_end_at)}. Please enter payment details to continue your GymCloud membership.
 
       a.green-button.long href="http://#{webapp_domain}"
         | ENTER PAYMENT DETAILS

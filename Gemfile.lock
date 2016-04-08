@@ -117,6 +117,23 @@ GEM
     carrierwave-aws (0.7.1)
       aws-sdk (~> 1.58)
       carrierwave (~> 0.7)
+    celluloid (0.17.3)
+      celluloid-essentials
+      celluloid-extras
+      celluloid-fsm
+      celluloid-pool
+      celluloid-supervision
+      timers (>= 4.1.1)
+    celluloid-essentials (0.20.5)
+      timers (>= 4.1.1)
+    celluloid-extras (0.20.5)
+      timers (>= 4.1.1)
+    celluloid-fsm (0.20.5)
+      timers (>= 4.1.1)
+    celluloid-pool (0.20.5)
+      timers (>= 4.1.1)
+    celluloid-supervision (0.20.5)
+      timers (>= 4.1.1)
     choice (0.2.0)
     closure_tree (6.0.0)
       activerecord (>= 4.1.0)
@@ -269,12 +286,14 @@ GEM
       actionpack (>= 3.2, < 5)
       activesupport (>= 3.2, < 5)
     hashie (3.4.3)
+    hitimes (1.2.3)
     htmlentities (4.3.4)
     http-cookie (1.0.2)
       domain_name (~> 0.5)
     httpclient (2.7.1)
     hurley (0.2)
     i18n (0.7.0)
+    ice_cube (0.13.3)
     ice_nine (0.11.2)
     inherited_resources (1.6.0)
       actionpack (>= 3.2, < 5)
@@ -515,6 +534,10 @@ GEM
       concurrent-ruby (~> 1.0)
       connection_pool (~> 2.2, >= 2.2.0)
       redis (~> 3.2, >= 3.2.1)
+    sidetiq (0.7.0)
+      celluloid (>= 0.17.3)
+      ice_cube (~> 0.13.2)
+      sidekiq (>= 4.0.0)
     signet (0.7.2)
       addressable (~> 2.3)
       faraday (~> 0.9)
@@ -555,6 +578,8 @@ GEM
     thor (0.19.1)
     thread_safe (0.3.5)
     tilt (2.0.2)
+    timers (4.1.1)
+      hitimes
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
     uber (0.0.15)
@@ -659,6 +684,7 @@ DEPENDENCIES
   seedbank
   shoulda-matchers
   sidekiq
+  sidetiq
   sinatra
   slim
   spring

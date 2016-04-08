@@ -18,7 +18,6 @@ class Folder < ActiveRecord::Base
   has_many :exercises, dependent: :nullify
   has_many :workout_templates, -> { is_visible }, dependent: :nullify
   has_many :program_templates, dependent: :nullify
-  has_many :program_presets, dependent: :destroy
 
   validates :name, :user_id, presence: true
   validates :name, length: {maximum: 255}

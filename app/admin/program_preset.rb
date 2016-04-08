@@ -2,14 +2,13 @@ ActiveAdmin.register ProgramPreset do
 
   menu parent: 'Presets'
 
-  permit_params :name, :user_id, :folder_id
+  permit_params :name, :user_id, program_template_ids: []
 
   index do
     selectable_column
     id_column
     column :name
     column :user
-    column :folder
     actions
   end
 
@@ -23,9 +22,10 @@ ActiveAdmin.register ProgramPreset do
       f.input :user_id,
         as: :select,
         collection: ::User.gymcloud_pros
-      f.input :folder_id,
+      f.input :program_templates,
         as: :select,
-        collection: f.object.user ? f.object.user.programs_folder.children : []
+        collection: f.object.user ? f.object.user.program_templates : [],
+        multiple: true
     end
     f.actions
   end
@@ -41,10 +41,10 @@ ActiveAdmin.register ProgramPreset do
 
   end
 
-  collection_action :user_folders, method: :get do
+  collection_action :user_program_templates, method: :get do
     user = ::User.find(params[:user_id])
-    folders = user.programs_folder.children
-    render json: folders
+    programs = user.program_templates
+    render json: programs
   end
 
 end

@@ -15,15 +15,10 @@ class Import < BaseService
 
   def import
     ActiveRecord::Base.transaction do
-      programs_to_import.map do |program_template|
+      @program_preset.program_templates.map do |program_template|
         duplicate(program_template)
       end
     end
-  end
-
-  def programs_to_import
-    folder_id = @program_preset.folder_id
-    ::ProgramTemplate.where(folder_id: folder_id, is_public: true)
   end
 
   def duplicate(program_template)

@@ -238,6 +238,22 @@ namespace :users do
 
       end
 
+      resource :transactions do
+        desc 'Fetch user transactions'
+        params do
+          optional :starting_after, type: String
+        end
+        get do
+          user = ::User.find(params[:id])
+          authorize!(:read_transactions, user)
+          transactions = Services::Stripe::GetTransactionsList.!(
+            user: user,
+            starting_after: params[:starting_after]
+          )
+          present(transactions)
+        end
+      end
+
     end
 
   end

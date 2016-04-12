@@ -44,6 +44,7 @@ class Ability
     can :read, User
     as_self_can [:read_email, :update_email], User
     as_self_can :update, User
+    as_self_can [:read_transactions], User
     as_owner_can [:read, :destroy], UserAuthentication
     can :read, UserProfile
     as_owner_can :update, UserProfile

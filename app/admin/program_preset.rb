@@ -24,7 +24,7 @@ ActiveAdmin.register ProgramPreset do
         collection: ::User.gymcloud_pros
       f.input :program_templates,
         as: :select,
-        collection: f.object.user ? f.object.user.program_templates : [],
+        collection: [],
         multiple: true
     end
     f.actions
@@ -43,8 +43,8 @@ ActiveAdmin.register ProgramPreset do
 
   collection_action :user_program_templates, method: :get do
     user = ::User.find(params[:user_id])
-    programs = user.program_templates
-    render json: programs
+    programs = user.program_templates.order(folder_id: :asc)
+    render json: programs.as_json(include: :folder)
   end
 
 end

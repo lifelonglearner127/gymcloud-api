@@ -6,6 +6,15 @@
 
 ### Setup
 
+```
+cp .env.sample .env
+cp config/database.yml.sample config/database.yml
+bundle install
+bundle exec rake db:create
+bundle exec rake db:migrate
+bundle exec rake db:seed
+```
+
 ### Usage
 
 #### Services

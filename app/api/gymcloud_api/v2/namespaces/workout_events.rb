@@ -3,6 +3,22 @@ module Namespaces
 
 class WorkoutEvents < Base
 
+helpers do
+
+  def send_results_email(event)
+    user_id = if current_user.pro?
+      event.person.id
+    else
+      event.person.pros.first.id
+    end
+    changes = event.changes[:is_completed]
+    if !changes[0] && changes[1]
+      HtmlMailer.delay.results_added(user_id, event.id)
+    end
+  end
+
+end
+
 namespace :workout_events do
 
   desc 'Create Workout Event'
@@ -66,9 +82,8 @@ namespace :workout_events do
       event = ::WorkoutEvent.find(params[:id])
       event.assign_attributes(filtered_params)
       authorize!(:update, event)
+      send_results_email(event)
       event.save!
-      pro_id = event.person.pros.first.id
-      HtmlMailer.delay.results_added(pro_id, event.id)
       present(event, with: Entities::WorkoutEvent)
     end
 

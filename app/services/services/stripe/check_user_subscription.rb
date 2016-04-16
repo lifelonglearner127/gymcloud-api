@@ -14,8 +14,8 @@ class CheckUserSubscription < BaseService
   private
 
   def check
-    subscriptions = customer.subscriptions.all
-    subscription = subscriptions.data.detect do |sub|
+    subscriptions = customer.subscriptions.data
+    subscription = subscriptions.detect do |sub|
       %w(trialing active).include?(sub.status)
     end
     return subscription if subscription.nil?
@@ -32,7 +32,7 @@ class CheckUserSubscription < BaseService
     end_date = (is_trialing && sub.trial_end) || sub.current_period_end
     @user.update_attributes!(
       is_trialing: is_trialing,
-      subscription_end: Time.at(end_date).utc.to_datetime
+      subscription_end_at: Time.at(end_date).utc.to_datetime
     )
   end
 

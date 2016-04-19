@@ -64,6 +64,22 @@ namespace :users do
       present(user, with: Entities::User)
     end
 
+    desc 'Stripe Customer'
+    get :customer do
+      user = ::User.find(params[:id])
+      authorize!(:manage_payments, user)
+      customer = Services::Stripe::GetCustomer.!(user: user)
+      present(customer)
+    end
+
+    desc 'User Subscription'
+    get :subscription do
+      user = ::User.find(params[:id])
+      authorize!(:manage_payments, user)
+      subscription = Services::Stripe::CheckUserSubscription.!(user: user)
+      present(subscription)
+    end
+
     namespace :collections do
 
       namespace :user_authentications do
@@ -245,7 +261,7 @@ namespace :users do
         end
         get do
           user = ::User.find(params[:id])
-          authorize!(:read_transactions, user)
+          authorize!(:manage_payments, user)
           transactions = Services::Stripe::GetTransactionsList.!(
             user: user,
             starting_after: params[:starting_after]

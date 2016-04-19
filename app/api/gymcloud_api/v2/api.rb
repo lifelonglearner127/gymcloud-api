@@ -39,6 +39,7 @@ class API < Grape::API
   mount Namespaces::WorkoutExercises
   mount Namespaces::WorkoutTemplates
   mount Namespaces::ProgramPresets
+  mount Namespaces::Cards
 
 end
 

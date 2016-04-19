@@ -1,4 +1,13 @@
 GIT
+  remote: git://github.com/Insightly/insightly-ruby.git
+  revision: ab55b94c333fd9bc24882199956e98396f998182
+  ref: ab55b94
+  specs:
+    insightly2 (0.2.0)
+      activesupport
+      faraday
+
+GIT
   remote: git://github.com/activeadmin/activeadmin.git
   revision: f7483e3b8fcd74437b03c18fb658dac62a9fc62e
   specs:
@@ -653,6 +662,7 @@ DEPENDENCIES
   guard-regressor!
   guard-rspec
   guard-rubocop
+  insightly2!
   jbuilder (~> 2.0)
   kaminari
   koala (~> 2.2)

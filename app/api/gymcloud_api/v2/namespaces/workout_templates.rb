@@ -33,7 +33,7 @@ namespace :workout_templates do
     optional :folder_ids, type: Array[Integer]
   end
   post '/duplicate' do
-    old_workouts = ::WorkoutTemplate.find(params[:ids])
+    old_workouts = ::WorkoutTemplate.with_deleted.find(params[:ids])
     workouts = []
     ActiveRecord::Base.transaction do
       old_workouts.each do |old_workout|

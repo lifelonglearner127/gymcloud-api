@@ -66,6 +66,21 @@ namespace :program_workouts do
       present(program_workout, with: Entities::ProgramWorkout)
     end
 
+    desc 'Duplicate Personal Program Workout'
+    post '/duplicate' do
+      program_workout = ::ProgramWorkout.find(params[:id])
+      authorize!(:create, program_workout)
+
+      workout = program_workout.workout
+      new_program_workout = program_workout.dup
+      new_program_workout.assign_attributes(
+        workout: Services::PersonalDuplicating::Workout.!(workout: workout)
+      )
+      new_program_workout.save!
+
+      present(new_program_workout, with: Entities::ProgramWorkout, nested: true)
+    end
+
   end
 
 end

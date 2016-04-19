@@ -50,6 +50,7 @@ gem 'mini_magick'
 
 gem 'stripe'
 gem 'stripe_event'
+gem 'insightly2', github: 'Insightly/insightly-ruby', ref: 'ab55b94'
 
 # Then choose your preferred paginator from the following:
 gem 'kaminari' # will_paginate

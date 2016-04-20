@@ -8,14 +8,22 @@ class Import < BaseService
   end
 
   def input_params
-    %i(user program_preset)
+    %i(user program_preset program_template_ids)
+  end
+
+  def defaults
+    {program_template_ids: []}
   end
 
   private
 
   def import
     ActiveRecord::Base.transaction do
-      @program_preset.program_templates.map do |program_template|
+      program_templates = @program_preset
+        .program_templates
+        .where { id.in(my { @program_template_ids }) }
+
+      program_templates.map do |program_template|
         duplicate(program_template)
       end
     end

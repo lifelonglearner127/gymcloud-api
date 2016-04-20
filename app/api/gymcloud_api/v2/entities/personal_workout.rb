@@ -16,6 +16,7 @@ class PersonalWorkout < Grape::Entity
     if: {nested: true},
     using: Entities::WorkoutExercise,
     as: :exercises
+  expose :workout_template_id
   expose :workout_template_version
   expose :is_program_part
   expose :program_name,

@@ -6,7 +6,7 @@ class UpdateSubscriptionWorker
   recurrence { daily }
 
   def perform
-    ::User.pros.where { !stripe_customer_id.nil? }.each do |user|
+    ::User.pros.with_stripe.each do |user|
       Services::Stripe::CheckUserSubscription.!(user: user)
     end
   end

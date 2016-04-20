@@ -56,6 +56,8 @@ class User < ActiveRecord::Base
   end)
   scope :gymcloud_pros,
     -> { pros.where { (email =~ '%@gymcloud.com') } }
+  scope :with_stripe,
+    -> { where { stripe_customer_id.not_eq nil } }
 
   after_invitation_accepted :on_invitation_accepted
   after_create :activate!

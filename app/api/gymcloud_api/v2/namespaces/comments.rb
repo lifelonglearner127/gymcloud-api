@@ -26,6 +26,7 @@ namespace :comments do
         else
           comment.commentable.personal_workout.workout_template.user
         end
+      HtmlMailer.delay.comment_added(recipient.id, comment.id)
     end
     comment.create_activity(
       action: :create,

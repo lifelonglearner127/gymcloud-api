@@ -1,7 +1,7 @@
 module SearchScopes
 module Training
 
-  MASTER_EMAILS = ['kenton@gymcloud.com'].freeze
+  MASTER_EMAILS = ['support@gymcloud.com'].freeze
 
   extend ActiveSupport::Concern
 

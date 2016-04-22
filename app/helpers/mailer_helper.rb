@@ -33,6 +33,10 @@ module MailerHelper
     "http://#{webapp_domain}/#workout_events/#{id}/results"
   end
 
+  def comments_url(id)
+    "#{workout_event_results_url(id)}/comments"
+  end
+
   def confirmation_on_frontend(token)
     "http://#{webapp_domain}/#confirm/#{token}"
   end

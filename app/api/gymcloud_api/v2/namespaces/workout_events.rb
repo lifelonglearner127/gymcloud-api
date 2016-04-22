@@ -18,6 +18,18 @@ helpers do
     end
   end
 
+  def send_event_email(event)
+    mailer_method = if (event.begins_at - Time.now) / 1.hours > 1
+                      delayed_time = event.begins_at - 1.hours
+                      HtmlMailer.delay_until(delayed_time)
+                    else
+                      HtmlMailer.delay
+                    end
+    mailer_method.event_scheduled(
+      event.personal_workout.workout_template.user.id,
+      event.id
+    ) unless event.personal_workout.person.pro?
+  end
 end
 
 namespace :workout_events do
@@ -33,12 +45,7 @@ namespace :workout_events do
     event = ::WorkoutEvent.new(filtered_params)
     authorize!(:create, event)
     event.save!
-
-    HtmlMailer.delay.event_scheduled(
-      event.personal_workout.workout_template.user.id,
-      event.id
-    ) unless event.personal_workout.person.pro?
-
+    send_event_email(event)
     recipient =
       if current_user.pro?
         event.person

@@ -26,7 +26,7 @@ helpers do
                       HtmlMailer.delay
                     end
     mailer_method.event_scheduled(
-      event.personal_workout.workout_template.user.id,
+      event.personal_workout.person.id,
       event.id
     ) unless event.personal_workout.person.pro?
   end

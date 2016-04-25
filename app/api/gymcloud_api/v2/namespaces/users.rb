@@ -164,6 +164,18 @@ namespace :users do
         end
       end
 
+      resource :personal_exercises do
+        desc 'Fetch assigned user exercises'
+        get do
+          user = ::User.find(params[:id])
+          exercises = ::Exercise.personal_for(user)
+          authorize!(:update, user.user_profile)
+          present exercises,
+            with: Entities::Exercise,
+            nested: false
+        end
+      end
+
       resource :workout_exercises do
         desc 'Fetch user workout exercises'
         get do

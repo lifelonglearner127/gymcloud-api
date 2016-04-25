@@ -40,4 +40,13 @@ class Exercise < ActiveRecord::Base
   has_paper_trail
   acts_as_paranoid
 
+  scope :personal_for, (lambda do |user|
+    status = ::PersonalWorkout.statuses[:active]
+    distinct
+      .joins { workout_exercises }
+      .joins { workout_exercises.personal_workout }
+      .where { workout_exercises.personal_workouts.person_id == my { user.id } }
+      .where { workout_exercises.personal_workouts.status == my { status } }
+  end)
+
 end

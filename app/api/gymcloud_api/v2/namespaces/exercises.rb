@@ -87,6 +87,25 @@ namespace :exercises do
       present(exercise, with: Entities::Exercise)
     end
 
+    namespace :personal_best do
+      params do
+        requires :user_id, type: Integer
+      end
+      route_param :user_id do
+        desc 'Read Personal Best List'
+        get do
+          user = ::User.find(params[:user_id])
+          authorize!(:update, user.user_profile)
+
+          best_results = ::ExerciseResult.personal_best_for(
+            params[:id],
+            params[:user_id]
+          )
+          present(best_results, with: Entities::ExerciseResult)
+        end
+      end
+    end
+
   end
 
 end

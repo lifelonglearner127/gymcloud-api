@@ -22,6 +22,16 @@ class ExerciseResult < ActiveRecord::Base
   validates :workout_exercise_id, :workout_event_id, presence: true
   validate :check_exercise_workout_type
 
+  scope :personal_best_for, (lambda do |exercise_id, user_id|
+    joins { workout_exercise }
+    .joins { workout_exercise.exercise }
+    .joins { workout_event }
+    .joins { workout_event.personal_workout }
+    .where { workout_exercise.exercise.id == my { exercise_id } }
+    .where { workout_event.personal_workout.person_id == my { user_id } }
+    .where { is_personal_best == true }
+  end)
+
   def display_name
     "#{workout_exercise.display_name} - #{workout_event.display_name}"
   end

@@ -55,7 +55,8 @@ class Workout < BaseService
       exercise_version: exercise.version&.index,
       note: workout_exercise.note,
       position: workout_exercise.position,
-      order_name: workout_exercise.order_name
+      order_name: workout_exercise.order_name,
+      source: workout_exercise
     )
   end
 
@@ -66,7 +67,8 @@ class Workout < BaseService
       value: exercise_property.value,
       value2: exercise_property.value2,
       position: exercise_property.position,
-      property_unit: exercise_property.property_unit
+      property_unit: exercise_property.property_unit,
+      source: exercise_property
     )
   end
 

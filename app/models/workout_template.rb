@@ -2,21 +2,22 @@
 #
 # Table name: workout_templates
 #
-#  id          :integer          not null, primary key
-#  name        :string
-#  description :text
-#  note        :text
-#  video_url   :string
-#  is_public   :boolean
-#  author_id   :integer
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  folder_id   :integer
-#  is_visible  :boolean          default(TRUE)
-#  deleted_at  :datetime
-#  video_id    :integer
-#  user_id     :integer
-#  original_id :integer
+#  id              :integer          not null, primary key
+#  name            :string
+#  description     :text
+#  note            :text
+#  video_url       :string
+#  is_public       :boolean
+#  author_id       :integer
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  folder_id       :integer
+#  is_visible      :boolean          default(TRUE)
+#  deleted_at      :datetime
+#  video_id        :integer
+#  user_id         :integer
+#  original_id     :integer
+#  client_group_id :integer
 #
 
 class WorkoutTemplate < ActiveRecord::Base

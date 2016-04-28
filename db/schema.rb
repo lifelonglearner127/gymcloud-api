@@ -559,6 +559,7 @@ ActiveRecord::Schema.define(version: 20160606180120) do
 
   create_table "workout_templates", force: :cascade do |t|
     t.integer "author_id"
+    t.integer "client_group_id"
     t.datetime "created_at", null: false
     t.datetime "deleted_at"
     t.text "description"
@@ -575,6 +576,7 @@ ActiveRecord::Schema.define(version: 20160606180120) do
   end
 
   add_index "workout_templates", ["author_id"], name: "index_workout_templates_on_author_id", using: :btree
+  add_index "workout_templates", ["client_group_id"], name: "index_workout_templates_on_client_group_id", using: :btree
   add_index "workout_templates", ["deleted_at"], name: "index_workout_templates_on_deleted_at", using: :btree
   add_index "workout_templates", ["folder_id"], name: "index_workout_templates_on_folder_id", using: :btree
   add_index "workout_templates", ["original_id"], name: "index_workout_templates_on_original_id", using: :btree
@@ -598,4 +600,5 @@ ActiveRecord::Schema.define(version: 20160606180120) do
   add_foreign_key "workout_event_exercises", "workout_exercises"
   add_foreign_key "workout_events", "personal_workouts"
   add_foreign_key "workout_exercises", "exercises"
+  add_foreign_key "workout_templates", "client_groups"
 end

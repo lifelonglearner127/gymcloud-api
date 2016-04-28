@@ -25,12 +25,23 @@ class Workout < BaseService
 
   private
 
+  def template_duplicate
+    template = Services::TemplateDuplicating::Workout.!(
+      workout: @template,
+      user: @template.user,
+      is_visible: false
+    )
+    template.client_group = @group
+    template.save!
+    template
+  end
+
   def create_personal
     ids = assigned_client_ids
     users = @group.clients.where { id << ids }
     users.map do |user|
       workout = Services::PersonalAssignment::Workout.!(
-        template: @template,
+        template: template_duplicate,
         user: user
       )
       create_activity_for(workout) if @create_activities

@@ -120,6 +120,8 @@ ActiveRecord::Schema.define(version: 20160606180120) do
     t.integer "personal_property_id"
     t.integer "position"
     t.integer "property_unit_id"
+    t.integer "source_id"
+    t.string "source_type"
     t.datetime "updated_at", null: false
     t.decimal "value", precision: 14, scale: 5
     t.decimal "value2", precision: 14, scale: 5
@@ -344,6 +346,8 @@ ActiveRecord::Schema.define(version: 20160606180120) do
     t.integer "position"
     t.integer "program_id"
     t.string "program_type"
+    t.integer "source_id"
+    t.string "source_type"
     t.datetime "updated_at", null: false
   end
 
@@ -355,6 +359,8 @@ ActiveRecord::Schema.define(version: 20160606180120) do
     t.integer "position"
     t.integer "program_id"
     t.string "program_type"
+    t.integer "source_id"
+    t.string "source_type"
     t.datetime "updated_at", null: false
     t.integer "week_id"
     t.integer "workout_id"
@@ -541,6 +547,8 @@ ActiveRecord::Schema.define(version: 20160606180120) do
     t.text "note"
     t.string "order_name"
     t.integer "position"
+    t.integer "source_id"
+    t.string "source_type"
     t.datetime "updated_at", null: false
     t.integer "workout_id"
     t.string "workout_type"

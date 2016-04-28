@@ -3,11 +3,12 @@ require 'rails_helper'
 RSpec.describe ProgramWorkout do
 
   # === Relations ===
-  it { is_expected.to belong_to :workout}
+  it { is_expected.to belong_to :source}
+	it { is_expected.to belong_to :workout}
 	it { is_expected.to belong_to :program}
 	it { is_expected.to belong_to :week}
   
-  
+  it { is_expected.to have_many :clones}
 
   # === Nested Attributes ===
   
@@ -23,6 +24,8 @@ RSpec.describe ProgramWorkout do
 	it { is_expected.to have_db_column :updated_at }
 	it { is_expected.to have_db_column :position }
 	it { is_expected.to have_db_column :week_id }
+	it { is_expected.to have_db_column :source_id }
+	it { is_expected.to have_db_column :source_type }
 
   # === Database (Indexes) ===
   it { is_expected.to have_db_index ["program_type", "program_id"]}

@@ -89,6 +89,12 @@ namespace :client_groups do
             .find_by!(client_id: user.id)
           authorize!(:destroy, membership)
           membership.destroy
+          user.personal_workouts.each do |pw|
+            if pw.workout_template.client_group_id == params[:id]
+              pw.status = :inactive
+              pw.save!
+            end
+          end
           present(client_group, with: Entities::ClientGroup)
         end
 

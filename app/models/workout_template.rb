@@ -30,6 +30,7 @@ class WorkoutTemplate < ActiveRecord::Base
   belongs_to :original, class_name: WorkoutTemplate
   belongs_to :folder
   belongs_to :video
+  belongs_to :client_group
   has_many :personal_workouts
   has_many :workout_exercises, as: :workout, dependent: :destroy
   has_one :program_workout, as: :workout
@@ -45,8 +46,9 @@ class WorkoutTemplate < ActiveRecord::Base
   has_paper_trail
   acts_as_paranoid
 
-  scope :is_visible, -> { where(is_visible: :true) }
+  scope :is_visible, -> { where(is_visible: :true, client_group_id: nil) }
   scope :is_invisible, -> { where(is_visible: :false) }
+  scope :belongs_to_group, -> { where { client_group_id.not_eq nil } }
 
   scope :assigned_to_group, (lambda do |client_group|
     ids = client_group.clients.pluck(:id).to_a

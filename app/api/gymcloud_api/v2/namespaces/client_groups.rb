@@ -67,15 +67,17 @@ namespace :client_groups do
       route_param :user_id do
 
         desc 'Add Member'
+        params do
+          optional :assign_templates, type: Boolean, default: 'true'
+        end
         post do
-          client_group = ::ClientGroup.find(params[:id])
-          user = ::User.find(params[:user_id])
-          membership = ClientGroupMembership.new(
-            client_group: client_group,
-            client: user
+          service = Services::Clients::AddToGroup.new(
+            client_id: params[:user_id],
+            group_id: params[:id],
+            assign_templates: params[:assign_templates]
           )
-          authorize!(:create, membership)
-          membership.save!
+          authorize!(:create, service.build)
+          client_group = service.run
           present(client_group, with: Entities::ClientGroup)
         end
 

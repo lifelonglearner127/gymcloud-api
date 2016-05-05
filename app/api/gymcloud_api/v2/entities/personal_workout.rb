@@ -12,6 +12,9 @@ class PersonalWorkout < Grape::Entity
   expose :video_url
   expose :status
   expose :person_id
+  expose :author_id do |workout|
+    workout.andand.author.andand.id
+  end
   expose :workout_exercises,
     if: {nested: true},
     using: Entities::WorkoutExercise,

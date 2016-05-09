@@ -3,6 +3,7 @@
 class AvatarUploader < CarrierWave::Uploader::Base
 
   include CarrierWave::MiniMagick
+  include CarrierWave::BombShelter
 
   def self.which_storage
     Rails.env.production? ? :aws : :file
@@ -28,6 +29,10 @@ class AvatarUploader < CarrierWave::Uploader::Base
 
   def extension_white_list
     %w(jpg jpeg gif png)
+  end
+
+  def image_type_whitelist
+    %i(jpg jpeg gif png)
   end
 
   def ensure_auto_orient

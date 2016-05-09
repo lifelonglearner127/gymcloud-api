@@ -46,6 +46,7 @@ gem 'squeel', '~> 1.2.3'
 gem 'ransack', '1.6.5'
 gem 'carrierwave'
 gem 'carrierwave-aws', '~> 0.7.1'
+gem 'carrierwave-bombshelter'
 gem 'mini_magick'
 
 gem 'stripe'

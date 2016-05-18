@@ -28,6 +28,10 @@ namespace :videos do
     optional :scope, type: String, default: 'mine',
       values: %w(mine gymcloud vimeo youtube),
       desc: 'Search scope'
+    optional :order, type: String,
+      values: %w(recent oldest),
+      default: 'recent',
+      desc: 'Search order'
     use :pagination
   end
   get '/search' do
@@ -39,9 +43,15 @@ namespace :videos do
   end
 
   desc 'Retrieve videos'
+  params do
+    optional :order, type: String,
+      values: %w(recent oldest),
+      default: 'recent',
+      desc: 'Search order'
+  end
   paginate per_page: 50, max_per_page: 50
   get do
-    videos = Video.owned_by(current_user.id).all
+    videos = Video.owned_by(current_user.id).send(params[:order]).all
     present(paginate(videos), with: Entities::Video)
   end
 

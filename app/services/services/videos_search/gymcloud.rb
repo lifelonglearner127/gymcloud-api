@@ -14,6 +14,7 @@ class Gymcloud < BaseVideoService
       .send(scope, @user.id)
       .search_by_criteria(@q)
       .send(@order)
+      .distinct
       .page(@page).per(@per_page)
   end
 

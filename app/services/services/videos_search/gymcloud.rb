@@ -4,13 +4,16 @@ module VideosSearch
 class Gymcloud < BaseVideoService
 
   def input_params
-    super.concat([:scope, :user])
+    super.concat([:scope, :user, :order])
   end
 
   private
 
   def search
-    ::Video.send(scope, @user.id).search_by_criteria(@q)
+    ::Video
+      .send(scope, @user.id)
+      .search_by_criteria(@q)
+      .send(@order)
       .page(@page).per(@per_page)
   end
 

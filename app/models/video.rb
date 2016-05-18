@@ -28,6 +28,9 @@ class Video < ActiveRecord::Base
 
   validates :name, length: {maximum: 255}
 
+  scope :oldest, -> { order(uploaded_at: :asc) }
+  scope :recent, -> { order(uploaded_at: :desc) }
+
   mount_uploader :tmp_file, VideoUploader
 
   before_destroy :delete_tmp_file_folder

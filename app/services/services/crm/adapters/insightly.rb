@@ -39,7 +39,7 @@ class Insightly
     }
   end
 
-  def created_contact_attributes(user)
+  def created_contact_attributes(user) # rubocop:disable Metrics/MethodLength
     {
       first_name: user.user_profile.first_name,
       last_name: user.user_profile.last_name,
@@ -87,7 +87,7 @@ class Insightly
     ::Insightly2.client
   end
 
-  def detailed_background(user)
+  def detailed_background(user) # rubocop:disable Metrics/MethodLength
     <<-EOT.sub(/\n$/, '')
       gymcloud_user_id: #{user.id}
       first_name: #{user.user_profile.first_name}

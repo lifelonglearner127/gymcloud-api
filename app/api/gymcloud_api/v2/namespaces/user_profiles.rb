@@ -39,6 +39,7 @@ namespace :user_profiles do
       profile.assign_attributes(filtered_params)
       authorize!(:update, profile)
       profile.save!
+      Services::CRM::UpdateUserContact.!(user_id: profile.user.id)
       present(profile, with: Entities::UserProfile)
     end
 

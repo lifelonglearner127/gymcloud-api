@@ -62,6 +62,12 @@ class Ability
         we.workout.person_id == @user.id
       end
     end
+    can :read, Exercise do |ex|
+      ex.workout_exercises
+        .joins { personal_workout }
+        .where { personal_workout.person_id == my { @user.id } }
+        .any?
+    end
     can :read, PersonalProgram, person_id: @user.id
     can :crud, WorkoutEvent, personal_workout: {person_id: @user.id}
     can :crud, Activity do |notification|

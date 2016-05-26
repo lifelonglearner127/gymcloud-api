@@ -59,7 +59,7 @@ namespace :users do
       Services::Clients::Invite.!(
         current_user: current_user,
         user: user,
-        email: params[:email].andand.downcase.andand.squish
+        email: params[:email]&.downcase&.squish
       )
       present(user, with: Entities::User)
     end

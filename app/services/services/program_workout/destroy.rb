@@ -17,8 +17,8 @@ class Destroy < BaseService
     if @program_workout.workout_type == 'WorkoutTemplate'
       workout_template = @program_workout.workout
     else
-      workout_template = @program_workout.workout.andand.workout_template
-      @program_workout.workout.andand.destroy
+      workout_template = @program_workout.workout&.workout_template
+      @program_workout.workout&.destroy
     end
     try_to_destroy_workout_template(workout_template) if workout_template
     @program_workout.destroy

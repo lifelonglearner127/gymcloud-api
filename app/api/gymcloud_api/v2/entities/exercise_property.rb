@@ -8,7 +8,7 @@ class ExerciseProperty < Grape::Entity
   expose :updated_at
   expose :property_unit_id
   expose :property_unit_name do |model|
-    model.property_unit.andand.short_name
+    model.property_unit&.short_name
   end
   expose :personal_property, with: Entities::PersonalProperty
   expose :workout_exercise_id

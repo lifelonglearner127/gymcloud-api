@@ -1,7 +1,7 @@
 class UpdateExerciseProperties < ActiveRecord::Migration
   def up
     intervals_proprty = ::GlobalProperty.find_by(symbol: 'intervals')
-    intervals_proprty.andand.destroy
+    intervals_proprty&.destroy
     Services::Seed::GlobalProperty.!
     Services::Seed::PropertyUnit.!
     Services::Seed::GlobalPropertyUnit.!

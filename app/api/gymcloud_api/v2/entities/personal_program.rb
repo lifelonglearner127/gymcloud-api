@@ -12,7 +12,7 @@ class PersonalProgram < Grape::Entity
   expose :status
   expose :person_id
   expose :author_id do |program|
-    program.andand.author.andand.id
+    program&.author&.id
   end
   expose :program_workouts,
     if: {nested: true},

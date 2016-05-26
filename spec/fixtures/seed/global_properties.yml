@@ -21,7 +21,7 @@
     position: 4
   -
     symbol: "time"
-    name: "Time"
+    name: "Work Period"
     position: 5
   -
     symbol: "heart_rate"
@@ -33,7 +33,7 @@
     position: 7
   -
     symbol: "rest_period"
-    name: "Rest period"
+    name: "Rest Period"
     position: 8
   -
     symbol: "rounds"

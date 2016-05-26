@@ -9,6 +9,7 @@ class Exercise < Grape::Entity
   expose :name
   expose :description
   expose :video_url
+  expose :video_id
   expose :folder_id
   expose :is_public
   expose :user_id

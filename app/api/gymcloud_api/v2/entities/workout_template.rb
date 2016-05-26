@@ -10,6 +10,7 @@ class WorkoutTemplate < Grape::Entity
   expose :description
   expose :note
   expose :video_url
+  expose :video_id
   expose :is_public
   expose :is_visible
   expose :user_id

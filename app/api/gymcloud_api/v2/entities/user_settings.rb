@@ -38,6 +38,12 @@ class UserSettings < Grape::Entity
       type: 'string'
     }
 
+  expose :tutorial_steps,
+    documentation: {
+      desc: 'finished tutorial steps',
+      type: 'array'
+    }
+
   expose :is_tutorial_finished,
     documentation: {
       desc: 'is tutorial finished',

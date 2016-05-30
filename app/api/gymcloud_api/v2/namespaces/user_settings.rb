@@ -13,6 +13,7 @@ namespace :user_settings do
     optional :units_system, type: String,
       values: ::UserSettings.units_systems.keys,
       default: 'imperial'
+    optional :tutorial_steps, type: Array[String]
     optional :is_tutorial_finished, type: Boolean, default: 'false'
     optional :is_presets_loaded, type: Boolean, default: 'false'
   end
@@ -45,6 +46,7 @@ namespace :user_settings do
       optional :user_account_type_id, type: Integer
       optional :units_system, type: String,
         values: ::UserSettings.units_systems.keys
+      optional :tutorial_steps, type: Array[String]
       optional :is_tutorial_finished, type: Boolean
       optional :is_presets_loaded, type: Boolean
     end

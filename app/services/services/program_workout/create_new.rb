@@ -46,13 +46,21 @@ class CreateNew < BaseService
       .where(name: 'Workout Templates').pluck(:id).first
 
     ::WorkoutTemplate.create!(
-      name: "Workout #{@attrs['position']}".squish,
+      name: workout_template_name,
       folder_id: folder_id,
       is_visible: false,
       is_public: false,
       author: @user,
       user: @user
     )
+  end
+
+  def workout_template_name
+    index = ::ProgramWorkout.where(
+      program_id: @attrs['program_id'],
+      week_id: @attrs['week_id']
+    ).count
+    "Workout #{index + 1}"
   end
 
   def personal_workout(program)

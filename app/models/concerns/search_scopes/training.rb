@@ -25,7 +25,7 @@ module Training
     scope :global_for, (lambda do |id|
       joins(:user)
         .where do
-          (users.email >> my { MASTER_EMAIL }) & (is_public == true) |
+          (users.email >> my { MASTER_EMAILS }) & (is_public == true) |
           (user_id == my { id })
         end
     end)

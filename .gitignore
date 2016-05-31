@@ -18,6 +18,7 @@ db/*.sqlite3
 !/log/.keep
 /tmp
 .ruby-gemset
+.byebug_history
 
 # Collaboration artifacts
 .floo*

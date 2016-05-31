@@ -3,9 +3,9 @@ class SearchService
   ENTITIES = {
     exercises: Exercise,
     workouts: WorkoutTemplate,
-    programs: ProgramTemplate,
-    clients: User,
-    client_groups: ClientGroup
+    programs: ProgramTemplate
+    # clients: User,
+    # client_groups: ClientGroup
   }.freeze
 
   attr_accessor :results

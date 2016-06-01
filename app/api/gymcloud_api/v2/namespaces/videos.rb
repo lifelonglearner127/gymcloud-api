@@ -101,10 +101,7 @@ namespace :videos do
     desc 'Delete a video'
     delete do
       video = Video.find(params[:id])
-      vimeo_id = video.vimeo_id
-      video.destroy!
-
-      VimeoVideoDeleteWorker.perform_async(vimeo_id) if vimeo_id
+      Services::Video::Delete.!(video: video)
 
       present(video, with: Entities::Video)
     end

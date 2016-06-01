@@ -28,7 +28,7 @@ ActiveAdmin.register UserProfile do
     column :gender
     column :zip
     column :pro do |model|
-      pro = model.user.andand.pros.andand.last.andand.user_profile
+      pro = model.user&.pros&.last&.user_profile
       link_to(pro.full_name, [:admin, pro]) if pro
     end
 

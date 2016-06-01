@@ -35,7 +35,7 @@ class GlobalProperty < ActiveRecord::Base
 
   def set_default_unit
     return if default_unit
-    self.default_unit = property_units.presence.andand.first
+    self.default_unit = property_units.presence&.first
   end
 
 end

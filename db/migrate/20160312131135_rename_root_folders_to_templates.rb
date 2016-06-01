@@ -18,7 +18,7 @@ class RenameRootFoldersToTemplates < ActiveRecord::Migration
 
   def rename_folders(map)
     User.all
-      .select { |user| user.folders.andand.root.andand.children }
+      .select { |user| user.folders&.root&.children }
       .each do |user|
         user.folders.root.children
           .select { |folder| folder.name.in?(map.keys) }

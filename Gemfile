@@ -61,7 +61,6 @@ gem 'sidekiq'
 gem 'sidetiq' # Recurring jobs for Sidekiq
 
 gem 'vimeo', bitbucket: 'gymcloud/vimeo', branch: 'v2'
-gem 'andand'
 gem 'faker'
 gem 'ffaker'
 gem 'factory_girl_rails'

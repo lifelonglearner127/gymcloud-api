@@ -52,7 +52,7 @@ class Workout < BaseService
     WorkoutExercise.create!(
       workout: workout,
       exercise: exercise,
-      exercise_version: exercise.version.andand.index,
+      exercise_version: exercise.version&.index,
       note: workout_exercise.note,
       position: workout_exercise.position,
       order_name: workout_exercise.order_name

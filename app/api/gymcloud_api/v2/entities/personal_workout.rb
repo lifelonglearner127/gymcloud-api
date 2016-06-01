@@ -13,7 +13,7 @@ class PersonalWorkout < Grape::Entity
   expose :status
   expose :person_id
   expose :author_id do |workout|
-    workout.andand.author.andand.id
+    workout&.author&.id
   end
   expose :workout_exercises,
     if: {nested: true},
@@ -25,7 +25,7 @@ class PersonalWorkout < Grape::Entity
   expose :program_name,
     if: (lambda do |workout, _options|
       workout.is_program_part &&
-        workout.andand.program_workout.andand.program
+        workout&.program_workout&.program
     end) \
     do |workout|
       workout.program_workout.program.name

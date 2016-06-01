@@ -6,7 +6,7 @@ class UserSettings < Base
   private
 
   def destroy
-    @user.user_settings.andand.destroy
+    @user.user_settings&.destroy
   end
 
 end

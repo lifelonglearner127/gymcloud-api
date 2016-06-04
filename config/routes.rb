@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   if Rails.env.development?
     require 'sidekiq/web'
     mount Sidekiq::Web, at: '/sidekiq'
+    require 'sidetiq/web'
 
     mount LetterOpenerWeb::Engine, at: '/letter_opener'
     get 'preview/invitation_instructions'

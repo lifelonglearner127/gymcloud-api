@@ -12,7 +12,7 @@ class BlogStatsWorker
     connection.post do |request|
       request.url('/webhooks/stats')
       request.headers['Content-Type'] = 'application/json'
-      request.headers['WEBHOOK_STATS_KEY'] = ENV['WEBHOOK_STATS_KEYs']
+      request.headers['WEBHOOK_STATS_KEY'] = ENV['WEBHOOK_STATS_KEY']
       request.body = stats.to_json
     end
   end

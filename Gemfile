@@ -96,7 +96,7 @@ group :development, :test do
   gem 'byebug'
   gem 'spring'
   gem 'ruby-progressbar'
-
+  gem 'brakeman', require: false
   gem 'rspec-rails', '~> 3.0'
   gem 'database_cleaner'
 end

@@ -1,5 +1,5 @@
-name: 'Standart Plan'
-amount: 24.99
+name: 'Client Standart Plan'
+amount: 499
 currency: 'usd'
 interval: 'month'
 trial_period_days: 14

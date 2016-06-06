@@ -21,10 +21,8 @@ class ConfirmationsController < Devise::ConfirmationsController
   private
 
   def perform_after_confirmation(user)
-    if user.pro?
-      Services::CRM::ConvertUserToLead.!(user_id: user.id)
-      Services::Stripe::UserBootstrap.!(user: user)
-    end
+    Services::CRM::ConvertUserToLead.!(user_id: user.id) if user.pro?
+    Services::Stripe::UserBootstrap.!(user: user) unless user.pro?
   end
 
 end

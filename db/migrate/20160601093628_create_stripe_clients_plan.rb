@@ -1,6 +1,7 @@
 class CreateStripeClientsPlan < ActiveRecord::Migration
 
   def up
+    return unless Stripe.api_key.present?
     name = 'Client Standart Plan'
     plans = Stripe::Plan.all
     if plans.none? { |plan| plan.name == name }

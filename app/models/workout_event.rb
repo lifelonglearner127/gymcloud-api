@@ -45,6 +45,7 @@ class WorkoutEvent < ActiveRecord::Base
         (personal_workout.person_id >> user.id)
       end
   end)
+  scope :is_completed, -> { where(is_completed: true) }
 
   def display_name
     "#{personal_workout.name} at #{begins_at}"

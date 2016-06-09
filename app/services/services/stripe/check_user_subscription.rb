@@ -16,7 +16,7 @@ class CheckUserSubscription < BaseService
   def check
     subscriptions = customer.subscriptions.data
     subscription = subscriptions.detect do |sub|
-      %w(trialing active).include?(sub.status)
+      %w(trialing active past_due).include?(sub.status)
     end
     return subscription if subscription.nil?
     update_user(subscription)
@@ -28,7 +28,9 @@ class CheckUserSubscription < BaseService
   end
 
   def update_user(sub)
-    is_trialing = sub.status == 'trialing'
+    is_trialing = sub.status == 'trialing' || (sub.status == 'past_due' &&
+                  sub.trial_end == sub.current_period_end)
+
     end_date = (is_trialing && sub.trial_end) || sub.current_period_end
     @user.update_attributes!(
       is_trialing: is_trialing,

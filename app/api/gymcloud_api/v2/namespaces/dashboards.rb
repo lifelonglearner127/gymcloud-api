@@ -9,7 +9,12 @@ namespace :dashboards do
     desc 'Fetch Pro dashboard'
     get do
       dashboard = Services::Dashboards::Fetch.!(user: current_user)
-      present(dashboard, with: Entities::Dashboard, is_pro: true)
+      present(
+        dashboard,
+        with: Entities::Dashboard,
+        is_pro: true,
+        dashboard: true
+      )
     end
   end
 
@@ -17,7 +22,7 @@ namespace :dashboards do
     desc 'Fetch Client dashboard'
     get do
       dashboard = Services::Dashboards::Fetch.!(user: current_user)
-      present(dashboard, with: Entities::Dashboard)
+      present(dashboard, with: Entities::Dashboard, dashboard: true)
     end
   end
 

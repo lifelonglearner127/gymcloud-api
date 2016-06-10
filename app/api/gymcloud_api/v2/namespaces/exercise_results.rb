@@ -93,7 +93,7 @@ namespace :exercise_results do
           if params[:value].blank?
             result_item.destroy
           else
-            result_item.update_attributes!(filtered_params)
+            result_item.update_attributes!(value: params[:value])
           end
           present(result_item, with: Entities::ExerciseResultItem)
         end

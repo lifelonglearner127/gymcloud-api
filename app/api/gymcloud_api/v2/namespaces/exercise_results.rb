@@ -78,7 +78,7 @@ namespace :exercise_results do
       end
 
       params do
-        requires :id, type: Integer, desc: 'Result Item ID'
+        requires :item_id, type: Integer, desc: 'Result Item ID'
       end
       route_param :item_id do
 

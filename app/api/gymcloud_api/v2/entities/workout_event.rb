@@ -21,6 +21,11 @@ class WorkoutEvent < Grape::Entity
   do |event|
     event.personal_workout.person.user_profile.avatar.thumb.url
   end
+  expose :pro_name,
+    unless: {is_pro: true} \
+  do |event|
+    event.personal_workout.author.user_profile.full_name
+  end
   expose :workout_name do |event|
     event.personal_workout.name
   end

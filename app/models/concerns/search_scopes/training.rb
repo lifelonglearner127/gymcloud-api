@@ -16,13 +16,15 @@ module Training
         .where(users: {email: MASTER_EMAILS})
     end)
 
-    scope :public_for, (lambda do |id|
+    scope :public_for_by_master, (lambda do |id|
       not_owned_by(id)
         .owned_by_master
         .where(is_public: true)
     end)
 
-    scope :global_for, (lambda do |id|
+    scope :public_for_by_all, ->(id) { not_owned_by(id).where(is_public: true) }
+
+    scope :global_for_by_master, (lambda do |id|
       joins(:user)
         .where do
           (users.email >> my { MASTER_EMAILS }) & (is_public == true) |
@@ -30,9 +32,18 @@ module Training
         end
     end)
 
+    scope :global_for_by_all, (lambda do |id|
+      where { (user_id == my { id }) | (is_public == true) }
+    end)
+
     scope :search_by_criteria, (lambda do |criteria|
       where { name =~ my { criteria } }
     end)
+
+    class << self
+      alias_method :public_for, :public_for_by_all
+      alias_method :global_for, :global_for_by_all
+    end
 
   end
 

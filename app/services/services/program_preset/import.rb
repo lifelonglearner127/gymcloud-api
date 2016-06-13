@@ -23,8 +23,10 @@ class Import < BaseService
         .program_templates
         .where { id.in(my { @program_template_ids }) }
 
-      program_templates.map do |program_template|
-        duplicate(program_template)
+      program_templates.map do |pt|
+        next if @user.program_templates
+            .where(original_id: [pt.original_id, pt.id]).any?
+        duplicate(pt)
       end
     end
   end
@@ -35,10 +37,16 @@ class Import < BaseService
       user: @user,
       folder_id: @user.programs_folder.id
     )
-    program.program_workouts.each do |pw|
+    duplicate_program_workouts(program.program_workouts)
+    program
+  end
+
+  def duplicate_program_workouts(program_workouts)
+    program_workouts.each do |pw|
+      next if @user.workout_templates
+          .where(original_id: [pw.workout.original_id, pw.workout.id]).any?
       duplicate_workout(pw.workout)
     end
-    program
   end
 
   def duplicate_workout(workout_template)
@@ -47,10 +55,16 @@ class Import < BaseService
       user: @user,
       folder_id: @user.workouts_folder.id
     )
-    workout.workout_exercises.each do |we|
+    duplicate_workout_exercises(workout.workout_exercises)
+    workout
+  end
+
+  def duplicate_workout_exercises(workout_exercises)
+    workout_exercises.each do |we|
+      next if @user.exercises
+          .where(original_id: [we.exercise.original_id, we.exercise.id]).any?
       duplicate_exercise(we.exercise)
     end
-    workout
   end
 
   def duplicate_exercise(exercise)

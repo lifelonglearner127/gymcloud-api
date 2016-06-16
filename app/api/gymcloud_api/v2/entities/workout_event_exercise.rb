@@ -22,8 +22,7 @@ class WorkoutEventExercise < Grape::Entity
   end
   expose :exercise_results, using: Entities::ExerciseResult
   expose :exercise_properties,
-    using: Entities::ExerciseProperty,
-    as: :properties
+    using: Entities::ExerciseProperty
   expose :previous, if: :expose_previous do |instance, options|
     Entities::WorkoutEventExercise.represent instance.previous,
       options.merge(expose_previous: false)

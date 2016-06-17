@@ -4,7 +4,7 @@ module PersonalDuplicating
 class Workout < BaseService
 
   def run
-    duplicate
+    ActiveRecord::Base.transaction { duplicate }
   end
 
   def input_params
@@ -46,17 +46,10 @@ class Workout < BaseService
   def duplicate_exercise_property(property, new_workout_exercise)
     new_property = property.dup
     new_property.assign_attributes(
-      personal_property: prepare_personal_property(property.personal_property),
+      personal_property: property.personal_property,
       workout_exercise: new_workout_exercise
     )
     new_property.save!
-  end
-
-  def prepare_personal_property(personal_property)
-    ::PersonalProperty.find_by(
-      person: @user,
-      global_property: personal_property.global_property
-    )
   end
 
 end

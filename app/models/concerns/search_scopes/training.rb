@@ -1,7 +1,7 @@
 module SearchScopes
 module Training
 
-  MASTER_EMAILS = ['support@gymcloud.com'].freeze
+  MASTER_EMAILS = (ENV['MASTER_EMAIL'] || ['support@gymcloud.com']).freeze
 
   extend ActiveSupport::Concern
 
@@ -41,8 +41,8 @@ module Training
     end)
 
     class << self
-      alias_method :public_for, :public_for_by_all
-      alias_method :global_for, :global_for_by_all
+      alias_method :public_for, :public_for_by_master
+      alias_method :global_for, :global_for_by_master
     end
 
   end

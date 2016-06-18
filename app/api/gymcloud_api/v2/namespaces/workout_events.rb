@@ -6,12 +6,9 @@ class WorkoutEvents < Base
 helpers do
 
   def send_results_email(event)
-    user_id =
-      if current_user.pro?
-        event.person.id
-      else
-        event.person.pros.first.id
-      end
+    # The only case to send email is when client added result
+    return false if current_user.pro?
+    user_id = event.person.pros.first.id
     changes = event.changes[:is_completed]
     if !changes[0] && changes[1]
       HtmlMailer.delay.results_added(user_id, event.id)

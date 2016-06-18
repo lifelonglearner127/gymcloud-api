@@ -15,6 +15,7 @@ AllCops:
     - 'app/models/concerns/has_template_version.rb'
     - 'app/api/gymcloud_api/v2/namespaces/users.rb'
     - 'app/controllers/google_oauth2_controller.rb'
+    - 'app/api/gymcloud_api/v2/namespaces/workout_events.rb'
 
 Style/EmptyLinesAroundModuleBody:
   Enabled: false

@@ -22,10 +22,18 @@ helpers do
                     else
                       HtmlMailer.delay
                     end
-    mailer_method.event_scheduled(
-      event.personal_workout.person.id,
-      event.id
-    ) unless event.personal_workout.person.pro?
+    unless event.personal_workout.person.pro?
+      user_id =
+        if current_user.pro?
+          event.person.id
+        else
+          event.person.pros.first.id
+        end
+      mailer_method.event_scheduled(
+        user_id,
+        event.id
+      )
+    end
   end
 end
 

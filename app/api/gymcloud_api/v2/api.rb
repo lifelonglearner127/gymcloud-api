@@ -41,6 +41,7 @@ class API < Grape::API
   mount Namespaces::ProgramPresets
   mount Namespaces::Cards
   mount Namespaces::Dashboards
+  mount Namespaces::ClientsPerformance
 
 end
 

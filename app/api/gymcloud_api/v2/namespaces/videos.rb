@@ -44,6 +44,7 @@ namespace :videos do
 
   desc 'Retrieve videos'
   params do
+    optional :q, type: String, desc: 'Query for search'
     optional :order, type: String,
       values: %w(recent oldest),
       default: 'recent',
@@ -52,7 +53,16 @@ namespace :videos do
   paginate per_page: 50, max_per_page: 50
   get do
     videos = Video.owned_by(current_user.id).send(params[:order]).all
-    present(paginate(videos), with: Entities::Video)
+    videos = videos.search_by_criteria(params[:q]) if params[:q].present?
+    videos = paginate(videos)
+
+    present(
+      [{
+        per_page: params[:per_page],
+        page: params[:page],
+        total_entries: videos.total_pages
+      }, Entities::Video.represent(videos)]
+    )
   end
 
   desc 'Create new video and uploading it to Vimeo'

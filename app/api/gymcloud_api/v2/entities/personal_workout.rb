@@ -21,6 +21,7 @@ class PersonalWorkout < Grape::Entity
     as: :exercises
   expose :workout_template_id
   expose :workout_template_version
+  expose :is_default_for_group
   expose :is_program_part
   expose :program_name,
     if: (lambda do |workout, _options|

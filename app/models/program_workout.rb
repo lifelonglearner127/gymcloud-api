@@ -12,11 +12,14 @@
 #  updated_at   :datetime         not null
 #  position     :integer
 #  week_id      :integer
+#  source_id    :integer
+#  source_type  :string
 #
 
 class ProgramWorkout < ActiveRecord::Base
 
   include HasTemplateVersion
+  include Cloneable
 
   belongs_to :workout,
     -> { with_deleted },

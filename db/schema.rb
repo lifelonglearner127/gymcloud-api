@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160606180120) do
+ActiveRecord::Schema.define(version: 20160623133816) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -120,6 +120,8 @@ ActiveRecord::Schema.define(version: 20160606180120) do
     t.integer "personal_property_id"
     t.integer "position"
     t.integer "property_unit_id"
+    t.integer "source_id"
+    t.string "source_type"
     t.datetime "updated_at", null: false
     t.decimal "value", precision: 14, scale: 5
     t.decimal "value2", precision: 14, scale: 5
@@ -290,6 +292,7 @@ ActiveRecord::Schema.define(version: 20160606180120) do
   create_table "personal_workouts", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.text "description"
+    t.boolean "is_default_for_group"
     t.boolean "is_program_part", default: false
     t.string "name"
     t.text "note"
@@ -344,6 +347,8 @@ ActiveRecord::Schema.define(version: 20160606180120) do
     t.integer "position"
     t.integer "program_id"
     t.string "program_type"
+    t.integer "source_id"
+    t.string "source_type"
     t.datetime "updated_at", null: false
   end
 
@@ -355,6 +360,8 @@ ActiveRecord::Schema.define(version: 20160606180120) do
     t.integer "position"
     t.integer "program_id"
     t.string "program_type"
+    t.integer "source_id"
+    t.string "source_type"
     t.datetime "updated_at", null: false
     t.integer "week_id"
     t.integer "workout_id"
@@ -541,6 +548,8 @@ ActiveRecord::Schema.define(version: 20160606180120) do
     t.text "note"
     t.string "order_name"
     t.integer "position"
+    t.integer "source_id"
+    t.string "source_type"
     t.datetime "updated_at", null: false
     t.integer "workout_id"
     t.string "workout_type"
@@ -551,6 +560,7 @@ ActiveRecord::Schema.define(version: 20160606180120) do
 
   create_table "workout_templates", force: :cascade do |t|
     t.integer "author_id"
+    t.integer "client_group_id"
     t.datetime "created_at", null: false
     t.datetime "deleted_at"
     t.text "description"
@@ -567,6 +577,7 @@ ActiveRecord::Schema.define(version: 20160606180120) do
   end
 
   add_index "workout_templates", ["author_id"], name: "index_workout_templates_on_author_id", using: :btree
+  add_index "workout_templates", ["client_group_id"], name: "index_workout_templates_on_client_group_id", using: :btree
   add_index "workout_templates", ["deleted_at"], name: "index_workout_templates_on_deleted_at", using: :btree
   add_index "workout_templates", ["folder_id"], name: "index_workout_templates_on_folder_id", using: :btree
   add_index "workout_templates", ["original_id"], name: "index_workout_templates_on_original_id", using: :btree
@@ -590,4 +601,5 @@ ActiveRecord::Schema.define(version: 20160606180120) do
   add_foreign_key "workout_event_exercises", "workout_exercises"
   add_foreign_key "workout_events", "personal_workouts"
   add_foreign_key "workout_exercises", "exercises"
+  add_foreign_key "workout_templates", "client_groups"
 end

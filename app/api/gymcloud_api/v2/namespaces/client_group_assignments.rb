@@ -64,7 +64,8 @@ class ClientGroupAssignments < Base
       client_group = ::ClientGroup.find(params[:id])
       template_type = params[:template_type].underscore
       template_class = "::#{params[:template_type]}".constantize
-      template = template_class.find(params[:template_id])
+      # template = template_class.find(params[:template_id])
+      template = template_class.find_by(original_id: params[:template_id])
       personal_class = {
         WorkoutTemplate: ::PersonalWorkout,
         ProgramTemplate: ::PersonalProgram
@@ -80,6 +81,7 @@ class ClientGroupAssignments < Base
       personal_entities.each do |record|
         record.update_attributes!(status: :inactive)
       end
+      template.destroy
 
       group = ClientGroup.with_assinged_count_for(template).find(params[:id])
       present(group, with: Entities::ClientGroupAssignment)

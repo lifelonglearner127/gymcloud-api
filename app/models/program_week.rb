@@ -9,9 +9,13 @@
 #  program_type :string
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
+#  source_id    :integer
+#  source_type  :string
 #
 
 class ProgramWeek < ActiveRecord::Base
+
+  include Cloneable
 
   belongs_to :program, -> { with_deleted }, polymorphic: true
 

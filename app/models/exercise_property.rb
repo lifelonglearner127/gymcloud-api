@@ -11,9 +11,13 @@
 #  updated_at           :datetime         not null
 #  value2               :decimal(14, 5)
 #  property_unit_id     :integer
+#  source_id            :integer
+#  source_type          :string
 #
 
 class ExerciseProperty < ActiveRecord::Base
+
+  include Cloneable
 
   default_scope -> { order('id ASC') }
 

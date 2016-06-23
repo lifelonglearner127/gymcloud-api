@@ -12,11 +12,14 @@
 #  workout_type     :string
 #  order_name       :string
 #  position         :integer
+#  source_id        :integer
+#  source_type      :string
 #
 
 class WorkoutExercise < ActiveRecord::Base
 
   include HasTemplateVersion
+  include Cloneable
 
   belongs_to :exercise, -> { with_deleted }
   belongs_to :workout, -> { with_deleted }, polymorphic: true

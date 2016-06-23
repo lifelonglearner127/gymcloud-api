@@ -4,7 +4,7 @@ module GroupAssignment
 class Workout < BaseService
 
   def run
-    create_personal
+    create_personal_workouts
   end
 
   def input_params
@@ -25,17 +25,32 @@ class Workout < BaseService
 
   private
 
-  def create_personal
+  def template_duplicate
+    template = Services::TemplateDuplicating::Workout.!(
+      workout: @template,
+      user: @template.user,
+      is_visible: false
+    )
+    template.client_group = @group
+    template.save!
+    template
+  end
+
+  def create_personal_workouts
     ids = assigned_client_ids
     users = @group.clients.where { id << ids }
-    users.map do |user|
-      workout = Services::PersonalAssignment::Workout.!(
-        template: @template,
-        user: user
-      )
-      create_activity_for(workout) if @create_activities
-      workout
-    end
+    group_template = template_duplicate
+    users.map { |user| create_personal(user, group_template) }
+  end
+
+  def create_personal(user, group_template)
+    workout = Services::PersonalAssignment::Workout.!(
+      template: group_template,
+      user: user,
+      is_default_for_group: true
+    )
+    create_activity_for(workout) if @create_activities
+    workout
   end
 
   def assigned_client_ids

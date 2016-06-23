@@ -33,9 +33,11 @@ RSpec.describe WorkoutTemplate do
 	it { is_expected.to have_db_column :video_id }
 	it { is_expected.to have_db_column :user_id }
 	it { is_expected.to have_db_column :original_id }
+	it { is_expected.to have_db_column :client_group_id }
 
   # === Database (Indexes) ===
   it { is_expected.to have_db_index ["author_id"]}
+	it { is_expected.to have_db_index ["client_group_id"]}
 	it { is_expected.to have_db_index ["deleted_at"]}
 	it { is_expected.to have_db_index ["folder_id"]}
 	it { is_expected.to have_db_index ["original_id"]}

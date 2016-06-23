@@ -8,11 +8,11 @@ class Workout < BaseService
   end
 
   def input_params
-    [:template, :user, :is_program_part]
+    [:template, :user, :is_program_part, :is_default_for_group]
   end
 
   def defaults
-    {is_program_part: false}
+    {is_program_part: false, is_default_for_group: false}
   end
 
   def build_personal

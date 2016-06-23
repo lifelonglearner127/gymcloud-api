@@ -46,6 +46,7 @@ namespace :personal_workouts do
       optional :description, type: String
       optional :note, type: String
       optional :video_url, type: String
+      optional :is_default_for_group, type: Boolean
     end
     patch do
       workout = ::PersonalWorkout.is_active.find(params[:id])

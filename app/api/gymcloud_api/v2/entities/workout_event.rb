@@ -16,9 +16,7 @@ class WorkoutEvent < Grape::Entity
   expose :person_name do |event|
     event.personal_workout.person.user_profile.full_name
   end
-  expose :person_avatar,
-    if: {dashboard: true} \
-  do |event|
+  expose :person_avatar do |event|
     event.personal_workout.person.user_profile.avatar.thumb.url
   end
   expose :pro_name,

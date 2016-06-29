@@ -15,7 +15,7 @@ tr
       - if @event.personal_workout.user.user_profile.avatar.thumb.url
         img.avatar src=@event.personal_workout.user.user_profile.avatar.thumb.url
       .message
-        | #{@event.personal_workout.user.user_profile.full_name} scheduled event
+        | #{@creator_name} scheduled event
         a<> href="#"
           | "#{@event.personal_workout.name}"
         | on #{cool_readable_date(@event.begins_at)}

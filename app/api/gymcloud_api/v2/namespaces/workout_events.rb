@@ -23,14 +23,16 @@ helpers do
                       HtmlMailer.delay
                     end
     unless event.personal_workout.person.pro?
-      user_id =
-        if current_user.pro?
-          event.person.id
-        else
-          event.person.pros.first.id
-        end
+      if current_user.pro?
+        user_id = event.person.id
+        creator_id = event.person.pros.first.id
+      else
+        user_id = event.person.pros.first.id
+        creator_id = event.person.id
+      end
       mailer_method.event_scheduled(
         user_id,
+        creator_id,
         event.id
       )
     end

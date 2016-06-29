@@ -19,9 +19,10 @@ class HtmlMailer < ApplicationMailer
     mail(to: email, subject: 'GymCloud')
   end
 
-  def event_scheduled(user_id, event_id)
+  def event_scheduled(user_id, creator_id, event_id)
     email = ::User.find(user_id).email
     @event = ::WorkoutEvent.find(event_id)
+    @creator_name = ::User.find(creator_id).user_profile.full_name
     mail(to: email, subject: 'GymCloud')
   end
 

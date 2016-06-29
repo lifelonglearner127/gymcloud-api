@@ -198,8 +198,8 @@ namespace :users do
             values: %w(all upcoming past all_with_clients),
             default: 'all',
             desc: 'Scope of events'
-          optional :range_from, type: Date
-          optional :range_to, type: Date
+          optional :range_from, type: DateTime
+          optional :range_to, type: DateTime
         end
         paginate per_page: 50, max_per_page: 50
         get do

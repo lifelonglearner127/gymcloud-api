@@ -60,7 +60,7 @@ namespace :videos do
       [{
         per_page: params[:per_page],
         page: params[:page],
-        total_entries: videos.total_pages
+        total_pages: videos.total_pages
       }, Entities::Video.represent(videos)]
     )
   end

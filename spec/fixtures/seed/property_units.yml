@@ -62,3 +62,6 @@
   -
     short_name: "rpe"
     name: "RPE"
+  -
+    short_name: "°"
+    name: "Degrees"

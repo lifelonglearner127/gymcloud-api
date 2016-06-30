@@ -24,6 +24,7 @@ class PersonalProperties < BaseService
       global_property: global_property,
       person: @user
     )
+    return unless property.new_record?
     property.update_attributes(
       position: position,
       is_visible: true

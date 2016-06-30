@@ -54,3 +54,8 @@
     units: ["rpe"]
     default: "rpe"
     save: "rpe"
+  -
+    symbol: "rom"
+    units: ["°"]
+    default: "°"
+    save: "°"

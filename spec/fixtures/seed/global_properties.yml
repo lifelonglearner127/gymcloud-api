@@ -43,3 +43,7 @@
     symbol: "percentage"
     name: "Percentage"
     position: 10
+  -
+    symbol: "rom"
+    name: "ROM"
+    position: 11

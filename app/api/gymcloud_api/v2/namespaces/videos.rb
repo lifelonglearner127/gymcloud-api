@@ -54,14 +54,15 @@ namespace :videos do
   get do
     videos = Video.owned_by(current_user.id).send(params[:order]).all
     videos = videos.search_by_criteria(params[:q]) if params[:q].present?
-    videos = paginate(videos)
+    paginated_videos = paginate(videos)
 
     present(
       [{
         per_page: params[:per_page],
         page: params[:page],
-        total_pages: videos.total_pages
-      }, Entities::Video.represent(videos)]
+        total_entries: videos.count,
+        total_pages: paginated_videos.total_pages
+      }, Entities::Video.represent(paginated_videos)]
     )
   end
 

@@ -20,6 +20,7 @@ RSpec.describe UserSettings do
 	it { is_expected.to have_db_column :is_presets_loaded }
 	it { is_expected.to have_db_column :created_at }
 	it { is_expected.to have_db_column :updated_at }
+	it { is_expected.to have_db_column :tutorial_steps }
 
   # === Database (Indexes) ===
   it { is_expected.to have_db_index ["user_account_type_id"]}

@@ -28,6 +28,7 @@ RSpec.describe PersonalWorkout do
 	it { is_expected.to have_db_column :updated_at }
 	it { is_expected.to have_db_column :workout_template_version }
 	it { is_expected.to have_db_column :is_program_part }
+	it { is_expected.to have_db_column :is_default_for_group }
 
   # === Database (Indexes) ===
   it { is_expected.to have_db_index ["person_id"]}

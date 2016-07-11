@@ -14,6 +14,7 @@
 #  deleted_at  :datetime
 #  user_id     :integer
 #  original_id :integer
+#  weeks_count :integer
 #
 
 class ProgramTemplate < ActiveRecord::Base

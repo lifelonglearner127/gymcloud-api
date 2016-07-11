@@ -14,6 +14,7 @@
 #  updated_at               :datetime         not null
 #  workout_template_version :integer
 #  is_program_part          :boolean          default(FALSE)
+#  is_default_for_group     :boolean
 #
 
 class PersonalWorkout < ActiveRecord::Base

@@ -8,6 +8,7 @@ RSpec.describe WorkoutTemplate do
 	it { is_expected.to belong_to :original}
 	it { is_expected.to belong_to :folder}
 	it { is_expected.to belong_to :video}
+	it { is_expected.to belong_to :client_group}
   it { is_expected.to have_one :program_workout}
   it { is_expected.to have_many :personal_workouts}
 	it { is_expected.to have_many :workout_exercises}

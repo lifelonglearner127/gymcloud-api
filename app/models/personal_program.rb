@@ -12,6 +12,7 @@
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
 #  program_template_version :integer
+#  weeks_count              :integer
 #
 
 class PersonalProgram < ActiveRecord::Base

@@ -30,6 +30,7 @@ RSpec.describe ProgramTemplate do
 	it { is_expected.to have_db_column :deleted_at }
 	it { is_expected.to have_db_column :user_id }
 	it { is_expected.to have_db_column :original_id }
+	it { is_expected.to have_db_column :weeks_count }
 
   # === Database (Indexes) ===
   it { is_expected.to have_db_index ["author_id"]}

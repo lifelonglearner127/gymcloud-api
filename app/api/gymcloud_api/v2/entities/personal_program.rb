@@ -14,6 +14,7 @@ class PersonalProgram < Grape::Entity
   expose :author_id do |program|
     program&.author&.id
   end
+  expose :weeks_count
   expose :program_workouts,
     if: {nested: true},
     using: Entities::ProgramWorkout,

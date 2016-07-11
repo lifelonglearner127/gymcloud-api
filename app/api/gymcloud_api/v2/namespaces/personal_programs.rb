@@ -45,6 +45,7 @@ namespace :personal_programs do
       optional :name, type: String
       optional :description, type: String
       optional :note, type: String
+      optional :weeks_count, type: Integer
       optional :status, type: String, desc: 'Activity status',
                 values: ::PersonalProgram.statuses.keys
     end

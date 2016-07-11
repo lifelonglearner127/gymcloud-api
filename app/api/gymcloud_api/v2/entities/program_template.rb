@@ -16,6 +16,7 @@ class ProgramTemplate < Grape::Entity
     template.author.user_profile.full_name
   end
   expose :folder_id
+  expose :weeks_count
   expose :program_workouts,
     if: {nested: true},
     using: Entities::ProgramWorkout,

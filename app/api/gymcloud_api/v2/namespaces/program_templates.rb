@@ -66,6 +66,7 @@ namespace :program_templates do
       optional :name, type: String
       optional :description, type: String
       optional :note, type: String
+      optional :weeks_count, type: Integer
       optional :folder_id, type: Integer
       optional :is_public, type: Boolean
     end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160623133816) do
+ActiveRecord::Schema.define(version: 20160711080922) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -273,6 +273,7 @@ ActiveRecord::Schema.define(version: 20160623133816) do
     t.integer "program_template_version"
     t.integer "status"
     t.datetime "updated_at", null: false
+    t.integer "weeks_count"
   end
 
   add_index "personal_programs", ["person_id"], name: "index_personal_programs_on_person_id", using: :btree
@@ -333,6 +334,7 @@ ActiveRecord::Schema.define(version: 20160623133816) do
     t.integer "original_id"
     t.datetime "updated_at", null: false
     t.integer "user_id"
+    t.integer "weeks_count"
   end
 
   add_index "program_templates", ["author_id"], name: "index_program_templates_on_author_id", using: :btree

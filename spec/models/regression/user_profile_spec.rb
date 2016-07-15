@@ -26,6 +26,7 @@ RSpec.describe UserProfile do
 	it { is_expected.to have_db_column :created_at }
 	it { is_expected.to have_db_column :updated_at }
 	it { is_expected.to have_db_column :avatar }
+	it { is_expected.to have_db_column :timezone }
 
   # === Database (Indexes) ===
   it { is_expected.to have_db_index ["user_id"]}

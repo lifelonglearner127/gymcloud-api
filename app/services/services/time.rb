@@ -2,7 +2,7 @@ module Services
 
 class Time < BaseService
 
-  DEFAULT_TIMEZONE = 'UTC'
+  DEFAULT_TIMEZONE = 'UTC'.freeze
 
   def run
     local_time
@@ -24,9 +24,7 @@ class Time < BaseService
   end
 
   def local_time
-    if @time.respond_to?(:zone)
-      @time.in_time_zone(timezone)
-    end
+    @time.in_time_zone(timezone) if @time.respond_to?(:zone)
   end
 
 end

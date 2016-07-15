@@ -111,3 +111,4 @@ end
 gem 'premailer-rails'
 gem 'slim'
 gem 'zurb-ink'
+gem 'timezone', '~> 1.0'

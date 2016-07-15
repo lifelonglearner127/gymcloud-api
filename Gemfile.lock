@@ -591,6 +591,7 @@ GEM
     tilt (2.0.2)
     timers (4.1.1)
       hitimes
+    timezone (1.1.0)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
     uber (0.0.15)
@@ -703,6 +704,7 @@ DEPENDENCIES
   stripe
   stripe_event
   thin
+  timezone (~> 1.0)
   unread (~> 0.6.1)
   vimeo!
   web-console (~> 3.0)

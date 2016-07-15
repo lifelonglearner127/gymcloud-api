@@ -8,41 +8,41 @@ class HtmlMailer < ApplicationMailer
   end
 
   def program_assigned(user_id, program_id)
-    email = ::User.find(user_id).email
+    @user = ::User.find(user_id)
     @program = ::PersonalProgram.find(program_id)
-    mail(to: email, subject: 'GymCloud')
+    mail(to: @user.email, subject: 'GymCloud')
   end
 
   def workout_assigned(user_id, workout_id)
-    email = ::User.find(user_id).email
+    @user = ::User.find(user_id)
     @workout = ::PersonalWorkout.find(workout_id)
-    mail(to: email, subject: 'GymCloud')
+    mail(to: @user.email, subject: 'GymCloud')
   end
 
   def event_scheduled(user_id, creator_id, event_id)
-    email = ::User.find(user_id).email
+    @user = ::User.find(user_id)
     @event = ::WorkoutEvent.find(event_id)
     @creator_name = ::User.find(creator_id).user_profile.full_name
-    mail(to: email, subject: 'GymCloud')
+    mail(to: @user.email, subject: 'GymCloud')
   end
 
   def event_changed(user_id, event_id)
-    email = ::User.find(user_id).email
+    @user = ::User.find(user_id)
     # NOTE: We cannot change event time for now
     @event = ::WorkoutEvent.find(event_id)
-    mail(to: email, subject: 'GymCloud')
+    mail(to: @user.email, subject: 'GymCloud')
   end
 
   def results_added(user_id, event_id)
-    email = ::User.find(user_id).email
+    @user = ::User.find(user_id)
     @event = ::WorkoutEvent.find(event_id)
-    mail(to: email, subject: 'GymCloud')
+    mail(to: @user.email, subject: 'GymCloud')
   end
 
   def comment_added(user_id, comment_id)
-    email = ::User.find(user_id).email
+    @user = ::User.find(user_id)
     @comment = ::Comment.find(comment_id)
-    mail(to: email, subject: 'GymCloud')
+    mail(to: @user.email, subject: 'GymCloud')
   end
 
   def trial_expiration(user_id)

@@ -42,6 +42,12 @@ module MailerHelper
   end
 
   def cool_readable_date(date)
-    date.strftime('%B %-d, %Y at %I:%M %p')
+    user_local_time(@user, date)
+      .strftime('%B %-d, %Y at %I:%M %p')
   end
+
+  def user_local_time(user, time)
+    Services::Time.!(user: user, time: time)
+  end
+
 end

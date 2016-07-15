@@ -17,6 +17,7 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  avatar     :string
+#  timezone   :string
 #
 
 class UserProfile < ActiveRecord::Base

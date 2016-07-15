@@ -82,6 +82,12 @@ class UserProfile < Grape::Entity
       desc: 'avatar'
     }
 
+  expose :timezone,
+    documentation: {
+      desc: 'time zone',
+      type: 'string'
+    }
+
 end
 
 end

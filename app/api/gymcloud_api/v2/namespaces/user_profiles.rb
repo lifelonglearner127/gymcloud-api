@@ -33,6 +33,7 @@ namespace :user_profiles do
       optional :zip, type: String
       optional :employer, type: String
       optional :birthday, type: Date
+      optional :timezone, type: String
     end
     patch do
       profile = ::UserProfile.find(params[:id])

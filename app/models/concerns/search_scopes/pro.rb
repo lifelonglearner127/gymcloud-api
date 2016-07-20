@@ -11,7 +11,9 @@ module Pro
       joins { user_profile }
         .where do
           (user_profile.first_name =~ my { criteria }) |
-          (user_profile.last_name =~ my { criteria })
+          (user_profile.last_name =~ my { criteria }) |
+          (concat(user_profile.first_name, ' ', user_profile.last_name) =~
+            my { criteria })
         end
     end)
   end

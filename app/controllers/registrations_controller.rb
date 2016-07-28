@@ -10,7 +10,7 @@ class RegistrationsController < Devise::RegistrationsController
     build_resource(sign_up_params)
     # resource.skip_confirmation!
     resource.save!
-    resource.become_a_pro!
+    resource.become_a_pro! unless params[:user][:is_client]
     HtmlMailer.delay.welcome_new_user(resource.id)
     Services::UserBootstrap::All.!(user: resource)
     entity = {id: resource.id, user_profile: {id: resource.user_profile.id}}

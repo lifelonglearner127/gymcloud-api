@@ -12,7 +12,7 @@ class Create < BaseService
   end
 
   def build_client
-    email = @attrs.delete(:email)
+    email = @attrs[:email]
     email ||= generate_fake_email
     email.downcase.squish!
     password = Devise.friendly_token

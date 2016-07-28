@@ -34,6 +34,15 @@ namespace :pros do
     present(pro, with: Entities::User)
   end
 
+  desc 'Provide Pro'
+  post do
+    request = ::RequestPro.find_or_initialize_by(client: current_user)
+    authorize!(:create, request)
+    request.save!
+    ::HtmlMailer.delay.provide_pro(current_user.id)
+    present(request)
+  end
+
 end
 
 end

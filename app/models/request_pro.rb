@@ -10,5 +10,10 @@
 #
 
 class RequestPro < ActiveRecord::Base
+
   belongs_to :client, class_name: User
+
+  validates :client_id, presence: true
+  validates :pro_provided, inclusion: {in: [true, false]}
+
 end

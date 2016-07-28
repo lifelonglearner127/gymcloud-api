@@ -5,6 +5,16 @@ class Pros < Base
 
 namespace :pros do
 
+  helpers do
+    def invite(pro)
+      Services::Pros::Invite.!(
+        current_user: current_user,
+        user: pro,
+        email: params[:email]&.downcase&.squish
+      )
+    end
+  end
+
   desc 'Create Pro'
   params do
     requires :first_name, type: String
@@ -26,17 +36,16 @@ namespace :pros do
     end
 
     authorize!(:invite, pro)
-    Services::Pros::Invite.!(
-      current_user: current_user,
-      user: pro,
-      email: params[:email]&.downcase&.squish
-    )
+    invite(pro)
     present(pro, with: Entities::User)
   end
 
   desc 'Provide Pro'
-  post do
-    request = ::RequestPro.find_or_initialize_by(client: current_user)
+  post '/request' do
+    request = ::RequestPro.find_or_initialize_by(
+      client: current_user,
+      pro_provided: false
+    )
     authorize!(:create, request)
     request.save!
     ::HtmlMailer.delay.provide_pro(current_user.id)

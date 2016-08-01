@@ -95,6 +95,10 @@ module UserRelations
       foreign_key: :author_id,
       dependent: :nullify
 
+    has_many :request_pros,
+      foreign_key: :client_id,
+      dependent: :nullify
+
   end
 
 end

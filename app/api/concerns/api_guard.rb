@@ -67,7 +67,11 @@ module APIGuard
 
         end
 
-        raise UserIsNotActiveError  if not current_user.is_active?
+        raise WaitingGymcloudPro if current_user.waiting_gymcloud_pro?
+
+        raise WaitingInvitedPro if not current_user.has_active_pro?
+
+        raise UserIsNotActiveError if not current_user.is_active?
 
       end
     end
@@ -111,7 +115,7 @@ module APIGuard
       error_classes = [
         MissingTokenError, TokenNotFoundError,
         ExpiredError, RevokedError, InsufficientScopeError,
-        UserIsNotActiveError
+        UserIsNotActiveError, WaitingGymcloudPro, WaitingInvitedPro
       ]
 
       base.send :rescue_from, *error_classes, oauth2_bearer_token_error_handler
@@ -157,6 +161,18 @@ module APIGuard
               "User Account is suspended"
             )
 
+          when WaitingGymcloudPro
+            Rack::OAuth2::Server::Abstract::Error.new(
+              452,
+              'Waiting Gymcloud Pro'
+            )
+
+          when WaitingInvitedPro
+            Rack::OAuth2::Server::Abstract::Error.new(
+              453,
+              'Waiting Invited Pro'
+            )
+
           end
 
         response.finish
@@ -177,6 +193,10 @@ module APIGuard
   class RevokedError < StandardError; end
 
   class UserIsNotActiveError < StandardError; end
+
+  class WaitingGymcloudPro < StandardError; end
+
+  class WaitingInvitedPro < StandardError; end
 
   class InsufficientScopeError < StandardError
 

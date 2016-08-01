@@ -5,16 +5,6 @@ class Pros < Base
 
 namespace :pros do
 
-  helpers do
-    def invite(pro)
-      Services::Pros::Invite.!(
-        current_user: current_user,
-        user: pro,
-        email: params[:email]&.downcase&.squish
-      )
-    end
-  end
-
   desc 'Create Pro'
   params do
     requires :first_name, type: String
@@ -35,8 +25,18 @@ namespace :pros do
       pro = service.result
     end
 
+    present(pro, with: Entities::User)
+  end
+
+  desc 'Send Invite to Pro'
+  post '/invitation' do
+    pro = current_user.pros.where(is_active: false).take
     authorize!(:invite, pro)
-    invite(pro)
+    Services::Pros::Invite.!(
+      current_user: current_user,
+      user: pro,
+      email: pro.email
+    )
     present(pro, with: Entities::User)
   end
 

@@ -126,6 +126,15 @@ class User < ActiveRecord::Base
     pro? && (!confirmed? || ended)
   end
 
+  def waiting_gymcloud_pro?
+    !pro? && request_pros.where(pro_provided: false).any?
+  end
+
+  # rubocop:disable PredicateName
+  def has_active_pro?
+    pros.where(is_active: true).take
+  end
+
   private
 
   def on_invitation_accepted

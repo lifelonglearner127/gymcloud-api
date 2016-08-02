@@ -28,6 +28,7 @@ class API < Grape::API
   mount Namespaces::ProgramTemplates
   mount Namespaces::ProgramWeeks
   mount Namespaces::ProgramWorkouts
+  mount Namespaces::Pros
   mount Namespaces::Search
   mount Namespaces::UserAuthentications
   mount Namespaces::UserAccountTypes

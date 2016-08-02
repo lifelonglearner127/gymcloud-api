@@ -51,4 +51,9 @@ class HtmlMailer < ApplicationMailer
     mail(to: @user.email, subject: 'GymCloud')
   end
 
+  def provide_pro(user_id)
+    @user = ::User.find(user_id)
+    mail(to: ENV['MAILER_EMAIL'], subject: 'GymCloud client need a Pro')
+  end
+
 end

@@ -41,10 +41,13 @@ class Ability
   end
 
   def as_user
-    can :read, User
+    can [:read, :create], User
     as_self_can [:read_email, :update_email], User
     as_self_can :update, User
     as_self_can [:manage_payments], User
+    can :invite, User do |user|
+      @user.agreements_as_client.where(pro: user).any?
+    end
     as_owner_can [:read, :destroy], UserAuthentication
     can :read, UserProfile
     as_owner_can :update, UserProfile
@@ -134,7 +137,6 @@ class Ability
     # if_new_can :read, WorkoutEvent
     can :crud, Folder
     can [:read, :update], PersonalProperty
-    can :create, User
     can :invite, User do |user|
       user.agreements_as_client.where(pro: @user).any?
     end

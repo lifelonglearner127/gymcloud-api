@@ -16,9 +16,13 @@ class All < BaseService
   def bootstrap
     Services::UserBootstrap::UserProfile.!(user: @user)
     Services::UserBootstrap::UserSettings.!(user: @user)
-    Services::UserBootstrap::PersonalProperties.!(user: @user)
-    Services::UserBootstrap::Folders.!(user: @user)
-    Services::UserBootstrap::TestClients.!(user: @user)
+
+    if @user.pro?
+      Services::UserBootstrap::PersonalProperties.!(user: @user)
+      Services::UserBootstrap::Folders.!(user: @user)
+      Services::UserBootstrap::TestClients.!(user: @user)
+    end
+
     @user.update_attributes!(is_active: true)
   end
 

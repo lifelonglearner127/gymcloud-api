@@ -24,9 +24,10 @@ class PersonalProperties < BaseService
       global_property: global_property,
       person: @user
     )
-    if property.new_record?
-      property.update_attributes(position: position, is_visible: true)
-    end
+    property.assign_attributes(
+      position: position,
+      is_visible: true
+    )
     property.save!
   end
 

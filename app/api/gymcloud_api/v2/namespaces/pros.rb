@@ -7,8 +7,8 @@ namespace :pros do
 
   desc 'Create Pro'
   params do
-    requires :first_name, type: String
-    requires :last_name, type: String
+    optional :first_name, type: String
+    optional :last_name, type: String
     optional :email, type: String
   end
   post do

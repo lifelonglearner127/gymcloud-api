@@ -67,9 +67,10 @@ module APIGuard
 
         end
 
-        raise WaitingGymcloudPro if current_user.waiting_gymcloud_pro?
-
-        raise WaitingInvitedPro if not current_user.has_active_pro?
+        unless @namespace == '/pros'
+          raise WaitingGymcloudPro if current_user.waiting_gymcloud_pro?
+          raise WaitingInvitedPro if not current_user.has_active_pro?
+        end
 
         raise UserIsNotActiveError if not current_user.is_active?
 

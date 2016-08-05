@@ -23,6 +23,7 @@ namespace :pros do
       authorize!(:create, pro)
       service.process
       pro = service.result
+      pro.become_a_pro!
     end
 
     present(pro, with: Entities::User)
@@ -30,7 +31,7 @@ namespace :pros do
 
   desc 'Send Invite to Pro'
   post '/invitation' do
-    pro = current_user.pros.where(is_active: false).take
+    pro = current_user.pros.take
     authorize!(:invite, pro)
     Services::Pros::Invite.!(
       current_user: current_user,

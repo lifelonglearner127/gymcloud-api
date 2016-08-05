@@ -48,6 +48,7 @@ class Ability
     can :invite, User do |user|
       @user.agreements_as_client.where(pro: user).any?
     end
+    can :create, RequestPro
     as_owner_can [:read, :destroy], UserAuthentication
     can :read, UserProfile
     as_owner_can :update, UserProfile

@@ -8,12 +8,11 @@ namespace :dashboards do
   resource :pro do
     desc 'Fetch Pro dashboard'
     get do
-      dashboard = Services::Dashboards::Fetch.!(user: current_user)
+      dashboard = Services::Dashboards::Pro.!(user: current_user)
       present(
         dashboard,
         with: Entities::Dashboard,
-        is_pro: true,
-        dashboard: true
+        is_pro: true
       )
     end
   end
@@ -21,8 +20,8 @@ namespace :dashboards do
   resource :client do
     desc 'Fetch Client dashboard'
     get do
-      dashboard = Services::Dashboards::Fetch.!(user: current_user)
-      present(dashboard, with: Entities::Dashboard, dashboard: true)
+      dashboard = Services::Dashboards::Client.!(user: current_user)
+      present(dashboard, with: Entities::Dashboard)
     end
   end
 

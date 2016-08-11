@@ -9,8 +9,9 @@ module MailerHelper
       invitation_token: token,
       first_name: user.user_profile.first_name,
       last_name: user.user_profile.last_name,
+      is_pro: user.pro?,
       email: user.email,
-      client_id: user.id,
+      user_id: user.id,
       user_profile_id: user.user_profile.id
     }.to_param
     "http://#{webapp_domain}/#signup?#{params}"

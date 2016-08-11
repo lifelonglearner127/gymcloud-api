@@ -132,11 +132,7 @@ class User < ActiveRecord::Base
 
   # rubocop:disable PredicateName
   def has_active_pro?
-    pros.where do
-      (invitation_accepted_at.not_eq(nil) & invitation_token.not_eq(nil)) |
-        (invitation_accepted_at.eq(nil) & invitation_token.eq(nil))
-    end
-      .any?
+    pros.where(invitation_token: nil).any?
   end
 
   private

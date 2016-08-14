@@ -20,6 +20,7 @@ class Create < Services::Clients::Create
   end
 
   def create_agreement(pro)
+    return if @current_user.pro?
     @current_user.agreements_as_client.create!(
       pro: pro,
       category: AgreementCategory.find_by(symbol: 'trainer'),

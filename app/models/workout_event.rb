@@ -18,6 +18,7 @@ class WorkoutEvent < ActiveRecord::Base
   acts_as_commentable
 
   belongs_to :personal_workout
+  has_one :workout_template, through: :personal_workout
   has_one :person, through: :personal_workout
   has_many :exercise_results, dependent: :destroy
   has_many :workout_event_exercises, dependent: :destroy
@@ -50,12 +51,10 @@ class WorkoutEvent < ActiveRecord::Base
     in_range(14.days.ago, 7.days.ago)
   end)
   scope :with_clients, (lambda do |user|
-    joins { personal_workout.workout_template }
-      .where do
-        (personal_workout.person_id >> user.clients.pluck(:id)) &
-        (personal_workout.workout_template.user_id == user.id) |
-        (personal_workout.person_id >> user.id)
-      end
+    templates = ::WorkoutTemplate.unscoped.where(user_id: user.id)
+    joins { personal_workout }
+    .where { personal_workout.workout_template_id.in(templates.select { id }) }
+    .where { personal_workout.person_id >> user.clients.pluck(:id) }
   end)
   scope :completed, -> { where(is_completed: true) }
   scope :uncompleted, -> { where(is_completed: false) }

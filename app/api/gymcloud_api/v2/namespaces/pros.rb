@@ -30,8 +30,16 @@ namespace :pros do
   end
 
   desc 'Send Invite to Pro'
+  params do
+    optional :email, type: String
+  end
   post '/invitation' do
-    pro = current_user.pros.take
+    pro = if params[:email].blank?
+            current_user.pros.take
+          else
+            ::User.where(email: params[:email]).take
+          end
+
     authorize!(:invite, pro)
     Services::Pros::Invite.!(
       current_user: current_user,

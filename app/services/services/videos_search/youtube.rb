@@ -19,7 +19,7 @@ class Youtube < BaseVideoService
   end
 
   def id_from_url(url)
-    match = @q.match(%r{youtube.com/watch.*v=([\w\-]*)})
+    match = url.match(%r{youtube.com/watch.*v=([\w\-]*)})
     match ? match[1] : nil
   end
 

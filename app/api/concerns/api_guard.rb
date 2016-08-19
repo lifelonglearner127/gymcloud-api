@@ -68,6 +68,7 @@ module APIGuard
         end
 
         unless @namespace == '/pros'
+          raise WaitingSignupSelectPro if current_user.lonely_client?
           raise WaitingGymcloudPro if current_user.waiting_gymcloud_pro?
           raise WaitingInvitedPro if not current_user.has_active_pro?
         end
@@ -116,7 +117,8 @@ module APIGuard
       error_classes = [
         MissingTokenError, TokenNotFoundError,
         ExpiredError, RevokedError, InsufficientScopeError,
-        UserIsNotActiveError, WaitingGymcloudPro, WaitingInvitedPro
+        UserIsNotActiveError, WaitingGymcloudPro, WaitingInvitedPro,
+        WaitingSignupSelectPro
       ]
 
       base.send :rescue_from, *error_classes, oauth2_bearer_token_error_handler
@@ -174,6 +176,12 @@ module APIGuard
               'Waiting Invited Pro'
             )
 
+          when WaitingSignupSelectPro
+            Rack::OAuth2::Server::Abstract::Error.new(
+              454,
+              'Waiting For Select Signup Type To Get Pro'
+            )
+
           end
 
         response.finish
@@ -198,6 +206,8 @@ module APIGuard
   class WaitingGymcloudPro < StandardError; end
 
   class WaitingInvitedPro < StandardError; end
+
+  class WaitingSignupSelectPro < StandardError; end
 
   class InsufficientScopeError < StandardError
 

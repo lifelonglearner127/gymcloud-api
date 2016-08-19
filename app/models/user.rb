@@ -126,6 +126,10 @@ class User < ActiveRecord::Base
     pro? && (!confirmed? || ended)
   end
 
+  def lonely_client?
+    !waiting_gymcloud_pro? && pros.count == 0
+  end
+
   def waiting_gymcloud_pro?
     !pro? && request_pros.where(pro_provided: false).any?
   end

@@ -21,14 +21,8 @@
     short_name: "km"
     name: "Kilometres"
   -
-    short_name: "g"
-    name: "Grams"
-  -
     short_name: "kg"
     name: "Kilograms"
-  -
-    short_name: "oz"
-    name: "Ounces"
   -
     short_name: "lbs"
     name: "Pounds"

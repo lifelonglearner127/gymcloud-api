@@ -11,9 +11,9 @@
     save: "reps"
   -
     symbol: "weight"
-    units: ["g", "kg", "oz", "lbs"]
+    units: ["kg", "lbs"]
     default: "lbs"
-    save: "g"
+    save: "kg"
   -
     symbol: "height"
     units: ["in", "cm"]

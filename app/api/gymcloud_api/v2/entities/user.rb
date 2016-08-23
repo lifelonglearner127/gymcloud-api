@@ -29,6 +29,17 @@ class User < Grape::Entity
     user.live
   end
 
+  expose :has_certificate,
+    documentation: {
+      desc: 'has certificate',
+      type: 'boolean'
+    } \
+  do |user|
+    statuses = ::Certificate.statuses
+    statuses = [statuses[:verified], statuses[:unverified]]
+    ::Certificate.where(user: user, status: statuses).any?
+  end
+
   expose :unconfirmed_email,
     if: (lambda do |user, options|
       options[:email] && user.unconfirmed_email?

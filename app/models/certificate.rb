@@ -12,6 +12,8 @@
 
 class Certificate < ActiveRecord::Base
 
+  mount_uploader :file, CertificateUploader
+
   belongs_to :user
 
   enum status: [:unverified, :verified, :declined]

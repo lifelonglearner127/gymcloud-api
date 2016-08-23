@@ -167,6 +167,7 @@ class Ability
     end
     can :crud, ExerciseProperty, personal_property: {person_id: @user.id}
     can :import, ProgramPreset
+    can :upload, Certificate
   end
 
   def as_admin

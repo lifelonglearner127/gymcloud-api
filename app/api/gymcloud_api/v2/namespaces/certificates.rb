@@ -13,6 +13,7 @@ namespace :certificates do
     certificate = current_user.certificate || current_user.build_certificate
     authorize!(:upload, certificate)
     certificate.file = ActionDispatch::Http::UploadedFile.new(params[:file])
+    certificate.status = :unverified
     certificate.save!
     present(certificate)
   end

@@ -403,9 +403,9 @@ ActiveRecord::Schema.define(version: 20160823142646) do
 
   create_table "request_pros", force: :cascade do |t|
     t.integer "client_id"
-    t.datetime "created_at", null: false
+    t.datetime "created_at", precision: 6, null: false
     t.boolean "pro_provided"
-    t.datetime "updated_at", null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "root_folder_categories", force: :cascade do |t|

@@ -19,7 +19,7 @@ RSpec.describe UserAccountType do
 	it { is_expected.to have_db_column :updated_at }
 
   # === Database (Indexes) ===
-  
+  it { is_expected.to have_db_index ["id"]}
 
   # === Validations (Length) ===
   it { is_expected.to allow_value(Faker::Lorem.characters(255)).for :name }

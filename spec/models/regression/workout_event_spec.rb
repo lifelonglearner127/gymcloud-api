@@ -4,7 +4,8 @@ RSpec.describe WorkoutEvent do
 
   # === Relations ===
   it { is_expected.to belong_to :personal_workout}
-  it { is_expected.to have_one :person}
+  it { is_expected.to have_one :workout_template}
+	it { is_expected.to have_one :person}
   it { is_expected.to have_many :activities}
 	it { is_expected.to have_many :comments}
 	it { is_expected.to have_many :exercise_results}

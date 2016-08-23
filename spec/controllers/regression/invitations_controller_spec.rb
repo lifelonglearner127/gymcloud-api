@@ -2,8 +2,8 @@ require 'rails_helper'
 
 describe InvitationsController do
   # === Routes (REST) ===
-  it { should route(:get, '/users/invitation/new').to({:controller=>"invitations", :action=>"new"}) } 
-	it { should route(:patch, '/users/invitation').to({:controller=>"invitations", :action=>"update"}) } 
+  it { should route(:patch, '/users/invitation').to({:controller=>"invitations", :action=>"update"}) } 
+	it { should route(:get, '/users/invitation/new').to({:controller=>"invitations", :action=>"new"}) } 
 	it { should route(:post, '/users/invitation').to({:controller=>"invitations", :action=>"create"}) } 
 	it { should route(:get, '/users/invitation/remove').to({:controller=>"invitations", :action=>"destroy"}) } 
 	it { should route(:get, '/users/invitation/accept').to({:controller=>"invitations", :action=>"edit"}) } 

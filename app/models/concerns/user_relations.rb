@@ -10,6 +10,9 @@ module UserRelations
     has_one :user_settings,
       dependent: :destroy
 
+    has_one :certificate,
+      dependent: :destroy
+
     has_many :authentications,
       class_name: 'UserAuthentication',
       dependent: :destroy

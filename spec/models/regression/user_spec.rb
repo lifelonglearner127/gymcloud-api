@@ -6,8 +6,8 @@ RSpec.describe User do
   it { is_expected.to belong_to :invited_by}
   it { is_expected.to have_one :user_profile}
 	it { is_expected.to have_one :user_settings}
-	it { is_expected.to have_one :certificate}
   it { is_expected.to have_many :activities}
+	it { is_expected.to have_many :certificates}
 	it { is_expected.to have_many :authentications}
 	it { is_expected.to have_many :agreements_as_pro}
 	it { is_expected.to have_many :agreements_as_client}

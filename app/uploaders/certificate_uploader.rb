@@ -11,7 +11,7 @@ class CertificateUploader < CarrierWave::Uploader::Base
   end
 
   def extension_white_list
-    %w(jpg jpeg gif png pdf tiff)
+    %w(jpg jpeg gif png tiff pdf)
   end
 
 end

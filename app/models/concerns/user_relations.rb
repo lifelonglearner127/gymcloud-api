@@ -10,7 +10,7 @@ module UserRelations
     has_one :user_settings,
       dependent: :destroy
 
-    has_one :certificate,
+    has_many :certificates,
       dependent: :destroy
 
     has_many :authentications,

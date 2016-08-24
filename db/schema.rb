@@ -92,7 +92,7 @@ ActiveRecord::Schema.define(version: 20160823142646) do
     t.integer "user_id"
   end
 
-  add_index "certificates", ["user_id"], name: "index_certificates_on_user_id", unique: true, using: :btree
+  add_index "certificates", ["user_id"], name: "index_certificates_on_user_id", using: :btree
 
   create_table "client_group_memberships", force: :cascade do |t|
     t.integer "client_group_id"
@@ -605,6 +605,7 @@ ActiveRecord::Schema.define(version: 20160823142646) do
   add_index "workout_templates", ["original_id"], name: "index_workout_templates_on_original_id", using: :btree
   add_index "workout_templates", ["user_id"], name: "index_workout_templates_on_user_id", using: :btree
 
+  add_foreign_key "certificates", "users"
   add_foreign_key "exercise_properties", "personal_properties"
   add_foreign_key "exercise_properties", "workout_exercises"
   add_foreign_key "exercise_result_items", "exercise_properties"

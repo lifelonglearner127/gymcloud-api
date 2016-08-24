@@ -30,6 +30,7 @@ class User < Grape::Entity
   end
 
   expose :has_certificate,
+    if: -> (user, _) { user.pro? },
     documentation: {
       desc: 'has certificate',
       type: 'boolean'
@@ -37,7 +38,7 @@ class User < Grape::Entity
   do |user|
     statuses = ::Certificate.statuses
     statuses = [statuses[:verified], statuses[:unverified]]
-    ::Certificate.where(user: user, status: statuses).any?
+    user.certificates.where(status: statuses).any?
   end
 
   expose :unconfirmed_email,

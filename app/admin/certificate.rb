@@ -4,7 +4,7 @@ ActiveAdmin.register Certificate do
 
   permit_params :user_id, :status, :file
 
-  actions :all, except: [:new, :destroy, :edit]
+  actions :all, except: [:new, :edit]
 
   index do
     id_column
@@ -28,14 +28,23 @@ ActiveAdmin.register Certificate do
 
   member_action :verify, method: :get do
     resource.status = :verified
-    resource.save
+    flash[:alert] = resource.errors.messages unless resource.save
     redirect_to :back
   end
 
   member_action :decline, method: :get do
     resource.status = :declined
-    resource.save
+    flash[:alert] = resource.errors.messages unless resource.save
     redirect_to :back
+  end
+
+  controller do
+
+    def destroy
+      redirect_to :back unless resource.status == 'declined'
+      super
+    end
+
   end
 
 end

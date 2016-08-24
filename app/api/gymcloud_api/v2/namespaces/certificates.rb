@@ -7,12 +7,12 @@ namespace :certificates do
 
   desc 'Upload Certificate'
   params do
-    requires :file, type: Rack::Multipart::UploadedFile
+    requires :files, type: [Rack::Multipart::UploadedFile]
   end
   post do
-    certificate = current_user.certificate || current_user.build_certificate
+    certificate = current_user.certificates.build
     authorize!(:upload, certificate)
-    certificate.file = ActionDispatch::Http::UploadedFile.new(params[:file])
+    certificate.file = ActionDispatch::Http::UploadedFile.new(params[:files][0])
     certificate.status = :unverified
     certificate.save!
     present(certificate)

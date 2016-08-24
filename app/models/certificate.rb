@@ -19,6 +19,5 @@ class Certificate < ActiveRecord::Base
   enum status: [:unverified, :verified, :declined]
 
   validates :status, :file, :user_id, presence: true
-  validates :user_id, uniqueness: true
 
 end

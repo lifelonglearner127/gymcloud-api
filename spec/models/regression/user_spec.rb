@@ -7,6 +7,7 @@ RSpec.describe User do
   it { is_expected.to have_one :user_profile}
 	it { is_expected.to have_one :user_settings}
   it { is_expected.to have_many :activities}
+	it { is_expected.to have_many :certificates}
 	it { is_expected.to have_many :authentications}
 	it { is_expected.to have_many :agreements_as_pro}
 	it { is_expected.to have_many :agreements_as_client}
@@ -28,6 +29,7 @@ RSpec.describe User do
 	it { is_expected.to have_many :exercises_as_author}
 	it { is_expected.to have_many :program_templates_as_author}
 	it { is_expected.to have_many :workout_templates_as_author}
+	it { is_expected.to have_many :request_pros}
 	it { is_expected.to have_many :read_marks}
 
   # === Nested Attributes ===

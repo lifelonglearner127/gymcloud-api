@@ -14,9 +14,13 @@ class API < Grape::API
   default_format :json
 
   mount Namespaces::Root
+  mount Namespaces::Cards
+  mount Namespaces::Certificates
   mount Namespaces::ClientGroups
   mount Namespaces::Clients
+  mount Namespaces::ClientsPerformance
   mount Namespaces::Comments
+  mount Namespaces::Dashboards
   mount Namespaces::ExerciseProperties
   mount Namespaces::ExerciseResults
   mount Namespaces::Exercises
@@ -25,13 +29,14 @@ class API < Grape::API
   mount Namespaces::PersonalPrograms
   mount Namespaces::PersonalProperties
   mount Namespaces::PersonalWorkouts
+  mount Namespaces::ProgramPresets
   mount Namespaces::ProgramTemplates
   mount Namespaces::ProgramWeeks
   mount Namespaces::ProgramWorkouts
   mount Namespaces::Pros
   mount Namespaces::Search
-  mount Namespaces::UserAuthentications
   mount Namespaces::UserAccountTypes
+  mount Namespaces::UserAuthentications
   mount Namespaces::UserProfiles
   mount Namespaces::UserSettings
   mount Namespaces::Users
@@ -39,10 +44,6 @@ class API < Grape::API
   mount Namespaces::WorkoutEvents
   mount Namespaces::WorkoutExercises
   mount Namespaces::WorkoutTemplates
-  mount Namespaces::ProgramPresets
-  mount Namespaces::Cards
-  mount Namespaces::Dashboards
-  mount Namespaces::ClientsPerformance
 
 end
 

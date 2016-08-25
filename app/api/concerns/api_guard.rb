@@ -67,7 +67,7 @@ module APIGuard
 
         end
 
-        unless @namespace == '/pros'
+        unless %w(/user_profiles /pros).include?(@namespace)
           raise WaitingSignupSelectPro if current_user.lonely_client?
           raise WaitingGymcloudPro if current_user.waiting_gymcloud_pro?
           raise WaitingInvitedPro if not current_user.has_active_pro?

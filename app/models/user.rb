@@ -30,6 +30,7 @@
 #  stripe_customer_id     :string
 #  is_trialing            :boolean
 #  subscription_end_at    :datetime
+#  started_using_at       :date
 #
 
 class User < ActiveRecord::Base
@@ -137,6 +138,14 @@ class User < ActiveRecord::Base
   # rubocop:disable PredicateName
   def has_active_pro?
     pros.where(invitation_token: nil).any?
+  end
+
+  def certification_required?
+    statuses = ::Certificate.statuses
+    statuses = [statuses[:verified], statuses[:unverified]]
+    has_no_certificates = certificates.where(status: statuses).empty?
+    started_using_at = self.started_using_at || Date.today
+    pro? && has_no_certificates && started_using_at < 14.days.ago
   end
 
   private

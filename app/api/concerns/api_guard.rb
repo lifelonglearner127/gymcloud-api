@@ -68,11 +68,12 @@ module APIGuard
         end
 
         unless %w(/user_profiles /pros).include?(@namespace)
-          raise WaitingSignupSelectPro if current_user.lonely_client?
-          raise WaitingGymcloudPro if current_user.waiting_gymcloud_pro?
-          raise WaitingInvitedPro if not current_user.has_active_pro?
+          raise WaitingSignupSelectProError if current_user.lonely_client?
+          raise WaitingGymcloudProError if current_user.waiting_gymcloud_pro?
+          raise WaitingInvitedProError if not current_user.has_active_pro?
         end
 
+        raise CertificationRequiredError if current_user.certification_required?
         raise UserIsNotActiveError if not current_user.is_active?
 
       end
@@ -117,8 +118,8 @@ module APIGuard
       error_classes = [
         MissingTokenError, TokenNotFoundError,
         ExpiredError, RevokedError, InsufficientScopeError,
-        UserIsNotActiveError, WaitingGymcloudPro, WaitingInvitedPro,
-        WaitingSignupSelectPro
+        UserIsNotActiveError, WaitingGymcloudProError, WaitingInvitedProError,
+        WaitingSignupSelectProError, CertificationRequiredError
       ]
 
       base.send :rescue_from, *error_classes, oauth2_bearer_token_error_handler
@@ -164,22 +165,28 @@ module APIGuard
               "User Account is suspended"
             )
 
-          when WaitingGymcloudPro
+          when WaitingGymcloudProError
             Rack::OAuth2::Server::Abstract::Error.new(
               452,
               'Waiting Gymcloud Pro'
             )
 
-          when WaitingInvitedPro
+          when WaitingInvitedProError
             Rack::OAuth2::Server::Abstract::Error.new(
               453,
               'Waiting Invited Pro'
             )
 
-          when WaitingSignupSelectPro
+          when WaitingSignupSelectProError
             Rack::OAuth2::Server::Abstract::Error.new(
               454,
               'Waiting For Select Signup Type To Get Pro'
+            )
+
+          when CertificationRequiredError
+            Rack::OAuth2::Server::Abstract::Error.new(
+              455,
+              'Upload Certificate To Continue Using GymCloud'
             )
 
           end
@@ -203,11 +210,13 @@ module APIGuard
 
   class UserIsNotActiveError < StandardError; end
 
-  class WaitingGymcloudPro < StandardError; end
+  class WaitingGymcloudProError < StandardError; end
 
-  class WaitingInvitedPro < StandardError; end
+  class WaitingInvitedProError < StandardError; end
 
-  class WaitingSignupSelectPro < StandardError; end
+  class WaitingSignupSelectProError < StandardError; end
+
+  class CertificationRequiredError < StandardError; end
 
   class InsufficientScopeError < StandardError
 

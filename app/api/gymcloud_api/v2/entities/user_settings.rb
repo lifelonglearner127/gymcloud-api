@@ -50,6 +50,12 @@ class UserSettings < Grape::Entity
       type: 'boolean'
     }
 
+  expose :is_mobile_tutorial_finished,
+    documentation: {
+      desc: 'is mobile tutorial finished',
+      type: 'boolean'
+    }
+
   expose :is_presets_loaded,
     documentation: {
       desc: 'is presets loaded',

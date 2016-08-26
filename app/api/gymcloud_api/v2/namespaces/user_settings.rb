@@ -48,6 +48,7 @@ namespace :user_settings do
         values: ::UserSettings.units_systems.keys
       optional :tutorial_steps, type: Array[String]
       optional :is_tutorial_finished, type: Boolean
+      optional :is_mobile_tutorial_finished, type: Boolean
       optional :is_presets_loaded, type: Boolean
     end
     patch do

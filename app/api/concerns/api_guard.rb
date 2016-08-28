@@ -119,7 +119,8 @@ module APIGuard
         MissingTokenError, TokenNotFoundError,
         ExpiredError, RevokedError, InsufficientScopeError,
         UserIsNotActiveError, WaitingGymcloudProError, WaitingInvitedProError,
-        WaitingSignupSelectProError, CertificationRequiredError
+        WaitingSignupSelectProError, CertificationRequiredError,
+        NoSubscriptionError
       ]
 
       base.send :rescue_from, *error_classes, oauth2_bearer_token_error_handler
@@ -165,26 +166,32 @@ module APIGuard
               "User Account is suspended"
             )
 
+          when NoSubscriptionError
+            APIBaseError.new(
+              402,
+              'Payment Or Subscription is required'
+            )
+
           when WaitingGymcloudProError
-            Rack::OAuth2::Server::Abstract::Error.new(
+            APIBaseError.new(
               452,
               'Waiting Gymcloud Pro'
             )
 
           when WaitingInvitedProError
-            Rack::OAuth2::Server::Abstract::Error.new(
+            APIBaseError.new(
               453,
               'Waiting Invited Pro'
             )
 
           when WaitingSignupSelectProError
-            Rack::OAuth2::Server::Abstract::Error.new(
+            APIBaseError.new(
               454,
               'Waiting For Select Signup Type To Get Pro'
             )
 
           when CertificationRequiredError
-            Rack::OAuth2::Server::Abstract::Error.new(
+            APIBaseError.new(
               455,
               'Upload Certificate To Continue Using GymCloud'
             )
@@ -199,6 +206,8 @@ module APIGuard
   #
   # Exceptions
   #
+
+  class APIBaseError < Rack::OAuth2::Server::Abstract::Error; end
 
   class MissingTokenError < StandardError; end
 
@@ -217,6 +226,8 @@ module APIGuard
   class WaitingSignupSelectProError < StandardError; end
 
   class CertificationRequiredError < StandardError; end
+
+  class NoSubscriptionError < StandardError; end
 
   class InsufficientScopeError < StandardError
 

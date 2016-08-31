@@ -34,7 +34,7 @@ class CheckUserSubscription < BaseService
     end_date = (is_trialing ? sub.trial_end : nil) || sub.current_period_end
     @user.update_attributes!(
       is_trialing: is_trialing,
-      subscription_end_at: Time.at(end_date).utc.to_datetime
+      subscription_end_at: ::Time.at(end_date).utc.to_datetime
     )
   end
 

@@ -14,12 +14,10 @@ class CancelSubscription < BaseService
   private
 
   def delete
-    subscription = ::Stripe::Subscription.retrieve(@id)
-
-    raise 'wrong customer' if subscription.customer != @user.stripe_customer_id
-
+    customer = GetCustomer.!(user: @user)
+    subscription = customer.subscriptions.retrieve(@id)
     subscription.delete
-    @user.update_attribute(:subscription_end_at, DateTime.now)
+    @user.update_attribute(:subscription_end_at, ::DateTime.now)
 
     subscription
   end

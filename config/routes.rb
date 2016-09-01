@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :podcasts, only: [:index]
+
   match '/users/mobile_auth/google_oauth2/callback',
     to: 'google_oauth2#mobile_google_oauth2',
     via: [:get, :post]

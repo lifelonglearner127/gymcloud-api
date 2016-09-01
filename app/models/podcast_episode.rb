@@ -23,6 +23,11 @@ class PodcastEpisode < ActiveRecord::Base
 
   before_save :save_audio_attributes
 
+  scope :published, (lambda do
+    where.not(published_at: nil)
+      .order(published_at: :desc)
+  end)
+
   private
 
   def save_audio_attributes

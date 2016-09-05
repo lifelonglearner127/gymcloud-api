@@ -41,7 +41,7 @@ ActiveAdmin.register Certificate do
   controller do
 
     def destroy
-      redirect_to :back unless resource.status == 'declined'
+      return redirect_to :back unless resource.status == 'declined'
       super
     end
 

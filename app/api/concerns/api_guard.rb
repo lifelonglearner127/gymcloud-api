@@ -73,7 +73,10 @@ module APIGuard
           raise WaitingInvitedProError if not current_user.has_active_pro?
         end
 
-        raise CertificationRequiredError if current_user.certification_required?
+        if @namespace != '/certificates'
+          raise CertificationRequiredError if current_user.certification_required?
+        end
+
         raise UserIsNotActiveError if not current_user.is_active?
 
       end

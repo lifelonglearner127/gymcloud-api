@@ -59,3 +59,8 @@
     units: ["°"]
     default: "°"
     save: "°"
+  -
+    symbol: "duration"
+    units: ["mmss"]
+    default: "mmss"
+    save: "mmss"

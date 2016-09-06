@@ -59,3 +59,6 @@
   -
     short_name: "°"
     name: "Degrees"
+  -
+    short_name: "mmss"
+    name: "MM:SS"

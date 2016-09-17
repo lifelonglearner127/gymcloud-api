@@ -4,7 +4,7 @@ email = 'support@gymcloud.com'
 description = 'We empower fitness professionals with tools and knowledge to
   become better coaches and help more people.'
 keywords = 'GymCloud, podcasts, training, workouts'
-# image = 'http://railscasts.com/images/railscasts_cover.jpg'
+image = 'https://api.gymcloud.com/podcast_cover.jpg'
 
 xml.rss(
   'xmlns:itunes' => 'http://www.itunes.com/dtds/podcast-1.0.dtd',
@@ -21,7 +21,7 @@ xml.rss(
     xml.itunes :author, author
     xml.itunes :keywords, keywords
     xml.itunes :explicit, 'clean'
-    # xml.itunes :image, href: image
+    xml.itunes :image, href: image
     xml.itunes :owner do
       xml.itunes :name, author
       xml.itunes :email, email

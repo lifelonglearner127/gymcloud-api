@@ -30,9 +30,6 @@ xml.rss(
     xml.itunes :category, text: 'Health & Medicine' do
       xml.itunes :category, text: 'Health & Exercise Science'
     end
-    xml.itunes :category, text: 'Health & Medicine' do
-      xml.itunes :category, text: 'Diet & Nutrition'
-    end
 
     @episodes.each do |episode|
       xml.item do

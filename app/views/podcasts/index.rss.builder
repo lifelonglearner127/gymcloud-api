@@ -27,8 +27,8 @@ xml.rss(
       xml.itunes :email, email
     end
     xml.itunes :block, 'no'
-    xml.itunes :category, text: 'Health & Medicine' do
-      xml.itunes :category, text: 'Health & Exercise Science'
+    xml.itunes :category, text: 'Health' do
+      xml.itunes :category, text: 'Fitness & Nutrition'
     end
 
     @episodes.each do |episode|

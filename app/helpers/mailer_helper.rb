@@ -31,7 +31,7 @@ module MailerHelper
   end
 
   def workout_event_results_url(id)
-    "http://#{webapp_domain}/#workout_events/#{id}/results"
+    "http://#{webapp_domain}/#events/#{id}/results"
   end
 
   def comments_url(id)

@@ -5,7 +5,10 @@ class PodcastsController < ApplicationController
   def index
     @episodes = ::PodcastEpisode.published
 
-    respond_to { |format| format.rss }
+    respond_to do |format|
+      format.rss
+      format.json { render json: @episodes }
+    end
   end
 
 end

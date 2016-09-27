@@ -1,6 +1,7 @@
 module GymcloudAPI::V2
 module Namespaces
 
+# rubocop:disable Metrics/ClassLength
 class Videos < Base
 
 namespace :videos do
@@ -10,7 +11,8 @@ namespace :videos do
     def scope_service(scope)
       {
         vimeo: Services::VideosSearch::Vimeo,
-        youtube: Services::VideosSearch::Youtube
+        youtube: Services::VideosSearch::Youtube,
+        all: Services::VideosSearch::All
       }[scope.to_sym] || Services::VideosSearch::Gymcloud
     end
 
@@ -26,7 +28,7 @@ namespace :videos do
   params do
     requires :q, type: String, desc: 'Query for search'
     optional :scope, type: String, default: 'mine',
-      values: %w(mine gymcloud vimeo youtube),
+      values: %w(all mine gymcloud vimeo youtube),
       desc: 'Search scope'
     optional :order, type: String,
       values: %w(recent oldest),
@@ -36,10 +38,15 @@ namespace :videos do
   end
   get '/search' do
     service = scope_service(params[:scope])
-    entity_class = scope_entity_class(params[:scope])
     videos = service.!(filtered_params_with(user: current_user))
-
-    present(videos, with: entity_class)
+    if params[:scope] == 'all'
+      videos.reduce([]) do |results, (key, val)|
+        results.concat(scope_entity_class(key).represent(val))
+      end
+    else
+      entity_class = scope_entity_class(params[:scope])
+      present(videos, with: entity_class)
+    end
   end
 
   desc 'Retrieve videos'

@@ -79,7 +79,7 @@ namespace :workout_templates do
       workout_template = ::WorkoutTemplate.find(params[:id])
       workout_template.assign_attributes(filtered_params)
       authorize!(:update, workout_template)
-      workout_template.save!
+      workout_template.touch
       present(workout_template, with: Entities::WorkoutTemplate)
     end
 

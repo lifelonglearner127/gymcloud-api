@@ -75,7 +75,7 @@ namespace :exercises do
       exercise = ::Exercise.find(params[:id])
       exercise.assign_attributes(filtered_params)
       authorize!(:update, exercise)
-      exercise.save!
+      exercise.touch
       present(exercise, with: Entities::Exercise)
     end
 

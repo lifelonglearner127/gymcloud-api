@@ -21,7 +21,7 @@
     save: "mm"
   -
     symbol: "distance"
-    units: ["in", "ft", "mi", "mm", "cm", "m", "km"]
+    units: ["ft", "mi", "m", "km"]
     default: "ft"
     save: "mm"
   -

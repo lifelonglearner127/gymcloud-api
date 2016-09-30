@@ -77,9 +77,12 @@ namespace :workout_templates do
     end
     patch do
       workout_template = ::WorkoutTemplate.find(params[:id])
-      workout_template.assign_attributes(filtered_params)
+      workout_template.assign_attributes(
+        filtered_params_with(
+          updated_at: workout_template.send(:current_time_from_proper_timezone)
+        ))
       authorize!(:update, workout_template)
-      workout_template.touch
+      workout_template.save!
       present(workout_template, with: Entities::WorkoutTemplate)
     end
 

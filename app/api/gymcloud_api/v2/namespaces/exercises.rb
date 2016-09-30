@@ -73,9 +73,12 @@ namespace :exercises do
     end
     patch do
       exercise = ::Exercise.find(params[:id])
-      exercise.assign_attributes(filtered_params)
+      exercise.assign_attributes(
+        filtered_params_with(
+          updated_at: exercise.send(:current_time_from_proper_timezone)
+        ))
       authorize!(:update, exercise)
-      exercise.touch
+      exercise.save!
       present(exercise, with: Entities::Exercise)
     end
 

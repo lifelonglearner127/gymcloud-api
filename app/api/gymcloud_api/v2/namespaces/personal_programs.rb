@@ -19,7 +19,6 @@ namespace :personal_programs do
     )
     authorize!(:create, service.build_personal)
     program = service.process.result
-    byebug
     unless current_user == user
       HtmlMailer.delay.program_assigned(user.id, program.id)
     end

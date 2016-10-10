@@ -21,9 +21,13 @@ class ClientGroup < ActiveRecord::Base
 
   scope :with_assinged_count_for, (lambda do |template|
     if template.class == WorkoutTemplate
+      group_template = WorkoutTemplate
+        .select { id }
+        .belongs_to_group
+        .where { original_id == (template.original_id || template.id) }
       pws = PersonalWorkout.select { person_id }
+        .joins { group_template.as(gt).on { workout_template_id == gt.id } }
         .where { status == my { PersonalWorkout.statuses[:active] } }
-        .where { workout_template_id == my { template.id } }
     else
       pws = PersonalProgram.select { person_id }
         .where { status == my { PersonalProgram.statuses[:active] } }

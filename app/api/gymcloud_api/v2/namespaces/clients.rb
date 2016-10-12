@@ -37,6 +37,7 @@ namespace :clients do
       )
       user_agreement.status = :finished
       user_agreement.save!
+      ::ClientGroupMembership.destroy_all(client_id: params[:id])
       present(user_agreement, with: Entities::UserAgreement)
     end
   end
